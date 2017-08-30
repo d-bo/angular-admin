@@ -1,0 +1,183 @@
+<md-sidenav-container class="example-container">
+
+    <md-sidenav #sidenav class="example-sidenav">
+        <md-list>
+            <h3 md-subheader>Folders</h3>
+            <md-list-item *ngFor="let folder of folders">
+                <md-icon md-list-icon>folder</md-icon>
+                <h4 md-line>{{folder.name}}</h4>
+                <p md-line> {{folder.updated | date}} </p>
+            </md-list-item>
+            <md-divider></md-divider>
+            <h3 md-subheader>Notes</h3>
+            <md-list-item *ngFor="let note of notes">
+                <md-icon md-list-icon>note</md-icon>
+                <h4 md-line>{{note.name}}</h4>
+                <p md-line> {{note.updated | date}} </p>
+            </md-list-item>
+        </md-list>
+    </md-sidenav>
+
+    <md-toolbar color="primary">
+        <span>Admin</span>
+        <md-toolbar-row>
+            <span>
+                <md-icon md-button (click)="sidenav.open()"
+                    style="cursor: pointer">menu
+                </md-icon>
+            </span>
+            <span class="example-spacer"></span>
+            <button md-button [mdMenuTriggerFor]="menu">
+                <md-icon class="example-icon">person</md-icon>
+            </button>
+            <md-menu #menu="mdMenu">
+                <button md-menu-item>
+                  <md-icon>dialpad</md-icon>
+                  <span>Profile</span>
+                </button>
+                <button md-menu-item>
+                  <md-icon>fingerprint</md-icon>
+                  <span>Log out</span>
+                </button>
+            </md-menu>
+            <md-icon class="example-icon">delete</md-icon>
+        </md-toolbar-row>
+    </md-toolbar>
+
+    <md-tab-group>
+
+        <md-tab label="Брэнды">
+            <h3 md-subheader>Брэнды</h3>
+            <md-list>
+                <table>
+                    <tr>
+                      <td></td>
+                      <td>
+                        <md-paginator [length]="100"
+                                      [pageSize]="10"
+                                      [pageSizeOptions]="[5, 10, 25, 100]">
+                        </md-paginator>
+                      </td>
+                      <td></td>
+                    </tr>
+                    <tr *ngFor="let br of brands_gestori">
+                        <td>
+                            <md-list-item>
+                                <span md-line>{{br._id.name}}</span>
+                            </md-list-item>
+                        </td>
+                        <td>
+                          <md-input-container>
+                             <input type="text" mdInput [formControl]="myControl" [mdAutocomplete]="auto">
+                          </md-input-container>
+
+                          <md-autocomplete #auto="mdAutocomplete">
+                             <md-option *ngFor="let option of filteredOptions | async" [value]="option">
+                                {{ option }}
+                             </md-option>
+                          </md-autocomplete>
+                        </td>
+                        <td>
+                            <button md-mini-fab><md-icon>check</md-icon></button>
+                        </td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td>
+                        <md-paginator [length]="100"
+                                      [pageSize]="10"
+                                      [pageSizeOptions]="[5, 10, 25, 100]">
+                        </md-paginator>
+                      </td>
+                      <td></td>
+                    </tr>
+                </table>
+            </md-list>
+        </md-tab>
+
+        <md-tab label="Form">
+                <form class="example-form">
+
+                    <md-select placeholder="Brand" class="example-full-width">
+                        <md-option *ngFor="let br of brands_letu" [value]="br">
+                            {{ br }}
+                        </md-option>
+                    </md-select>
+
+                    <md-input-container class="example-full-width">
+                        <input mdInput placeholder="First name">
+                    </md-input-container>
+                    <md-input-container class="example-full-width">
+                        <input mdInput placeholder="Long Last Name That Will Be Truncated">
+                    </md-input-container>
+
+                    <p>
+                        <md-input-container class="example-full-width">
+                            <textarea mdInput placeholder="Address">1600 Amphitheatre Pkwy</textarea>
+                        </md-input-container>
+                        <md-input-container class="example-full-width">
+                            <textarea mdInput placeholder="Address 2"></textarea>
+                        </md-input-container>
+                    </p>
+
+                    <table class="example-full-width" cellspacing="0"><tr>
+                        <td><md-input-container class="example-full-width">
+                        <input mdInput placeholder="City">
+                        </md-input-container></td>
+                        <td><md-input-container class="example-full-width">
+                        <input mdInput placeholder="State">
+                        </md-input-container></td>
+                        <td><md-input-container class="example-full-width">
+                        <input mdInput #postalCode maxlength="5" placeholder="Postal Code" value="94043">
+                        <md-hint align="end">{{postalCode.value.length}} / 5</md-hint>
+                        </md-input-container></td>
+                    </tr></table>
+
+                    <div class="button-row" style="text-align: right;margin-top: 50px">
+                        <button md-raised-button>Raised button</button>
+                    </div>
+
+                </form>
+        </md-tab>
+
+        <md-tab label="Gestori">
+            <md-list>
+                <h3 md-subheader>Gestori</h3>
+                <md-list-item *ngFor="let folder of gestori">
+                    <md-icon md-list-icon>photo</md-icon>
+                    <h4 md-line><b>{{folder.Artic}}</b> {{folder.Name}}</h4>
+                    <p md-line>{{folder.Brand}}</p>
+                    <p md-line>{{folder.Name_e}}</p>
+                    <p md-line>{{folder.Barcod}}</p>
+                </md-list-item>
+            </md-list>
+        </md-tab>
+
+        <md-tab label="Ilde">
+            <md-list>
+                <h3 md-subheader>Iledebeaute.ru</h3>
+                <md-list-item *ngFor="let il of ilde">
+                    <md-icon md-list-icon>photo</md-icon>
+                    <h4 md-line><b>{{il.articul}}</b> {{il.pc}}</h4>
+                    <p md-line>{{il.brand}}</p>
+                    <p md-line>{{il.Name_e}}</p>
+                    <p md-line>gestori cod_cood: {{il.gestori}}</p>
+                </md-list-item>
+            </md-list>
+        </md-tab>
+
+        <md-tab label="Letu">
+            <md-list>
+                <h3 md-subheader>Iledebeaute.ru</h3>
+                <md-list-item *ngFor="let le of letu">
+                    <md-icon md-list-icon>photo</md-icon>
+                    <h4 md-line><b>{{le.articul}}</b> {{le.name}}</h4>
+                    <p md-line>{{le.brand}}</p>
+                    <p md-line>{{le.desc}}</p>
+                </md-list-item>
+            </md-list>
+        </md-tab>
+
+    </md-tab-group>
+
+</md-sidenav-container>
