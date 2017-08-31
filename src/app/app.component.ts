@@ -34,7 +34,7 @@ export class AppComponent implements OnInit {
   length: any;
   pageSize = 10;
   pageSizeOptions = [5, 10, 25, 100];
-  
+
   pageEvent: PageEvent;
 
   myControl = new FormControl();
