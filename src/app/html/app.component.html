@@ -19,8 +19,6 @@
     </md-sidenav>
 
     <md-toolbar color="primary">
-        <span>Admin</span>
-        <md-toolbar-row>
             <span>
                 <md-icon md-button (click)="sidenav.open()"
                     style="cursor: pointer">menu
@@ -41,58 +39,72 @@
                 </button>
             </md-menu>
             <md-icon class="example-icon">delete</md-icon>
-        </md-toolbar-row>
     </md-toolbar>
 
     <md-tab-group>
-
         <md-tab label="Брэнды">
             <h3 md-subheader>Брэнды</h3>
+            <div class="has-text-centered">
+                <div style="display: none"><md-spinner></md-spinner></div>
+                <pagination-controls (pageChange)="getPage($event)" id="server"></pagination-controls>
+            </div>
+            <div style="padding: 0 15px">
             <md-list>
                 <table>
                     <tr>
-                      <td></td>
-                      <td>
-                        <md-paginator [length]="100"
-                                      [pageSize]="10"
-                                      [pageSizeOptions]="[5, 10, 25, 100]">
-                        </md-paginator>
-                      </td>
-                      <td></td>
+                        <td>
+                            <md-icon class="example-icon">search</md-icon>
+                        </td>
+                        <td>
+                            <md-input-container class="example-full-width">
+                                <input type="text" mdInput placeholder="Brand search"
+                                [formControl]="myCompleteControl" [mdAutocomplete]="auto" #brandInput>
+                            </md-input-container>
+
+                            <md-autocomplete #auto="mdAutocomplete">
+                                <md-option *ngFor="let option_complete of filteredOptions | async" [value]="option_complete.val">
+                                    {{ option_complete.val }}
+                                </md-option>
+                            </md-autocomplete>
+                        </td>
+                        <td>
+                            <button md-icon-button>
+                                <md-icon class="md-24">clear</md-icon>
+                            </button>
+                        </td>
                     </tr>
-                    <tr *ngFor="let br of brands_gestori">
+                    <tr *ngFor="let br of asyncBrands | async | paginate: { id: 'server', itemsPerPage: 10, currentPage: p, totalItems: total }">
+                        <td>
+                            <md-checkbox></md-checkbox>
+                        </td>
+                        <td>
+                            <button md-icon-button color="primary">
+                                <md-icon class="md-24" aria-label="Example icon-button with a heart icon">add</md-icon>
+                            </button>
+                        </td>
+                        <td>
+                            <md-input-container class="example-full-width">
+                                <input type="text" mdInput #brandInput>
+                            </md-input-container>
+                        </td>
                         <td>
                             <md-list-item>
                                 <span md-line>{{br._id.name}}</span>
                             </md-list-item>
                         </td>
                         <td>
-                          <md-input-container>
-                             <input type="text" mdInput [formControl]="myControl" [mdAutocomplete]="auto">
-                          </md-input-container>
-
-                          <md-autocomplete #auto="mdAutocomplete">
-                             <md-option *ngFor="let option of filteredOptions | async" [value]="option">
-                                {{ option }}
-                             </md-option>
-                          </md-autocomplete>
+                            <button md-icon-button (click)="saveBrand(br._id.id, brandInput.value)">
+                                <md-icon>check</md-icon>
+                            </button>
                         </td>
-                        <td>
-                            <button md-mini-fab><md-icon>check</md-icon></button>
-                        </td>
-                    </tr>
-                    <tr>
-                      <td></td>
-                      <td>
-                        <md-paginator [length]="100"
-                                      [pageSize]="10"
-                                      [pageSizeOptions]="[5, 10, 25, 100]">
-                        </md-paginator>
-                      </td>
-                      <td></td>
                     </tr>
                 </table>
             </md-list>
+            </div>
+            <div class="has-text-centered">
+                <div style="display: none"><md-spinner></md-spinner></div>
+                <pagination-controls (pageChange)="getPage($event)" id="server"></pagination-controls>
+            </div>
         </md-tab>
 
         <md-tab label="Form">
@@ -138,44 +150,6 @@
                     </div>
 
                 </form>
-        </md-tab>
-
-        <md-tab label="Gestori">
-            <md-list>
-                <h3 md-subheader>Gestori</h3>
-                <md-list-item *ngFor="let folder of gestori">
-                    <md-icon md-list-icon>photo</md-icon>
-                    <h4 md-line><b>{{folder.Artic}}</b> {{folder.Name}}</h4>
-                    <p md-line>{{folder.Brand}}</p>
-                    <p md-line>{{folder.Name_e}}</p>
-                    <p md-line>{{folder.Barcod}}</p>
-                </md-list-item>
-            </md-list>
-        </md-tab>
-
-        <md-tab label="Ilde">
-            <md-list>
-                <h3 md-subheader>Iledebeaute.ru</h3>
-                <md-list-item *ngFor="let il of ilde">
-                    <md-icon md-list-icon>photo</md-icon>
-                    <h4 md-line><b>{{il.articul}}</b> {{il.pc}}</h4>
-                    <p md-line>{{il.brand}}</p>
-                    <p md-line>{{il.Name_e}}</p>
-                    <p md-line>gestori cod_cood: {{il.gestori}}</p>
-                </md-list-item>
-            </md-list>
-        </md-tab>
-
-        <md-tab label="Letu">
-            <md-list>
-                <h3 md-subheader>Iledebeaute.ru</h3>
-                <md-list-item *ngFor="let le of letu">
-                    <md-icon md-list-icon>photo</md-icon>
-                    <h4 md-line><b>{{le.articul}}</b> {{le.name}}</h4>
-                    <p md-line>{{le.brand}}</p>
-                    <p md-line>{{le.desc}}</p>
-                </md-list-item>
-            </md-list>
         </md-tab>
 
     </md-tab-group>

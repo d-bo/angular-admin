@@ -1,25 +1,27 @@
 //import { BrowserModule } from '@angular/platform-browser';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {NgModule} from '@angular/core';
-import {MaterialModule} from '@angular/material';
-import {HttpClientModule} from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgModule } from '@angular/core';
+import { MaterialModule } from '@angular/material';
+import { HttpClientModule } from '@angular/common/http';
 import 'hammerjs';
 
 import { AppComponent } from './app.component';
-import {MdInputModule} from '@angular/material';
-import {MdButtonModule} from '@angular/material';
-import {MdToolbarModule} from '@angular/material';
-import {MdMenuModule} from '@angular/material';
-import {MdSidenavModule} from '@angular/material';
-import {MdListModule} from '@angular/material';
-import {MdAutocompleteModule} from '@angular/material';
-import {MdSelectModule} from '@angular/material';
-import {MdTableModule} from '@angular/material';
-import {MdCheckboxModule} from '@angular/material';
-import {MdSnackBarModule} from '@angular/material';
-import {MdDialogModule} from '@angular/material';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MdPaginatorModule} from '@angular/material';
+import { MdInputModule } from '@angular/material';
+import { MdButtonModule } from '@angular/material';
+import { MdToolbarModule } from '@angular/material';
+import { MdMenuModule } from '@angular/material';
+import { MdSidenavModule } from '@angular/material';
+import { MdListModule } from '@angular/material';
+import { MdAutocompleteModule } from '@angular/material';
+import { MdSelectModule } from '@angular/material';
+import { MdTableModule } from '@angular/material';
+import { MdCheckboxModule } from '@angular/material';
+import { MdSnackBarModule } from '@angular/material';
+import { MdDialogModule } from '@angular/material';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MdPaginatorModule } from '@angular/material';
+import { NgxPaginationModule } from 'ngx-pagination';
+import {MdSlideToggleModule} from '@angular/material';
 
 
 
@@ -45,7 +47,9 @@ import {MdPaginatorModule} from '@angular/material';
     MdDialogModule,
     FormsModule,
     ReactiveFormsModule,
-    MdPaginatorModule
+    MdPaginatorModule,
+    NgxPaginationModule,
+    MdSlideToggleModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
