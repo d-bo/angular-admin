@@ -42,8 +42,10 @@
     </md-toolbar>
 
     <md-tab-group>
+        <md-tab label="Form">
+            <gestori-product-form></gestori-product-form>
+        </md-tab>
         <md-tab label="Брэнды">
-            <h3 md-subheader>Брэнды</h3>
             <div class="has-text-centered">
                 <div style="display: none"><md-spinner></md-spinner></div>
                 <pagination-controls (pageChange)="getPage($event)" id="server"></pagination-controls>
@@ -68,7 +70,7 @@
                             </md-autocomplete>
                         </td>
                         <td>
-                            <button md-icon-button>
+                            <button md-icon-button color="primary">
                                 <md-icon class="md-24">clear</md-icon>
                             </button>
                         </td>
@@ -105,51 +107,6 @@
                 <div style="display: none"><md-spinner></md-spinner></div>
                 <pagination-controls (pageChange)="getPage($event)" id="server"></pagination-controls>
             </div>
-        </md-tab>
-
-        <md-tab label="Form">
-                <form class="example-form">
-
-                    <md-select placeholder="Brand" class="example-full-width">
-                        <md-option *ngFor="let br of brands_letu" [value]="br">
-                            {{ br }}
-                        </md-option>
-                    </md-select>
-
-                    <md-input-container class="example-full-width">
-                        <input mdInput placeholder="First name">
-                    </md-input-container>
-                    <md-input-container class="example-full-width">
-                        <input mdInput placeholder="Long Last Name That Will Be Truncated">
-                    </md-input-container>
-
-                    <p>
-                        <md-input-container class="example-full-width">
-                            <textarea mdInput placeholder="Address">1600 Amphitheatre Pkwy</textarea>
-                        </md-input-container>
-                        <md-input-container class="example-full-width">
-                            <textarea mdInput placeholder="Address 2"></textarea>
-                        </md-input-container>
-                    </p>
-
-                    <table class="example-full-width" cellspacing="0"><tr>
-                        <td><md-input-container class="example-full-width">
-                        <input mdInput placeholder="City">
-                        </md-input-container></td>
-                        <td><md-input-container class="example-full-width">
-                        <input mdInput placeholder="State">
-                        </md-input-container></td>
-                        <td><md-input-container class="example-full-width">
-                        <input mdInput #postalCode maxlength="5" placeholder="Postal Code" value="94043">
-                        <md-hint align="end">{{postalCode.value.length}} / 5</md-hint>
-                        </md-input-container></td>
-                    </tr></table>
-
-                    <div class="button-row" style="text-align: right;margin-top: 50px">
-                        <button md-raised-button>Raised button</button>
-                    </div>
-
-                </form>
         </md-tab>
 
     </md-tab-group>

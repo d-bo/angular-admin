@@ -1,0 +1,26 @@
+<h1 md-dialog-title>GESTORI</h1>
+<md-dialog-content>
+    <div>Are you sure you want add this product to gestori ?</div>
+    <p>
+        <table>
+            <tr>
+                <td>Группа:</td><td class="aright">{{data.group_id}}</td>
+            </tr>
+            <tr>
+                <td>Наименование:</td><td class="aright"> {{data.name}}</td>
+            </tr>
+            <tr>
+                <td>Штрих-код:</td><td class="aright">{{data.barcode}}</td>
+            </tr>
+            <tr>
+                <td>Артикул:</td><td class="aright">{{data.artic}}</td>
+            </tr>
+            <tr>
+                <td>Измерение:</td><td class="aright">{{data.measure}}</td>
+            </tr>
+        </table>
+</md-dialog-content>
+<md-dialog-actions class="aright">
+    <button md-raised-button color="primary" md-button [md-dialog-close]="true" (click)="clickYes()">Yes</button>
+    <button md-button md-dialog-close>No</button>
+</md-dialog-actions>

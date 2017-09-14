@@ -5,7 +5,7 @@ import { MaterialModule } from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 import 'hammerjs';
 
-import { AppComponent } from './app.component';
+import { AppComponent, DialogOverviewExampleDialog } from './app.component';
 import { MdInputModule } from '@angular/material';
 import { MdButtonModule } from '@angular/material';
 import { MdToolbarModule } from '@angular/material';
@@ -21,13 +21,22 @@ import { MdDialogModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MdPaginatorModule } from '@angular/material';
 import { NgxPaginationModule } from 'ngx-pagination';
-import {MdSlideToggleModule} from '@angular/material';
+import { MdSlideToggleModule } from '@angular/material';
+
+import { GestoriProductFormComponent, SubmitDialog } from './gestori.product.form.component';
 
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DialogOverviewExampleDialog,
+    GestoriProductFormComponent,
+    SubmitDialog
+  ],
+  entryComponents: [
+    DialogOverviewExampleDialog,
+    SubmitDialog
   ],
   imports: [
     MaterialModule,

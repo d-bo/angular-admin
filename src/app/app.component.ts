@@ -1,9 +1,9 @@
 import { Component, Input, Output, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { MdDialog, MdDialogRef } from '@angular/material';
+import { MdDialog, MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
 import { PageEvent } from '@angular/material';
 import { MdSnackBar } from '@angular/material';
 import { MdAutocomplete } from '@angular/material';
@@ -34,12 +34,19 @@ interface IServerResponse {
 }
 
 @Component({
-  selector: 'dialog-result-example-dialog',
-  template: 'Hello, i am dialog',
+  selector: 'dialog-overview-example-dialog',
+  templateUrl: './html/dialog-overview-example-dialog.html',
 })
 
-export class DialogResultExampleDialog {
-  constructor(public dialogRef: MdDialogRef<DialogResultExampleDialog>) {}
+export class DialogOverviewExampleDialog {
+
+    constructor(
+      public dialogRef: MdDialogRef<DialogOverviewExampleDialog>,
+      @Inject(MD_DIALOG_DATA) public data: any) { }
+
+    onNoClick(): void {
+      this.dialogRef.close();
+    }
 }
 
 @Component({
@@ -68,14 +75,6 @@ export class AppComponent implements OnInit {
   myCompleteControl = new FormControl();
   filteredOptions: Observable<any>;
   asyncBrands: Observable<any>;
-
-  testAsyncOptions = [
-    'aowder',
-    'b5tythth',
-    'cv9999',
-    'd00xxx',
-    'emm11jdsuishwd',
-  ]
 
   filter(val: string): any {
     return this.http.get('http://127.0.0.1:5000/all_brands?search='+val)
@@ -135,35 +134,26 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPage(1)
-    this.http.get('http://127.0.0.1:5000/gestori').subscribe(data => {
-      this.gestori = data;
+    this.http.get('http://127.0.0.1:5000/ping').subscribe(data => {
+      // pass
     }, err => {
       this.snackBar.open(
         "cant't load API http://127.0.0.1:5000/gestori",
         'OK'
       )
     });
-    this.http.get('http://127.0.0.1:5000/letu').subscribe(data => {
-      this.letu = data;
-    });
-    this.http.get('http://127.0.0.1:5000/ilde').subscribe(data => {
-      this.ilde = data;
-    });
-    /*
-    this.http.get('http://127.0.0.1:5000/brands_gestori').subscribe(data => {
-      this.brands_gestori = data;
-      this.brands_gestori_data = this.brands_gestori['data'];
-      this.brands_gestori_count = this.brands_gestori['count'];
-    });
-    */
-    this.http.get('http://127.0.0.1:5000/brands_letu').subscribe(data => {
-      this.brands_letu = data;
-      this.length = _.size(data);
-    });
   }
 
   saveBrand(id, value): void {
-    this.snackBar.open(id+' '+value, '', {duration: 1000})
+    let dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
+      width: '400px',
+      data: { 'id': id, 'value': value }
+    });
+    /*
+    dialogRef.afterClosed().subscribe(result => {
+
+    });
+    */
   }
 
   selectedItem(event) {
@@ -183,11 +173,9 @@ export class AppComponent implements OnInit {
   }
 
   serverCallObservable(page: number): Observable<any> {
-
     const perPage = this.pageSize;
     const start = (page - 1) * perPage;
     const end = start + perPage;
-
     return this.http.get('http://127.0.0.1:5000/brands_gestori?page='+page+'&perPage='+perPage)
   }
 
