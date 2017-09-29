@@ -24,6 +24,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { MdSlideToggleModule } from '@angular/material';
 
 import { GestoriProductFormComponent, SubmitDialog } from './gestori.product.form.component';
+import { MatchProductFormComponent } from './match.product.form.component';
 
 
 
@@ -32,6 +33,7 @@ import { GestoriProductFormComponent, SubmitDialog } from './gestori.product.for
     AppComponent,
     DialogOverviewExampleDialog,
     GestoriProductFormComponent,
+    MatchProductFormComponent,
     SubmitDialog
   ],
   entryComponents: [
