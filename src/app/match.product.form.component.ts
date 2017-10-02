@@ -62,6 +62,11 @@ export class MatchProductFormComponent implements OnInit {
     filterIlde(val: string): any {
         return this.http.get('http://127.0.0.1:5000/all_brands?search='+val)
     }
+
+    filterRive(val: string): any {
+        return this.http.get('http://127.0.0.1:5000/all_brands?search='+val)
+    }
+
     constructor(
         private http: HttpClient,
         private dialog: MdDialog,

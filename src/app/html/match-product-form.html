@@ -1,9 +1,9 @@
-<div style="padding:20px;float: left">
-	<table>
+<div style="padding:5px;float: left">
+	<table class="striped">
 		<tr>
 			<td>
 			    <md-input-container class="example-full-width">
-			        <input type="text" mdInput placeholder="Брэнд"
+			        <input type="text" mdInput placeholder="Брэнд Gestori"
 			        [formControl]='myCompleteMatchControl' [mdAutocomplete]="auto" #brandInput>
 			    </md-input-container>
 
@@ -22,12 +22,11 @@
 		    </div>
 	    </tr>
 	    <tr *ngFor="let br of asyncGestoriProducts | async | paginate: { id: 'match_pr_paginate', itemsPerPage: perPage, currentPage: p, totalItems: totalMatch }">
-	        <td>
+	        <td class="table-td">
 	            <md-list-item>
-	            	<div md-line><i>{{br._id.name_e}}</i></div>
-	                <div md-line><span md-line style="padding-right: 15px;color: rgb(63, 81, 181)"><b>{{br._id.artic}}</b></span>{{br._id.name}}</div>
-	                <div md-line>{{br._id.brand}}</div>
-	                <div md-line>{{br._id.barcod}}</div>
+	            	<div md-line><h2 style="margin: 0;color: #333;font-size: 16px">{{br._id.name}}</h2></div>
+	                <div md-line><span md-line style="padding-right: 15px;color: rgb(63, 81, 181)">{{br._id.artic}}</span><span>{{br._id.brand}}</span>&nbsp;&nbsp;&nbsp;<span>{{br._id.barcod}}</span></div>
+	                <div md-line>{{br._id.name_e}}</div>
 	            </md-list-item>
 	        </td>
 	        <td>
@@ -41,12 +40,97 @@
 
 <div>
 	<md-tab-group>
-		<md-tab label="LETU">
+		<md-tab label="RIVE">
 			<table>
 				<tr>
 					<td>
 					    <md-input-container class="example-full-width">
-					        <input type="text" mdInput placeholder="Брэнд"
+					        <input type="text" mdInput placeholder="Брэнд Рив Гош"
+					        [formControl]="myCompleteRiveMatchControl" [mdAutocomplete]="auto3" #brandInputRive>
+					    </md-input-container>
+					    <md-autocomplete #auto3="mdAutocomplete">
+					        <md-option *ngFor="let option_rive of filteredRiveMatchOptions | async" [value]="option_rive.val">
+					            {{ option_rive.val }}
+					        </md-option>
+					    </md-autocomplete>
+			    	</td>
+			    </tr>
+			</table>
+			<table class="striped">
+			    <tr>
+				    <div>
+				        <div style="display: none"><md-spinner></md-spinner></div>
+				        <pagination-controls (pageChange)="getPageRive($event)" id="match_pr_rive_paginate" previousLabel="Пред." nextLabel="След."></pagination-controls>
+				    </div>
+			    </tr>
+			    <tr *ngFor="let xr of asyncRiveProducts | async | paginate: { id: 'match_pr_rive_paginate', itemsPerPage: perPage, currentPage: p3, totalItems: totalMatch3 }">
+			        <td class="table-td">
+			            <md-list-item>
+							<div md-line><h2 style="margin: 0;color: #333;font-size: 16px;line-height: 20px">{{xr._id.name}}</h2></div>
+	                		<div md-line><span md-line style="padding-right: 15px;color: rgb(63, 81, 181)">{{xr._id.code}}</span>&nbsp;<span>{{xr._id.brand}}</span>&nbsp;&nbsp;&nbsp;<span>{{xr._id.country}}</span></div>
+			                <div md-line>{{xr._id.desc}}</div>
+			            </md-list-item>
+			        </td>
+			        <td>
+			        	<img src="{{xr._id.image_url}}" height="50px"/>
+			        </td>
+			        <td>
+			            <button md-icon-button color="primary">
+			                <md-icon class="md-24" aria-label="Example icon-button with a heart icon">check</md-icon>
+			            </button>
+			        </td>
+			    </tr>
+			</table>
+		</md-tab>
+
+		<md-tab label="ILDE">
+			<table class="striped">
+				<tr>
+					<td>
+					    <md-input-container class="example-full-width">
+					        <input type="text" mdInput placeholder="Брэнд Ильдеботэ"
+					        [formControl]="myCompleteIldeMatchControl" [mdAutocomplete]="auto1" #brandInputLetu>
+					    </md-input-container>
+
+					    <md-autocomplete #auto1="mdAutocomplete">
+					        <md-option *ngFor="let option_ilde of filteredIldeMatchOptions | async" [value]="option_ilde.val">
+					            {{ option_ilde.val }}
+					        </md-option>
+					    </md-autocomplete>
+					</td>
+					<td></td>
+				</tr>
+			    <tr>
+				    <div>
+				        <div style="display: none"><md-spinner></md-spinner></div>
+				        <pagination-controls (pageChange)="getPageIlde($event)" id="match_pr_ilde_paginate" previousLabel="Пред." nextLabel="След."></pagination-controls>
+				    </div>
+			    </tr>
+			    <tr *ngFor="let jr of asyncIldeProducts | async | paginate: { id: 'match_pr_ilde_paginate', itemsPerPage: perPage, currentPage: p2, totalItems: totalMatch2 }">
+			        <td>
+			            <md-list-item>
+							<div md-line><h2 style="margin: 0;color: #333;font-size: 16px;line-height: 20px">{{jr._id.name}}</h2></div>
+	                		<div md-line><span md-line style="padding-right: 15px;color: rgb(63, 81, 181)">{{jr._id.artic}}</span>&nbsp;<span>{{jr._id.brand}}</span>&nbsp;&nbsp;&nbsp;</div>
+			            </md-list-item>
+			        </td>
+			        <td>
+			        	<img src="http://static.iledebeaute.ru{{jr._id.image}}" height="50px" />
+			        </td>
+			        <td>
+			            <button md-icon-button color="primary">
+			                <md-icon class="md-24" aria-label="Example icon-button with a heart icon">check</md-icon>
+			            </button>
+			        </td>
+			    </tr>
+			</table>
+		</md-tab>
+
+		<md-tab label="LETU">
+			<table class="striped">
+				<tr>
+					<td>
+					    <md-input-container class="example-full-width">
+					        <input type="text" mdInput placeholder="Брэнд Летуаль"
 					        [formControl]="myCompleteLetuMatchControl" [mdAutocomplete]="auto1" #brandInputLetu>
 					    </md-input-container>
 
@@ -81,84 +165,5 @@
 			</table>
 		</md-tab>
 
-		<md-tab label="ILDE">
-			<table>
-				<tr>
-					<td>
-					    <md-input-container class="example-full-width">
-					        <input type="text" mdInput placeholder="Брэнд"
-					        [formControl]="myCompleteIldeMatchControl" [mdAutocomplete]="auto1" #brandInputLetu>
-					    </md-input-container>
-
-					    <md-autocomplete #auto1="mdAutocomplete">
-					        <md-option *ngFor="let option_ilde of filteredIldeMatchOptions | async" [value]="option_ilde.val">
-					            {{ option_ilde.val }}
-					        </md-option>
-					    </md-autocomplete>
-					</td>
-					<td></td>
-				</tr>
-			    <tr>
-				    <div>
-				        <div style="display: none"><md-spinner></md-spinner></div>
-				        <pagination-controls (pageChange)="getPageIlde($event)" id="match_pr_ilde_paginate" previousLabel="Пред." nextLabel="След."></pagination-controls>
-				    </div>
-			    </tr>
-			    <tr *ngFor="let jr of asyncIldeProducts | async | paginate: { id: 'match_pr_ilde_paginate', itemsPerPage: perPage, currentPage: p2, totalItems: totalMatch2 }">
-			        <td>
-			            <md-list-item>
-			            	<div md-line><i>{{jr._id.name}}</i></div>
-			                <div md-line><span md-line style="padding-right: 15px;color: rgb(63, 81, 181)"><b>{{jr._id.artic}}</b></span>{{jr._id.name_e}}</div>
-			                <div md-line>{{jr._id.brand}}</div>
-			            </md-list-item>
-			        </td>
-			        <td>
-			            <button md-icon-button color="primary">
-			                <md-icon class="md-24" aria-label="Example icon-button with a heart icon">check</md-icon>
-			            </button>
-			        </td>
-			    </tr>
-			</table>
-		</md-tab>
-
-		<md-tab label="RIVE">
-			<table>
-				<tr>
-					<td>
-					    <md-input-container class="example-full-width">
-					        <input type="text" mdInput placeholder="Брэнд"
-					        [formControl]="myCompleteRiveMatchControl" [mdAutocomplete]="auto3" #brandInputRive>
-					    </md-input-container>
-
-					    <md-autocomplete #auto3="mdAutocomplete">
-					        <md-option *ngFor="let option_rive of filteredRiveMatchOptions | async" [value]="option_rive.val">
-					            {{ option_rive.val }}
-					        </md-option>
-					    </md-autocomplete>
-					</td>
-					<td></td>
-				</tr>
-			    <tr *ngFor="let xr of asyncRiveProducts | async | paginate: { id: 'match_pr_rive_paginate', itemsPerPage: perPage, currentPage: p3, totalItems: totalMatch3 }">
-			        <td>
-			            <md-list-item>
-			            	<div md-line><i>{{xr._id.name}}</i></div>
-			                <div md-line><span md-line style="padding-right: 15px;color: rgb(63, 81, 181)"><b>{{xr._id.artic}}</b></span>{{xr._id.name_e}}</div>
-			                <div md-line>{{xr._id.brand}}</div>
-			            </md-list-item>
-			        </td>
-			        <td>
-			            <button md-icon-button color="primary">
-			                <md-icon class="md-24" aria-label="Example icon-button with a heart icon">check</md-icon>
-			            </button>
-			        </td>
-			    </tr>
-			    <tr>
-				    <div>
-				        <div style="display: none"><md-spinner></md-spinner></div>
-				        <pagination-controls (pageChange)="getPageRive($event)" id="match_pr_rive_paginate" previousLabel="Пред." nextLabel="След."></pagination-controls>
-				    </div>
-			    </tr>
-			</table>
-		</md-tab>
 	</md-tab-group>
 </div>

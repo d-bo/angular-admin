@@ -30,3 +30,21 @@ body {
 .w32 {
 	width: 32px;
 }
+
+.striped tbody tr:nth-child(odd) {
+   background-color: #f6f6f6;
+   box-shadow: 2px 2px 5px #f1f1f1;
+}
+
+.table-td {
+	padding: 11px 7px;
+}
+
+.ga-h2-custom h2 {
+	margin: 0;
+	color: #333;
+}
+
+.ga-shadow {
+	box-shadow: 10px 10px 5px #888888;
+}
