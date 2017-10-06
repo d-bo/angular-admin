@@ -1,26 +1,25 @@
-<div style="padding:5px;float: left">
+<div style="padding:10px;float: left">
+
+	<div>
+	    <md-input-container class="example-full-width">
+	        <input type="text" mdInput placeholder="Брэнд Gestori"
+	        [formControl]='myCompleteMatchControl' [mdAutocomplete]="auto" #brandInput>
+	    </md-input-container>
+
+	    <md-autocomplete #auto="mdAutocomplete">
+	        <md-option *ngFor="let option_complete of filteredMatchOptions | async" [value]="option_complete.val" (onSelectionChange)="getGestoriBrands($event, item)">
+	            {{ option_complete.val }}
+	        </md-option>
+	    </md-autocomplete>
+	</div>
+
 	<table class="striped">
 		<tr>
-			<td>
-			    <md-input-container class="example-full-width">
-			        <input type="text" mdInput placeholder="Брэнд Gestori"
-			        [formControl]='myCompleteMatchControl' [mdAutocomplete]="auto" #brandInput>
-			    </md-input-container>
-
-			    <md-autocomplete #auto="mdAutocomplete">
-			        <md-option *ngFor="let option_complete of filteredMatchOptions | async" [value]="option_complete.val">
-			            {{ option_complete.val }}
-			        </md-option>
-			    </md-autocomplete>
-			</td>
-			<td></td>
-		</tr>
-	    <tr>
 		    <div>
 		        <div style="display: none"><md-spinner></md-spinner></div>
 		        <pagination-controls (pageChange)="getPageGestori($event)" id="match_pr_paginate" previousLabel="Пред." nextLabel="След."></pagination-controls>
 		    </div>
-	    </tr>
+		</tr>
 	    <tr *ngFor="let br of asyncGestoriProducts | async | paginate: { id: 'match_pr_paginate', itemsPerPage: perPage, currentPage: p, totalItems: totalMatch }">
 	        <td class="table-td">
 	            <md-list-item>
@@ -36,6 +35,7 @@
 	        </td>
 	    </tr>
 	</table>
+
 </div>
 
 <div>

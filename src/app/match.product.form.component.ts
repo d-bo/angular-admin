@@ -35,6 +35,7 @@ export class MatchProductFormComponent implements OnInit {
     filteredMatchOptions: Observable<any>;
     filteredLetuMatchOptions: Observable<any>;
     filteredRiveMatchOptions: Observable<any>;
+    filteredIldeMatchOptions: Observable<any>;
 
     p: any;
     p1: any;
@@ -50,6 +51,8 @@ export class MatchProductFormComponent implements OnInit {
     myCompleteLetuMatchControl = new FormControl();
     myCompleteIldeMatchControl = new FormControl();
     myCompleteRiveMatchControl = new FormControl();
+
+    gestoriSelectedBrand: any;
 
     filter(val: string): any {
         return this.http.get('http://127.0.0.1:5000/gestori_brands?search='+val)
@@ -78,10 +81,16 @@ export class MatchProductFormComponent implements OnInit {
         this.snackBar = snackBar
 
         this.filteredMatchOptions = this.myCompleteMatchControl.valueChanges
-            .flatMap(val => this.http.get('http://127.0.0.1:5000/all_brands?search='+val));
+            .flatMap(val => this.http.get('http://127.0.0.1:5000/brands?s='+val+'&p=gest'));
 
         this.filteredLetuMatchOptions = this.myCompleteLetuMatchControl.valueChanges
-            .flatMap(val => this.http.get('http://127.0.0.1:5000/all_brands?search='+val));
+            .flatMap(val => this.http.get('http://127.0.0.1:5000/brands?s='+val+'&p=letu'));
+
+        this.filteredIldeMatchOptions = this.myCompleteIldeMatchControl.valueChanges
+            .flatMap(val => this.http.get('http://127.0.0.1:5000/brands?s='+val+'&p=ilde'));
+
+        this.filteredRiveMatchOptions = this.myCompleteRiveMatchControl.valueChanges
+            .flatMap(val => this.http.get('http://127.0.0.1:5000/brands?s='+val+'&p=rive'));
     }
 
     ngOnInit(): void {
@@ -91,19 +100,24 @@ export class MatchProductFormComponent implements OnInit {
         this.getPageRive(1)
     }
 
+    getGestoriBrands(event) {
+        this.gestoriSelectedBrand = event.source.value;
+        this.getPageGestori(1);
+    }
+
     getPageGestori(page: number) {
-        this.asyncGestoriProducts = this.serverCallGestoriObservable(page)
+        this.asyncGestoriProducts = this.serverCallGestoriObservable(page, this.gestoriSelectedBrand)
             .do(res => {
                 this.totalMatch = res.count;
                 this.p = page;
             }).map(res => res.data);
     }
 
-    serverCallGestoriObservable(page: number): Observable<any> {
+    serverCallGestoriObservable(page: number, search: string): Observable<any> {
         const perPage = this.pageSize;
         const start = (page - 1) * perPage;
         const end = start + perPage;
-        return this.http.get('http://127.0.0.1:5000/gestori_products?page='+page+'&perPage='+perPage)
+        return this.http.get('http://127.0.0.1:5000/gestori_products?page='+page+'&perPage='+perPage+'&search='+search)
     }
 
     getPageLetu(page: number) {

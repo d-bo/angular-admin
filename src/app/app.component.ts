@@ -133,15 +133,7 @@ export class AppComponent implements OnInit {
   ];
 
   ngOnInit(): void {
-    this.getPage(1)
-    this.http.get('http://127.0.0.1:5000/ping').subscribe(data => {
-      // pass
-    }, err => {
-      this.snackBar.open(
-        "cant't load API http://127.0.0.1:5000/ping",
-        'OK'
-      )
-    });
+    this.ping;
   }
 
   saveBrand(id, value): void {
@@ -161,22 +153,15 @@ export class AppComponent implements OnInit {
     return event;
   }
 
-  getPage(page: number) {
-    this.loading = 'block';
-    this.asyncBrands = this.serverCallObservable(page)
-      .do(res => {
-        this.total = res.count;
-        this.p = page;
-        this.loading = 'none';
-      })
-      .map(res => res.data);
-  }
-
-  serverCallObservable(page: number): Observable<any> {
-    const perPage = this.pageSize;
-    const start = (page - 1) * perPage;
-    const end = start + perPage;
-    return this.http.get('http://127.0.0.1:5000/brands_gestori?page='+page+'&perPage='+perPage)
+  ping() {
+    this.http.get('http://127.0.0.1:5000/ping').subscribe(data => {
+      // pass
+    }, err => {
+      this.snackBar.open(
+        "cant't load API http://127.0.0.1:5000/ping",
+        'OK'
+      )
+    });
   }
 
 }
