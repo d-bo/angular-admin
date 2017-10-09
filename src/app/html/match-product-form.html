@@ -1,14 +1,29 @@
 <div style="padding:10px;float: left">
 
+	<!-- GEST BRAND SEARCH -->
 	<div>
 	    <md-input-container class="example-full-width">
 	        <input type="text" mdInput placeholder="Брэнд Gestori"
-	        [formControl]='myCompleteMatchControl' [mdAutocomplete]="auto" #brandInput>
+	        [formControl]='myCompleteMatchControl' [mdAutocomplete]="auto" #brandInputGest>
 	    </md-input-container>
 
 	    <md-autocomplete #auto="mdAutocomplete">
 	        <md-option *ngFor="let option_complete of filteredMatchOptions | async" [value]="option_complete.val" (onSelectionChange)="getGestoriBrands($event, item)">
 	            {{ option_complete.val }}
+	        </md-option>
+	    </md-autocomplete>
+	</div>
+
+	<!-- GEST FULLTEXT SEARCH -->
+	<div>
+	    <md-input-container class="example-full-width">
+	        <input type="text" mdInput placeholder="fulltext Gestori"
+	        [formControl]='myCompleteGestFullTxtControl' [mdAutocomplete]="autoTxtGest" #brandInput>
+	    </md-input-container>
+
+	    <md-autocomplete #autoTxtGest="mdAutocomplete">
+	        <md-option *ngFor="let option_complete_txt of filteredMatchOptions | async" [value]="option_complete_txt.val" (onSelectionChange)="getGestoriFullTxt($event, item)">
+	            {{ option_complete_txt.val }}
 	        </md-option>
 	    </md-autocomplete>
 	</div>
@@ -35,7 +50,6 @@
 	        </td>
 	    </tr>
 	</table>
-
 </div>
 
 <div>
@@ -49,7 +63,7 @@
 					        [formControl]="myCompleteRiveMatchControl" [mdAutocomplete]="auto3" #brandInputRive>
 					    </md-input-container>
 					    <md-autocomplete #auto3="mdAutocomplete">
-					        <md-option *ngFor="let option_rive of filteredRiveMatchOptions | async" [value]="option_rive.val">
+					        <md-option *ngFor="let option_rive of filteredRiveMatchOptions | async" [value]="option_rive.val" (onSelectionChange)="getRiveBrands($event, item)">
 					            {{ option_rive.val }}
 					        </md-option>
 					    </md-autocomplete>
@@ -89,11 +103,11 @@
 					<td>
 					    <md-input-container class="example-full-width">
 					        <input type="text" mdInput placeholder="Брэнд Ильдеботэ"
-					        [formControl]="myCompleteIldeMatchControl" [mdAutocomplete]="auto1" #brandInputLetu>
+					        [formControl]="myCompleteIldeMatchControl" [mdAutocomplete]="autoIlde" #brandInputIlde>
 					    </md-input-container>
 
-					    <md-autocomplete #auto1="mdAutocomplete">
-					        <md-option *ngFor="let option_ilde of filteredIldeMatchOptions | async" [value]="option_ilde.val">
+					    <md-autocomplete #autoIlde="mdAutocomplete">
+					        <md-option *ngFor="let option_ilde of filteredIldeMatchOptions | async" [value]="option_ilde.val" (onSelectionChange)="getIldeBrands($event, item)">
 					            {{ option_ilde.val }}
 					        </md-option>
 					    </md-autocomplete>
@@ -110,7 +124,7 @@
 			        <td>
 			            <md-list-item>
 							<div md-line><h2 style="margin: 0;color: #333;font-size: 16px;line-height: 20px">{{jr._id.name}}</h2></div>
-	                		<div md-line><span md-line style="padding-right: 15px;color: rgb(63, 81, 181)">{{jr._id.artic}}</span>&nbsp;<span>{{jr._id.brand}}</span>&nbsp;&nbsp;&nbsp;</div>
+	                		<div md-line><span md-line style="padding-right: 15px;color: rgb(63, 81, 181)">{{jr._id.brand}}</span>&nbsp;<span>{{jr._id.artic}}</span>&nbsp;&nbsp;&nbsp;</div>
 			            </md-list-item>
 			        </td>
 			        <td>
@@ -131,11 +145,11 @@
 					<td>
 					    <md-input-container class="example-full-width">
 					        <input type="text" mdInput placeholder="Брэнд Летуаль"
-					        [formControl]="myCompleteLetuMatchControl" [mdAutocomplete]="auto1" #brandInputLetu>
+					        [formControl]="myCompleteLetuMatchControl" [mdAutocomplete]="auto2" #brandInputLetu>
 					    </md-input-container>
 
-					    <md-autocomplete #auto1="mdAutocomplete">
-					        <md-option *ngFor="let option_letu of filteredLetuMatchOptions | async" [value]="option_letu.val">
+					    <md-autocomplete #auto2="mdAutocomplete">
+					        <md-option *ngFor="let option_letu of filteredLetuMatchOptions | async" [value]="option_letu.val" (onSelectionChange)="getLetuBrands($event, item)">
 					            {{ option_letu.val }}
 					        </md-option>
 					    </md-autocomplete>
@@ -148,12 +162,11 @@
 				        <pagination-controls (pageChange)="getPageLetu($event)" id="match_pr_letu_paginate" previousLabel="Пред." nextLabel="След."></pagination-controls>
 				    </div>
 			    </tr>
-			    <tr *ngFor="let br of asyncLetuProducts | async | paginate: { id: 'match_pr_letu_paginate', itemsPerPage: perPage, currentPage: p1, totalItems: totalMatch }">
+			    <tr *ngFor="let br of asyncLetuProducts | async | paginate: { id: 'match_pr_letu_paginate', itemsPerPage: perPage, currentPage: p1, totalItems: totalMatch1 }">
 			        <td>
 			            <md-list-item>
-			            	<div md-line><i>{{br._id.name}}</i></div>
-			                <div md-line><span md-line style="padding-right: 15px;color: rgb(63, 81, 181)"><b>{{br._id.artic}}</b></span>{{br._id.name_e}}</div>
-			                <div md-line>{{br._id.brand}}</div>
+							<div md-line><h2 style="margin: 0;color: #333;font-size: 16px;line-height: 20px">{{br._id.name}}</h2></div>
+	                		<div md-line><span md-line style="padding-right: 15px;color: rgb(63, 81, 181)">{{br._id.brand}}</span>&nbsp;<span>{{br._id.desc}}</span>&nbsp;<span>{{br._id.articul}}</span></div>
 			            </md-list-item>
 			        </td>
 			        <td>
