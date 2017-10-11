@@ -42,7 +42,7 @@ export class DialogOverviewExampleDialog {
 
     constructor(
       public dialogRef: MdDialogRef<DialogOverviewExampleDialog>,
-      @Inject(MD_DIALOG_DATA) public data: any) { }
+      @Inject(MD_DIALOG_DATA) public data: any) {}
 
     onNoClick(): void {
       this.dialogRef.close();

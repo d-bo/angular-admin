@@ -29,9 +29,9 @@ export class SubmitDialog {
     classLink: object;
 
     constructor(
-      public dialogRef: MdDialogRef<SubmitDialog>,
-      @Inject(MD_DIALOG_DATA) public data: any) 
-        {}
+        public dialogRef: MdDialogRef<SubmitDialog>,
+        @Inject(MD_DIALOG_DATA) public data: any
+      ) {}
 
     onNoClick(): void {
         this.dialogRef.close();
@@ -58,7 +58,7 @@ export class GestoriProductFormComponent {
     submitted = false;
 
     constructor(
-        public http: HttpClient, public dialog: MdDialog
+        public http: HttpClient, private dialog: MdDialog
     ) {
         this.asyncGroups = this.GroupsControl.valueChanges
             .flatMap(val => this.http.get('http://127.0.0.1:5000/gestori_groups?search='+val));
@@ -73,7 +73,7 @@ export class GestoriProductFormComponent {
     onSubmit() {
         this.openSubmitDialog();
     }
- 
+
     openSubmitDialog() {
         let dialogRef = this.dialog.open(SubmitDialog, {
           width: '400px',

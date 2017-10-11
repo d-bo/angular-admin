@@ -32,7 +32,7 @@ body {
 }
 
 .striped tbody tr:nth-child(even) {
-   background-color: #f8f8f8;
+   background-color: #f7f7f7;
    box-shadow: 2px 2px 5px #f5f5f5;
 }
 
@@ -47,4 +47,15 @@ body {
 
 .ga-shadow {
 	box-shadow: 10px 10px 5px #888888;
+}
+
+.selected-item-before {
+  transition: border-left 0.5s;
+  border-left: 0px;
+  margin-bottom: 7px;
+}
+
+.selected-item-after {
+  transition: border-left 0.5s;
+  border-left: 14px solid rgb(33, 153, 232);
 }

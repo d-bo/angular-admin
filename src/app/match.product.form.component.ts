@@ -21,6 +21,27 @@ import 'rxjs/add/operator/mergeMap';
 import _ from 'lodash';
 
 @Component({
+  selector: 'match-dialog',
+  templateUrl: './html/match-dialog.html',
+})
+
+export class MatchDialog {
+
+    constructor(
+            public dialogRefMatch: MdDialogRef<MatchDialog>,
+            @Inject(MD_DIALOG_DATA) public data: any
+        ) {}
+
+    onNoClick(): void {
+      this.dialogRefMatch.close();
+    }
+
+    onYesClick(): void {
+        this.dialogRefMatch.close();
+    }
+}
+
+@Component({
     selector: 'match-product-form',
     templateUrl: './html/match-product-form.html'
 })
@@ -75,17 +96,24 @@ export class MatchProductFormComponent implements OnInit {
     letuSelectedBrand: any;
     ildeSelectedBrand: any;
 
+    gestSelectedItem: any;
+    riveSelectedItem: any;
+    letuSelectedItem: any;
+    ildeSelectedItem: any;
+
 
 
     constructor(
         private http: HttpClient,
-        private dialog: MdDialog,
+        private mdialog: MdDialog,
         private snackBar: MdSnackBar
     ) {
 
         this.http = http
-        this.dialog = dialog
+        this.mdialog = mdialog
         this.snackBar = snackBar
+
+
 
         // autocomplete BRAND search
         this.filteredMatchOptions = this.myCompleteMatchControl.valueChanges
@@ -99,6 +127,8 @@ export class MatchProductFormComponent implements OnInit {
 
         this.filteredRiveMatchOptions = this.myCompleteRiveMatchControl.valueChanges
             .flatMap(val => this.http.get('http://127.0.0.1:5000/brands?s='+val+'&p=rive'));
+
+
 
         // autocomplete product search
         this.filteredTxtMatchOptions = this.myCompleteMatchControl.valueChanges
@@ -119,6 +149,80 @@ export class MatchProductFormComponent implements OnInit {
         this.getPageLetu(1)
         this.getPageIlde(1)
         this.getPageRive(1)
+    }
+
+    markGestori(item_obj) {
+        console.log(item_obj);
+        let el = document.getElementById('gest_'+item_obj.artic);
+        let attribute = el.getAttribute('gmarked');
+        if (attribute == 'yes') {
+            el.style.borderLeft = '';
+            //el.setAttribute('class', 'selected-item-before');
+            el.setAttribute('gmarked', 'no');
+            this.gestSelectedItem = null;
+        } else {
+            el.style.borderLeft = "14px solid rgb(33, 153, 232)";
+            //el.setAttribute('class', 'selected-item-after');
+            el.setAttribute('gmarked', 'yes');
+            this.gestSelectedItem = item_obj;
+        }
+    }
+
+    markRive(item_obj) {
+        console.log(item_obj)
+        let el = document.getElementById('rive_'+item_obj.code);
+        let attribute = el.getAttribute('rivemarked');
+        if (attribute == 'yes') {
+            el.style.borderLeft = '';
+            el.setAttribute('rivemarked', 'no');
+            this.riveSelectedItem = null;
+        } else {
+            el.style.borderLeft = "14px solid rgb(33, 153, 232)";
+            el.setAttribute('rivemarked', 'yes');
+            this.riveSelectedItem = item_obj;
+        }
+    }
+
+    markIlde(item_id) {
+        let el = document.getElementById(item_id);
+        let attribute = el.getAttribute('ildemarked');
+        if (attribute == 'yes') {
+            el.style.borderLeft = '';
+            el.setAttribute('ildemarked', 'no');
+        } else {
+            el.style.borderLeft = "14px solid rgb(33, 153, 232)";
+            el.setAttribute('ildemarked', 'yes');
+        }
+    }
+
+    markLetu(item_id) {
+        let el = document.getElementById(item_id);
+        let attribute = el.getAttribute('letumarked');
+        if (attribute == 'yes') {
+            el.style.borderLeft = '';
+            el.setAttribute('letumarked', 'no');
+        } else {
+            el.style.borderLeft = "14px solid rgb(33, 153, 232)";
+            el.setAttribute('letumarked', 'yes');
+        }
+    }
+
+    confirmMatchRive() {
+        let dialogRef = this.mdialog.open(MatchDialog, {
+          width: '400px',
+          data: {
+              'gestSelectedItem': this.gestSelectedItem,
+              'riveSelectedItem': this.riveSelectedItem
+            }
+        });
+    }
+
+    confirmMatchIlde() {
+
+    }
+
+    confirmMatchLetu() {
+        
     }
 
     getGestoriBrands(event) {

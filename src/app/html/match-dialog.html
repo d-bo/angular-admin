@@ -1,0 +1,27 @@
+<h1 md-dialog-title>Match</h1>
+
+<md-dialog-content>
+    <h2>Вы уверены ?</h2>
+</md-dialog-content>
+
+<div *ngIf="data.gestSelectedItem.name != undefined">
+	<div><b>{{data.gestSelectedItem.name}}</b></div>
+	<div><b>{{data.gestSelectedItem.name_e}}</b></div>
+	<div>{{data.gestSelectedItem.artic}}</div>
+	<div><b>{{data.gestSelectedItem.brand}}</b></div>
+</div>
+
+<hr>
+
+<div *ngIf="data.riveSelectedItem.name != undefined">
+	<div><b>{{data.riveSelectedItem.name}}</b></div>
+	<div><b>{{data.riveSelectedItem.brand}}</b></div>
+	<div><b>{{data.riveSelectedItem.country}}</b></div>
+	<div>{{data.riveSelectedItem.desc}}</div>
+	<div><img src="{{data.riveSelectedItem.image_url}}" height="50px" /></div>
+</div>
+
+<md-dialog-actions class="aright">
+    <button md-raised-button color="primary" md-button [md-dialog-close]="true" (click)="onYesClick()">Да</button>
+    <button md-button md-dialog-close>Нет</button>
+</md-dialog-actions>
