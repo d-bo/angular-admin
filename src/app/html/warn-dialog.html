@@ -1,0 +1,9 @@
+<h2 md-dialog-title></h2>
+
+<md-dialog-content>
+    <p>{{data.msg}}</p>
+</md-dialog-content>
+
+<md-dialog-actions class="aright">
+    <button md-raised-button color="primary" md-button [md-dialog-close]="true" (click)="onYesClick()">Ok</button>
+</md-dialog-actions>

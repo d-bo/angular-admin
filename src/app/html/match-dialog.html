@@ -1,27 +1,48 @@
 <h1 md-dialog-title>Match</h1>
 
 <md-dialog-content>
-    <h2>Вы уверены ?</h2>
+    <h3>Вы уверены ?</h3>
 </md-dialog-content>
 
-<div *ngIf="data.gestSelectedItem.name != undefined">
+<div *ngIf="data.gestSelectedItem!==undefined">
 	<div><b>{{data.gestSelectedItem.name}}</b></div>
 	<div><b>{{data.gestSelectedItem.name_e}}</b></div>
 	<div>{{data.gestSelectedItem.artic}}</div>
 	<div><b>{{data.gestSelectedItem.brand}}</b></div>
 </div>
 
+<!-- RIVE -->
+<div *ngIf="data.riveSelectedItem!==undefined">
 <hr>
-
-<div *ngIf="data.riveSelectedItem.name != undefined">
 	<div><b>{{data.riveSelectedItem.name}}</b></div>
 	<div><b>{{data.riveSelectedItem.brand}}</b></div>
 	<div><b>{{data.riveSelectedItem.country}}</b></div>
 	<div>{{data.riveSelectedItem.desc}}</div>
 	<div><img src="{{data.riveSelectedItem.image_url}}" height="50px" /></div>
 </div>
+<!-- /RIVE -->
+
+<!-- ILDE -->
+<div *ngIf="data.ildeSelectedItem!==undefined">
+<hr>
+	<div><b>{{data.ildeSelectedItem.name}}</b></div>
+	<div><b>{{data.ildeSelectedItem.brand}}</b></div>
+	<div><b>{{data.ildeSelectedItem.artic}}</b></div>
+	<div><img src="//static.iledebeaute.ru{{data.ildeSelectedItem.image}}" height="50px" /></div>
+</div>
+<!-- /ILDE -->
+
+<!-- LETU -->
+<div *ngIf="data.letuSelectedItem!==undefined">
+<hr>
+	<div><b>{{data.letuSelectedItem.name}}</b></div>
+	<div><b>{{data.letuSelectedItem.brand}}</b></div>
+	<div><b>{{data.letuSelectedItem.artic}}</b></div>
+	<div>{{data.letuSelectedItem.desc}}</div>
+</div>
+<!-- /LETU -->
 
 <md-dialog-actions class="aright">
-    <button md-raised-button color="primary" md-button [md-dialog-close]="true" (click)="onYesClick()">Да</button>
+    <button md-raised-button color="primary" md-button [md-dialog-close]="true" (click)="onYesClick(data.gestSelectedItem, data.riveSelectedItem, data.ildeSelectedItem, data.letuSelectedItem)">Да</button>
     <button md-button md-dialog-close>Нет</button>
 </md-dialog-actions>

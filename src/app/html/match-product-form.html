@@ -14,7 +14,11 @@
 		        </md-option>
 		    </md-autocomplete>
 		</div>
-
+		<div>
+            <button md-icon-button color="primary" (click)="confirmMatchRive()">
+                <md-icon class="md-24" aria-label="Example icon-button with a heart icon">flag</md-icon>
+            </button>
+		</div>
 		<table class="striped">
 			<tr>
 			    <div>
@@ -42,11 +46,6 @@
 	<div>
 		<md-tab-group>
 			<md-tab label="RIVE">
-				<div>
-		            <button md-icon-button color="primary" (click)="confirmMatchRive()">
-		                <md-icon class="md-24" aria-label="Example icon-button with a heart icon">flag</md-icon>
-		            </button>
-				</div>
 				<table>
 					<tr>
 						<td>
@@ -90,11 +89,6 @@
 			</md-tab>
 
 			<md-tab label="ILDE">
-				<div>
-		            <button md-icon-button color="primary">
-		                <md-icon class="md-36" aria-label="Example icon-button with a heart icon">flag</md-icon>
-		            </button>
-				</div>
 				<table class="striped">
 					<tr>
 						<td>
@@ -128,7 +122,7 @@
 				        	<img src="http://static.iledebeaute.ru{{jr._id.image}}" height="50px" />
 				        </td>
 				        <td>
-				            <button md-icon-button color="primary" (click)="markIlde('ilde_'+jr._id.artic)">
+				            <button md-icon-button color="primary" (click)="markIlde(jr._id)">
 				                <md-icon class="md-24" aria-label="Example icon-button with a heart icon">check</md-icon>
 				            </button>
 				        </td>
@@ -137,11 +131,6 @@
 			</md-tab>
 
 			<md-tab label="LETU">
-				<div>
-		            <button md-icon-button color="primary">
-		                <md-icon class="md-24" aria-label="Example icon-button with a heart icon">flag</md-icon>
-		            </button>
-				</div>
 				<table class="striped">
 					<tr>
 						<td>
@@ -172,7 +161,7 @@
 				            </md-list-item>
 				        </td>
 				        <td>
-				            <button md-icon-button color="primary" (click)="markLetu('letu_'+kr._id.artic)">
+				            <button md-icon-button color="primary" (click)="markLetu(kr._id)">
 				                <md-icon class="md-24" aria-label="Example icon-button with a heart icon">check</md-icon>
 				            </button>
 				        </td>

@@ -21,6 +21,24 @@ import 'rxjs/add/operator/mergeMap';
 import _ from 'lodash';
 
 @Component({
+    selector: 'warn-dialog',
+    templateUrl: './html/warn-dialog.html',
+})
+
+export class WarnDialog {
+
+    constructor(
+            public dialogRefMatch: MdDialogRef<WarnDialog>,
+            private http: HttpClient,
+            @Inject(MD_DIALOG_DATA) public data: any
+        ) {}
+
+    onNoClick(): void {
+      this.dialogRefMatch.close();
+    }
+}
+
+@Component({
   selector: 'match-dialog',
   templateUrl: './html/match-dialog.html',
 })
@@ -29,6 +47,8 @@ export class MatchDialog {
 
     constructor(
             public dialogRefMatch: MdDialogRef<MatchDialog>,
+            public mdialog: MdDialog,
+            private http: HttpClient,
             @Inject(MD_DIALOG_DATA) public data: any
         ) {}
 
@@ -36,8 +56,28 @@ export class MatchDialog {
       this.dialogRefMatch.close();
     }
 
-    onYesClick(): void {
+    onYesClick(gest, rive, ilde, letu): void {
         this.dialogRefMatch.close();
+        this.http.post(
+            'http://127.0.0.1:5000/match',
+            {'gest': gest, 'rive': rive, 'ilde': ilde, 'letu': letu}
+        ).subscribe(
+            x => {},
+            err => {
+                let dialogRef = this.mdialog.open(WarnDialog, {
+                  data: {
+                      'msg': 'Error: '+err
+                    }
+                });
+            },
+            () => {
+                let dialogRef = this.mdialog.open(WarnDialog, {
+                  data: {
+                      'msg': 'Success !'
+                    }
+                });
+            }
+        );
     }
 }
 
@@ -159,7 +199,7 @@ export class MatchProductFormComponent implements OnInit {
             el.style.borderLeft = '';
             //el.setAttribute('class', 'selected-item-before');
             el.setAttribute('gmarked', 'no');
-            this.gestSelectedItem = null;
+            this.gestSelectedItem = undefined;
         } else {
             el.style.borderLeft = "14px solid rgb(33, 153, 232)";
             //el.setAttribute('class', 'selected-item-after');
@@ -175,7 +215,7 @@ export class MatchProductFormComponent implements OnInit {
         if (attribute == 'yes') {
             el.style.borderLeft = '';
             el.setAttribute('rivemarked', 'no');
-            this.riveSelectedItem = null;
+            this.riveSelectedItem = undefined;
         } else {
             el.style.borderLeft = "14px solid rgb(33, 153, 232)";
             el.setAttribute('rivemarked', 'yes');
@@ -183,36 +223,64 @@ export class MatchProductFormComponent implements OnInit {
         }
     }
 
-    markIlde(item_id) {
-        let el = document.getElementById(item_id);
+    markIlde(item_obj) {
+        let el = document.getElementById('ilde_'+item_obj.artic);
         let attribute = el.getAttribute('ildemarked');
         if (attribute == 'yes') {
             el.style.borderLeft = '';
             el.setAttribute('ildemarked', 'no');
+            this.ildeSelectedItem = undefined;
         } else {
             el.style.borderLeft = "14px solid rgb(33, 153, 232)";
             el.setAttribute('ildemarked', 'yes');
+            this.ildeSelectedItem = item_obj;
         }
     }
 
-    markLetu(item_id) {
-        let el = document.getElementById(item_id);
+    markLetu(item_obj) {
+        let el = document.getElementById('letu_'+item_obj.artic);
         let attribute = el.getAttribute('letumarked');
         if (attribute == 'yes') {
             el.style.borderLeft = '';
             el.setAttribute('letumarked', 'no');
+            this.letuSelectedItem = undefined;
         } else {
             el.style.borderLeft = "14px solid rgb(33, 153, 232)";
             el.setAttribute('letumarked', 'yes');
+            this.letuSelectedItem = item_obj;
         }
     }
 
     confirmMatchRive() {
+
+        if (this.gestSelectedItem == '' || this.gestSelectedItem == undefined) {
+            let dialogRef = this.mdialog.open(WarnDialog, {
+              width: '400px',
+              data: {
+                  'msg': 'Не выбрано gestori'
+                }
+            });
+            return;
+        }
+
+        if ((this.riveSelectedItem == '' || this.riveSelectedItem == undefined) &&
+            (this.ildeSelectedItem == '' || this.ildeSelectedItem == undefined) &&
+            (this.letuSelectedItem == '' || this.letuSelectedItem == undefined)) {
+                let dialogRef = this.mdialog.open(WarnDialog, {
+                  width: '400px',
+                  data: {
+                      'msg': 'Не выбрано letu || rive || ilde'
+                    }
+                });
+                return;
+            }
+
         let dialogRef = this.mdialog.open(MatchDialog, {
-          width: '400px',
           data: {
               'gestSelectedItem': this.gestSelectedItem,
-              'riveSelectedItem': this.riveSelectedItem
+              'riveSelectedItem': this.riveSelectedItem,
+              'letuSelectedItem': this.letuSelectedItem,
+              'ildeSelectedItem': this.ildeSelectedItem
             }
         });
     }
