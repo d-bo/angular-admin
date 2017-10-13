@@ -24,7 +24,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { MdSlideToggleModule } from '@angular/material';
 
 import { GestoriProductFormComponent, SubmitDialog } from './gestori.product.form.component';
-import { MatchProductFormComponent, MatchDialog, WarnDialog } from './match.product.form.component';
+import { MatchListComponent, MatchProductFormComponent, MatchDialog, WarnDialog } from './match.product.form.component';
+import { MatchService } from './match.service';
 
 
 
@@ -36,7 +37,8 @@ import { MatchProductFormComponent, MatchDialog, WarnDialog } from './match.prod
     MatchProductFormComponent,
     SubmitDialog,
     MatchDialog,
-    WarnDialog
+    WarnDialog,
+    MatchListComponent
   ],
   entryComponents: [
     DialogOverviewExampleDialog,
@@ -66,7 +68,9 @@ import { MatchProductFormComponent, MatchDialog, WarnDialog } from './match.prod
     NgxPaginationModule,
     MdSlideToggleModule,
   ],
-  providers: [],
+  providers: [
+      MatchService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

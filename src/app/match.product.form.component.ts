@@ -7,6 +7,7 @@ import { FormControl } from '@angular/forms';
 import { URLSearchParams } from "@angular/http";
 import { MdSnackBar } from '@angular/material';
 import { MdDialog, MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
+import { MatchService } from './match.service';
 
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/observable/merge';
@@ -19,6 +20,24 @@ import 'rxjs/add/operator/delay';
 import 'rxjs/add/operator/mergeMap';
 
 import _ from 'lodash';
+
+@Component({
+    selector: 'match-list',
+    templateUrl: './html/match-list.html',
+})
+
+export class MatchListComponent implements OnInit {
+    mservice: any;
+    constructor(
+            private matchService: MatchService,
+        ) {
+            this.mservice = matchService;
+        }
+
+    ngOnInit(): void {
+        this.mservice.getMatches();
+    }
+}
 
 @Component({
     selector: 'warn-dialog',
@@ -66,7 +85,7 @@ export class MatchDialog {
             err => {
                 let dialogRef = this.mdialog.open(WarnDialog, {
                   data: {
-                      'msg': 'Error: '+err
+                      'msg': 'Fuck, error: '+err
                     }
                 });
             },
@@ -276,11 +295,12 @@ export class MatchProductFormComponent implements OnInit {
             }
 
         let dialogRef = this.mdialog.open(MatchDialog, {
-          data: {
-              'gestSelectedItem': this.gestSelectedItem,
-              'riveSelectedItem': this.riveSelectedItem,
-              'letuSelectedItem': this.letuSelectedItem,
-              'ildeSelectedItem': this.ildeSelectedItem
+            width: '400px',
+            data: {
+                'gestSelectedItem': this.gestSelectedItem,
+                'riveSelectedItem': this.riveSelectedItem,
+                'letuSelectedItem': this.letuSelectedItem,
+                'ildeSelectedItem': this.ildeSelectedItem
             }
         });
     }
