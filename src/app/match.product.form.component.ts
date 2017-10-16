@@ -27,15 +27,18 @@ import _ from 'lodash';
 })
 
 export class MatchListComponent implements OnInit {
+
     mservice: any;
+    res: any;
+
     constructor(
-            private matchService: MatchService,
+            private matchService: MatchService
         ) {
             this.mservice = matchService;
         }
 
     ngOnInit(): void {
-        this.mservice.getMatches();
+        this.mservice.getMatched().subscribe(result => {this.res = result});
     }
 }
 

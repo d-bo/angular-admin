@@ -9,7 +9,7 @@ export class MatchService {
 
 	constructor(public http: HttpClient) {}
 
-	getMatches(): Observable<any> {
+	getMatched(): Observable<any> {
 		return this.http.get('http://127.0.0.1:5000/getMatched');
 	}
 

@@ -1,1 +1,31 @@
-<h1>HELLLLLLOOO</h1>
+<table class="striped">
+	<tr *ngFor="let prods of res">
+		<td *ngIf="prods.gest!==undefined" style="vertical-align: top">
+			<div><b>{{prods.gest.name_e}}</b></div>
+			<div><b>{{prods.gest.name}}</b></div>
+			<div>{{prods.gest.barcod}}</div>
+			<div>{{prods.gest.brand}}</div>
+			<div>{{prods.gest.artic}}</div>
+			<div>{{prods.gest.brand}}</div>
+		</td>
+		<td *ngIf="prods.rive!==undefined" style="vertical-align: top">
+			<div><b>{{prods.rive.name}}</b></div>
+			<div><b>{{prods.rive.brand}}</b></div>
+			<div>{{prods.rive.code}}</div>
+			<div>{{prods.rive.country}}</div>
+			<div><img src="{{prods.rive.image_url}}" height="50px" /></div>
+		</td>
+		<td *ngIf="prods.letu!==undefined" style="vertical-align: top">
+			<div><b>{{prods.letu.name}}</b></div>
+			<div>{{prods.letu.name_e}}</div>
+			<div>{{prods.letu.brand}}</div>
+			<div>{{prods.letu.artic}}</div>
+		</td>
+		<td *ngIf="prods.ilde!==undefined" style="vertical-align: top">
+			<div><b>{{prods.letu.name}}</b></div>
+			<div><b>{{prods.letu.brand}}</b></div>
+			<div>{{prods.letu.artic}}</div>
+			<div><img src="http://static.iledebeaute.ru{{prods.rive.image}}" height="50px" /></div>
+		</td>
+	</tr>
+</table>
