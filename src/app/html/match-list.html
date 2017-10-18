@@ -1,31 +1,55 @@
-<table class="striped">
-	<tr *ngFor="let prods of res">
-		<td *ngIf="prods.gest!==undefined" style="vertical-align: top">
-			<div><b>{{prods.gest.name_e}}</b></div>
-			<div><b>{{prods.gest.name}}</b></div>
-			<div>{{prods.gest.barcod}}</div>
-			<div>{{prods.gest.brand}}</div>
-			<div>{{prods.gest.artic}}</div>
-			<div>{{prods.gest.brand}}</div>
-		</td>
-		<td *ngIf="prods.rive!==undefined" style="vertical-align: top">
-			<div><b>{{prods.rive.name}}</b></div>
-			<div><b>{{prods.rive.brand}}</b></div>
-			<div>{{prods.rive.code}}</div>
-			<div>{{prods.rive.country}}</div>
-			<div><img src="{{prods.rive.image_url}}" height="50px" /></div>
-		</td>
-		<td *ngIf="prods.letu!==undefined" style="vertical-align: top">
-			<div><b>{{prods.letu.name}}</b></div>
-			<div>{{prods.letu.name_e}}</div>
-			<div>{{prods.letu.brand}}</div>
-			<div>{{prods.letu.artic}}</div>
-		</td>
-		<td *ngIf="prods.ilde!==undefined" style="vertical-align: top">
-			<div><b>{{prods.letu.name}}</b></div>
-			<div><b>{{prods.letu.brand}}</b></div>
-			<div>{{prods.letu.artic}}</div>
-			<div><img src="http://static.iledebeaute.ru{{prods.rive.image}}" height="50px" /></div>
-		</td>
-	</tr>
+<table class="striped1">
+	<thead>
+		<td></td>
+		<td><h2>gestori</h2></td>
+		<td><h2>rive</h2></td>
+		<td><h2>letu</h2></td>
+		<td><h2>ilde</h2></td>
+	</thead>
+	<tbody>
+		<tr *ngFor="let prods of res">
+			<td>
+				<div style="padding: 7px">
+					<md-checkbox (click)="switchVerified($event)"></md-checkbox>
+				</div>
+			</td>
+			<td class="ga-tr-1" width="25%">
+				<div *ngIf="prods.gest!==undefined">
+					<div class="ga-h2">{{prods.gest.name_e}}</div>
+					<div class="ga-h2">{{prods.gest.name}}</div>
+					<div class="ga-brand">{{prods.gest.brand}}</div>
+					<div>{{prods.gest.barcod}}</div>
+					<div>{{prods.gest.artic}}</div>
+				</div>
+			</td>
+			<td class="ga-tr-1" width="25%">
+				<div *ngIf="prods.rive!==undefined">
+					<div class="ga-h2">{{prods.rive.name}}</div>
+					<div class="ga-brand">{{prods.rive.brand}}</div>
+					<div>{{prods.rive.code}}</div>
+					<div>{{prods.rive.country}}</div>
+					<div><img src="{{prods.rive.image_url}}" height="50px" /></div>
+				</div>
+			</td>
+			<td class="ga-tr-1" width="25%">
+				<div *ngIf="prods.letu!==undefined">
+					<div class="ga-h2">{{prods.letu.name}}</div>
+					<div>{{prods.letu.name_e}}</div>
+					<div class="ga-brand">{{prods.letu.brand}}</div>
+					<div>{{prods.letu.artic}}</div>
+				</div>
+			</td>
+			<td class="ga-tr-1" width="25%">
+				<div *ngIf="prods.ilde!==undefined">
+					<div class="ga-h2">{{prods.ilde.name}}</div>
+					<div class="ga-brand">{{prods.ilde.brand}}</div>
+					<div>{{prods.ilde.artic}}</div>
+					<div><img src="http://static.iledebeaute.ru{{prods.ilde.image}}" height="50px" /></div>
+				</div>
+			</td>
+			<td>
+				<md-icon class="example-icon">clear</md-icon>
+			</td>
+		</tr>
+	</tbody>
 </table>

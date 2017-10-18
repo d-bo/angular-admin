@@ -38,7 +38,12 @@ export class MatchListComponent implements OnInit {
         }
 
     ngOnInit(): void {
-        this.mservice.getMatched().subscribe(result => {this.res = result});
+        this.mservice.getMatched(1).subscribe(result => {this.res = result});
+    }
+
+    // 
+    switchVerified(event, item) {
+        alert(item)
     }
 }
 
@@ -121,10 +126,10 @@ export class MatchProductFormComponent implements OnInit {
     filteredRiveMatchOptions: Observable<any>;
     filteredIldeMatchOptions: Observable<any>;
 
-    filteredTxtMatchOptions: Observable<any>;
-    filteredTxtLetuMatchOptions: Observable<any>;
-    filteredTxtRiveMatchOptions: Observable<any>;
-    filteredTxtIldeMatchOptions: Observable<any>;
+    filteredTextOptions: Observable<any>;
+    filteredTextOptionsLetu: Observable<any>;
+    filteredTextOptionsRive: Observable<any>;
+    filteredTextOptionsIlde: Observable<any>;
 
     asyncFulltextSearchGest: Observable<any>;
     asyncFulltextSearchLetu: Observable<any>;
@@ -136,22 +141,24 @@ export class MatchProductFormComponent implements OnInit {
     p2: any;
     p3: any;
     p4: any;
+    pgTxt: any;
     pageSize = 7;
     totalMatch: number;
     totalMatch1: number;
     totalMatch2: number;
     totalMatch3: number;
     totalMatch4: number;
+    totalMatchGestTxt: number;
 
     myCompleteMatchControl = new FormControl();
     myCompleteLetuMatchControl = new FormControl();
     myCompleteIldeMatchControl = new FormControl();
     myCompleteRiveMatchControl = new FormControl();
 
-    myCompleteGestFullTxtControl = new FormControl();
-    myCompleteLetuFullTxtControl = new FormControl();
-    myCompleteIldeFullTxtControl = new FormControl();
-    myCompleteRiveFullTxtControl = new FormControl();
+    myTextSearchControl = new FormControl();
+    myTextSearchControlLetu = new FormControl();
+    myTextSearchControlIlde = new FormControl();
+    myTextSearchControlRive = new FormControl();
 
     gestoriSelectedBrand: any;
     riveSelectedBrand: any;
@@ -192,18 +199,21 @@ export class MatchProductFormComponent implements OnInit {
 
 
 
-        // autocomplete product search
-        this.filteredTxtMatchOptions = this.myCompleteMatchControl.valueChanges
-            .flatMap(val => this.http.get('http://127.0.0.1:5000/ft?s='+val+'&p=gest'));
+        // FULL TXT GEST
+        this.filteredTextOptions = this.myTextSearchControl.valueChanges
+        .flatMap(val => this.http.get('http://127.0.0.1:5000/ft?s='+val+'&p=gest'));
 
-        this.filteredTxtLetuMatchOptions = this.myCompleteLetuMatchControl.valueChanges
-            .flatMap(val => this.http.get('http://127.0.0.1:5000/ft?s='+val+'&p=letu'));
+        // FULL TXT LETU
+        this.filteredTextOptionsLetu = this.myTextSearchControlLetu.valueChanges
+        .flatMap(val => this.http.get('http://127.0.0.1:5000/ft?s='+val+'&p=letu'));
 
-        this.filteredTxtIldeMatchOptions = this.myCompleteIldeMatchControl.valueChanges
-            .flatMap(val => this.http.get('http://127.0.0.1:5000/ft?s='+val+'&p=ilde'));
+        // FULL TXT ILDE
+        this.filteredTextOptionsIlde = this.myTextSearchControlIlde.valueChanges
+        .flatMap(val => this.http.get('http://127.0.0.1:5000/ft?s='+val+'&p=ilde'));
 
-        this.filteredTxtRiveMatchOptions = this.myCompleteRiveMatchControl.valueChanges
-            .flatMap(val => this.http.get('http://127.0.0.1:5000/ft?s='+val+'&p=rive'));
+        // FULL TXT RIVE
+        this.filteredTextOptionsRive = this.myTextSearchControlRive.valueChanges
+        .flatMap(val => this.http.get('http://127.0.0.1:5000/ft?s='+val+'&p=rive'));
     }
 
     ngOnInit(): void {
@@ -342,6 +352,19 @@ export class MatchProductFormComponent implements OnInit {
                 this.totalMatch = res.count;
                 this.p = page;
             }).map(res => res.data);
+    }
+
+    // FULL TXT GESTORI
+    getGestoriFulltext(page: number) {
+        this.asyncFulltextSearchGest = this.serverCallGestoriObservable(page, this.gestoriSelectedBrand)
+        .do(res => {
+            this.totalMatchGestTxt = res.count;
+            this.pgTxt = page;
+        }).map(res => res.data);
+    }
+
+    serverCallGestoriTextObservable() {
+
     }
 
     serverCallGestoriObservable(page: number, search: string): Observable<any> {

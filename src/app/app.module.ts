@@ -73,4 +73,4 @@ import { MatchService } from './match.service';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

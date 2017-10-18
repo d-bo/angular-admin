@@ -1,6 +1,6 @@
 <div>
 	<div style="padding:10px;float: left">
-		
+
 		<!-- GEST BRAND SEARCH -->
 		<div>
 			
@@ -16,11 +16,27 @@
 		    </md-autocomplete>
 		    
 		</div>
+
+		<!-- GEST FULL TEXT SEARCH -->
+		<div>
+		    <md-input-container class="example-full-width">
+		        <input type="text" mdInput placeholder="По имени"
+		        [formControl]='myTextSearchControl' [mdAutocomplete]="autoText" #fulltextInputGest>
+		    </md-input-container>
+		    
+		    <md-autocomplete #autoText="mdAutocomplete">
+		        <md-option *ngFor="let option_text_complete of filteredTextOptions | async" [value]="option_text_complete.Barcod" (onSelectionChange)="getGestoriFulltext($event, item)">
+					<div style="font-size: 14px"><b>{{ option_text_complete.Name}}</b> / {{ option_text_complete.Name_e}} / {{ option_text_complete.Barcod}}</div>
+		        </md-option>
+		    </md-autocomplete>
+		</div>
+
 		<div>
             <button md-icon-button color="primary" (click)="confirmMatchRive()">
                 <md-icon class="md-24" aria-label="Example icon-button with a heart icon">flag</md-icon>
             </button>
 		</div>
+
 		<table class="striped">
 			<tr>
 			    <div>
@@ -48,26 +64,44 @@
 	<div>
 		<md-tab-group>
 			<md-tab label="RIVE">
-				<table>
-					<tr>
-						<td>
-						    <md-input-container class="example-full-width">
-						        <input type="text" mdInput placeholder="Брэнд Рив Гош"
-						        [formControl]="myCompleteRiveMatchControl" [mdAutocomplete]="auto3" #brandInputRive>
-						    </md-input-container>
-						    <md-autocomplete #auto3="mdAutocomplete">
-						        <md-option *ngFor="let option_rive of filteredRiveMatchOptions | async" [value]="option_rive.val" (onSelectionChange)="getRiveBrands($event, item)">
-						            {{ option_rive.val }}
-						        </md-option>
-						    </md-autocomplete>
-				    	</td>
-				    </tr>
-				</table>
+				
+				<div>
+					<md-input-container class="example-full-width">
+						<input type="text" mdInput placeholder="Брэнд Рив Гош"
+						[formControl]="myCompleteRiveMatchControl" [mdAutocomplete]="auto3" #brandInputRive>
+					</md-input-container>
+					<md-autocomplete #auto3="mdAutocomplete">
+						<md-option *ngFor="let option_rive of filteredRiveMatchOptions | async" [value]="option_rive.val" (onSelectionChange)="getRiveBrands($event, item)">
+							{{ option_rive.val }}
+						</md-option>
+					</md-autocomplete>
+				</div>
+
+				<!-- RIVE FULL TEXT SEARCH -->
+				<div>
+					<md-input-container class="example-full-width">
+						<input type="text" mdInput placeholder="По имени"
+						[formControl]='myTextSearchControlRive' [mdAutocomplete]="autoTextRive" #fulltextInputRive>
+					</md-input-container>
+					
+					<md-autocomplete #autoTextRive="mdAutocomplete">
+						<md-option *ngFor="let option_text_complete_rive of filteredTextOptionsRive | async" 
+						[value]="option_text_complete_rive.code" 
+						(onSelectionChange)="getRiveFulltext($event, item)">
+							<div style="font-size: 14px"><img src="{{option_text_complete_rive.image_url}}" 
+								width="30px" height="30px" style="padding-right: 7px" />{{ option_text_complete_rive.name}} / {{ option_text_complete_rive.code}}</div>
+						</md-option>
+					</md-autocomplete>
+				</div>
+
 				<table class="striped">
 				    <tr>
 					    <div>
 					        <div style="display: none"><md-spinner></md-spinner></div>
-					        <pagination-controls (pageChange)="getPageRive($event)" id="match_pr_rive_paginate" previousLabel="Пред." nextLabel="След."></pagination-controls>
+							<pagination-controls 
+							(pageChange)="getPageRive($event)" 
+							id="match_pr_rive_paginate" previousLabel="Пред." 
+							nextLabel="След."></pagination-controls>
 					    </div>
 				    </tr>
 				    <tr *ngFor="let xr of asyncRiveProducts | async | paginate: { id: 'match_pr_rive_paginate', itemsPerPage: perPage, currentPage: p3, totalItems: totalMatch3 }">
@@ -91,22 +125,36 @@
 			</md-tab>
 
 			<md-tab label="ILDE">
-				<table class="striped">
-					<tr>
-						<td>
-						    <md-input-container class="example-full-width">
-						        <input type="text" mdInput placeholder="Брэнд Ильдеботэ"
-						        [formControl]="myCompleteIldeMatchControl" [mdAutocomplete]="autoIlde" #brandInputIlde>
-						    </md-input-container>
 
-						    <md-autocomplete #autoIlde="mdAutocomplete">
-						        <md-option *ngFor="let option_ilde of filteredIldeMatchOptions | async" [value]="option_ilde.val" (onSelectionChange)="getIldeBrands($event, item)">
-						            {{ option_ilde.val }}
-						        </md-option>
-						    </md-autocomplete>
-						</td>
-						<td></td>
-					</tr>
+				<div>
+					<md-input-container class="example-full-width">
+							<input type="text" mdInput placeholder="Брэнд Ильдеботэ"
+							[formControl]="myCompleteIldeMatchControl" [mdAutocomplete]="autoIlde" #brandInputIlde>
+					</md-input-container>
+
+					<md-autocomplete #autoIlde="mdAutocomplete">
+						<md-option *ngFor="let option_ilde of filteredIldeMatchOptions | async" [value]="option_ilde.val" (onSelectionChange)="getIldeBrands($event, item)">
+							{{ option_ilde.val }}
+						</md-option>
+					</md-autocomplete>
+				</div>
+
+				<!-- ILDE FULL TEXT SEARCH -->
+				<div>
+					<md-input-container class="example-full-width">
+						<input type="text" mdInput placeholder="По имени"
+						[formControl]='myTextSearchControlIlde' [mdAutocomplete]="autoTextIlde" #fulltextInputIlde>
+					</md-input-container>
+					
+					<md-autocomplete #autoTextIlde="mdAutocomplete">
+						<md-option *ngFor="let option_text_complete_ilde of filteredTextOptionsIlde | async" [value]="option_text_complete_ilde.articul" (onSelectionChange)="getIldeFulltext($event, item)">
+							<div style="font-size: 14px"><img src="http://static.iledebeaute.ru{{option_text_complete_ilde.image}}" 
+								height="30px" width="30px" style="padding-right: 7px" />{{ option_text_complete_ilde.pn}} / {{ option_text_complete_ilde.articul}}</div>
+						</md-option>
+					</md-autocomplete>
+				</div>
+
+				<table class="striped">
 				    <tr>
 					    <div>
 					        <div style="display: none"><md-spinner></md-spinner></div>
@@ -133,22 +181,37 @@
 			</md-tab>
 
 			<md-tab label="LETU">
-				<table class="striped">
-					<tr>
-						<td>
-						    <md-input-container class="example-full-width">
-						        <input type="text" mdInput placeholder="Брэнд Летуаль"
-						        [formControl]="myCompleteLetuMatchControl" [mdAutocomplete]="auto2" #brandInputLetu>
-						    </md-input-container>
 
-						    <md-autocomplete #auto2="mdAutocomplete">
-						        <md-option *ngFor="let option_letu of filteredLetuMatchOptions | async" [value]="option_letu.val" (onSelectionChange)="getLetuBrands($event, item)">
-						            {{ option_letu.val }}
-						        </md-option>
-						    </md-autocomplete>
-						</td>
-						<td></td>
-					</tr>
+				<div>
+					<md-input-container class="example-full-width">
+						<input type="text" mdInput placeholder="Брэнд Летуаль"
+							[formControl]="myCompleteLetuMatchControl" [mdAutocomplete]="auto2" #brandInputLetu>
+					</md-input-container>
+
+					<md-autocomplete #auto2="mdAutocomplete">
+						<md-option *ngFor="let option_letu of filteredLetuMatchOptions | async" [value]="option_letu.val" (onSelectionChange)="getLetuBrands($event, item)">
+							{{ option_letu.val }}
+						</md-option>
+					</md-autocomplete>
+				</div>
+
+				<!-- LETU FULL TEXT SEARCH -->
+				<div>
+					<md-input-container class="example-full-width">
+						<input type="text" mdInput placeholder="По имени"
+						[formControl]='myTextSearchControlLetu' [mdAutocomplete]="autoTextLetu" #fulltextInputLetu>
+					</md-input-container>
+					
+					<md-autocomplete #autoTextLetu="mdAutocomplete">
+						<md-option *ngFor="let option_text_complete_letu of filteredTextOptionsLetu | async" 
+						[value]="option_text_complete_letu.articul" 
+						(onSelectionChange)="getLetuFulltext($event, item)">
+							<div style="font-size: 14px">{{ option_text_complete_letu.name}} / {{ option_text_complete_letu.desc}} / {{ option_text_complete_letu.articul}}</div>
+						</md-option>
+					</md-autocomplete>
+				</div>
+
+				<table class="striped">
 				    <tr>
 					    <div>
 					        <div style="display: none"><md-spinner></md-spinner></div>
