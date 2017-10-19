@@ -217,7 +217,7 @@ export class MatchProductFormComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.getPageGestori(1)
+        this.getPageGestori(1, undefined)
         this.getPageLetu(1)
         this.getPageIlde(1)
         this.getPageRive(1)
@@ -318,17 +318,9 @@ export class MatchProductFormComponent implements OnInit {
         });
     }
 
-    confirmMatchIlde() {
-
-    }
-
-    confirmMatchLetu() {
-        
-    }
-
-    getGestoriBrands(event) {
+    getGestoriBrands(event, item) {
         this.gestoriSelectedBrand = event.source.value;
-        this.getPageGestori(1);
+        this.getPageGestori(1, item);
     }
 
     getRiveBrands(event) {
@@ -346,32 +338,24 @@ export class MatchProductFormComponent implements OnInit {
         this.getPageLetu(1);
     }
 
-    getPageGestori(page: number) {
-        this.asyncGestoriProducts = this.serverCallGestoriObservable(page, this.gestoriSelectedBrand)
+    getPageGestori(page: number, artic: any) {
+        this.asyncGestoriProducts = this.serverCallGestoriObservable(page, this.gestoriSelectedBrand, artic)
             .do(res => {
                 this.totalMatch = res.count;
                 this.p = page;
             }).map(res => res.data);
     }
 
-    // FULL TXT GESTORI
-    getGestoriFulltext(page: number) {
-        this.asyncFulltextSearchGest = this.serverCallGestoriObservable(page, this.gestoriSelectedBrand)
-        .do(res => {
-            this.totalMatchGestTxt = res.count;
-            this.pgTxt = page;
-        }).map(res => res.data);
-    }
-
-    serverCallGestoriTextObservable() {
-
-    }
-
-    serverCallGestoriObservable(page: number, search: string): Observable<any> {
+    serverCallGestoriObservable(page: number, search: string, artic: any): Observable<any> {
         const perPage = this.pageSize;
         const start = (page - 1) * perPage;
         const end = start + perPage;
-        return this.http.get('http://127.0.0.1:5000/gestori_products?page='+page+'&perPage='+perPage+'&search='+search)
+        // search by article instead of huge string
+        if (artic !== undefined) {
+            return this.http.get('http://127.0.0.1:5000/gestori_products?page='+page+'&perPage='+perPage+'&art='+artic)
+        } else {
+            return this.http.get('http://127.0.0.1:5000/gestori_products?page='+page+'&perPage='+perPage+'&search='+search)
+        }
     }
 
     getPageLetu(page: number) {
