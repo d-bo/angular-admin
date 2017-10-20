@@ -69,7 +69,8 @@ import { MatchService } from './match.service';
     MdSlideToggleModule,
   ],
   providers: [
-      MatchService
+      MatchService,
+      MatchListComponent
   ],
   bootstrap: [AppComponent]
 })

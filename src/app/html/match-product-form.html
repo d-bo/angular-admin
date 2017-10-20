@@ -89,7 +89,7 @@
 					<md-autocomplete #autoTextRive="mdAutocomplete">
 						<md-option *ngFor="let option_text_complete_rive of filteredTextOptionsRive | async" 
 						[value]="option_text_complete_rive.name" 
-						(onSelectionChange)="getRiveSingleFulltext($event, item)">
+						(onSelectionChange)="getRiveBrands($event, option_text_complete_rive.code)">
 							<div style="font-size: 14px"><img src="{{option_text_complete_rive.image_url}}" 
 								width="30px" height="30px" style="padding-right: 7px" />{{ option_text_complete_rive.name}} / {{ option_text_complete_rive.code}}</div>
 						</md-option>
@@ -135,7 +135,9 @@
 					</md-input-container>
 
 					<md-autocomplete #autoIlde="mdAutocomplete">
-						<md-option *ngFor="let option_ilde of filteredIldeMatchOptions | async" [value]="option_ilde.val" (onSelectionChange)="getIldeBrands($event, item)">
+						<md-option *ngFor="let option_ilde of filteredIldeMatchOptions | async" 
+						[value]="option_ilde.val" 
+						(onSelectionChange)="getIldeBrands($event, item)">
 							{{ option_ilde.val }}
 						</md-option>
 					</md-autocomplete>
@@ -151,7 +153,7 @@
 					<md-autocomplete #autoTextIlde="mdAutocomplete">
 						<md-option *ngFor="let option_text_complete_ilde of filteredTextOptionsIlde | async" 
 						[value]="option_text_complete_ilde.pn" 
-						(onSelectionChange)="getIldeSingleFulltext($event, item)">
+						(onSelectionChange)="getIldeBrands($event, option_text_complete_ilde.articul)">
 							<div style="font-size: 14px"><img src="http://static.iledebeaute.ru{{option_text_complete_ilde.image}}" 
 								height="30px" width="30px" style="padding-right: 7px" />{{option_text_complete_ilde.brand}} {{ option_text_complete_ilde.pn}} / {{ option_text_complete_ilde.articul}}</div>
 						</md-option>
@@ -209,8 +211,8 @@
 					<md-autocomplete #autoTextLetu="mdAutocomplete">
 						<md-option *ngFor="let option_text_complete_letu of filteredTextOptionsLetu | async" 
 						[value]="option_text_complete_letu.name" 
-						(onSelectionChange)="getLetuSingleFulltext($event, item)">
-							<div style="font-size: 14px">{{ option_text_complete_letu.name}} / {{ option_text_complete_letu.desc}} / {{ option_text_complete_letu.articul}}</div>
+						(onSelectionChange)="getLetuBrands($event, option_text_complete_letu.articul)">
+							<div style="font-size: 14px">{{ option_text_complete_letu.name}} / {{ option_text_complete_letu.desc}} / {{ option_text_complete_letu.articul }}</div>
 						</md-option>
 					</md-autocomplete>
 				</div>

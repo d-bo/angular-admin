@@ -12,8 +12,4 @@ export class MatchService {
 	getMatched(page: any): Observable<any> {
 		return this.http.get('http://127.0.0.1:5000/getMatched?perPage=5&page='+page);
 	}
-
-	addMatch(): void {
-		//itemsMatched.merge
-	}
 }
