@@ -21,7 +21,7 @@ import 'rxjs/add/operator/mergeMap';
 
 import _ from 'lodash';
 
-const MAIN_IP = '127.0.0.1'
+const MAIN_IP = '127.0.0.1';
 
 @Component({
     selector: 'match-list',
@@ -47,8 +47,8 @@ export class MatchListComponent implements OnInit {
         if (this.res !== undefined) {
             this.res.push();
         }
-        //this.mservice.getMatched(1).subscribe(result => {this.res = result});
-        //this.mservice.getMatched(1).subscribe(result => {this.res.next(result)});
+        // this.mservice.getMatched(1).subscribe(result => {this.res = result});
+        // this.mservice.getMatched(1).subscribe(result => {this.res.next(result)});
     }
 
     addElement(item): void {
@@ -60,6 +60,10 @@ export class MatchListComponent implements OnInit {
 
     switchVerified(event, item) {
         alert(item)
+    }
+
+    refreshMatched() {
+        alert('refresh !')
     }
 }
 
@@ -113,14 +117,14 @@ export class MatchDialog {
             err => {
                 let dialogRef = this.mdialog.open(WarnDialog, {
                   data: {
-                      'msg': 'Fuck, error: '+err
+                      'msg': 'jшибка: '+err
                     }
                 });
             },
             () => {
                 let dialogRef = this.mdialog.open(WarnDialog, {
                   data: {
-                      'msg': 'Success !'
+                      'msg': 'OK !'
                     }
                 });
             }
@@ -310,9 +314,8 @@ export class MatchProductFormComponent implements OnInit {
 
         if (this.gestSelectedItem == '' || this.gestSelectedItem == undefined) {
             let dialogRef = this.mdialog.open(WarnDialog, {
-              width: '400px',
               data: {
-                  'msg': 'Не выбрано gestori'
+                  'msg': 'Сначала выберите gestori'
                 }
             });
             return;

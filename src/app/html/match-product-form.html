@@ -3,39 +3,61 @@
 
 		<!-- GEST BRAND SEARCH -->
 		<div>
-		    <md-input-container class="example-full-width">
-		        <input type="text" mdInput placeholder="Брэнд Gestori"
-		        [formControl]='myCompleteMatchControl' [mdAutocomplete]="auto" #brandInputGest>
-		    </md-input-container>
-		    
-		    <md-autocomplete #auto="mdAutocomplete">
-				<md-option *ngFor="let option_complete of filteredMatchOptions | async" 
-				[value]="option_complete.val" 
-				(onSelectionChange)="getGestoriBrands($event)">
-		            {{ option_complete.val }}
-		        </md-option>
-		    </md-autocomplete>
+			<table width="100%">
+				<tr>
+					<td>
+						<md-input-container class="example-full-width">
+							<input type="text" mdInput placeholder="Брэнд Gestori"
+							[formControl]='myCompleteMatchControl' [mdAutocomplete]="auto" #brandInputGest>
+						</md-input-container>
+						
+						<md-autocomplete #auto="mdAutocomplete">
+							<md-option *ngFor="let option_complete of filteredMatchOptions | async" 
+							[value]="option_complete.val" 
+							(onSelectionChange)="getGestoriBrands($event)">
+								{{ option_complete.val }}
+							</md-option>
+						</md-autocomplete>
+					</td>
+					<td>
+						<button md-icon-button type="button">
+							<md-icon class="md-24" color="basic">clear</md-icon>
+						</button>
+					</td>
+				</tr>
+			</table>
 		</div>
 
 		<!-- GEST FULL TEXT SEARCH -->
 		<div>
-		    <md-input-container class="example-full-width">
-		        <input type="text" mdInput placeholder="По имени"
-		        [formControl]='myTextSearchControl' [mdAutocomplete]="autoText" #fulltextInputGest>
-		    </md-input-container>
-		    
-		    <md-autocomplete #autoText="mdAutocomplete">
-				<md-option *ngFor="let option_text_complete of filteredTextOptions | async" 
-				[value]="option_text_complete.Name" 
-				(onSelectionChange)="getGestoriBrands($event, option_text_complete.Artic)">
-					<div style="font-size: 14px"><b>{{ option_text_complete.Name}}</b> / {{ option_text_complete.Name_e}} / {{ option_text_complete.Barcod}}</div>
-		        </md-option>
-		    </md-autocomplete>
+			<table width="100%">
+				<tr>
+					<td>
+						<md-input-container class="example-full-width">
+							<input type="text" mdInput placeholder="По имени"
+							[formControl]='myTextSearchControl' [mdAutocomplete]="autoText" #fulltextInputGest>
+						</md-input-container>
+						
+						<md-autocomplete #autoText="mdAutocomplete">
+							<md-option *ngFor="let option_text_complete of filteredTextOptions | async" 
+							[value]="option_text_complete.Name" 
+							(onSelectionChange)="getGestoriBrands($event, option_text_complete.Artic)">
+								<div style="font-size: 14px"><b>{{ option_text_complete.Name}}</b> / {{ option_text_complete.Name_e}} / {{ option_text_complete.Barcod}}</div>
+							</md-option>
+						</md-autocomplete>
+					</td>
+					<td>
+						<button md-icon-button type="button">
+							<md-icon class="md-24" color="basic">clear</md-icon>
+						</button>
+					</td>
+				</tr>
+			</table>
 		</div>
 
 		<div>
             <button md-icon-button color="primary" (click)="confirmMatchRive()">
-                <md-icon class="md-24" aria-label="Example icon-button with a heart icon">flag</md-icon>
+                <md-icon class="md-24">flag</md-icon>
             </button>
 		</div>
 
@@ -51,12 +73,19 @@
 		            <md-list-item>
 		            	<div md-line><h2 style="margin: 0;color: #333;font-size: 16px;line-height: 20px">{{br._id.name}}</h2></div>
 						<div md-line>{{br._id.name_e}}</div>
-		                <div md-line><span md-line style="padding-right: 15px;color: rgb(63, 81, 181)">{{br._id.brand}}</span><span>{{br._id.artic}}</span>&nbsp;&nbsp;&nbsp;<span>{{br._id.barcod}}</span></div>
+						<div md-line>
+							<span md-line style="padding-right: 15px;color: rgb(63, 81, 181)">{{br._id.brand}}</span>
+							<span>{{br._id.artic}}</span>&nbsp;&nbsp;&nbsp;
+							<span>{{br._id.barcod}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						</div>
+						<div style="text-align: right">
+							<span><i>{{br._id.retail_price}} руб.</i></span>
+						</div>
 		            </md-list-item>
 		        </td>
 		        <td>
 		            <button md-icon-button color="primary" (click)="markGestori(br._id)">
-		                <md-icon class="md-24" aria-label="Example icon-button with a heart icon">check</md-icon>
+		                <md-icon class="md-24">check</md-icon>
 		            </button>
 		        </td>
 		    </tr>
@@ -64,36 +93,57 @@
 	</div>
 
 	<div>
-		<md-tab-group>
+		<md-tab-group style="max-width: 600px">
 			<md-tab label="RIVE">
-				
 				<div>
-					<md-input-container class="example-full-width">
-						<input type="text" mdInput placeholder="Брэнд Рив Гош"
-						[formControl]="myCompleteRiveMatchControl" [mdAutocomplete]="auto3" #brandInputRive>
-					</md-input-container>
-					<md-autocomplete #auto3="mdAutocomplete">
-						<md-option *ngFor="let option_rive of filteredRiveMatchOptions | async" [value]="option_rive.val" (onSelectionChange)="getRiveBrands($event, item)">
-							{{ option_rive.val }}
-						</md-option>
-					</md-autocomplete>
+					<table width="100%">
+						<tr>
+							<td>
+								<md-input-container class="example-full-width">
+									<input type="text" mdInput placeholder="Брэнд Рив Гош"
+									[formControl]="myCompleteRiveMatchControl" [mdAutocomplete]="auto3" #brandInputRive>
+								</md-input-container>
+								<md-autocomplete #auto3="mdAutocomplete">
+									<md-option *ngFor="let option_rive of filteredRiveMatchOptions | async" [value]="option_rive.val" (onSelectionChange)="getRiveBrands($event, item)">
+										{{ option_rive.val }}
+									</md-option>
+								</md-autocomplete>
+							</td>
+							<td>
+								<button md-icon-button type="button">
+									<md-icon class="md-24" color="basic">clear</md-icon>
+								</button>
+							</td>
+						</tr>
+					</table>
 				</div>
 
 				<!-- RIVE FULL TEXT SEARCH -->
 				<div>
-					<md-input-container class="example-full-width">
-						<input type="text" mdInput placeholder="По имени"
-						[formControl]='myTextSearchControlRive' [mdAutocomplete]="autoTextRive" #fulltextInputRive>
-					</md-input-container>
-					
-					<md-autocomplete #autoTextRive="mdAutocomplete">
-						<md-option *ngFor="let option_text_complete_rive of filteredTextOptionsRive | async" 
-						[value]="option_text_complete_rive.name" 
-						(onSelectionChange)="getRiveBrands($event, option_text_complete_rive.code)">
-							<div style="font-size: 14px"><img src="{{option_text_complete_rive.image_url}}" 
-								width="30px" height="30px" style="padding-right: 7px" />{{ option_text_complete_rive.name}} / {{ option_text_complete_rive.code}}</div>
-						</md-option>
-					</md-autocomplete>
+					<table width="100%">
+						<tr>
+							<td>
+								<md-input-container class="example-full-width">
+									<input type="text" mdInput placeholder="По имени"
+									[formControl]='myTextSearchControlRive' [mdAutocomplete]="autoTextRive" #fulltextInputRive>
+								</md-input-container>
+								
+								<md-autocomplete #autoTextRive="mdAutocomplete">
+									<md-option *ngFor="let option_text_complete_rive of filteredTextOptionsRive | async" 
+									[value]="option_text_complete_rive.name" 
+									(onSelectionChange)="getRiveBrands($event, option_text_complete_rive.code)">
+										<div style="font-size: 14px"><img src="{{option_text_complete_rive.image_url}}" 
+											width="30px" height="30px" style="padding-right: 7px" />{{ option_text_complete_rive.name}} / {{ option_text_complete_rive.code}}</div>
+									</md-option>
+								</md-autocomplete>
+							</td>
+							<td>
+								<button md-icon-button type="button">
+									<md-icon class="md-24" color="basic">clear</md-icon>
+								</button>
+							</td>
+						</tr>
+					</table>
 				</div>
 
 				<table class="striped">
@@ -112,52 +162,76 @@
 								<div md-line><h2 style="margin: 0;color: #333;font-size: 16px;line-height: 20px">{{xr._id.name}}</h2></div>
 		                		<div md-line><span md-line style="padding-right: 15px;color: rgb(63, 81, 181)">{{xr._id.brand}}</span>&nbsp;<span>{{xr._id.code}}</span>&nbsp;&nbsp;&nbsp;<span>{{xr._id.country}}</span></div>
 				                <div md-line>{{xr._id.desc}}</div>
-				            </md-list-item>
+							</md-list-item>
+							<div style="text-align: right">
+								<span><i>{{xr._id.listingprice}} руб.</i></span>
+							</div>
 				        </td>
 				        <td>
 				        	<img src="{{xr._id.image_url}}" height="50px"/>
 				        </td>
 				        <td>
-				            <button md-icon-button color="primary" (click)="markRive(xr._id)">
-				                <md-icon class="md-24" aria-label="Example icon-button with a heart icon">check</md-icon>
-				            </button>
+							<button md-icon-button color="primary" (click)="markRive(xr._id)">
+							<md-icon class="md-24" aria-label="Example icon-button with a heart icon">check</md-icon>
+							</button>
 				        </td>
 				    </tr>
 				</table>
 			</md-tab>
 
 			<md-tab label="ILDE">
-
 				<div>
-					<md-input-container class="example-full-width">
-							<input type="text" mdInput placeholder="Брэнд Ильдеботэ"
-							[formControl]="myCompleteIldeMatchControl" [mdAutocomplete]="autoIlde" #brandInputIlde>
-					</md-input-container>
+					<table width="100%">
+						<tr>
+							<td>
+								<md-input-container class="example-full-width">
+										<input type="text" mdInput placeholder="Брэнд Ильдеботэ"
+										[formControl]="myCompleteIldeMatchControl" [mdAutocomplete]="autoIlde" #brandInputIlde>
+								</md-input-container>
 
-					<md-autocomplete #autoIlde="mdAutocomplete">
-						<md-option *ngFor="let option_ilde of filteredIldeMatchOptions | async" 
-						[value]="option_ilde.val" 
-						(onSelectionChange)="getIldeBrands($event, item)">
-							{{ option_ilde.val }}
-						</md-option>
-					</md-autocomplete>
+								<md-autocomplete #autoIlde="mdAutocomplete">
+									<md-option *ngFor="let option_ilde of filteredIldeMatchOptions | async" 
+									[value]="option_ilde.val" 
+									(onSelectionChange)="getIldeBrands($event, item)">
+										{{ option_ilde.val }}
+									</md-option>
+								</md-autocomplete>
+							</td>
+							<td>
+								<button md-icon-button type="button">
+									<md-icon class="md-24" color="basic">clear</md-icon>
+								</button>
+							</td>
+						</tr>
+					</table>
 				</div>
 
 				<!-- ILDE FULL TEXT SEARCH -->
 				<div>
-					<md-input-container class="example-full-width">
-						<input type="text" mdInput placeholder="По имени"
-						[formControl]='myTextSearchControlIlde' [mdAutocomplete]="autoTextIlde" #fulltextInputIlde>
-					</md-input-container>
-					
-					<md-autocomplete #autoTextIlde="mdAutocomplete">
-						<md-option *ngFor="let option_text_complete_ilde of filteredTextOptionsIlde | async" 
-						[value]="option_text_complete_ilde.pn" 
-						(onSelectionChange)="getIldeBrands($event, option_text_complete_ilde.articul)">
-							<div style="font-size: 14px"><img src="http://static.iledebeaute.ru{{option_text_complete_ilde.image}}" 
-								height="30px" width="30px" style="padding-right: 7px" />{{option_text_complete_ilde.brand}} {{ option_text_complete_ilde.pn}} / {{ option_text_complete_ilde.articul}}</div>
-						</md-option>
-					</md-autocomplete>
+					<table width="100%">
+						<tr>
+							<td>
+								<md-input-container class="example-full-width">
+									<input type="text" mdInput placeholder="По имени"
+									[formControl]='myTextSearchControlIlde' [mdAutocomplete]="autoTextIlde" #fulltextInputIlde>
+								</md-input-container>
+								
+								<md-autocomplete #autoTextIlde="mdAutocomplete">
+									<md-option *ngFor="let option_text_complete_ilde of filteredTextOptionsIlde | async" 
+									[value]="option_text_complete_ilde.pn" 
+									(onSelectionChange)="getIldeBrands($event, option_text_complete_ilde.articul)">
+										<div style="font-size: 14px"><img src="http://static.iledebeaute.ru{{option_text_complete_ilde.image}}" 
+											height="30px" width="30px" style="padding-right: 7px" />{{option_text_complete_ilde.brand}} {{ option_text_complete_ilde.pn}} / {{ option_text_complete_ilde.articul}}</div>
+									</md-option>
+								</md-autocomplete>
+							</td>
+							<td>
+								<button md-icon-button type="button">
+									<md-icon class="md-24" color="basic">clear</md-icon>
+								</button>
+							</td>
+						</tr>
+					</table>
 				</div>
 
 				<table class="striped">
@@ -172,14 +246,17 @@
 				            <md-list-item>
 								<div md-line><h2 style="margin: 0;color: #333;font-size: 16px;line-height: 20px">{{jr._id.name}}</h2></div>
 		                		<div md-line><span md-line style="padding-right: 15px;color: rgb(63, 81, 181)">{{jr._id.brand}}</span>&nbsp;<span>{{jr._id.artic}}</span>&nbsp;&nbsp;&nbsp;</div>
-				            </md-list-item>
+							</md-list-item>
+							<div style="text-align: right">
+								<span><i>{{jr._id.listingprice}} руб.</i></span>
+							</div>
 				        </td>
 				        <td>
 				        	<img src="http://static.iledebeaute.ru{{jr._id.image}}" height="50px" />
 				        </td>
 				        <td>
 				            <button md-icon-button color="primary" (click)="markIlde(jr._id)">
-				                <md-icon class="md-24" aria-label="Example icon-button with a heart icon">check</md-icon>
+				                <md-icon class="md-24">check</md-icon>
 				            </button>
 				        </td>
 				    </tr>
@@ -187,34 +264,55 @@
 			</md-tab>
 
 			<md-tab label="LETU">
-
 				<div>
-					<md-input-container class="example-full-width">
-						<input type="text" mdInput placeholder="Брэнд Летуаль"
-							[formControl]="myCompleteLetuMatchControl" [mdAutocomplete]="auto2" #brandInputLetu>
-					</md-input-container>
+					<table width="100%">
+						<tr>
+							<td>
+								<md-input-container class="example-full-width">
+									<input type="text" mdInput placeholder="Брэнд Летуаль"
+										[formControl]="myCompleteLetuMatchControl" [mdAutocomplete]="auto2" #brandInputLetu>
+								</md-input-container>
 
-					<md-autocomplete #auto2="mdAutocomplete">
-						<md-option *ngFor="let option_letu of filteredLetuMatchOptions | async" [value]="option_letu.val" (onSelectionChange)="getLetuBrands($event, item)">
-							{{ option_letu.val }}
-						</md-option>
-					</md-autocomplete>
+								<md-autocomplete #auto2="mdAutocomplete">
+									<md-option *ngFor="let option_letu of filteredLetuMatchOptions | async" [value]="option_letu.val" (onSelectionChange)="getLetuBrands($event, item)">
+										{{ option_letu.val }}
+									</md-option>
+								</md-autocomplete>
+							</td>
+							<td>
+								<button md-icon-button type="button">
+									<md-icon class="md-24" color="basic">clear</md-icon>
+								</button>
+							</td>
+						</tr>
+					</table>
 				</div>
 
 				<!-- LETU FULL TEXT SEARCH -->
 				<div>
-					<md-input-container class="example-full-width">
-						<input type="text" mdInput placeholder="По имени"
-						[formControl]='myTextSearchControlLetu' [mdAutocomplete]="autoTextLetu" #fulltextInputLetu>
-					</md-input-container>
-					
-					<md-autocomplete #autoTextLetu="mdAutocomplete">
-						<md-option *ngFor="let option_text_complete_letu of filteredTextOptionsLetu | async" 
-						[value]="option_text_complete_letu.name" 
-						(onSelectionChange)="getLetuBrands($event, option_text_complete_letu.articul)">
-							<div style="font-size: 14px">{{ option_text_complete_letu.name}} / {{ option_text_complete_letu.desc}} / {{ option_text_complete_letu.articul }}</div>
-						</md-option>
-					</md-autocomplete>
+					<table width="100%">
+						<tr>
+							<td>
+								<md-input-container class="example-full-width">
+									<input type="text" mdInput placeholder="По имени"
+									[formControl]='myTextSearchControlLetu' [mdAutocomplete]="autoTextLetu" #fulltextInputLetu>
+								</md-input-container>
+								
+								<md-autocomplete #autoTextLetu="mdAutocomplete">
+									<md-option *ngFor="let option_text_complete_letu of filteredTextOptionsLetu | async" 
+									[value]="option_text_complete_letu.name" 
+									(onSelectionChange)="getLetuBrands($event, option_text_complete_letu.articul)">
+										<div style="font-size: 14px">{{ option_text_complete_letu.name}} / {{ option_text_complete_letu.desc}} / {{ option_text_complete_letu.articul }}</div>
+									</md-option>
+								</md-autocomplete>
+							</td>
+							<td>
+								<button md-icon-button type="button">
+									<md-icon class="md-24" color="basic">clear</md-icon>
+								</button>
+							</td>
+						</tr>
+					</table>
 				</div>
 
 				<table class="striped">
@@ -229,7 +327,10 @@
 				            <md-list-item>
 								<div md-line><h2 style="margin: 0;color: #333;font-size: 16px;line-height: 20px">{{kr._id.name}}</h2></div>
 		                		<div md-line><span md-line style="padding-right: 15px;color: rgb(63, 81, 181)">{{kr._id.brand}}</span>&nbsp;<span>{{kr._id.desc}}</span>&nbsp;<span>{{kr._id.artic}}</span></div>
-				            </md-list-item>
+							</md-list-item>
+							<div style="text-align: right">
+								<span><i>{{kr._id.listingprice}} руб.</i></span>
+							</div>
 				        </td>
 				        <td>
 				            <button md-icon-button color="primary" (click)="markLetu(kr._id)">
