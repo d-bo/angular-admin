@@ -302,7 +302,7 @@
 									<md-option *ngFor="let option_text_complete_letu of filteredTextOptionsLetu | async" 
 									[value]="option_text_complete_letu.name" 
 									(onSelectionChange)="getLetuBrands($event, option_text_complete_letu.articul)">
-										<div style="font-size: 14px"><img src="http://www.letu.ru{{option_text_complete_letu.img}}" height="50px" width="50px" style="padding-right: 7px" />{{ option_text_complete_letu.name}} / {{ option_text_complete_letu.desc}} / {{ option_text_complete_letu.articul }}</div>
+										<div style="font-size: 14px"><img src="http://www.letu.ru{{option_text_complete_letu.img}}" height="30px" width="30px" style="padding-right: 7px" />{{ option_text_complete_letu.name}} / {{ option_text_complete_letu.desc}} / {{ option_text_complete_letu.articul }}</div>
 									</md-option>
 								</md-autocomplete>
 							</td>
