@@ -302,7 +302,7 @@
 									<md-option *ngFor="let option_text_complete_letu of filteredTextOptionsLetu | async" 
 									[value]="option_text_complete_letu.name" 
 									(onSelectionChange)="getLetuBrands($event, option_text_complete_letu.articul)">
-										<div style="font-size: 14px">{{ option_text_complete_letu.name}} / {{ option_text_complete_letu.desc}} / {{ option_text_complete_letu.articul }}</div>
+										<div style="font-size: 14px"><img src="http://www.letu.ru{{option_text_complete_letu.img}}" height="50px" width="50px" style="padding-right: 7px" />{{ option_text_complete_letu.name}} / {{ option_text_complete_letu.desc}} / {{ option_text_complete_letu.articul }}</div>
 									</md-option>
 								</md-autocomplete>
 							</td>
@@ -326,11 +326,15 @@
 				        <td class="table-td" [attr.id]="'letu_'+kr._id.artic">
 				            <md-list-item>
 								<div md-line><h2 style="margin: 0;color: #333;font-size: 16px;line-height: 20px">{{kr._id.name}}</h2></div>
-		                		<div md-line><span md-line style="padding-right: 15px;color: rgb(63, 81, 181)">{{kr._id.brand}}</span>&nbsp;<span>{{kr._id.desc}}</span>&nbsp;<span>{{kr._id.artic}}</span></div>
+								<div md-line><span md-line style="padding-right: 15px;color: rgb(63, 81, 181)">{{kr._id.brand}}</span>&nbsp;<span>{{kr._id.volume}}</span>&nbsp;<span>{{kr._id.artic}}</span></div>
+								<div md-line>{{kr._id.desc}}</div>
 							</md-list-item>
 							<div style="text-align: right">
 								<span><i>{{kr._id.listingprice}} руб.</i></span>
 							</div>
+						</td>
+				        <td>
+				        	<img src="http://www.letu.ru{{kr._id.img}}" height="50px" width="50px" />
 				        </td>
 				        <td>
 				            <button md-icon-button color="primary" (click)="markLetu(kr._id)">
@@ -339,6 +343,7 @@
 				        </td>
 				    </tr>
 				</table>
+
 			</md-tab>
 
 		</md-tab-group>
