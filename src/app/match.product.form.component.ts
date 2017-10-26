@@ -4,10 +4,11 @@ import { Component } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
 import { FormControl } from '@angular/forms';
-import { URLSearchParams } from "@angular/http";
+import { URLSearchParams } from '@angular/http';
 import { MdSnackBar } from '@angular/material';
 import { MdDialog, MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
 import { MatchService } from './match.service';
+import { GlobalService } from './global.service';
 
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/observable/merge';
@@ -21,7 +22,7 @@ import 'rxjs/add/operator/mergeMap';
 
 import _ from 'lodash';
 
-const MAIN_IP = '127.0.0.1';
+
 
 @Component({
     selector: 'match-list',
@@ -40,7 +41,7 @@ export class MatchListComponent implements OnInit {
         }
 
     ngOnInit(): void {
-        this.mservice.getMatched(1).subscribe(result => {this.res = result});
+        this.mservice.getMatched(1).subscribe(result => { this.res = result; });
     }
 
     add(save_data): void {
@@ -94,12 +95,13 @@ export class WarnDialog {
   templateUrl: './html/match-dialog.html',
 })
 
-export class MatchDialog {
+export class MatchDialogComponent {
 
     constructor(
-            public dialogRefMatch: MdDialogRef<MatchDialog>,
+            public dialogRefMatch: MdDialogRef<MatchDialogComponent>,
             public mdialog: MdDialog,
             private http: HttpClient,
+            private globals: GlobalService,
             @Inject(MD_DIALOG_DATA) public data: any
         ) {}
 
@@ -110,19 +112,19 @@ export class MatchDialog {
     onYesClick(gest, rive, ilde, letu): void {
         this.dialogRefMatch.close();
         this.http.post(
-            'http://'+MAIN_IP+':5000/match',
+            'http://' + this.globals.MAIN_IP + ':5000/match',
             {'gest': gest, 'rive': rive, 'ilde': ilde, 'letu': letu}
         ).subscribe(
             x => {},
             err => {
-                let dialogRef = this.mdialog.open(WarnDialog, {
+                const dialogRef = this.mdialog.open(WarnDialog, {
                   data: {
-                      'msg': 'jшибка: '+err
+                      'msg': 'ошибка: ' + err
                     }
                 });
             },
             () => {
-                let dialogRef = this.mdialog.open(WarnDialog, {
+                const dialogRef = this.mdialog.open(WarnDialog, {
                   data: {
                       'msg': 'OK !'
                     }
@@ -138,8 +140,6 @@ export class MatchDialog {
 })
 
 export class MatchProductFormComponent implements OnInit {
-
-
 
     // observables
     asyncGestoriProducts: Observable<any>;
@@ -202,109 +202,114 @@ export class MatchProductFormComponent implements OnInit {
         private http: HttpClient,
         private mdialog: MdDialog,
         private snackBar: MdSnackBar,
-        private mlist: MatchListComponent
+        private mlist: MatchListComponent,
+        private globals: GlobalService
     ) {
 
-        this.http = http
-        this.mdialog = mdialog
-        this.snackBar = snackBar
+        this.http = http;
+        this.mdialog = mdialog;
+        this.snackBar = snackBar;
 
 
 
         // autocomplete BRAND search
         this.filteredMatchOptions = this.myCompleteMatchControl.valueChanges
-            .flatMap(val => this.http.get('http://'+MAIN_IP+':5000/brands?s='+val+'&p=gest'));
+            .flatMap(val => this.http.get('http://' + this.globals.MAIN_IP + ':5000/brands?s=' + val + '&p=gest'));
 
         this.filteredLetuMatchOptions = this.myCompleteLetuMatchControl.valueChanges
-            .flatMap(val => this.http.get('http://'+MAIN_IP+':5000/brands?s='+val+'&p=letu'));
+            .flatMap(val => this.http.get('http://' + this.globals.MAIN_IP + ':5000/brands?s=' + val + '&p=letu'));
 
         this.filteredIldeMatchOptions = this.myCompleteIldeMatchControl.valueChanges
-            .flatMap(val => this.http.get('http://'+MAIN_IP+':5000/brands?s='+val+'&p=ilde'));
+            .flatMap(val => this.http.get('http://' + this.globals.MAIN_IP + ':5000/brands?s=' + val + '&p=ilde'));
 
         this.filteredRiveMatchOptions = this.myCompleteRiveMatchControl.valueChanges
-            .flatMap(val => this.http.get('http://'+MAIN_IP+':5000/brands?s='+val+'&p=rive'));
+            .flatMap(val => this.http.get('http://' + this.globals.MAIN_IP + ':5000/brands?s=' + val + '&p=rive'));
 
 
 
         // FULL TXT GEST
         this.filteredTextOptions = this.myTextSearchControl.valueChanges
-        .flatMap(val => this.http.get('http://'+MAIN_IP+':5000/ft?s='+val+'&p=gest'));
+        .flatMap(val => this.http.get('http://' + this.globals.MAIN_IP + ':5000/ft?s=' + val + '&p=gest'));
 
         // FULL TXT LETU
         this.filteredTextOptionsLetu = this.myTextSearchControlLetu.valueChanges
-        .flatMap(val => this.http.get('http://'+MAIN_IP+':5000/ft?s='+val+'&p=letu'));
+        .flatMap(val => this.http.get('http://' + this.globals.MAIN_IP + ':5000/ft?s=' + val + '&p=letu'));
 
         // FULL TXT ILDE
         this.filteredTextOptionsIlde = this.myTextSearchControlIlde.valueChanges
-        .flatMap(val => this.http.get('http://'+MAIN_IP+':5000/ft?s='+val+'&p=ilde'));
+        .flatMap(val => this.http.get('http://' + this.globals.MAIN_IP + ':5000/ft?s=' + val + '&p=ilde'));
 
         // FULL TXT RIVE
         this.filteredTextOptionsRive = this.myTextSearchControlRive.valueChanges
-        .flatMap(val => this.http.get('http://'+MAIN_IP+':5000/ft?s='+val+'&p=rive'));
+        .flatMap(val => this.http.get('http://' + this.globals.MAIN_IP + ':5000/ft?s=' + val + '&p=rive'));
     }
 
     ngOnInit(): void {
-        this.getPageGestori(1, undefined)
-        this.getPageLetu(1, undefined)
-        this.getPageIlde(1, undefined)
-        this.getPageRive(1, undefined)
+        this.getPageGestori(1, undefined);
+        this.getPageLetu(1, undefined);
+        this.getPageIlde(1, undefined);
+        this.getPageRive(1, undefined);
+    }
+
+    showImg(event, item) {
+        alert(event);
     }
 
     markGestori(item_obj) {
         console.log(item_obj);
-        let el = document.getElementById('gest_'+item_obj.artic);
-        let attribute = el.getAttribute('gmarked');
-        if (attribute == 'yes') {
+        const el = document.getElementById('gest_' + item_obj.artic);
+        const attribute = el.getAttribute('gmarked');
+        if (attribute === 'yes') {
             el.style.borderLeft = '';
-            //el.setAttribute('class', 'selected-item-before');
+            // el.setAttribute('class', 'selected-item-before');
             el.setAttribute('gmarked', 'no');
             this.gestSelectedItem = undefined;
         } else {
-            el.style.borderLeft = "14px solid rgb(33, 153, 232)";
-            //el.setAttribute('class', 'selected-item-after');
+            el.style.borderLeft = '14px solid rgb(33, 153, 232)';
+            // el.setAttribute('class', 'selected-item-after');
             el.setAttribute('gmarked', 'yes');
             this.gestSelectedItem = item_obj;
         }
     }
 
     markRive(item_obj) {
-        console.log(item_obj)
-        let el = document.getElementById('rive_'+item_obj.code);
-        let attribute = el.getAttribute('rivemarked');
-        if (attribute == 'yes') {
+        console.log(item_obj);
+        const el = document.getElementById('rive_' + item_obj.code);
+        const attribute = el.getAttribute('rivemarked');
+        if (attribute === 'yes') {
             el.style.borderLeft = '';
             el.setAttribute('rivemarked', 'no');
             this.riveSelectedItem = undefined;
         } else {
-            el.style.borderLeft = "14px solid rgb(33, 153, 232)";
+            el.style.borderLeft = '14px solid rgb(33, 153, 232)';
             el.setAttribute('rivemarked', 'yes');
             this.riveSelectedItem = item_obj;
         }
     }
 
     markIlde(item_obj) {
-        let el = document.getElementById('ilde_'+item_obj.artic);
-        let attribute = el.getAttribute('ildemarked');
-        if (attribute == 'yes') {
+        const el = document.getElementById('ilde_' + item_obj.artic);
+        const attribute = el.getAttribute('ildemarked');
+        if (attribute === 'yes') {
             el.style.borderLeft = '';
             el.setAttribute('ildemarked', 'no');
             this.ildeSelectedItem = undefined;
         } else {
-            el.style.borderLeft = "14px solid rgb(33, 153, 232)";
+            el.style.borderLeft = '14px solid rgb(33, 153, 232)';
             el.setAttribute('ildemarked', 'yes');
             this.ildeSelectedItem = item_obj;
         }
     }
 
     markLetu(item_obj) {
-        let el = document.getElementById('letu_'+item_obj.artic);
-        let attribute = el.getAttribute('letumarked');
-        if (attribute == 'yes') {
+        const el = document.getElementById('letu_' + item_obj.artic);
+        const attribute = el.getAttribute('letumarked');
+        if (attribute === 'yes') {
             el.style.borderLeft = '';
             el.setAttribute('letumarked', 'no');
             this.letuSelectedItem = undefined;
         } else {
-            el.style.borderLeft = "14px solid rgb(33, 153, 232)";
+            el.style.borderLeft = '14px solid rgb(33, 153, 232)';
             el.setAttribute('letumarked', 'yes');
             this.letuSelectedItem = item_obj;
         }
@@ -312,8 +317,8 @@ export class MatchProductFormComponent implements OnInit {
 
     confirmMatchRive() {
 
-        if (this.gestSelectedItem == '' || this.gestSelectedItem == undefined) {
-            let dialogRef = this.mdialog.open(WarnDialog, {
+        if (this.gestSelectedItem === '' || this.gestSelectedItem === undefined) {
+            const dialogRef = this.mdialog.open(WarnDialog, {
               data: {
                   'msg': 'Сначала выберите gestori'
                 }
@@ -321,10 +326,10 @@ export class MatchProductFormComponent implements OnInit {
             return;
         }
 
-        if ((this.riveSelectedItem == '' || this.riveSelectedItem == undefined) &&
-            (this.ildeSelectedItem == '' || this.ildeSelectedItem == undefined) &&
-            (this.letuSelectedItem == '' || this.letuSelectedItem == undefined)) {
-                let dialogRef = this.mdialog.open(WarnDialog, {
+        if ((this.riveSelectedItem === '' || this.riveSelectedItem === undefined) &&
+            (this.ildeSelectedItem === '' || this.ildeSelectedItem === undefined) &&
+            (this.letuSelectedItem === '' || this.letuSelectedItem === undefined)) {
+                const dialogRef = this.mdialog.open(WarnDialog, {
                   width: '400px',
                   data: {
                       'msg': 'Не выбрано letu || rive || ilde'
@@ -333,13 +338,13 @@ export class MatchProductFormComponent implements OnInit {
                 return;
             }
 
-        let save_data = {
+        const save_data = {
             'gestSelectedItem': this.gestSelectedItem,
             'riveSelectedItem': this.riveSelectedItem,
             'letuSelectedItem': this.letuSelectedItem,
             'ildeSelectedItem': this.ildeSelectedItem
-        }
-        let dialogRef = this.mdialog.open(MatchDialog, {
+        };
+        const dialogRef = this.mdialog.open(MatchDialogComponent, {
             width: '400px',
             data: save_data
         });
@@ -380,9 +385,13 @@ export class MatchProductFormComponent implements OnInit {
         const end = start + perPage;
         // search by article instead of huge string
         if (artic !== undefined) {
-            return this.http.get('http://'+MAIN_IP+':5000/gestori_products?page='+page+'&perPage='+perPage+'&art='+artic)
+            return this.http.get(
+                'http://' + this.globals.MAIN_IP + ':5000/gestori_products?page=' + page + '&perPage=' + perPage + '&art=' + artic
+            );
         } else {
-            return this.http.get('http://'+MAIN_IP+':5000/gestori_products?page='+page+'&perPage='+perPage+'&search='+search)
+            return this.http.get(
+                'http://' + this.globals.MAIN_IP + ':5000/gestori_products?page=' + page + '&perPage=' + perPage + '&search=' + search
+            );
         }
     }
 
@@ -416,9 +425,12 @@ export class MatchProductFormComponent implements OnInit {
         const end3 = start3 + perPage3;
         // search by article instead of huge string
         if (artic !== undefined) {
-            return this.http.get('http://'+MAIN_IP+':5000/rive_products?page='+page+'&perPage='+perPage3+'&art='+artic)
+            return this.http.get(
+                'http://' + this.globals.MAIN_IP + ':5000/rive_products?page=' + page + '&perPage=' + perPage3 + '&art=' + artic
+            );
         } else {
-            return this.http.get('http://'+MAIN_IP+':5000/rive_products?page='+page+'&perPage='+perPage3+'&search='+search)
+            return this.http.get('http://' + this.globals.MAIN_IP + ':5000/rive_products?page=' + page + '&perPage=' + perPage3 + '&search=' + search
+            );
         }
     }
 
@@ -427,9 +439,13 @@ export class MatchProductFormComponent implements OnInit {
         const end2 = start2 + this.pageSize;
         // search by article instead of huge string
         if (artic !== undefined) {
-            return this.http.get('http://'+MAIN_IP+':5000/ilde_products?page='+page+'&perPage='+this.pageSize+'&art='+artic)
+            return this.http.get(
+                'http://' + this.globals.MAIN_IP + ':5000/ilde_products?page=' + page + '&perPage=' + this.pageSize + '&art=' + artic
+            );
         } else {
-            return this.http.get('http://'+MAIN_IP+':5000/ilde_products?page='+page+'&perPage='+this.pageSize+'&search='+search)
+            return this.http.get(
+                'http://' + this.globals.MAIN_IP + ':5000/ilde_products?page=' + page + '&perPage=' + this.pageSize + '&search=' + search
+            );
         }
     }
 
@@ -439,9 +455,13 @@ export class MatchProductFormComponent implements OnInit {
         const end1 = start1 + perPage1;
         // search by article instead of huge string
         if (artic !== undefined) {
-            return this.http.get('http://'+MAIN_IP+':5000/letu_products?page='+page+'&perPage='+perPage1+'&art='+artic)
+            return this.http.get(
+                'http://' + this.globals.MAIN_IP + ':5000/letu_products?page=' + page + '&perPage=' + perPage1 + '&art=' + artic
+            );
         } else {
-            return this.http.get('http://'+MAIN_IP+':5000/letu_products?page='+page+'&perPage='+perPage1+'&search='+search)
+            return this.http.get(
+                'http://' + this.globals.MAIN_IP + ':5000/letu_products?page=' + page + '&perPage=' + perPage1 + '&search=' + search
+            );
         }
     }
 }

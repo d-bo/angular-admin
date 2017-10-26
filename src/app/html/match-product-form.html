@@ -19,9 +19,9 @@
 							</md-option>
 						</md-autocomplete>
 					</td>
-					<td>
-						<button md-icon-button type="button">
-							<md-icon class="md-24" color="basic">clear</md-icon>
+					<td style="text-align: center">
+						<button md-mini-fab type="button" color="basic">
+							<md-icon class="md-24">clear</md-icon>
 						</button>
 					</td>
 				</tr>
@@ -46,18 +46,18 @@
 							</md-option>
 						</md-autocomplete>
 					</td>
-					<td>
-						<button md-icon-button type="button">
-							<md-icon class="md-24" color="basic">clear</md-icon>
+					<td style="text-align: center">
+						<button md-mini-fab type="button" color="primary">
+							<md-icon class="md-24">search</md-icon>
 						</button>
 					</td>
 				</tr>
 			</table>
 		</div>
 
-		<div>
-            <button md-icon-button color="primary" (click)="confirmMatchRive()">
-                <md-icon class="md-24">flag</md-icon>
+		<div style="text-align: center">
+            <button md-fab color="basic" (click)="confirmMatchRive()">
+                <md-icon class="md-24" color="primary">send</md-icon>
             </button>
 		</div>
 
@@ -79,7 +79,7 @@
 							<span>{{br._id.barcod}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						</div>
 						<div style="text-align: right">
-							<span><i>{{br._id.retail_price}} руб.</i></span>
+							<span>{{br._id.retail_price}} руб.</span>
 						</div>
 		            </md-list-item>
 		        </td>
@@ -92,7 +92,7 @@
 		</table>
 	</div>
 
-	<div>
+	<div style="overflow: hidden">
 		<md-tab-group style="max-width: 600px">
 			<md-tab label="RIVE">
 				<div>
@@ -109,9 +109,9 @@
 									</md-option>
 								</md-autocomplete>
 							</td>
-							<td>
-								<button md-icon-button type="button">
-									<md-icon class="md-24" color="basic">clear</md-icon>
+							<td style="text-align: center">
+								<button md-mini-fab type="button" color="basic">
+									<md-icon class="md-24">clear</md-icon>
 								</button>
 							</td>
 						</tr>
@@ -133,13 +133,15 @@
 									[value]="option_text_complete_rive.name" 
 									(onSelectionChange)="getRiveBrands($event, option_text_complete_rive.code)">
 										<div style="font-size: 14px"><img src="{{option_text_complete_rive.image_url}}" 
-											width="30px" height="30px" style="padding-right: 7px" />{{ option_text_complete_rive.name}} / {{ option_text_complete_rive.code}}</div>
+											width="30px" height="30px" style="padding-right: 7px" />
+												{{ option_text_complete_rive.name}} / {{ option_text_complete_rive.code}}
+										</div>
 									</md-option>
 								</md-autocomplete>
 							</td>
-							<td>
-								<button md-icon-button type="button">
-									<md-icon class="md-24" color="basic">clear</md-icon>
+							<td style="text-align: center">
+								<button md-mini-fab type="button" color="primary">
+									<md-icon class="md-24">search</md-icon>
 								</button>
 							</td>
 						</tr>
@@ -164,11 +166,12 @@
 				                <div md-line>{{xr._id.desc}}</div>
 							</md-list-item>
 							<div style="text-align: right">
-								<span><i>{{xr._id.listingprice}} руб.</i></span>
+								<span>{{xr._id.listingprice}} руб.</span>
 							</div>
 				        </td>
 				        <td>
-				        	<img src="{{xr._id.image_url}}" height="50px"/>
+							<img src="{{xr._id.image_url}}" (click)="showImg($event, item)" 
+								height="50px" />
 				        </td>
 				        <td>
 							<button md-icon-button color="primary" (click)="markRive(xr._id)">
@@ -197,9 +200,9 @@
 									</md-option>
 								</md-autocomplete>
 							</td>
-							<td>
-								<button md-icon-button type="button">
-									<md-icon class="md-24" color="basic">clear</md-icon>
+							<td style="text-align: center">
+								<button md-mini-fab type="button" color="basic">
+									<md-icon class="md-24">clear</md-icon>
 								</button>
 							</td>
 						</tr>
@@ -225,9 +228,9 @@
 									</md-option>
 								</md-autocomplete>
 							</td>
-							<td>
-								<button md-icon-button type="button">
-									<md-icon class="md-24" color="basic">clear</md-icon>
+							<td style="text-align: center">
+								<button md-mini-fab type="button" color="primary">
+									<md-icon class="md-24">search</md-icon>
 								</button>
 							</td>
 						</tr>
@@ -248,7 +251,7 @@
 		                		<div md-line><span md-line style="padding-right: 15px;color: rgb(63, 81, 181)">{{jr._id.brand}}</span>&nbsp;<span>{{jr._id.artic}}</span>&nbsp;&nbsp;&nbsp;</div>
 							</md-list-item>
 							<div style="text-align: right">
-								<span><i>{{jr._id.listingprice}} руб.</i></span>
+								<span>{{jr._id.listingprice}} руб.</span>
 							</div>
 				        </td>
 				        <td>
@@ -279,9 +282,9 @@
 									</md-option>
 								</md-autocomplete>
 							</td>
-							<td>
-								<button md-icon-button type="button">
-									<md-icon class="md-24" color="basic">clear</md-icon>
+							<td style="text-align: center">
+								<button md-mini-fab type="button" color="basic">
+									<md-icon class="md-24">clear</md-icon>
 								</button>
 							</td>
 						</tr>
@@ -306,9 +309,9 @@
 									</md-option>
 								</md-autocomplete>
 							</td>
-							<td>
-								<button md-icon-button type="button">
-									<md-icon class="md-24" color="basic">clear</md-icon>
+							<td style="text-align: center">
+								<button md-mini-fab type="button" color="primary">
+									<md-icon class="md-24">search</md-icon>
 								</button>
 							</td>
 						</tr>
@@ -330,7 +333,7 @@
 								<div md-line>{{kr._id.desc}}</div>
 							</md-list-item>
 							<div style="text-align: right">
-								<span><i>{{kr._id.listingprice}} руб.</i></span>
+								<span>{{kr._id.listingprice}} руб.</span>
 							</div>
 						</td>
 				        <td>

@@ -1,11 +1,10 @@
-//import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { MaterialModule } from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 import 'hammerjs';
 
-import { AppComponent, DialogOverviewExampleDialog } from './app.component';
+import { AppComponent, DialogOverviewExampleDialogComponent } from './app.component';
 import { MdInputModule } from '@angular/material';
 import { MdButtonModule } from '@angular/material';
 import { MdToolbarModule } from '@angular/material';
@@ -24,26 +23,27 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { MdSlideToggleModule } from '@angular/material';
 
 import { GestoriProductFormComponent, SubmitDialog } from './gestori.product.form.component';
-import { MatchListComponent, MatchProductFormComponent, MatchDialog, WarnDialog } from './match.product.form.component';
+import { MatchListComponent, MatchProductFormComponent, MatchDialogComponent, WarnDialog } from './match.product.form.component';
 import { MatchService } from './match.service';
+import { GlobalService } from './global.service';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    DialogOverviewExampleDialog,
+    DialogOverviewExampleDialogComponent,
     GestoriProductFormComponent,
     MatchProductFormComponent,
     SubmitDialog,
-    MatchDialog,
+    MatchDialogComponent,
     WarnDialog,
     MatchListComponent
   ],
   entryComponents: [
-    DialogOverviewExampleDialog,
+    DialogOverviewExampleDialogComponent,
     SubmitDialog,
-    MatchDialog,
+    MatchDialogComponent,
     WarnDialog
   ],
   imports: [
@@ -69,8 +69,9 @@ import { MatchService } from './match.service';
     MdSlideToggleModule,
   ],
   providers: [
-      MatchService,
-      MatchListComponent
+    GlobalService,
+    MatchService,
+    MatchListComponent
   ],
   bootstrap: [AppComponent]
 })

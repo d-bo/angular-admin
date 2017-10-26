@@ -1,6 +1,6 @@
-<div>
-	<button md-icon-button type="button" (click)="refreshMatched()">
-		<md-icon class="md-24" color="warn">refresh</md-icon>
+<div style="padding: 14px 7px;text-align: center">
+	<button md-mini-fab type="button" (click)="refreshMatched()">
+		<md-icon class="md-24">refresh</md-icon>
 	</button>
 </div>
 <table class="striped1">
@@ -53,7 +53,9 @@
 				</div>
 			</td>
 			<td>
-				<md-icon class="example-icon">clear</md-icon>
+				<button md-mini-fab type="button" color="basic">
+					<md-icon class="md-24">clear</md-icon>
+				</button>
 			</td>
 		</tr>
 	</tbody>

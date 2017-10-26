@@ -38,10 +38,10 @@ interface IServerResponse {
   templateUrl: './html/dialog-overview-example-dialog.html',
 })
 
-export class DialogOverviewExampleDialog {
+export class DialogOverviewExampleDialogComponent {
 
     constructor(
-      public dialogRef: MdDialogRef<DialogOverviewExampleDialog>,
+      public dialogRef: MdDialogRef<DialogOverviewExampleDialogComponent>,
       @Inject(MD_DIALOG_DATA) public data: any) {}
 
     onNoClick(): void {
@@ -58,7 +58,7 @@ export class DialogOverviewExampleDialog {
 
 export class AppComponent implements OnInit {
 
-  p: number = 1;
+  p = 1;
   total: number;
   loading: any;
 
@@ -76,10 +76,6 @@ export class AppComponent implements OnInit {
   filteredOptions: Observable<any>;
   asyncBrands: Observable<any>;
 
-  filter(val: string): any {
-    return this.http.get('http://127.0.0.1:5000/all_brands?search='+val)
-  }
-
   gestori: any;
   letu: any;
   ilde: any;
@@ -88,17 +84,6 @@ export class AppComponent implements OnInit {
   brands_gestori_count: any;
   brands_letu: any;
   selected: any;
-
-  constructor(
-    private http: HttpClient, public dialog: MdDialog,
-    public snackBar: MdSnackBar, private sanitizer: DomSanitizer
-  ) {
-
-    this.filteredOptions = this.myCompleteControl.valueChanges
-      .flatMap(val => this.http.get('http://127.0.0.1:5000/all_brands?search='+val));
-
-    sanitizer.bypassSecurityTrustUrl(this.loading);
-  }
 
   folders = [
     {
@@ -132,12 +117,21 @@ export class AppComponent implements OnInit {
     {value: 'tacos-2', viewValue: 'Tacos'}
   ];
 
+  filter(val: string): any {
+    return this.http.get('http://127.0.0.1:5000/all_brands?search=' + val);
+  }
+
+  constructor(
+    private http: HttpClient, public dialog: MdDialog,
+    public snackBar: MdSnackBar, private sanitizer: DomSanitizer
+  ) {}
+
   ngOnInit(): void {
-    this.ping;
+    this.ping();
   }
 
   saveBrand(id, value): void {
-    let dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
+    const dialogRef = this.dialog.open(DialogOverviewExampleDialogComponent, {
       width: '400px',
       data: { 'id': id, 'value': value }
     });
@@ -149,7 +143,7 @@ export class AppComponent implements OnInit {
   }
 
   selectedItem(event) {
-    alert('EVENT: '+event);
+    alert('EVENT: ' + event);
     return event;
   }
 
@@ -158,9 +152,9 @@ export class AppComponent implements OnInit {
       // pass
     }, err => {
       this.snackBar.open(
-        "cant't load API http://127.0.0.1:5000/ping",
+        'cant\'t load API http://127.0.0.1:5000/ping',
         'OK'
-      )
+      );
     });
   }
 

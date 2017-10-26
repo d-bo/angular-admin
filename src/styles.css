@@ -32,8 +32,7 @@ body {
 }
 
 .striped tbody tr:nth-child(even) {
-   background-color: #f7f7f7;
-   box-shadow: 2px 2px 5px #f5f5f5;
+   filter: invert(5%);
 }
 
 .striped1 tbody tr:nth-child(even) {
@@ -78,4 +77,14 @@ body {
 
 .ga-brand {
     color: rgb(33, 153, 232);
+}
+
+.bottom-shadow {
+    -webkit-box-shadow: 0 6px 4px -4px #a7a7a7;
+    -moz-box-shadow: 0 6px 4px -4px #a7a7a7;
+    box-shadow: 0 6px 4px -4px #a7a7a7;
+}
+
+.mat-tab-body-content.ng-trigger.ng-trigger-translateTab {
+    overflow: hidden;
 }
