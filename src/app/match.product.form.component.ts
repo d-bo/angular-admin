@@ -251,8 +251,13 @@ export class MatchProductFormComponent implements OnInit {
         this.getPageRive(1, undefined);
     }
 
-    showImg(event, item) {
-        alert(event);
+    // img dialog
+    showImg(item) {
+        const dialogRef = this.mdialog.open(WarnDialog, {
+            data: {
+                img: item
+            }
+        });
     }
 
     markGestori(item_obj) {
@@ -429,7 +434,8 @@ export class MatchProductFormComponent implements OnInit {
                 'http://' + this.globals.MAIN_IP + ':5000/rive_products?page=' + page + '&perPage=' + perPage3 + '&art=' + artic
             );
         } else {
-            return this.http.get('http://' + this.globals.MAIN_IP + ':5000/rive_products?page=' + page + '&perPage=' + perPage3 + '&search=' + search
+            return this.http.get(
+                'http://' + this.globals.MAIN_IP + ':5000/rive_products?page=' + page + '&perPage=' + perPage3 + '&search=' + search
             );
         }
     }

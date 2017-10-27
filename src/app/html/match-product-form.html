@@ -170,7 +170,7 @@
 							</div>
 				        </td>
 				        <td>
-							<img src="{{xr._id.image_url}}" (click)="showImg($event, item)" 
+							<img src="{{xr._id.image_url}}" (click)="showImg(xr._id.image_url)" 
 								height="50px" />
 				        </td>
 				        <td>
@@ -180,6 +180,7 @@
 				        </td>
 				    </tr>
 				</table>
+
 			</md-tab>
 
 			<md-tab label="ILDE">
@@ -255,7 +256,8 @@
 							</div>
 				        </td>
 				        <td>
-				        	<img src="http://static.iledebeaute.ru{{jr._id.image}}" height="50px" />
+							<img (click)="showImg('http://static.iledebeaute.ru'+jr._id.image)" 
+								src="http://static.iledebeaute.ru{{jr._id.image}}" height="50px" />
 				        </td>
 				        <td>
 				            <button md-icon-button color="primary" (click)="markIlde(jr._id)">
@@ -337,7 +339,8 @@
 							</div>
 						</td>
 				        <td>
-				        	<img src="http://www.letu.ru{{kr._id.img}}" height="50px" width="50px" />
+							<img (click)="showImg('http://www.letu.ru'+kr._id.img)"
+								src="http://www.letu.ru{{kr._id.img}}" height="50px" width="50px" />
 				        </td>
 				        <td>
 				            <button md-icon-button color="primary" (click)="markLetu(kr._id)">
