@@ -2,6 +2,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { MaterialModule } from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import 'hammerjs';
 
 import { AppComponent, DialogOverviewExampleDialogComponent } from './app.component';
@@ -26,8 +27,16 @@ import { GestoriProductFormComponent, SubmitDialog } from './gestori.product.for
 import { MatchListComponent, MatchProductFormComponent, MatchDialogComponent, WarnDialogComponent } from './match.product.form.component';
 import { MatchService } from './match.service';
 import { GlobalService } from './global.service';
+import { BaseRequestOptions, Headers } from '@angular/http';
 
-
+@Injectable()
+export class CustomRequestOptions extends BaseRequestOptions {
+    headers = new Headers({
+        'Cache-Control': 'no-cache',
+        'Pragma': 'no-cache',
+        'Expires': 'Sat, 01 Jan 2000 00:00:00 GMT'
+    });
+}
 
 @NgModule({
   declarations: [
@@ -71,7 +80,8 @@ import { GlobalService } from './global.service';
   providers: [
     GlobalService,
     MatchService,
-    MatchListComponent
+    MatchListComponent,
+    {provide: CustomRequestOptions, useClass: CustomRequestOptions}
   ],
   bootstrap: [AppComponent]
 })
