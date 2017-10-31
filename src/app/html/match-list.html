@@ -1,5 +1,5 @@
 <div style="padding: 14px 7px;text-align: center">
-	<button md-mini-fab type="button" (click)="refreshMatched()">
+	<button md-mini-fab type="button" (click)="getListMatched(1)">
 		<md-icon class="md-24">refresh</md-icon>
 	</button>
 </div>
@@ -12,7 +12,7 @@
 		<td><h2>ilde</h2></td>
 	</thead>
 	<tbody>
-		<tr *ngFor="let prods of res">
+		<tr *ngFor="let prods of asyncRes | async">
 			<td>
 				<div style="padding: 7px">
 					<md-checkbox (click)="switchVerified($event)"></md-checkbox>

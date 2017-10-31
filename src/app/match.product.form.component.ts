@@ -29,10 +29,12 @@ import _ from 'lodash';
     templateUrl: './html/match-list.html',
 })
 
+// MatchListComponent
 export class MatchListComponent implements OnInit {
 
     mservice: any;
     res: any;
+    asyncRes: Observable<any>;
 
     constructor(
             private matchService: MatchService
@@ -41,7 +43,8 @@ export class MatchListComponent implements OnInit {
         }
 
     ngOnInit(): void {
-        this.mservice.getMatched(1).subscribe(result => { this.res = result; });
+        //this.mservice.getMatched(1).subscribe(result => { this.res = result; });
+        this.getListMatched(1);
     }
 
     add(save_data): void {
@@ -60,11 +63,18 @@ export class MatchListComponent implements OnInit {
     }
 
     switchVerified(event, item) {
-        alert(item)
+        alert(item);
     }
 
-    refreshMatched() {
-        alert('refresh !')
+    getListMatched(page: number) {
+        this.asyncRes = this.serverCallListObservable(page)
+            .do(res => {
+                // nope
+            }).map(res => res);
+    }
+
+    serverCallListObservable(page: number) {
+        return this.mservice.getMatched(1);
     }
 }
 
@@ -73,12 +83,13 @@ export class MatchListComponent implements OnInit {
     templateUrl: './html/warn-dialog.html',
 })
 
-export class WarnDialog {
+export class WarnDialogComponent {
 
     constructor(
-            public dialogRefMatch: MdDialogRef<WarnDialog>,
+            private dialogRefMatch: MdDialogRef<WarnDialogComponent>,
             private http: HttpClient,
-            @Inject(MD_DIALOG_DATA) public data: any
+            @Inject(MD_DIALOG_DATA) public data: any,
+            private mlist: MatchListComponent
         ) {}
 
     onYesClick(): void {
@@ -87,6 +98,10 @@ export class WarnDialog {
 
     onNoClick(): void {
       this.dialogRefMatch.close();
+    }
+
+    refreshMatchList() {
+        this.mlist.getListMatched(1);
     }
 }
 
@@ -117,14 +132,14 @@ export class MatchDialogComponent {
         ).subscribe(
             x => {},
             err => {
-                const dialogRef = this.mdialog.open(WarnDialog, {
+                const dialogRef = this.mdialog.open(WarnDialogComponent, {
                   data: {
                       'msg': 'ошибка: ' + err
                     }
                 });
             },
             () => {
-                const dialogRef = this.mdialog.open(WarnDialog, {
+                const dialogRef = this.mdialog.open(WarnDialogComponent, {
                   data: {
                       'msg': 'OK !'
                     }
@@ -253,7 +268,7 @@ export class MatchProductFormComponent implements OnInit {
 
     // img dialog
     showImg(item) {
-        const dialogRef = this.mdialog.open(WarnDialog, {
+        const dialogRef = this.mdialog.open(WarnDialogComponent, {
             data: {
                 img: item
             }
@@ -271,7 +286,6 @@ export class MatchProductFormComponent implements OnInit {
             this.gestSelectedItem = undefined;
         } else {
             el.style.borderLeft = '14px solid rgb(33, 153, 232)';
-            // el.setAttribute('class', 'selected-item-after');
             el.setAttribute('gmarked', 'yes');
             this.gestSelectedItem = item_obj;
         }
@@ -323,7 +337,7 @@ export class MatchProductFormComponent implements OnInit {
     confirmMatchRive() {
 
         if (this.gestSelectedItem === '' || this.gestSelectedItem === undefined) {
-            const dialogRef = this.mdialog.open(WarnDialog, {
+            const dialogRef = this.mdialog.open(WarnDialogComponent, {
               data: {
                   'msg': 'Сначала выберите gestori'
                 }
@@ -334,7 +348,7 @@ export class MatchProductFormComponent implements OnInit {
         if ((this.riveSelectedItem === '' || this.riveSelectedItem === undefined) &&
             (this.ildeSelectedItem === '' || this.ildeSelectedItem === undefined) &&
             (this.letuSelectedItem === '' || this.letuSelectedItem === undefined)) {
-                const dialogRef = this.mdialog.open(WarnDialog, {
+                const dialogRef = this.mdialog.open(WarnDialogComponent, {
                   width: '400px',
                   data: {
                       'msg': 'Не выбрано letu || rive || ilde'
@@ -353,7 +367,6 @@ export class MatchProductFormComponent implements OnInit {
             width: '400px',
             data: save_data
         });
-        this.mlist.add(save_data);
     }
 
     getGestoriBrands(event, item) {

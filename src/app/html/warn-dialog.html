@@ -14,3 +14,10 @@
             md-button [md-dialog-close]="true" (click)="onYesClick()">Ok</button>
     </md-dialog-actions>
 </div>
+
+<div *ngIf="data.refreshMatchList!==undefined">
+    <md-dialog-actions style="text-align: center">
+        <button md-raised-button color="primary" 
+            md-button [md-dialog-close]="true" (click)="onYesClick()">Ok</button>
+    </md-dialog-actions>
+</div>

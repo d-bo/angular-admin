@@ -133,8 +133,8 @@
 									[value]="option_text_complete_rive.name" 
 									(onSelectionChange)="getRiveBrands($event, option_text_complete_rive.code)">
 										<div style="font-size: 14px"><img src="{{option_text_complete_rive.image_url}}" 
-											width="30px" height="30px" style="padding-right: 7px" />
-												{{ option_text_complete_rive.name}} / {{ option_text_complete_rive.code}}
+											width="30px" height="30px" style="padding-right: 7px" /><b>
+												{{ option_text_complete_rive.name}}</b> / {{ option_text_complete_rive.code}}
 										</div>
 									</md-option>
 								</md-autocomplete>
@@ -225,7 +225,7 @@
 									[value]="option_text_complete_ilde.pn" 
 									(onSelectionChange)="getIldeBrands($event, option_text_complete_ilde.articul)">
 										<div style="font-size: 14px"><img src="http://static.iledebeaute.ru{{option_text_complete_ilde.image}}" 
-											height="30px" width="30px" style="padding-right: 7px" />{{option_text_complete_ilde.brand}} {{ option_text_complete_ilde.pn}} / {{ option_text_complete_ilde.articul}}</div>
+											height="30px" width="30px" style="padding-right: 7px" />{{option_text_complete_ilde.brand}} / <b>{{ option_text_complete_ilde.pn}}</b> / {{ option_text_complete_ilde.articul}}</div>
 									</md-option>
 								</md-autocomplete>
 							</td>
@@ -307,7 +307,7 @@
 									<md-option *ngFor="let option_text_complete_letu of filteredTextOptionsLetu | async" 
 									[value]="option_text_complete_letu.name" 
 									(onSelectionChange)="getLetuBrands($event, option_text_complete_letu.articul)">
-										<div style="font-size: 14px"><img src="http://www.letu.ru{{option_text_complete_letu.img}}" height="30px" width="30px" style="padding-right: 7px" />{{ option_text_complete_letu.name}} / {{ option_text_complete_letu.desc}} / {{ option_text_complete_letu.articul }}</div>
+										<div style="font-size: 14px"><img src="http://www.letu.ru{{option_text_complete_letu.img}}" height="30px" width="30px" style="padding-right: 7px" /><b>{{ option_text_complete_letu.name}}</b> / {{ option_text_complete_letu.desc}} / {{ option_text_complete_letu.articul }}</div>
 									</md-option>
 								</md-autocomplete>
 							</td>
