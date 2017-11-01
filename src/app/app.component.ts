@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import { Injectable, Inject } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { MdDialog, MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
+import { MdProgressBar, MdDialog, MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
 import { PageEvent } from '@angular/material';
 import { MdSnackBar } from '@angular/material';
 import { MdAutocomplete } from '@angular/material';
@@ -137,7 +137,7 @@ export class AppComponent implements OnInit {
       width: '400px',
       data: { 'id': id, 'value': value }
     });
-    
+
     /*
     dialogRef.afterClosed().subscribe(result => {
 

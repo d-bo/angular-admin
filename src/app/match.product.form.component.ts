@@ -50,8 +50,6 @@ export class MatchListComponent implements OnInit {
         if (this.res !== undefined) {
             this.res.push();
         }
-        // this.mservice.getMatched(1).subscribe(result => {this.res = result});
-        // this.mservice.getMatched(1).subscribe(result => {this.res.next(result)});
     }
 
     addElement(item): void {
@@ -213,6 +211,11 @@ export class MatchProductFormComponent implements OnInit {
     letuSelectedItem: any;
     ildeSelectedItem: any;
 
+    isGestLoaded: boolean;
+    isRiveLoaded: boolean;
+    isIldeLoaded: boolean;
+    isLetuLoaded: boolean;
+
 
 
     constructor(
@@ -339,7 +342,6 @@ export class MatchProductFormComponent implements OnInit {
     }
 
     confirmMatchRive() {
-
         if (this.gestSelectedItem === '' || this.gestSelectedItem === undefined) {
             const dialogRef = this.mdialog.open(WarnDialogComponent, {
               data: {
@@ -348,7 +350,6 @@ export class MatchProductFormComponent implements OnInit {
             });
             return;
         }
-
         if ((this.riveSelectedItem === '' || this.riveSelectedItem === undefined) &&
             (this.ildeSelectedItem === '' || this.ildeSelectedItem === undefined) &&
             (this.letuSelectedItem === '' || this.letuSelectedItem === undefined)) {
@@ -393,14 +394,6 @@ export class MatchProductFormComponent implements OnInit {
         this.getPageLetu(1, item);
     }
 
-    getPageGestori(page: number, artic: any) {
-        this.asyncGestoriProducts = this.serverCallGestoriObservable(page, this.gestoriSelectedBrand, artic)
-            .do(res => {
-                this.totalMatch = res.count;
-                this.p = page;
-            }).map(res => res.data);
-    }
-
     serverCallGestoriObservable(page: number, search: string, artic: any): Observable<any> {
         const perPage = this.pageSize;
         const start = (page - 1) * perPage;
@@ -417,27 +410,43 @@ export class MatchProductFormComponent implements OnInit {
         }
     }
 
+    getPageGestori(page: number, artic: any) {
+        this.isGestLoaded = true;
+        this.asyncGestoriProducts = this.serverCallGestoriObservable(page, this.gestoriSelectedBrand, artic)
+            .do(res => {
+                this.totalMatch = res.count;
+                this.p = page;
+                this.isGestLoaded = undefined;
+            }).map(res => res.data);
+    }
+
     getPageLetu(page: number, artic: any) {
+        this.isLetuLoaded = true;
         this.asyncLetuProducts = this.serverCallLetuObservable(page, this.letuSelectedBrand, artic)
             .do(res => {
                 this.totalMatch1 = res.count;
                 this.p1 = page;
+                this.isLetuLoaded = undefined;
             }).map(res => res.data);
     }
 
     getPageIlde(page: number, artic: any) {
+        this.isIldeLoaded = true;
         this.asyncIldeProducts = this.serverCallIldeObservable(page, this.ildeSelectedBrand, artic)
             .do(res => {
                 this.totalMatch2 = res.count;
                 this.p2 = page;
+                this.isIldeLoaded = undefined;
             }).map(res => res.data);
     }
 
     getPageRive(page: number, artic: any) {
+        this.isRiveLoaded = true;
         this.asyncRiveProducts = this.serverCallRiveObservable(page, this.riveSelectedBrand, artic)
             .do(res => {
                 this.totalMatch3 = res.count;
                 this.p3 = page;
+                this.isRiveLoaded = undefined;
             }).map(res => res.data);
     }
 

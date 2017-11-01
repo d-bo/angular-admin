@@ -29,6 +29,10 @@ import { MatchService } from './match.service';
 import { GlobalService } from './global.service';
 import { BaseRequestOptions, Headers } from '@angular/http';
 import { RequestOptions } from '@angular/http';
+import { MdExpansionModule } from '@angular/material';
+import { MdProgressBarModule } from '@angular/material';
+
+
 
 @Injectable()
 export class CustomRequestOptions extends BaseRequestOptions {
@@ -77,6 +81,7 @@ export class CustomRequestOptions extends BaseRequestOptions {
     MdPaginatorModule,
     NgxPaginationModule,
     MdSlideToggleModule,
+    MdProgressBarModule
   ],
   providers: [
     GlobalService,

@@ -1,11 +1,11 @@
 <div>
-	<div style="padding:10px;float: left">
+	<div style="padding:10px;float: left;">
 
 		<!-- GEST BRAND SEARCH -->
 		<div>
-			<table width="100%">
+			<table width="580px">
 				<tr>
-					<td>
+					<td style="width: 90%">
 						<md-input-container class="example-full-width">
 							<input type="text" mdInput placeholder="Брэнд Gestori"
 							[formControl]='myCompleteMatchControl' [mdAutocomplete]="auto" #brandInputGest>
@@ -32,7 +32,7 @@
 		<div>
 			<table width="100%">
 				<tr>
-					<td>
+					<td style="width: 90%">
 						<md-input-container class="example-full-width">
 							<input type="text" mdInput placeholder="По имени"
 							[formControl]='myTextSearchControl' [mdAutocomplete]="autoText" #fulltextInputGest>
@@ -45,7 +45,6 @@
 								<div style="font-size: 14px"><b>{{ option_text_complete.Name}}</b> / {{ option_text_complete.Name_e}} / {{ option_text_complete.Barcod}}</div>
 							</md-option>
 						</md-autocomplete>
-
 					</td>
 					<td style="text-align: center">
 						<button md-mini-fab type="button" color="primary">
@@ -61,6 +60,12 @@
                 <md-icon class="md-24" color="primary">send</md-icon>
             </button>
 		</div>
+
+		<!--
+		<div *ngIf="isGestLoaded!==undefined">
+			<md-progress-bar mode="indeterminate"></md-progress-bar>
+		</div>
+		-->
 
 		<table class="striped">
 			<tr>
@@ -99,7 +104,7 @@
 				<div>
 					<table width="100%">
 						<tr>
-							<td>
+							<td style="width: 90%">
 								<md-input-container class="example-full-width">
 									<input type="text" mdInput placeholder="Брэнд Рив Гош"
 									[formControl]="myCompleteRiveMatchControl" [mdAutocomplete]="auto3" #brandInputRive>
@@ -123,7 +128,7 @@
 				<div>
 					<table width="100%">
 						<tr>
-							<td>
+							<td style="width: 90%">
 								<md-input-container class="example-full-width">
 									<input type="text" mdInput placeholder="По имени"
 									[formControl]='myTextSearchControlRive' [mdAutocomplete]="autoTextRive" #fulltextInputRive>
@@ -148,6 +153,12 @@
 						</tr>
 					</table>
 				</div>
+
+				<!--
+				<div *ngIf="isRiveLoaded!==undefined" style="padding: 21px 7px">
+					<md-progress-bar mode="indeterminate"></md-progress-bar>
+				</div>
+				-->
 
 				<table class="striped">
 				    <tr>
@@ -188,7 +199,7 @@
 				<div>
 					<table width="100%">
 						<tr>
-							<td>
+							<td style="width: 90%">
 								<md-input-container class="example-full-width">
 										<input type="text" mdInput placeholder="Брэнд Ильдеботэ"
 										[formControl]="myCompleteIldeMatchControl" [mdAutocomplete]="autoIlde" #brandInputIlde>
@@ -215,7 +226,7 @@
 				<div>
 					<table width="100%">
 						<tr>
-							<td>
+							<td style="width: 90%">
 								<md-input-container class="example-full-width">
 									<input type="text" mdInput placeholder="По имени"
 									[formControl]='myTextSearchControlIlde' [mdAutocomplete]="autoTextIlde" #fulltextInputIlde>
@@ -238,6 +249,12 @@
 						</tr>
 					</table>
 				</div>
+
+				<!--
+				<div *ngIf="isIldeLoaded!==undefined" style="padding: 21px 7px">
+					<md-progress-bar mode="indeterminate"></md-progress-bar>
+				</div>
+				-->
 
 				<table class="striped">
 				    <tr>
@@ -273,7 +290,7 @@
 				<div>
 					<table width="100%">
 						<tr>
-							<td>
+							<td style="width: 90%">
 								<md-input-container class="example-full-width">
 									<input type="text" mdInput placeholder="Брэнд Летуаль"
 										[formControl]="myCompleteLetuMatchControl" [mdAutocomplete]="auto2" #brandInputLetu>
@@ -298,7 +315,7 @@
 				<div>
 					<table width="100%">
 						<tr>
-							<td>
+							<td style="width: 90%">
 								<md-input-container class="example-full-width">
 									<input type="text" mdInput placeholder="По имени"
 									[formControl]='myTextSearchControlLetu' [mdAutocomplete]="autoTextLetu" #fulltextInputLetu>
@@ -321,6 +338,12 @@
 						</tr>
 					</table>
 				</div>
+
+				<!--
+				<div *ngIf="isLetuLoaded!==undefined" style="padding: 21px 7px">
+					<md-progress-bar mode="indeterminate"></md-progress-bar>
+				</div>
+				-->
 
 				<table class="striped">
 				    <tr>
