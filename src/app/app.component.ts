@@ -10,6 +10,7 @@ import { MdAutocomplete } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import { PaginationInstance } from 'ngx-pagination/dist/ngx-pagination.module';
 import { EventEmitter } from '@angular/core';
+import { GlobalService } from './global.service';
 
 import { DataSource } from '@angular/cdk';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -123,7 +124,8 @@ export class AppComponent implements OnInit {
 
   constructor(
     private http: HttpClient, public dialog: MdDialog,
-    public snackBar: MdSnackBar, private sanitizer: DomSanitizer
+    public snackBar: MdSnackBar, private sanitizer: DomSanitizer,
+    private globals: GlobalService
   ) {}
 
   ngOnInit(): void {
@@ -135,6 +137,7 @@ export class AppComponent implements OnInit {
       width: '400px',
       data: { 'id': id, 'value': value }
     });
+    
     /*
     dialogRef.afterClosed().subscribe(result => {
 
@@ -148,7 +151,7 @@ export class AppComponent implements OnInit {
   }
 
   ping() {
-    this.http.get('http://127.0.0.1:5000/ping').subscribe(data => {
+    this.globals.get('http://' + this.globals.MAIN_IP + ':5000/ping?_p=0').subscribe(data => {
       // pass
     }, err => {
       this.snackBar.open(

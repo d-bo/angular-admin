@@ -94,3 +94,11 @@ body {
   -moz-border-radius: 12px;
   border-radius: 12px;
 }
+
+.centered {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -250px; /*(half of width)*/
+    margin-top: -250px;  /*(half of height)*/
+}

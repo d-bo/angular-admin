@@ -28,11 +28,12 @@ import { MatchListComponent, MatchProductFormComponent, MatchDialogComponent, Wa
 import { MatchService } from './match.service';
 import { GlobalService } from './global.service';
 import { BaseRequestOptions, Headers } from '@angular/http';
+import { RequestOptions } from '@angular/http';
 
 @Injectable()
 export class CustomRequestOptions extends BaseRequestOptions {
     headers = new Headers({
-        'Cache-Control': 'no-cache',
+        'Cache-Control': 'no-store, no-cache, no-transform, must-revalidate, max-age=0',
         'Pragma': 'no-cache',
         'Expires': 'Sat, 01 Jan 2000 00:00:00 GMT'
     });
@@ -81,7 +82,7 @@ export class CustomRequestOptions extends BaseRequestOptions {
     GlobalService,
     MatchService,
     MatchListComponent,
-    {provide: CustomRequestOptions, useClass: CustomRequestOptions}
+    {provide: RequestOptions, useClass: CustomRequestOptions}
   ],
   bootstrap: [AppComponent]
 })

@@ -45,6 +45,7 @@
 								<div style="font-size: 14px"><b>{{ option_text_complete.Name}}</b> / {{ option_text_complete.Name_e}} / {{ option_text_complete.Barcod}}</div>
 							</md-option>
 						</md-autocomplete>
+
 					</td>
 					<td style="text-align: center">
 						<button md-mini-fab type="button" color="primary">
@@ -71,7 +72,7 @@
 		    <tr *ngFor="let br of asyncGestoriProducts | async | paginate: { id: 'match_pr_paginate', itemsPerPage: perPage, currentPage: p, totalItems: totalMatch }">
 		        <td class="table-td" [attr.id]="'gest_'+br._id.artic">
 		            <md-list-item>
-		            	<div md-line><h2 style="margin: 0;color: #333;font-size: 16px;line-height: 20px">{{br._id.name}}</h2></div>
+		            	<div md-line><h2 style="margin: 0;color: #333;font-size: 18px;line-height: 20px">{{br._id.name}}</h2></div>
 						<div md-line>{{br._id.name_e}}</div>
 						<div md-line>
 							<span md-line style="padding-right: 15px;color: rgb(63, 81, 181)">{{br._id.brand}}</span>
@@ -161,7 +162,7 @@
 				    <tr *ngFor="let xr of asyncRiveProducts | async | paginate: { id: 'match_pr_rive_paginate', itemsPerPage: perPage, currentPage: p3, totalItems: totalMatch3 }">
 				        <td class="table-td" [attr.id]="'rive_'+xr._id.code">
 				            <md-list-item>
-								<div md-line><h2 style="margin: 0;color: #333;font-size: 16px;line-height: 20px">{{xr._id.name}}</h2></div>
+								<div md-line><h2 style="margin: 0;color: #333;font-size: 18px;line-height: 20px">{{xr._id.name}}</h2></div>
 		                		<div md-line><span md-line style="padding-right: 15px;color: rgb(63, 81, 181)">{{xr._id.brand}}</span>&nbsp;<span>{{xr._id.code}}</span>&nbsp;&nbsp;&nbsp;<span>{{xr._id.country}}</span></div>
 				                <div md-line>{{xr._id.desc}}</div>
 							</md-list-item>
@@ -248,7 +249,7 @@
 				    <tr *ngFor="let jr of asyncIldeProducts | async | paginate: { id: 'match_pr_ilde_paginate', itemsPerPage: perPage, currentPage: p2, totalItems: totalMatch2 }">
 				        <td class="table-td" [attr.id]="'ilde_'+jr._id.artic">
 				            <md-list-item>
-								<div md-line><h2 style="margin: 0;color: #333;font-size: 16px;line-height: 20px">{{jr._id.name}}</h2></div>
+								<div md-line><h2 style="margin: 0;color: #333;font-size: 18px;line-height: 20px">{{jr._id.name}}</h2></div>
 		                		<div md-line><span md-line style="padding-right: 15px;color: rgb(63, 81, 181)">{{jr._id.brand}}</span>&nbsp;<span>{{jr._id.artic}}</span>&nbsp;&nbsp;&nbsp;</div>
 							</md-list-item>
 							<div style="text-align: right">
@@ -307,7 +308,8 @@
 									<md-option *ngFor="let option_text_complete_letu of filteredTextOptionsLetu | async" 
 									[value]="option_text_complete_letu.name" 
 									(onSelectionChange)="getLetuBrands($event, option_text_complete_letu.articul)">
-										<div style="font-size: 14px"><img src="http://www.letu.ru{{option_text_complete_letu.img}}" height="30px" width="30px" style="padding-right: 7px" /><b>{{ option_text_complete_letu.name}}</b> / {{ option_text_complete_letu.desc}} / {{ option_text_complete_letu.articul }}</div>
+										<div style="font-size: 14px"><img src="http://www.letu.ru{{option_text_complete_letu.img}}" height="30px" width="30px" style="padding-right: 7px" />
+											<b>{{ option_text_complete_letu.name}}</b> / {{ option_text_complete_letu.volume}} / {{ option_text_complete_letu.articul }}</div>
 									</md-option>
 								</md-autocomplete>
 							</td>
@@ -330,7 +332,7 @@
 				    <tr *ngFor="let kr of asyncLetuProducts | async | paginate: { id: 'match_pr_letu_paginate', itemsPerPage: perPage, currentPage: p1, totalItems: totalMatch1 }">
 				        <td class="table-td" [attr.id]="'letu_'+kr._id.artic">
 				            <md-list-item>
-								<div md-line><h2 style="margin: 0;color: #333;font-size: 16px;line-height: 20px">{{kr._id.name}}</h2></div>
+								<div md-line><h2 style="margin: 0;color: #333;font-size: 18px;line-height: 20px">{{kr._id.name}}</h2></div>
 								<div md-line><span md-line style="padding-right: 15px;color: rgb(63, 81, 181)">{{kr._id.brand}}</span>&nbsp;<span>{{kr._id.volume}}</span>&nbsp;<span>{{kr._id.artic}}</span></div>
 								<div md-line>{{kr._id.desc}}</div>
 							</md-list-item>

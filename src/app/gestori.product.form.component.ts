@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { FormControl } from '@angular/forms';
 import { URLSearchParams } from "@angular/http";
 import { MdDialog, MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
+import { GlobalService } from './global.service';
 
 import 'rxjs/add/operator/mergeMap';
 
@@ -58,7 +59,9 @@ export class GestoriProductFormComponent {
     submitted = false;
 
     constructor(
-        public http: HttpClient, private dialog: MdDialog
+        public http: HttpClient,
+        private dialog: MdDialog,
+        private globals: GlobalService
     ) {
         this.asyncGroups = this.GroupsControl.valueChanges
             .flatMap(val => this.http.get('http://127.0.0.1:5000/gestori_groups?search='+val));
@@ -75,7 +78,7 @@ export class GestoriProductFormComponent {
     }
 
     openSubmitDialog() {
-        let dialogRef = this.dialog.open(SubmitDialog, {
+        const dialogRef = this.dialog.open(SubmitDialog, {
           width: '400px',
           data: {
               'group_id': this.model.group_id,
