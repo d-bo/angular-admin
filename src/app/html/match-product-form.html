@@ -99,8 +99,10 @@
 	</div>
 
 	<div style="overflow: hidden">
-		<md-tab-group style="max-width: 600px">
+		<md-tab-group style="max-width: 580px">
 			<md-tab label="RIVE">
+
+				<!-- RIVE BRAND SEARCH -->
 				<div>
 					<table width="100%">
 						<tr>
@@ -173,8 +175,21 @@
 				    <tr *ngFor="let xr of asyncRiveProducts | async | paginate: { id: 'match_pr_rive_paginate', itemsPerPage: perPage, currentPage: p3, totalItems: totalMatch3 }">
 				        <td class="table-td" [attr.id]="'rive_'+xr._id.code">
 				            <md-list-item>
-								<div md-line><h2 style="margin: 0;color: #333;font-size: 18px;line-height: 20px">{{xr._id.name}}</h2></div>
-		                		<div md-line><span md-line style="padding-right: 15px;color: rgb(63, 81, 181)">{{xr._id.brand}}</span>&nbsp;<span>{{xr._id.code}}</span>&nbsp;&nbsp;&nbsp;<span>{{xr._id.country}}</span></div>
+								<div md-line>
+									<a href="https://shop.rivegauche.ru/newstore/ru{{xr._id.url}}" 
+										target="_blank" style="text-decoration: none">
+										<h2 style="margin: 0;color: #333;font-size: 18px;line-height: 20px">
+											{{xr._id.name}}
+										</h2>
+									</a>
+								</div>
+		                		<div md-line>
+									<span md-line style="padding-right: 15px;color: rgb(63, 81, 181)">{{xr._id.brand}}</span>&nbsp;
+									<span>{{xr._id.code}}</span>&nbsp;&nbsp;&nbsp;
+									<span>{{xr._id.country}}</span>&nbsp;&nbsp;&nbsp;
+									<span>{{xr._id.volumefieldname}}:</span>&nbsp;&nbsp;&nbsp;
+									<span>{{xr._id.volume}}</span>
+								</div>
 				                <div md-line>{{xr._id.desc}}</div>
 							</md-list-item>
 							<div style="text-align: right">
@@ -187,7 +202,7 @@
 				        </td>
 				        <td>
 							<button md-icon-button color="primary" (click)="markRive(xr._id)">
-							<md-icon class="md-24" aria-label="Example icon-button with a heart icon">check</md-icon>
+								<md-icon class="md-24" aria-label="Example icon-button with a heart icon">check</md-icon>
 							</button>
 				        </td>
 				    </tr>
@@ -196,6 +211,8 @@
 			</md-tab>
 
 			<md-tab label="ILDE">
+
+				<!-- ILDE BRAND SEARCH -->
 				<div>
 					<table width="100%">
 						<tr>
@@ -287,6 +304,8 @@
 			</md-tab>
 
 			<md-tab label="LETU">
+
+				<!-- LETU BRAND SEARCH -->
 				<div>
 					<table width="100%">
 						<tr>
