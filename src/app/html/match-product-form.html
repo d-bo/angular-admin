@@ -67,7 +67,7 @@
 		</div>
 		-->
 
-		<table class="striped">
+		<table class="striped" width="100%">
 			<tr>
 			    <div>
 			        <div style="display: none"><md-spinner></md-spinner></div>
@@ -90,7 +90,7 @@
 		            </md-list-item>
 		        </td>
 		        <td>
-		            <button md-icon-button color="primary" (click)="markGestori(br._id)">
+		            <button md-mini-fab color="basic" (click)="markGestori(br._id)">
 		                <md-icon class="md-24">check</md-icon>
 		            </button>
 		        </td>
@@ -201,7 +201,7 @@
 								height="50px" />
 				        </td>
 				        <td>
-							<button md-icon-button color="primary" (click)="markRive(xr._id)">
+							<button md-mini-fab color="basic" (click)="markRive(xr._id)">
 								<md-icon class="md-24" aria-label="Example icon-button with a heart icon">check</md-icon>
 							</button>
 				        </td>
@@ -210,98 +210,7 @@
 
 			</md-tab>
 
-			<md-tab label="ILDE">
 
-				<!-- ILDE BRAND SEARCH -->
-				<div>
-					<table width="100%">
-						<tr>
-							<td style="width: 90%">
-								<md-input-container class="example-full-width">
-										<input type="text" mdInput placeholder="Брэнд Ильдеботэ"
-										[formControl]="myCompleteIldeMatchControl" [mdAutocomplete]="autoIlde" #brandInputIlde>
-								</md-input-container>
-
-								<md-autocomplete #autoIlde="mdAutocomplete">
-									<md-option *ngFor="let option_ilde of filteredIldeMatchOptions | async" 
-									[value]="option_ilde.val" 
-									(onSelectionChange)="getIldeBrands($event, item)">
-										{{ option_ilde.val }}
-									</md-option>
-								</md-autocomplete>
-							</td>
-							<td style="text-align: center">
-								<button md-mini-fab type="button" color="basic">
-									<md-icon class="md-24">clear</md-icon>
-								</button>
-							</td>
-						</tr>
-					</table>
-				</div>
-
-				<!-- ILDE FULL TEXT SEARCH -->
-				<div>
-					<table width="100%">
-						<tr>
-							<td style="width: 90%">
-								<md-input-container class="example-full-width">
-									<input type="text" mdInput placeholder="По имени"
-									[formControl]='myTextSearchControlIlde' [mdAutocomplete]="autoTextIlde" #fulltextInputIlde>
-								</md-input-container>
-								
-								<md-autocomplete #autoTextIlde="mdAutocomplete">
-									<md-option *ngFor="let option_text_complete_ilde of filteredTextOptionsIlde | async" 
-									[value]="option_text_complete_ilde.pn" 
-									(onSelectionChange)="getIldeBrands($event, option_text_complete_ilde.articul)">
-										<div style="font-size: 14px"><img src="http://static.iledebeaute.ru{{option_text_complete_ilde.image}}" 
-											height="30px" width="30px" style="padding-right: 7px" />{{option_text_complete_ilde.brand}} / <b>{{ option_text_complete_ilde.pn}}</b> / {{ option_text_complete_ilde.articul}}</div>
-									</md-option>
-								</md-autocomplete>
-							</td>
-							<td style="text-align: center">
-								<button md-mini-fab type="button" color="primary">
-									<md-icon class="md-24">search</md-icon>
-								</button>
-							</td>
-						</tr>
-					</table>
-				</div>
-
-				<!--
-				<div *ngIf="isIldeLoaded!==undefined" style="padding: 21px 7px">
-					<md-progress-bar mode="indeterminate"></md-progress-bar>
-				</div>
-				-->
-
-				<table class="striped">
-				    <tr>
-					    <div>
-					        <div style="display: none"><md-spinner></md-spinner></div>
-					        <pagination-controls (pageChange)="getPageIlde($event)" id="match_pr_ilde_paginate" previousLabel="Пред." nextLabel="След."></pagination-controls>
-					    </div>
-				    </tr>
-				    <tr *ngFor="let jr of asyncIldeProducts | async | paginate: { id: 'match_pr_ilde_paginate', itemsPerPage: perPage, currentPage: p2, totalItems: totalMatch2 }">
-				        <td class="table-td" [attr.id]="'ilde_'+jr._id.artic">
-				            <md-list-item>
-								<div md-line><h2 style="margin: 0;color: #333;font-size: 18px;line-height: 20px">{{jr._id.name}}</h2></div>
-		                		<div md-line><span md-line style="padding-right: 15px;color: rgb(63, 81, 181)">{{jr._id.brand}}</span>&nbsp;<span>{{jr._id.artic}}</span>&nbsp;&nbsp;&nbsp;</div>
-							</md-list-item>
-							<div style="text-align: right">
-								<span>{{jr._id.listingprice}} руб.</span>
-							</div>
-				        </td>
-				        <td>
-							<img (click)="showImg('http://static.iledebeaute.ru'+jr._id.image)" 
-								src="http://static.iledebeaute.ru{{jr._id.image}}" height="50px" />
-				        </td>
-				        <td>
-				            <button md-icon-button color="primary" (click)="markIlde(jr._id)">
-				                <md-icon class="md-24">check</md-icon>
-				            </button>
-				        </td>
-				    </tr>
-				</table>
-			</md-tab>
 
 			<md-tab label="LETU">
 
@@ -374,7 +283,14 @@
 				    <tr *ngFor="let kr of asyncLetuProducts | async | paginate: { id: 'match_pr_letu_paginate', itemsPerPage: perPage, currentPage: p1, totalItems: totalMatch1 }">
 				        <td class="table-td" [attr.id]="'letu_'+kr._id.artic">
 				            <md-list-item>
-								<div md-line><h2 style="margin: 0;color: #333;font-size: 18px;line-height: 20px">{{kr._id.name}}</h2></div>
+								<div md-line>
+									<a href="{{kr._id.url}}" 
+										target="_blank" style="text-decoration: none">
+											<h2 style="margin: 0;color: #333;font-size: 18px;line-height: 20px">
+												{{kr._id.name}}
+											</h2>
+									</a>
+								</div>
 								<div md-line><span md-line style="padding-right: 15px;color: rgb(63, 81, 181)">{{kr._id.brand}}</span>&nbsp;<span>{{kr._id.volume}}</span>&nbsp;<span>{{kr._id.artic}}</span></div>
 								<div md-line>{{kr._id.desc}}</div>
 							</md-list-item>
@@ -387,13 +303,107 @@
 								src="http://www.letu.ru{{kr._id.img}}" height="50px" width="50px" />
 				        </td>
 				        <td>
-				            <button md-icon-button color="primary" (click)="markLetu(kr._id)">
+				            <button md-mini-fab color="basic" (click)="markLetu(kr._id)">
 				                <md-icon class="md-24" aria-label="Example icon-button with a heart icon">check</md-icon>
 				            </button>
 				        </td>
 				    </tr>
 				</table>
 
+			</md-tab>
+
+
+
+			<md-tab label="ILDE">
+
+				<!-- ILDE BRAND SEARCH -->
+				<div>
+					<table width="100%">
+						<tr>
+							<td style="width: 90%">
+								<md-input-container class="example-full-width">
+										<input type="text" mdInput placeholder="Брэнд Ильдеботэ"
+										[formControl]="myCompleteIldeMatchControl" [mdAutocomplete]="autoIlde" #brandInputIlde>
+								</md-input-container>
+
+								<md-autocomplete #autoIlde="mdAutocomplete">
+									<md-option *ngFor="let option_ilde of filteredIldeMatchOptions | async" 
+									[value]="option_ilde.val" 
+									(onSelectionChange)="getIldeBrands($event, item)">
+										{{ option_ilde.val }}
+									</md-option>
+								</md-autocomplete>
+							</td>
+							<td style="text-align: center">
+								<button md-mini-fab type="button" color="basic">
+									<md-icon class="md-24">clear</md-icon>
+								</button>
+							</td>
+						</tr>
+					</table>
+				</div>
+
+				<!-- ILDE FULL TEXT SEARCH -->
+				<div>
+					<table width="100%">
+						<tr>
+							<td style="width: 90%">
+								<md-input-container class="example-full-width">
+									<input type="text" mdInput placeholder="По имени"
+									[formControl]='myTextSearchControlIlde' [mdAutocomplete]="autoTextIlde" #fulltextInputIlde>
+								</md-input-container>
+								<md-autocomplete #autoTextIlde="mdAutocomplete">
+									<md-option *ngFor="let option_text_complete_ilde of filteredTextOptionsIlde | async" 
+									[value]="option_text_complete_ilde.pn" 
+									(onSelectionChange)="getIldeBrands($event, option_text_complete_ilde.articul)">
+										<div style="font-size: 14px"><img src="http://static.iledebeaute.ru{{option_text_complete_ilde.image}}" 
+											height="30px" width="30px" style="padding-right: 7px" />{{option_text_complete_ilde.brand}} / <b>{{ option_text_complete_ilde.pn}}</b> / {{ option_text_complete_ilde.articul}}</div>
+									</md-option>
+								</md-autocomplete>
+							</td>
+							<td style="text-align: center">
+								<button md-mini-fab type="button" color="primary">
+									<md-icon class="md-24">search</md-icon>
+								</button>
+							</td>
+						</tr>
+					</table>
+				</div>
+
+				<!--
+				<div *ngIf="isIldeLoaded!==undefined" style="padding: 21px 7px">
+					<md-progress-bar mode="indeterminate"></md-progress-bar>
+				</div>
+				-->
+
+				<table class="striped">
+					<tr>
+						<div>
+							<div style="display: none"><md-spinner></md-spinner></div>
+							<pagination-controls (pageChange)="getPageIlde($event)" id="match_pr_ilde_paginate" previousLabel="Пред." nextLabel="След."></pagination-controls>
+						</div>
+					</tr>
+					<tr *ngFor="let jr of asyncIldeProducts | async | paginate: { id: 'match_pr_ilde_paginate', itemsPerPage: perPage, currentPage: p2, totalItems: totalMatch2 }">
+						<td class="table-td" [attr.id]="'ilde_'+jr._id.artic">
+							<md-list-item>
+								<div md-line><h2 style="margin: 0;color: #333;font-size: 18px;line-height: 20px">{{jr._id.name}}</h2></div>
+								<div md-line><span md-line style="padding-right: 15px;color: rgb(63, 81, 181)">{{jr._id.brand}}</span>&nbsp;<span>{{jr._id.artic}}</span>&nbsp;&nbsp;&nbsp;</div>
+							</md-list-item>
+							<div style="text-align: right">
+								<span>{{jr._id.listingprice}} руб.</span>
+							</div>
+						</td>
+						<td>
+							<img (click)="showImg('http://static.iledebeaute.ru'+jr._id.image)" 
+								src="http://static.iledebeaute.ru{{jr._id.image}}" height="50px" />
+						</td>
+						<td>
+							<button md-icon-button color="primary" (click)="markIlde(jr._id)">
+								<md-icon class="md-24">check</md-icon>
+							</button>
+						</td>
+					</tr>
+				</table>
 			</md-tab>
 
 		</md-tab-group>
