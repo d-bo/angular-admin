@@ -102,3 +102,17 @@ body {
     margin-left: -250px; /*(half of width)*/
     margin-top: -250px;  /*(half of height)*/
 }
+
+.h2-c {
+    color: #000 !important;
+    padding-bottom: 5px;
+    font-size: 18px !important;
+    margin: 0 !important;
+    line-height: 22px !important;
+}
+
+.ga-progress-bar {
+    height: 10px;
+    margin-top: 14px;
+    padding: 0 24px;
+}

@@ -6,9 +6,11 @@ import { HttpClient } from '@angular/common/http';
 import { FormControl } from '@angular/forms';
 import { URLSearchParams } from '@angular/http';
 import { MdSnackBar } from '@angular/material';
+import { MdChip, MdChipList } from '@angular/material';
 import { MdDialog, MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
 import { MatchService } from './match.service';
 import { GlobalService } from './global.service';
+import { MdExpansionPanel, MdExpansionPanelHeader, MdExpansionPanelActionRow } from '@angular/material';
 
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/observable/merge';
@@ -369,7 +371,7 @@ export class MatchProductFormComponent implements OnInit {
             'ildeSelectedItem': this.ildeSelectedItem
         };
         const dialogRef = this.mdialog.open(MatchDialogComponent, {
-            width: '400px',
+            width: '600px',
             data: save_data
         });
     }
@@ -414,7 +416,7 @@ export class MatchProductFormComponent implements OnInit {
         this.isGestLoaded = true;
         this.asyncGestoriProducts = this.serverCallGestoriObservable(page, this.gestoriSelectedBrand, artic)
             .do(res => {
-                this.totalMatch = res.count;
+                this.totalMatch = 20;
                 this.p = page;
                 this.isGestLoaded = undefined;
             }).map(res => res.data);
