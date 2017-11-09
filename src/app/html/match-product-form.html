@@ -1,8 +1,8 @@
 <div>
 	<div style="padding:10px;float: left;">
+
 		<div style="padding: 10px">
 			<md-expansion-panel>
-
 				<md-expansion-panel-header>
 					<md-panel-title>
 					Gestori
@@ -18,10 +18,9 @@
 						<tr>
 							<td style="width: 90%">
 								<md-input-container class="example-full-width">
-									<input type="text" mdInput placeholder="Брэнд Gestori"
+									<input type="text" mdInput placeholder="Брэнд Gestori" ng-model="inputSearchBrand"
 									[formControl]='myCompleteMatchControl' [mdAutocomplete]="auto" #brandInputGest>
 								</md-input-container>
-								
 								<md-autocomplete #auto="mdAutocomplete">
 									<md-option *ngFor="let option_complete of filteredMatchOptions | async" 
 									[value]="option_complete.val" 
@@ -31,7 +30,9 @@
 								</md-autocomplete>
 							</td>
 							<td style="text-align: center">
-								<button md-mini-fab type="button" color="basic">
+								<button 
+									md-mini-fab (click)="cleanAndReloadGest($event)"
+									type="button" color="basic">
 									<md-icon class="md-24">clear</md-icon>
 								</button>
 							</td>
@@ -141,7 +142,8 @@
 										</md-autocomplete>
 									</td>
 									<td style="text-align: center">
-										<button md-mini-fab type="button" color="basic">
+										<button md-mini-fab (click)="cleanAndReloadRive()"
+											type="button" color="basic">
 											<md-icon class="md-24">clear</md-icon>
 										</button>
 									</td>
@@ -187,7 +189,7 @@
 					</div>
 				</div>
 
-				<div>
+				<div style="text-align: center">
 					<pagination-controls (pageChange)="getPageRive($event)" 
 						id="match_pr_rive_paginate" previousLabel="Пред." 
 						nextLabel="След."></pagination-controls>
@@ -267,7 +269,8 @@
 										</md-autocomplete>
 									</td>
 									<td style="text-align: center">
-										<button md-mini-fab type="button" color="basic">
+										<button md-mini-fab (click)="cleanAndReloadLetu()"
+											type="button" color="basic">
 											<md-icon class="md-24">clear</md-icon>
 										</button>
 									</td>
@@ -312,13 +315,11 @@
 					</div>
 				</div>
 
+				<div style="text-align: center">
+					<pagination-controls (pageChange)="getPageLetu($event)" id="match_pr_letu_paginate" previousLabel="Пред." nextLabel="След."></pagination-controls>
+				</div>
+
 				<table class="striped">
-				    <tr>
-					    <div>
-					        <div style="display: none"><md-spinner></md-spinner></div>
-					        <pagination-controls (pageChange)="getPageLetu($event)" id="match_pr_letu_paginate" previousLabel="Пред." nextLabel="След."></pagination-controls>
-					    </div>
-				    </tr>
 				    <tr *ngFor="let kr of asyncLetuProducts | async | paginate: { id: 'match_pr_letu_paginate', itemsPerPage: pageSize, currentPage: p1, totalItems: totalMatch1 }">
 				        <td class="table-td" [attr.id]="'letu_'+kr._id.artic">
 				            <md-list-item>
@@ -389,7 +390,8 @@
 										</md-autocomplete>
 									</td>
 									<td style="text-align: center">
-										<button md-mini-fab type="button" color="basic">
+										<button md-mini-fab (click)="cleanAndReloadIlde()"
+											type="button" color="basic">
 											<md-icon class="md-24">clear</md-icon>
 										</button>
 									</td>
@@ -433,13 +435,11 @@
 					</div>
 				</div>
 
+				<div style="text-align: center">
+					<pagination-controls (pageChange)="getPageIlde($event)" id="match_pr_ilde_paginate" previousLabel="Пред." nextLabel="След."></pagination-controls>
+				</div>
+				
 				<table class="striped">
-					<tr>
-						<div>
-							<div style="display: none"><md-spinner></md-spinner></div>
-							<pagination-controls (pageChange)="getPageIlde($event)" id="match_pr_ilde_paginate" previousLabel="Пред." nextLabel="След."></pagination-controls>
-						</div>
-					</tr>
 					<tr *ngFor="let jr of asyncIldeProducts | async | paginate: { id: 'match_pr_ilde_paginate', itemsPerPage: pageSize, currentPage: p2, totalItems: totalMatch2 }">
 						<td class="table-td" [attr.id]="'ilde_'+jr._id.artic">
 							<md-list-item>
@@ -466,7 +466,7 @@
 				</table>
 			</md-tab>
 
-			<md-tab label="TEST">
+			<md-tab label="*">
 				<md-icon>home</md-icon>
 			</md-tab>
 

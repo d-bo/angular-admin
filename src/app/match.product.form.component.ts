@@ -218,7 +218,7 @@ export class MatchProductFormComponent implements OnInit {
     isIldeLoaded: boolean;
     isLetuLoaded: boolean;
 
-
+    inputSearchBrand: string;
 
     constructor(
         private http: HttpClient,
@@ -273,6 +273,29 @@ export class MatchProductFormComponent implements OnInit {
         this.getPageLetu(1, undefined);
         this.getPageIlde(1, undefined);
         this.getPageRive(1, undefined);
+    }
+
+    // clean input search by brands
+    // refresh product list
+    cleanAndReloadGest() {
+        this.myCompleteMatchControl.reset();
+        this.gestoriSelectedBrand = undefined;
+        this.getPageGestori(1, undefined);
+    }
+    cleanAndReloadRive() {
+        this.myCompleteRiveMatchControl.reset();
+        this.riveSelectedBrand = undefined;
+        this.getPageRive(1, undefined);
+    }
+    cleanAndReloadIlde() {
+        this.myCompleteIldeMatchControl.reset();
+        this.ildeSelectedBrand = undefined;
+        this.getPageIlde(1, undefined);
+    }
+    cleanAndReloadLetu() {
+        this.myCompleteLetuMatchControl.reset();
+        this.letuSelectedBrand = undefined;
+        this.getPageLetu(1, undefined);
     }
 
     // img dialog
@@ -417,6 +440,15 @@ export class MatchProductFormComponent implements OnInit {
         this.asyncGestoriProducts = this.serverCallGestoriObservable(page, this.gestoriSelectedBrand, artic)
             .do(res => {
                 this.totalMatch = res.count;
+                // total found products check
+                if (res.data.length < 1) {
+                    const dialogRef = this.mdialog.open(WarnDialogComponent, {
+                        data: {
+                            'msg': 'Не найдено'
+                          }
+                      });
+                    this.totalMatch = 0;
+                }
                 this.p = page;
                 this.isGestLoaded = undefined;
             }).map(res => res.data);
@@ -427,6 +459,15 @@ export class MatchProductFormComponent implements OnInit {
         this.asyncLetuProducts = this.serverCallLetuObservable(page, this.letuSelectedBrand, artic)
             .do(res => {
                 this.totalMatch1 = res.count;
+                // total found products check
+                if (res.data.length < 1) {
+                    const dialogRef = this.mdialog.open(WarnDialogComponent, {
+                        data: {
+                            'msg': 'Не найдено'
+                          }
+                      });
+                    this.totalMatch1 = 0;
+                }
                 this.p1 = page;
                 this.isLetuLoaded = undefined;
             }).map(res => res.data);
@@ -437,6 +478,15 @@ export class MatchProductFormComponent implements OnInit {
         this.asyncIldeProducts = this.serverCallIldeObservable(page, this.ildeSelectedBrand, artic)
             .do(res => {
                 this.totalMatch2 = res.count;
+                // total found products check
+                if (res.data.length < 1) {
+                    const dialogRef = this.mdialog.open(WarnDialogComponent, {
+                        data: {
+                            'msg': 'Не найдено'
+                          }
+                      });
+                    this.totalMatch2 = 0;
+                }
                 this.p2 = page;
                 this.isIldeLoaded = undefined;
             }).map(res => res.data);
@@ -447,6 +497,15 @@ export class MatchProductFormComponent implements OnInit {
         this.asyncRiveProducts = this.serverCallRiveObservable(page, this.riveSelectedBrand, artic)
             .do(res => {
                 this.totalMatch3 = res.count;
+                // total found products check
+                if (res.data.length < 1) {
+                    const dialogRef = this.mdialog.open(WarnDialogComponent, {
+                        data: {
+                            'msg': 'Не найдено'
+                          }
+                      });
+                    this.totalMatch3 = 0;
+                }
                 this.p3 = page;
                 this.isRiveLoaded = undefined;
             }).map(res => res.data);
