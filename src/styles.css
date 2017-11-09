@@ -80,9 +80,9 @@ body {
 }
 
 .bottom-shadow {
-    -webkit-box-shadow: 0 6px 4px -4px #a7a7a7;
-    -moz-box-shadow: 0 6px 4px -4px #a7a7a7;
-    box-shadow: 0 6px 4px -4px #a7a7a7;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 5px 0px;
+    -moz-box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 5px 0px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 5px 0px;
 }
 
 .mat-tab-body-content.ng-trigger.ng-trigger-translateTab {
