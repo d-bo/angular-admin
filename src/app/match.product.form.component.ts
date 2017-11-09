@@ -416,7 +416,7 @@ export class MatchProductFormComponent implements OnInit {
         this.isGestLoaded = true;
         this.asyncGestoriProducts = this.serverCallGestoriObservable(page, this.gestoriSelectedBrand, artic)
             .do(res => {
-                this.totalMatch = 20;
+                this.totalMatch = res.count;
                 this.p = page;
                 this.isGestLoaded = undefined;
             }).map(res => res.data);
