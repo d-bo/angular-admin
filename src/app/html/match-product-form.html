@@ -58,7 +58,7 @@
 								</md-autocomplete>
 							</td>
 							<td style="text-align: center">
-								<button md-mini-fab type="button" color="primary">
+								<button md-mini-fab type="button" color="primary" (click)="gestoriBrandPlusKeyword()">
 									<md-icon class="md-24">search</md-icon>
 								</button>
 							</td>
@@ -96,7 +96,9 @@
 								<md-chip>{{br._id.brand}}</md-chip>
 								<md-chip>{{br._id.artic}}</md-chip>
 								<md-chip>{{br._id.barcod}}</md-chip>
-								<md-chip color="primary"><b>{{br._id.retail_price}} руб.</b></md-chip>
+								<md-chip color="primary" *ngIf="br._id.retail_price!==''">
+									<b>{{br._id.retail_price}} руб.</b>
+								</md-chip>
 							</md-chip-list>
 						</div>
 		            </md-list-item>
@@ -335,7 +337,7 @@
 										<md-chip>{{kr._id.brand}}</md-chip>
 										<md-chip>{{kr._id.volume}}</md-chip>
 										<md-chip>{{kr._id.artic}}</md-chip>
-										<md-chip color="primary"><b>{{kr._id.listingprice}} руб.</b></md-chip>
+										<md-chip color="primary" *ngIf="kr._id.listingprice!==''"><b>{{kr._id.listingprice}} руб.</b></md-chip>
 									</md-chip-list>
 								</div>
 							</md-list-item>

@@ -269,7 +269,7 @@ export class MatchProductFormComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.getPageGestori(1, undefined);
+        this.getPageGestori(1, undefined, undefined);
         this.getPageLetu(1, undefined);
         this.getPageIlde(1, undefined);
         this.getPageRive(1, undefined);
@@ -280,7 +280,7 @@ export class MatchProductFormComponent implements OnInit {
     cleanAndReloadGest() {
         this.myCompleteMatchControl.reset();
         this.gestoriSelectedBrand = undefined;
-        this.getPageGestori(1, undefined);
+        this.getPageGestori(1, undefined, undefined);
     }
     cleanAndReloadRive() {
         this.myCompleteRiveMatchControl.reset();
@@ -401,7 +401,7 @@ export class MatchProductFormComponent implements OnInit {
 
     getGestoriBrands(event, item) {
         this.gestoriSelectedBrand = event.source.value;
-        this.getPageGestori(1, item);
+        this.getPageGestori(1, item, undefined);
     }
 
     getRiveBrands(event, item) {
@@ -419,39 +419,49 @@ export class MatchProductFormComponent implements OnInit {
         this.getPageLetu(1, item);
     }
 
-    serverCallGestoriObservable(page: number, search: string, artic: any): Observable<any> {
+    // search gestori global
+    gestoriBrandPlusKeyword() {
+        const brand = this.myCompleteMatchControl.value;
+        const txt = this.myTextSearchControl.value;
+
+        this.getPageGestori(1, brand, txt);
+    }
+
+    serverCallGestoriObservable(page: number, brand: string, artic: any, keyword: any): Observable<any> {
         const perPage = this.pageSize;
         const start = (page - 1) * perPage;
         const end = start + perPage;
         // search by article instead of huge string
-        if (artic !== undefined) {
+        if (artic !== null && artic !== undefined) {
             return this.globals.get(
-                'http://' + this.globals.MAIN_IP + ':5000/gestori_products?page=' + page + '&perPage=' + perPage + '&art=' + artic
+                'http://' + this.globals.MAIN_IP + ':5000/gestori_products?p=' + page + '&pP=' + perPage + '&a=' + artic
             );
         } else {
             return this.globals.get(
-                'http://' + this.globals.MAIN_IP + ':5000/gestori_products?page=' + page + '&perPage=' + perPage + '&search=' + search
+                'http://' + this.globals.MAIN_IP + ':5000/gestori_products?p=' + page + '&pP=' + perPage + '&s=' + brand + '&kw=' + keyword
             );
         }
     }
 
-    getPageGestori(page: number, artic: any) {
+    // get gestori products
+    getPageGestori(page: number, artic: any, keyword: any) {
         this.isGestLoaded = true;
-        this.asyncGestoriProducts = this.serverCallGestoriObservable(page, this.gestoriSelectedBrand, artic)
-            .do(res => {
-                this.totalMatch = res.count;
-                // total found products check
-                if (res.data.length < 1) {
-                    const dialogRef = this.mdialog.open(WarnDialogComponent, {
-                        data: {
-                            'msg': 'Не найдено'
-                          }
-                      });
-                    this.totalMatch = 0;
-                }
-                this.p = page;
-                this.isGestLoaded = undefined;
-            }).map(res => res.data);
+        this.asyncGestoriProducts = this.serverCallGestoriObservable(
+            page, this.gestoriSelectedBrand, artic, keyword
+        ).do(res => {
+            this.totalMatch = res.count;
+            // total found products check
+            if (res.data.length < 1) {
+                const dialogRef = this.mdialog.open(WarnDialogComponent, {
+                    data: {
+                        'msg': 'Не найдено'
+                        }
+                    });
+                this.totalMatch = 0;
+            }
+            this.p = page;
+            this.isGestLoaded = undefined;
+        }).map(res => res.data);
     }
 
     getPageLetu(page: number, artic: any) {
