@@ -48,11 +48,9 @@
 									<input type="text" mdInput placeholder="По имени"
 									[formControl]='myTextSearchControl' [mdAutocomplete]="autoText" #fulltextInputGest>
 								</md-input-container>
-								
 								<md-autocomplete #autoText="mdAutocomplete">
 									<md-option *ngFor="let option_text_complete of filteredTextOptions | async" 
-									[value]="option_text_complete.Name" 
-									(onSelectionChange)="getGestoriBrands($event, option_text_complete.Artic)">
+									[value]="option_text_complete.Name">
 										<div style="font-size: 14px"><b>{{ option_text_complete.Name}}</b> / {{ option_text_complete.Name_e}} / {{ option_text_complete.Barcod}}</div>
 									</md-option>
 								</md-autocomplete>

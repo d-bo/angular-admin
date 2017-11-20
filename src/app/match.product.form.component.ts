@@ -241,13 +241,19 @@ export class MatchProductFormComponent implements OnInit {
             ));
 
         this.filteredLetuMatchOptions = this.myCompleteLetuMatchControl.valueChanges
-            .flatMap(val => this.globals.get('http://' + this.globals.MAIN_IP + ':5000/brands?s=' + val + '&p=letu'));
+            .flatMap(val => this.globals.get(
+                'http://' + this.globals.MAIN_IP + ':5000/brands?s=' + val + '&p=letu'
+            ));
 
         this.filteredIldeMatchOptions = this.myCompleteIldeMatchControl.valueChanges
-            .flatMap(val => this.globals.get('http://' + this.globals.MAIN_IP + ':5000/brands?s=' + val + '&p=ilde'));
+            .flatMap(val => this.globals.get(
+                'http://' + this.globals.MAIN_IP + ':5000/brands?s=' + val + '&p=ilde'
+            ));
 
         this.filteredRiveMatchOptions = this.myCompleteRiveMatchControl.valueChanges
-            .flatMap(val => this.globals.get('http://' + this.globals.MAIN_IP + ':5000/brands?s=' + val + '&p=rive'));
+            .flatMap(val => this.globals.get(
+                'http://' + this.globals.MAIN_IP + ':5000/brands?s=' + val + '&p=rive'
+            ));
 
 
 
@@ -432,15 +438,9 @@ export class MatchProductFormComponent implements OnInit {
         const start = (page - 1) * perPage;
         const end = start + perPage;
         // search by article instead of huge string
-        if (artic !== null && artic !== undefined) {
-            return this.globals.get(
-                'http://' + this.globals.MAIN_IP + ':5000/gestori_products?p=' + page + '&pP=' + perPage + '&a=' + artic
-            );
-        } else {
-            return this.globals.get(
-                'http://' + this.globals.MAIN_IP + ':5000/gestori_products?p=' + page + '&pP=' + perPage + '&s=' + brand + '&kw=' + keyword
-            );
-        }
+        return this.globals.get(
+            'http://' + this.globals.MAIN_IP + ':5000/gestori_products?p=' + page + '&pP=' + perPage + '&s=' + brand + '&kw=' + encodeURIComponent(keyword)
+        );
     }
 
     // get gestori products
