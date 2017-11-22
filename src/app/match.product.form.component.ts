@@ -232,8 +232,6 @@ export class MatchProductFormComponent implements OnInit {
         this.mdialog = mdialog;
         this.snackBar = snackBar;
 
-
-
         // autocomplete BRAND search
         this.filteredMatchOptions = this.myCompleteMatchControl.valueChanges
             .flatMap(val => this.globals.get(
@@ -259,19 +257,23 @@ export class MatchProductFormComponent implements OnInit {
 
         // FULL TXT GEST
         this.filteredTextOptions = this.myTextSearchControl.valueChanges
-        .flatMap(val => this.globals.get('http://' + this.globals.MAIN_IP + ':5000/ft?s=' + val + '&p=gest'));
+        .flatMap(val => this.globals.get(
+            'http://' + this.globals.MAIN_IP + ':5000/ft?s=' + val + '&b=' + this.gestoriSelectedBrand + '&p=gest'
+        ));
 
         // FULL TXT LETU
         this.filteredTextOptionsLetu = this.myTextSearchControlLetu.valueChanges
-        .flatMap(val => this.globals.get('http://' + this.globals.MAIN_IP + ':5000/ft?s=' + val + '&p=letu'));
+        .flatMap(val => this.globals.get(
+            'http://' + this.globals.MAIN_IP + ':5000/ft?s=' + val + '&b=' + this.myTextSearchControlLetu.value + '&p=letu'
+        ));
 
         // FULL TXT ILDE
         this.filteredTextOptionsIlde = this.myTextSearchControlIlde.valueChanges
-        .flatMap(val => this.globals.get('http://' + this.globals.MAIN_IP + ':5000/ft?s=' + val + '&p=ilde'));
+        .flatMap(val => this.globals.get('http://' + this.globals.MAIN_IP + ':5000/ft?s=' + val + '&b=' + this.myTextSearchControlIlde.value + '&p=ilde'));
 
         // FULL TXT RIVE
         this.filteredTextOptionsRive = this.myTextSearchControlRive.valueChanges
-        .flatMap(val => this.globals.get('http://' + this.globals.MAIN_IP + ':5000/ft?s=' + val + '&p=rive'));
+        .flatMap(val => this.globals.get('http://' + this.globals.MAIN_IP + ':5000/ft?s=' + val + '&b=' + this.myTextSearchControlIlde.value + '&p=rive'));
     }
 
     ngOnInit(): void {
@@ -433,13 +435,42 @@ export class MatchProductFormComponent implements OnInit {
         this.getPageGestori(1, brand, txt);
     }
 
+    // search gestori global
+    riveBrandPlusKeyword() {
+        this.getPageRive(1, this.myCompleteRiveMatchControl.value);
+        this.snackBar.open(
+            'riveBrandPlusKeyword',
+            'OK'
+        );
+    }
+
+    // search gestori global
+    letuBrandPlusKeyword() {
+        this.getPageLetu(1, this.myCompleteLetuMatchControl.value);
+        this.snackBar.open(
+            'letuBrandPlusKeyword',
+            'OK'
+        );
+    }
+
+    // search gestori global
+    ildeBrandPlusKeyword() {
+        this.getPageIlde(1, this.myCompleteIldeMatchControl.value);
+      this.snackBar.open(
+        'ildeBrandPlusKeyword',
+        'OK'
+      );
+    }
+
     serverCallGestoriObservable(page: number, brand: string, artic: any, keyword: any): Observable<any> {
         const perPage = this.pageSize;
         const start = (page - 1) * perPage;
         const end = start + perPage;
+        const txt = this.myTextSearchControl.value;
+        brand = this.myCompleteMatchControl.value;
         // search by article instead of huge string
         return this.globals.get(
-            'http://' + this.globals.MAIN_IP + ':5000/gestori_products?p=' + page + '&pP=' + perPage + '&s=' + brand + '&kw=' + encodeURIComponent(keyword)
+            'http://' + this.globals.MAIN_IP + ':5000/gestori_products?p=' + page + '&pP=' + perPage + '&s=' + brand + '&kw=' + encodeURIComponent(txt)
         );
     }
 
@@ -464,9 +495,9 @@ export class MatchProductFormComponent implements OnInit {
         }).map(res => res.data);
     }
 
-    getPageLetu(page: number, artic: any) {
+    getPageLetu(page: number, keyword: any) {
         this.isLetuLoaded = true;
-        this.asyncLetuProducts = this.serverCallLetuObservable(page, this.letuSelectedBrand, artic)
+        this.asyncLetuProducts = this.serverCallLetuObservable(page, this.letuSelectedBrand)
             .do(res => {
                 this.totalMatch1 = res.count;
                 // total found products check
@@ -483,9 +514,9 @@ export class MatchProductFormComponent implements OnInit {
             }).map(res => res.data);
     }
 
-    getPageIlde(page: number, artic: any) {
+    getPageIlde(page: number, keyword: any) {
         this.isIldeLoaded = true;
-        this.asyncIldeProducts = this.serverCallIldeObservable(page, this.ildeSelectedBrand, artic)
+        this.asyncIldeProducts = this.serverCallIldeObservable(page, this.ildeSelectedBrand)
             .do(res => {
                 this.totalMatch2 = res.count;
                 // total found products check
@@ -502,9 +533,9 @@ export class MatchProductFormComponent implements OnInit {
             }).map(res => res.data);
     }
 
-    getPageRive(page: number, artic: any) {
+    getPageRive(page: number, keyword: any) {
         this.isRiveLoaded = true;
-        this.asyncRiveProducts = this.serverCallRiveObservable(page, this.riveSelectedBrand, artic)
+        this.asyncRiveProducts = this.serverCallRiveObservable(page, this.riveSelectedBrand)
             .do(res => {
                 this.totalMatch3 = res.count;
                 // total found products check
@@ -521,50 +552,38 @@ export class MatchProductFormComponent implements OnInit {
             }).map(res => res.data);
     }
 
-    serverCallRiveObservable(page: number, search: string, artic: any): Observable<any> {
+    serverCallRiveObservable(page: number, search: string): Observable<any> {
         const perPage3 = this.pageSize;
         const start3 = (page - 1) * perPage3;
         const end3 = start3 + perPage3;
+        const kw = this.myTextSearchControlRive.value;
+        search = this.myCompleteRiveMatchControl.value;
         // search by article instead of huge string
-        if (artic !== undefined) {
-            return this.globals.get(
-                'http://' + this.globals.MAIN_IP + ':5000/rive_products?page=' + page + '&perPage=' + perPage3 + '&art=' + artic
-            );
-        } else {
-            return this.globals.get(
-                'http://' + this.globals.MAIN_IP + ':5000/rive_products?page=' + page + '&perPage=' + perPage3 + '&search=' + search
-            );
-        }
+        return this.globals.get(
+            'http://' + this.globals.MAIN_IP + ':5000/rive_products?page=' + page + '&perPage=' + perPage3 + '&kw=' + kw + '&search=' + search
+        );
     }
 
-    serverCallIldeObservable(page: number, search: string, artic: any): Observable<any> {
+    serverCallIldeObservable(page: number, search: string): Observable<any> {
         const start2 = (page - 1) * this.pageSize;
         const end2 = start2 + this.pageSize;
+        const kw = this.myTextSearchControlIlde.value;
+        search = this.myCompleteIldeMatchControl.value;
         // search by article instead of huge string
-        if (artic !== undefined) {
-            return this.globals.get(
-                'http://' + this.globals.MAIN_IP + ':5000/ilde_products?page=' + page + '&perPage=' + this.pageSize + '&art=' + artic
-            );
-        } else {
-            return this.globals.get(
-                'http://' + this.globals.MAIN_IP + ':5000/ilde_products?page=' + page + '&perPage=' + this.pageSize + '&search=' + search
-            );
-        }
+        return this.globals.get(
+            'http://' + this.globals.MAIN_IP + ':5000/ilde_products?page=' + page + '&perPage=' + this.pageSize + '&kw=' + kw + '&search=' + search
+        );
     }
 
-    serverCallLetuObservable(page: number, search: string, artic: any): Observable<any> {
+    serverCallLetuObservable(page: number, search: string): Observable<any> {
         const perPage1 = this.pageSize;
         const start1 = (page - 1) * perPage1;
         const end1 = start1 + perPage1;
+        const kw = this.myTextSearchControlLetu.value;
+        search = this.myCompleteLetuMatchControl.value;
         // search by article instead of huge string
-        if (artic !== undefined) {
-            return this.globals.get(
-                'http://' + this.globals.MAIN_IP + ':5000/letu_products?page=' + page + '&perPage=' + perPage1 + '&art=' + artic
-            );
-        } else {
-            return this.globals.get(
-                'http://' + this.globals.MAIN_IP + ':5000/letu_products?page=' + page + '&perPage=' + perPage1 + '&search=' + search
-            );
-        }
+        return this.globals.get(
+            'http://' + this.globals.MAIN_IP + ':5000/letu_products?page=' + page + '&perPage=' + perPage1 + '&kw=' + kw + '&search=' + search
+        );
     }
 }

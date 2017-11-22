@@ -22,8 +22,7 @@
 								</md-input-container>
 								<md-autocomplete #auto="mdAutocomplete">
 									<md-option *ngFor="let option_complete of filteredMatchOptions | async" 
-									[value]="option_complete.val" 
-									(onSelectionChange)="getGestoriBrands($event)">
+									[value]="option_complete.val">
 										{{ option_complete.val }}
 									</md-option>
 								</md-autocomplete>
@@ -56,8 +55,10 @@
 								</md-autocomplete>
 							</td>
 							<td style="text-align: center">
-								<button md-mini-fab type="button" color="primary" (click)="gestoriBrandPlusKeyword()">
-									<md-icon class="md-24">search</md-icon>
+								<button 
+									md-mini-fab (click)="cleanAndReloadGest($event)"
+									type="button" color="basic">
+									<md-icon class="md-24">clear</md-icon>
 								</button>
 							</td>
 						</tr>
@@ -65,9 +66,16 @@
 				</div>
 
 				<div style="text-align: center">
-					<button md-icon-button color="basic" (click)="confirmMatchRive()">
-						<md-icon class="md-24" color="primary">send</md-icon>
-					</button>
+					<span style="margin-right: 50px">
+						<button md-mini-fab color="basic" (click)="confirmMatchRive()">
+							<md-icon class="md-24">add</md-icon>
+						</button>
+					</span>
+					<span>
+						<button md-mini-fab type="button" color="primary" (click)="gestoriBrandPlusKeyword()">
+							<md-icon class="md-24">search</md-icon>
+						</button>
+					</span>
 				</div>
 
 			</md-expansion-panel>
@@ -135,7 +143,7 @@
 											[formControl]="myCompleteRiveMatchControl" [mdAutocomplete]="auto3" #brandInputRive>
 										</md-input-container>
 										<md-autocomplete #auto3="mdAutocomplete">
-											<md-option *ngFor="let option_rive of filteredRiveMatchOptions | async" [value]="option_rive.val" (onSelectionChange)="getRiveBrands($event, item)">
+											<md-option *ngFor="let option_rive of filteredRiveMatchOptions | async" [value]="option_rive.val">
 												{{ option_rive.val }}
 											</md-option>
 										</md-autocomplete>
@@ -172,12 +180,18 @@
 										</md-autocomplete>
 									</td>
 									<td style="text-align: center">
-										<button md-mini-fab type="button" color="primary">
-											<md-icon class="md-24">search</md-icon>
+										<button md-mini-fab (click)="cleanAndReloadRive()"
+											type="button" color="basic">
+											<md-icon class="md-24">clear</md-icon>
 										</button>
 									</td>
 								</tr>
 							</table>
+							<div style="text-align: center">
+								<button md-mini-fab type="button" color="primary" (click)="riveBrandPlusKeyword()">
+									<md-icon class="md-24">search</md-icon>
+								</button>
+							</div>
 						</div>
 					</md-expansion-panel>
 				</div>
@@ -262,7 +276,7 @@
 												[formControl]="myCompleteLetuMatchControl" [mdAutocomplete]="auto2" #brandInputLetu>
 										</md-input-container>
 										<md-autocomplete #auto2="mdAutocomplete">
-											<md-option *ngFor="let option_letu of filteredLetuMatchOptions | async" [value]="option_letu.val" (onSelectionChange)="getLetuBrands($event, item)">
+											<md-option *ngFor="let option_letu of filteredLetuMatchOptions | async" [value]="option_letu.val">
 												{{ option_letu.val }}
 											</md-option>
 										</md-autocomplete>
@@ -297,12 +311,18 @@
 										</md-autocomplete>
 									</td>
 									<td style="text-align: center">
-										<button md-mini-fab type="button" color="primary">
-											<md-icon class="md-24">search</md-icon>
+										<button md-mini-fab (click)="cleanAndReloadLetu()"
+											type="button" color="basic">
+											<md-icon class="md-24">clear</md-icon>
 										</button>
 									</td>
 								</tr>
 							</table>
+							<div style="text-align: center;">
+								<button md-mini-fab type="button" color="primary" (click)="letuBrandPlusKeyword()">
+									<md-icon class="md-24">search</md-icon>
+								</button>
+							</div>
 						</div>
 
 					</md-expansion-panel>
@@ -382,8 +402,7 @@
 
 										<md-autocomplete #autoIlde="mdAutocomplete">
 											<md-option *ngFor="let option_ilde of filteredIldeMatchOptions | async" 
-											[value]="option_ilde.val" 
-											(onSelectionChange)="getIldeBrands($event, item)">
+											[value]="option_ilde.val">
 												{{ option_ilde.val }}
 											</md-option>
 										</md-autocomplete>
@@ -417,12 +436,18 @@
 										</md-autocomplete>
 									</td>
 									<td style="text-align: center">
-										<button md-mini-fab type="button" color="primary">
-											<md-icon class="md-24">search</md-icon>
+										<button md-mini-fab (click)="cleanAndReloadIlde()"
+											type="button" color="basic">
+											<md-icon class="md-24">clear</md-icon>
 										</button>
 									</td>
 								</tr>
 							</table>
+							<div style="text-align: center">
+								<button md-mini-fab type="button" color="primary" (click)="ildeBrandPlusKeyword()">
+									<md-icon class="md-24">search</md-icon>
+								</button>
+							</div>
 						</div>
 
 					</md-expansion-panel>
