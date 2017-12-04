@@ -209,47 +209,49 @@
 				</div>
 
 				<table class="striped">
-				    <tr *ngFor="let xr of asyncRiveProducts | async | paginate: { id: 'match_pr_rive_paginate', itemsPerPage: pageSize, currentPage: p3, totalItems: totalMatch3 }">
-				        <td class="table-td" [attr.id]="'rive_'+xr._id.code">
-				            <md-list-item>
-								<div md-line *ngIf="xr._id.url!==''">
-									<a href="https://shop.rivegauche.ru/newstore/ru{{xr._id.url}}" 
-										target="_blank" style="text-decoration: none">
+					<div *ngFor="let xr of asyncRiveProducts | async | paginate: { id: 'match_pr_rive_paginate', itemsPerPage: pageSize, currentPage: p3, totalItems: totalMatch3 }">
+					    <tr *ngIf="xr._id.name!==''">
+					        <td class="table-td" [attr.id]="'rive_'+xr._id.code">
+					            <md-list-item>
+									<div md-line *ngIf="xr._id.url!==''">
+										<a href="https://shop.rivegauche.ru/newstore/ru{{xr._id.url}}" 
+											target="_blank" style="text-decoration: none">
+											<h2 class="h2-c">
+												{{xr._id.name}}
+											</h2>
+										</a>
+									</div>
+									<div md-line *ngIf="xr._id.url===''">
 										<h2 class="h2-c">
 											{{xr._id.name}}
 										</h2>
-									</a>
-								</div>
-								<div md-line *ngIf="xr._id.url===''">
-									<h2 class="h2-c">
-										{{xr._id.name}}
-									</h2>
-									<h4 style="margin: 0;padding: 0">
-										{{xr._id.name_e}}
-									</h4>
-								</div>
-								<div md-line style="margin-bottom: 5px">
-									<md-chip-list style="padding: 0;">
-										<md-chip>{{xr._id.code}}</md-chip>
-										<md-chip>{{xr._id.country}}</md-chip>
-										<md-chip *ngIf="xr._id.volumefieldname!=='' || xr._id.volume!==''">{{xr._id.volumefieldname}} {{xr._id.volume}}</md-chip>
-										<md-chip *ngIf=""></md-chip>
-										<md-chip *ngIf="xr._id.listingprice!==''"><b>{{xr._id.listingprice}} руб.</b></md-chip>
-									</md-chip-list>
-								</div>
-								<div md-line>{{xr._id.desc}}</div>
-							</md-list-item>
-				        </td>
-				        <td>
-							<img src="{{xr._id.image_url}}" (click)="showImg(xr._id.image_url)" 
-								height="50px" />
-				        </td>
-				        <td>
-							<button md-mini-fab color="basic" (click)="markRive(xr._id)">
-								<md-icon class="md-24" aria-label="Example icon-button with a heart icon">check</md-icon>
-							</button>
-				        </td>
-				    </tr>
+										<h4 style="margin: 0;padding: 0">
+											{{xr._id.name_e}}
+										</h4>
+									</div>
+									<div md-line style="margin-bottom: 5px">
+										<md-chip-list style="padding: 0;">
+											<md-chip>{{xr._id.code}}</md-chip>
+											<md-chip>{{xr._id.country}}</md-chip>
+											<md-chip *ngIf="xr._id.volumefieldname!=='' || xr._id.volume!==''">{{xr._id.volumefieldname}} {{xr._id.volume}}</md-chip>
+											<md-chip *ngIf=""></md-chip>
+											<md-chip *ngIf="xr._id.listingprice!==''"><b>{{xr._id.listingprice}} руб.</b></md-chip>
+										</md-chip-list>
+									</div>
+									<div md-line>{{xr._id.desc}}</div>
+								</md-list-item>
+					        </td>
+					        <td>
+								<img src="{{xr._id.image_url}}" (click)="showImg(xr._id.image_url)" 
+									height="50px" />
+					        </td>
+					        <td>
+								<button md-mini-fab color="basic" (click)="markRive(xr._id)">
+									<md-icon class="md-24" aria-label="Example icon-button with a heart icon">check</md-icon>
+								</button>
+					        </td>
+					    </tr>
+					</div>
 				</table>
 
 			</md-tab>
