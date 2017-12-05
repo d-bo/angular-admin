@@ -438,28 +438,16 @@ export class MatchProductFormComponent implements OnInit {
     // search gestori global
     riveBrandPlusKeyword() {
         this.getPageRive(1, this.myCompleteRiveMatchControl.value);
-        this.snackBar.open(
-            'riveBrandPlusKeyword',
-            'OK'
-        );
     }
 
     // search gestori global
     letuBrandPlusKeyword() {
         this.getPageLetu(1, this.myCompleteLetuMatchControl.value);
-        this.snackBar.open(
-            'letuBrandPlusKeyword',
-            'OK'
-        );
     }
 
     // search gestori global
     ildeBrandPlusKeyword() {
         this.getPageIlde(1, this.myCompleteIldeMatchControl.value);
-      this.snackBar.open(
-        'ildeBrandPlusKeyword',
-        'OK'
-      );
     }
 
     serverCallGestoriObservable(page: number, brand: string, artic: any, keyword: any): Observable<any> {
