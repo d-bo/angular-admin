@@ -7,93 +7,93 @@
     <tr>
         <td>
             <p>
-                <md-input-container class="example-full-width">
-                    <input mdInput placeholder="Введите код подгруппы" required [(ngModel)]="model.group_id"
+                <mat-input-container class="example-full-width">
+                    <input matInput placeholder="Введите код подгруппы" required [(ngModel)]="model.group_id"
                     name="group_id" #inputGroupId maxlength="6">
-                    <md-hint align="start">Код подгруппы</md-hint>
-                    <md-hint align="end">310101</md-hint>
-                </md-input-container>
+                    <mat-hint align="start">Код подгруппы</mat-hint>
+                    <mat-hint align="end">310101</mat-hint>
+                </mat-input-container>
             </p>
         </td>
         <td style="width: 32px">
-            <button md-icon-button type="button">
-                <md-icon class="md-24" color="basic">clear</md-icon>
+            <button mat-icon-button type="button">
+                <mat-icon class="mat-24" color="basic">clear</mat-icon>
             </button>
         </td>
     </tr>
 
     <!--
-    <md-input-container class="example-full-width">
+    <mat-input-container class="example-full-width">
         <input type="text" mdInput placeholder="Gestori groups"
             [formControl]="GroupsControl" [mdAutocomplete]="auto" #groupInput>
-    </md-input-container>
+    </mat-input-container>
 
-    <md-autocomplete #auto="mdAutocomplete">
-        <md-option *ngFor="let async_brands of asyncBrands | async" [value]="async_brands.name">
+    <mat-autocomplete #auto="mdAutocomplete">
+        <mat-option *ngFor="let async_brands of asyncBrands | async" [value]="async_brands.name">
             {{ async_brands.name }}
-        </md-option>
-    </md-autocomplete>
+        </mat-option>
+    </mat-autocomplete>
     -->
 
     <tr>
         <td>
             <p>
-                <md-input-container class="example-full-width">
-                    <input mdInput placeholder="Введите баркод" required [(ngModel)]="model.barcode" 
+                <mat-input-container class="example-full-width">
+                    <input matInput placeholder="Введите баркод" required [(ngModel)]="model.barcode" 
                     name="barcode" required #inputBarcode>
-                    <md-hint align="start">Баркод</md-hint>
-                    <md-hint align="end">3145891642445</md-hint>
-                </md-input-container>
+                    <mat-hint align="start">Баркод</mat-hint>
+                    <mat-hint align="end">3145891642445</mat-hint>
+                </mat-input-container>
             </p>
         </td>
         <td style="width: 32px">
-            <button md-icon-button color="basic" type="button">
-                <md-icon class="md-24">clear</md-icon>
+            <button mat-icon-button color="basic" type="button">
+                <mat-icon class="mat-24">clear</mat-icon>
             </button>
         </td>
     </tr>
     <tr>
         <td>
             <p>
-                <md-input-container class="example-full-width">
-                    <textarea mdInput placeholder="Введите наименование" [(ngModel)]="model.name" name="name" required #inputName></textarea>
-                    <md-hint align="start">Наименование</md-hint>
-                    <md-hint align="end">Chanel Тени для век LES 4</md-hint>
-                </md-input-container>
+                <mat-input-container class="example-full-width">
+                    <textarea matInput placeholder="Введите наименование" [(ngModel)]="model.name" name="name" required #inputName></textarea>
+                    <mat-hint align="start">Наименование</mat-hint>
+                    <mat-hint align="end">Chanel Тени для век LES 4</mat-hint>
+                </mat-input-container>
             </p>
         </td>
         <td>
-            <button md-icon-button color="basic" type="button">
-                <md-icon class="md-24">clear</md-icon>
+            <button mat-icon-button color="basic" type="button">
+                <mat-icon class="mat-24">clear</mat-icon>
             </button>
         </td>
     </tr>
     <tr>
         <td>
             <p>
-                <md-input-container class="example-full-width">
-                    <input mdInput placeholder="Введите артикул" [(ngModel)]="model.artic" name="artic" #inputArtic required>
-                    <md-hint align="start">Артикул</md-hint>
-                    <md-hint align="end">164244</md-hint>
-                </md-input-container>
+                <mat-input-container class="example-full-width">
+                    <input matInput placeholder="Введите артикул" [(ngModel)]="model.artic" name="artic" #inputArtic required>
+                    <mat-hint align="start">Артикул</mat-hint>
+                    <mat-hint align="end">164244</mat-hint>
+                </mat-input-container>
             </p>
         </td>
         <td>
-            <button md-icon-button color="basic" type="button">
-                <md-icon class="md-24">clear</md-icon>
+            <button mat-icon-button color="basic" type="button">
+                <mat-icon class="mat-24">clear</mat-icon>
             </button>
         </td>
     </tr>
     <tr>
         <td>
             <p style="margin-top: 30px">
-                <md-select placeholder="Ед. измерения" 
+                <mat-select placeholder="Ед. измерения" 
                     [(ngModel)]="model.measure" 
                     name="measure" #inputMeasure required>
-                    <md-option *ngFor="let mea of measures" value="mea.value">
+                    <mat-option *ngFor="let mea of measures" value="mea.value">
                         {{mea.viewValue}}
-                    </md-option>
-                </md-select>
+                    </mat-option>
+                </mat-select>
             </p>
         </td>
         <td>
@@ -103,7 +103,7 @@
     </table>
 
     <div color="warn" class="button-row" style="text-align: right;margin-top: 60px">
-        <button md-raised-button type="submit">OK</button>
+        <button mat-raised-button type="submit">OK</button>
     </div>
 
 </form>

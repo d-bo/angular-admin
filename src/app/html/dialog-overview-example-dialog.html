@@ -1,11 +1,11 @@
-<h2 md-dialog-title>Delete all</h2>
-<md-dialog-content>
+<h2 mat-dialog-title>Delete all</h2>
+<mat-dialog-content>
   <div>Are you sure?</div>
   <div>{{data.id}}</div>
   <div>{{data.value}}</div>
-</md-dialog-content>
-<md-dialog-actions>
-  <button md-button md-dialog-close>No</button>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>No</button>
   <!-- Can optionally provide a result for the closing dialog. -->
-  <button md-button [md-dialog-close]="true">Yes</button>
-</md-dialog-actions>
+  <button mat-button [mat-dialog-close]="true">Yes</button>
+</mat-dialog-actions>

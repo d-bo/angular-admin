@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
 import { FormControl } from '@angular/forms';
 import { URLSearchParams } from "@angular/http";
-import { MdDialog, MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { GlobalService } from './global.service';
 
 import 'rxjs/add/operator/mergeMap';
@@ -30,8 +30,8 @@ export class SubmitDialog {
     classLink: object;
 
     constructor(
-        public dialogRef: MdDialogRef<SubmitDialog>,
-        @Inject(MD_DIALOG_DATA) public data: any
+        public dialogRef: MatDialogRef<SubmitDialog>,
+        @Inject(MAT_DIALOG_DATA) public data: any
       ) {}
 
     onNoClick(): void {
@@ -60,7 +60,7 @@ export class GestoriProductFormComponent {
 
     constructor(
         public http: HttpClient,
-        private dialog: MdDialog,
+        private dialog: MatDialog,
         private globals: GlobalService
     ) {
         this.asyncGroups = this.GroupsControl.valueChanges

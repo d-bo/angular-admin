@@ -1,37 +1,37 @@
 <div>
 	<div style="padding:10px;float: left;">
 		<div style="padding: 10px">
-			<md-expansion-panel>
-				<md-expansion-panel-header>
-					<md-panel-title>
+			<mat-expansion-panel>
+				<mat-expansion-panel-header>
+					<mat-panel-title>
 					Gestori
-					</md-panel-title>
-					<md-panel-description>
+					</mat-panel-title>
+					<mat-panel-description>
 					Фильтры
-					</md-panel-description>
-				</md-expansion-panel-header>
+					</mat-panel-description>
+				</mat-expansion-panel-header>
 
 				<!-- GEST BRAND SEARCH -->
 				<div>
 					<table width="500px">
 						<tr>
 							<td style="width: 90%">
-								<md-input-container class="example-full-width">
-									<input type="text" mdInput placeholder="Брэнд Gestori" ng-model="inputSearchBrand"
-									[formControl]='myCompleteMatchControl' [mdAutocomplete]="auto" #brandInputGest>
-								</md-input-container>
-								<md-autocomplete #auto="mdAutocomplete">
-									<md-option *ngFor="let option_complete of filteredMatchOptions | async" 
+								<mat-input-container class="example-full-width">
+									<input type="text" matInput placeholder="Брэнд Gestori" ng-model="inputSearchBrand"
+									[formControl]='myCompleteMatchControl' [matAutocomplete]="auto" #brandInputGest>
+								</mat-input-container>
+								<mat-autocomplete #auto="matAutocomplete">
+									<mat-option *ngFor="let option_complete of filteredMatchOptions | async" 
 									[value]="option_complete.val">
 										{{ option_complete.val }}
-									</md-option>
-								</md-autocomplete>
+									</mat-option>
+								</mat-autocomplete>
 							</td>
 							<td style="text-align: center">
 								<button 
-									md-mini-fab (click)="cleanAndReloadGest($event)"
+									mat-mini-fab (click)="cleanAndReloadGest($event)"
 									type="button" color="basic">
-									<md-icon class="md-24">clear</md-icon>
+									<mat-icon class="mat-24">clear</mat-icon>
 								</button>
 							</td>
 						</tr>
@@ -43,22 +43,22 @@
 					<table width="100%">
 						<tr>
 							<td style="width: 90%">
-								<md-input-container class="example-full-width">
-									<input type="text" mdInput placeholder="По имени"
-									[formControl]='myTextSearchControl' [mdAutocomplete]="autoText" #fulltextInputGest>
-								</md-input-container>
-								<md-autocomplete #autoText="mdAutocomplete">
-									<md-option *ngFor="let option_text_complete of filteredTextOptions | async" 
+								<mat-input-container class="example-full-width">
+									<input type="text" matInput placeholder="По имени"
+									[formControl]='myTextSearchControl' [matAutocomplete]="autoText" #fulltextInputGest>
+								</mat-input-container>
+								<mat-autocomplete #autoText="matAutocomplete">
+									<mat-option *ngFor="let option_text_complete of filteredTextOptions | async" 
 									[value]="option_text_complete.Name">
 										<div style="font-size: 14px"><b>{{ option_text_complete.Name}}</b> / {{ option_text_complete.Name_e}} / {{ option_text_complete.Barcod}}</div>
-									</md-option>
-								</md-autocomplete>
+									</mat-option>
+								</mat-autocomplete>
 							</td>
 							<td style="text-align: center">
 								<button 
-									md-mini-fab (click)="cleanAndReloadGest($event)"
+									mat-mini-fab (click)="cleanAndReloadGest($event)"
 									type="button" color="basic">
-									<md-icon class="md-24">clear</md-icon>
+									<mat-icon class="mat-24">clear</mat-icon>
 								</button>
 							</td>
 						</tr>
@@ -67,23 +67,23 @@
 
 				<div style="text-align: center">
 					<span style="margin-right: 50px">
-						<button md-mini-fab color="basic" (click)="confirmMatchRive()">
-							<md-icon class="md-24">add</md-icon>
+						<button mat-mini-fab color="basic" (click)="confirmMatchRive()">
+							<mat-icon class="mat-24">add</mat-icon>
 						</button>
 					</span>
 					<span>
-						<button md-mini-fab type="button" color="primary" (click)="gestoriBrandPlusKeyword()">
-							<md-icon class="md-24">search</md-icon>
+						<button mat-mini-fab type="button" color="primary" (click)="gestoriBrandPlusKeyword()">
+							<mat-icon class="mat-24">search</mat-icon>
 						</button>
 					</span>
 				</div>
 
-			</md-expansion-panel>
+			</mat-expansion-panel>
 		</div>
 
 		<div class="ga-progress-bar">
 			<div *ngIf="isGestLoaded!==undefined">
-				<md-progress-bar mode="buffer"></md-progress-bar>
+				<mat-progress-bar mode="buffer"></mat-progress-bar>
 			</div>
 		</div>
 
@@ -94,24 +94,24 @@
 		<table class="striped" width="100%">
 		    <tr *ngFor="let br of asyncGestoriProducts | async | paginate: { id: 'match_pr_paginate', itemsPerPage: pageSize, currentPage: p, totalItems: totalMatch }">
 		        <td class="table-td" [attr.id]="'gest_'+br._id.artic">
-		            <md-list-item>
-		            	<div md-line><h2 class="h2-c">{{br._id.name}}</h2></div>
-						<div md-line>{{br._id.name_e}}</div>
-						<div md-line>
-							<md-chip-list style="padding: 0;margin: 0">
-								<md-chip>{{br._id.brand}}</md-chip>
-								<md-chip>{{br._id.artic}}</md-chip>
-								<md-chip>{{br._id.barcod}}</md-chip>
-								<md-chip color="primary" *ngIf="br._id.retail_price!==''">
+		            <mat-list-item>
+		            	<div mat-line><h2 class="h2-c">{{br._id.name}}</h2></div>
+						<div mat-line>{{br._id.name_e}}</div>
+						<div mat-line>
+							<mat-chip-list style="padding: 0;margin: 0">
+								<mat-chip>{{br._id.brand}}</mat-chip>
+								<mat-chip>{{br._id.artic}}</mat-chip>
+								<mat-chip>{{br._id.barcod}}</mat-chip>
+								<mat-chip color="primary" *ngIf="br._id.retail_price!==''">
 									<b>{{br._id.retail_price}} руб.</b>
-								</md-chip>
-							</md-chip-list>
+								</mat-chip>
+							</mat-chip-list>
 						</div>
-		            </md-list-item>
+		            </mat-list-item>
 		        </td>
 		        <td>
-		            <button md-mini-fab color="basic" (click)="markGestori(br._id)">
-		                <md-icon class="md-24">check</md-icon>
+		            <button mat-mini-fab color="basic" (click)="markGestori(br._id)">
+		                <mat-icon class="mat-24">check</mat-icon>
 		            </button>
 		        </td>
 		    </tr>
@@ -119,39 +119,39 @@
 	</div>
 
 	<div style="overflow: hidden">
-		<md-tab-group style="width: 600px">
-			<md-tab label="RIVE">
+		<mat-tab-group style="width: 600px">
+			<mat-tab label="RIVE">
 
 				<div style="padding: 10px">
-					<md-expansion-panel>
-						<md-expansion-panel-header>
-							<md-panel-title>
+					<mat-expansion-panel>
+						<mat-expansion-panel-header>
+							<mat-panel-title>
 							Rive
-							</md-panel-title>
-							<md-panel-description>
+							</mat-panel-title>
+							<mat-panel-description>
 							Фильтры
-							</md-panel-description>
-						</md-expansion-panel-header>
+							</mat-panel-description>
+						</mat-expansion-panel-header>
 
 						<!-- RIVE BRAND SEARCH -->
 						<div>
 							<table width="100%">
 								<tr>
 									<td style="width: 90%">
-										<md-input-container class="example-full-width">
-											<input type="text" mdInput placeholder="Брэнд Рив Гош"
-											[formControl]="myCompleteRiveMatchControl" [mdAutocomplete]="auto3" #brandInputRive>
-										</md-input-container>
-										<md-autocomplete #auto3="mdAutocomplete">
-											<md-option *ngFor="let option_rive of filteredRiveMatchOptions | async" [value]="option_rive.val">
+										<mat-input-container class="example-full-width">
+											<input type="text" matInput placeholder="Брэнд Рив Гош"
+											[formControl]="myCompleteRiveMatchControl" [matAutocomplete]="auto3" #brandInputRive>
+										</mat-input-container>
+										<mat-autocomplete #auto3="matAutocomplete">
+											<mat-option *ngFor="let option_rive of filteredRiveMatchOptions | async" [value]="option_rive.val">
 												{{ option_rive.val }}
-											</md-option>
-										</md-autocomplete>
+											</mat-option>
+										</mat-autocomplete>
 									</td>
 									<td style="text-align: center">
-										<button md-mini-fab (click)="cleanAndReloadRive()"
+										<button mat-mini-fab (click)="cleanAndReloadRive()"
 											type="button" color="basic">
-											<md-icon class="md-24">clear</md-icon>
+											<mat-icon class="mat-24">clear</mat-icon>
 										</button>
 									</td>
 								</tr>
@@ -163,42 +163,42 @@
 							<table width="100%">
 								<tr>
 									<td style="width: 90%">
-										<md-input-container class="example-full-width">
-											<input type="text" mdInput placeholder="По имени"
-											[formControl]='myTextSearchControlRive' [mdAutocomplete]="autoTextRive" #fulltextInputRive>
-										</md-input-container>
+										<mat-input-container class="example-full-width">
+											<input type="text" matInput placeholder="По имени"
+											[formControl]='myTextSearchControlRive' [matAutocomplete]="autoTextRive" #fulltextInputRive>
+										</mat-input-container>
 										
-										<md-autocomplete #autoTextRive="mdAutocomplete">
-											<md-option *ngFor="let option_text_complete_rive of filteredTextOptionsRive | async" 
+										<mat-autocomplete #autoTextRive="matAutocomplete">
+											<mat-option *ngFor="let option_text_complete_rive of filteredTextOptionsRive | async" 
 											[value]="option_text_complete_rive.name" 
 											(onSelectionChange)="getRiveBrands($event, option_text_complete_rive.code)">
 												<div style="font-size: 14px"><img src="{{option_text_complete_rive.image_url}}" 
 													width="30px" height="30px" style="padding-right: 7px" /><b>
 														{{ option_text_complete_rive.name}}</b> / {{ option_text_complete_rive.code}}
 												</div>
-											</md-option>
-										</md-autocomplete>
+											</mat-option>
+										</mat-autocomplete>
 									</td>
 									<td style="text-align: center">
-										<button md-mini-fab (click)="cleanAndReloadRive()"
+										<button mat-mini-fab (click)="cleanAndReloadRive()"
 											type="button" color="basic">
-											<md-icon class="md-24">clear</md-icon>
+											<mat-icon class="mat-24">clear</mat-icon>
 										</button>
 									</td>
 								</tr>
 							</table>
 							<div style="text-align: center">
-								<button md-mini-fab type="button" color="primary" (click)="riveBrandPlusKeyword()">
-									<md-icon class="md-24">search</md-icon>
+								<button mat-mini-fab type="button" color="primary" (click)="riveBrandPlusKeyword()">
+									<mat-icon class="mat-24">search</mat-icon>
 								</button>
 							</div>
 						</div>
-					</md-expansion-panel>
+					</mat-expansion-panel>
 				</div>
 
 				<div class="ga-progress-bar">
 					<div *ngIf="isRiveLoaded!==undefined">
-						<md-progress-bar mode="buffer"></md-progress-bar>
+						<mat-progress-bar mode="buffer"></mat-progress-bar>
 					</div>
 				</div>
 
@@ -212,8 +212,8 @@
 					<div *ngFor="let xr of asyncRiveProducts | async | paginate: { id: 'match_pr_rive_paginate', itemsPerPage: pageSize, currentPage: p3, totalItems: totalMatch3 }">
 					    <tr *ngIf="xr._id.name!==''">
 					        <td class="table-td" [attr.id]="'rive_'+xr._id.code">
-					            <md-list-item>
-									<div md-line *ngIf="xr._id.url!==''">
+					            <mat-list-item>
+									<div mat-line *ngIf="xr._id.url!==''">
 										<a href="https://shop.rivegauche.ru/newstore/ru{{xr._id.url}}" 
 											target="_blank" style="text-decoration: none">
 											<h2 class="h2-c">
@@ -221,7 +221,7 @@
 											</h2>
 										</a>
 									</div>
-									<div md-line *ngIf="xr._id.url===''">
+									<div mat-line *ngIf="xr._id.url===''">
 										<h2 class="h2-c">
 											{{xr._id.name}}
 										</h2>
@@ -229,67 +229,67 @@
 											{{xr._id.name_e}}
 										</h4>
 									</div>
-									<div md-line style="margin-bottom: 5px">
-										<md-chip-list style="padding: 0;">
-											<md-chip>{{xr._id.code}}</md-chip>
-											<md-chip>{{xr._id.country}}</md-chip>
-											<md-chip *ngIf="xr._id.volumefieldname!=='' || xr._id.volume!==''">{{xr._id.volumefieldname}} {{xr._id.volume}}</md-chip>
-											<md-chip *ngIf=""></md-chip>
-											<md-chip *ngIf="xr._id.listingprice!==''"><b>{{xr._id.listingprice}} руб.</b></md-chip>
-										</md-chip-list>
+									<div mat-line style="margin-bottom: 5px">
+										<mat-chip-list style="padding: 0;">
+											<mat-chip>{{xr._id.code}}</mat-chip>
+											<mat-chip>{{xr._id.country}}</mat-chip>
+											<mat-chip *ngIf="xr._id.volumefieldname!=='' || xr._id.volume!==''">{{xr._id.volumefieldname}} {{xr._id.volume}}</mat-chip>
+											<mat-chip *ngIf=""></mat-chip>
+											<mat-chip *ngIf="xr._id.listingprice!==''"><b>{{xr._id.listingprice}} руб.</b></mat-chip>
+										</mat-chip-list>
 									</div>
-									<div md-line>{{xr._id.desc}}</div>
-								</md-list-item>
+									<div mat-line>{{xr._id.desc}}</div>
+								</mat-list-item>
 					        </td>
 					        <td>
 								<img src="{{xr._id.image_url}}" (click)="showImg(xr._id.image_url)" 
 									height="50px" />
 					        </td>
 					        <td>
-								<button md-mini-fab color="basic" (click)="markRive(xr._id)">
-									<md-icon class="md-24" aria-label="Example icon-button with a heart icon">check</md-icon>
+								<button mat-mini-fab color="basic" (click)="markRive(xr._id)">
+									<mat-icon class="mat-24" aria-label="Example icon-button with a heart icon">check</mat-icon>
 								</button>
 					        </td>
 					    </tr>
 					</div>
 				</table>
 
-			</md-tab>
+			</mat-tab>
 
 
 
-			<md-tab label="LETU">
+			<mat-tab label="LETU">
 
 				<div style="padding: 10px">
-					<md-expansion-panel>
-						<md-expansion-panel-header>
-							<md-panel-title>
+					<mat-expansion-panel>
+						<mat-expansion-panel-header>
+							<mat-panel-title>
 							Letu
-							</md-panel-title>
-							<md-panel-description>
+							</mat-panel-title>
+							<mat-panel-description>
 							Фильтры
-							</md-panel-description>
-						</md-expansion-panel-header>
+							</mat-panel-description>
+						</mat-expansion-panel-header>
 
 						<!-- LETU BRAND SEARCH -->
 						<div>
 							<table width="100%">
 								<tr>
 									<td style="width: 90%">
-										<md-input-container class="example-full-width">
-											<input type="text" mdInput placeholder="Брэнд Летуаль"
-												[formControl]="myCompleteLetuMatchControl" [mdAutocomplete]="auto2" #brandInputLetu>
-										</md-input-container>
-										<md-autocomplete #auto2="mdAutocomplete">
-											<md-option *ngFor="let option_letu of filteredLetuMatchOptions | async" [value]="option_letu.val">
+										<mat-input-container class="example-full-width">
+											<input type="text" matInput placeholder="Брэнд Летуаль"
+												[formControl]="myCompleteLetuMatchControl" [matAutocomplete]="auto2" #brandInputLetu>
+										</mat-input-container>
+										<mat-autocomplete #auto2="matAutocomplete">
+											<mat-option *ngFor="let option_letu of filteredLetuMatchOptions | async" [value]="option_letu.val">
 												{{ option_letu.val }}
-											</md-option>
-										</md-autocomplete>
+											</mat-option>
+										</mat-autocomplete>
 									</td>
 									<td style="text-align: center">
-										<button md-mini-fab (click)="cleanAndReloadLetu()"
+										<button mat-mini-fab (click)="cleanAndReloadLetu()"
 											type="button" color="basic">
-											<md-icon class="md-24">clear</md-icon>
+											<mat-icon class="mat-24">clear</mat-icon>
 										</button>
 									</td>
 								</tr>
@@ -301,41 +301,41 @@
 							<table width="100%">
 								<tr>
 									<td style="width: 90%">
-										<md-input-container class="example-full-width">
-											<input type="text" mdInput placeholder="По имени"
-											[formControl]='myTextSearchControlLetu' [mdAutocomplete]="autoTextLetu" #fulltextInputLetu>
-										</md-input-container>
+										<mat-input-container class="example-full-width">
+											<input type="text" matInput placeholder="По имени"
+											[formControl]='myTextSearchControlLetu' [matAutocomplete]="autoTextLetu" #fulltextInputLetu>
+										</mat-input-container>
 										
-										<md-autocomplete #autoTextLetu="mdAutocomplete">
-											<md-option *ngFor="let option_text_complete_letu of filteredTextOptionsLetu | async" 
+										<mat-autocomplete #autoTextLetu="matAutocomplete">
+											<mat-option *ngFor="let option_text_complete_letu of filteredTextOptionsLetu | async" 
 											[value]="option_text_complete_letu.name" 
 											(onSelectionChange)="getLetuBrands($event, option_text_complete_letu.articul)">
 												<div style="font-size: 14px"><img src="http://www.letu.ru{{option_text_complete_letu.img}}" height="30px" width="30px" style="padding-right: 7px" />
 													<b>{{ option_text_complete_letu.name}}</b> / {{ option_text_complete_letu.volume}} / {{ option_text_complete_letu.articul }}</div>
-											</md-option>
-										</md-autocomplete>
+											</mat-option>
+										</mat-autocomplete>
 									</td>
 									<td style="text-align: center">
-										<button md-mini-fab (click)="cleanAndReloadLetu()"
+										<button mat-mini-fab (click)="cleanAndReloadLetu()"
 											type="button" color="basic">
-											<md-icon class="md-24">clear</md-icon>
+											<mat-icon class="mat-24">clear</mat-icon>
 										</button>
 									</td>
 								</tr>
 							</table>
 							<div style="text-align: center;">
-								<button md-mini-fab type="button" color="primary" (click)="letuBrandPlusKeyword()">
-									<md-icon class="md-24">search</md-icon>
+								<button mat-mini-fab type="button" color="primary" (click)="letuBrandPlusKeyword()">
+									<mat-icon class="mat-24">search</mat-icon>
 								</button>
 							</div>
 						</div>
 
-					</md-expansion-panel>
+					</mat-expansion-panel>
 				</div>
 
 				<div class="ga-progress-bar">
 					<div *ngIf="isLetuLoaded!==undefined">
-						<md-progress-bar mode="buffer"></md-progress-bar>
+						<mat-progress-bar mode="buffer"></mat-progress-bar>
 					</div>
 				</div>
 
@@ -346,8 +346,8 @@
 				<table class="striped">
 				    <tr *ngFor="let kr of asyncLetuProducts | async | paginate: { id: 'match_pr_letu_paginate', itemsPerPage: pageSize, currentPage: p1, totalItems: totalMatch1 }">
 				        <td class="table-td" [attr.id]="'letu_'+kr._id.artic">
-				            <md-list-item>
-								<div md-line>
+				            <mat-list-item>
+								<div mat-line>
 									<a href="{{kr._id.url}}" 
 										target="_blank" style="text-decoration: none">
 											<h2 class="h2-c">
@@ -355,67 +355,67 @@
 											</h2>
 									</a>
 								</div>
-								<div md-line>
-									<md-chip-list style="padding: 0;margin: 0">
-										<md-chip>{{kr._id.brand}}</md-chip>
-										<md-chip>{{kr._id.volume}}</md-chip>
-										<md-chip>{{kr._id.artic}}</md-chip>
-										<md-chip color="primary" *ngIf="kr._id.listingprice!==''"><b>{{kr._id.listingprice}} руб.</b></md-chip>
-									</md-chip-list>
+								<div mat-line>
+									<mat-chip-list style="padding: 0;margin: 0">
+										<mat-chip>{{kr._id.brand}}</mat-chip>
+										<mat-chip>{{kr._id.volume}}</mat-chip>
+										<mat-chip>{{kr._id.artic}}</mat-chip>
+										<mat-chip color="primary" *ngIf="kr._id.listingprice!==''"><b>{{kr._id.listingprice}} руб.</b></mat-chip>
+									</mat-chip-list>
 								</div>
-							</md-list-item>
+							</mat-list-item>
 						</td>
 				        <td>
 							<img (click)="showImg('http://www.letu.ru'+kr._id.img)"
 								src="http://www.letu.ru{{kr._id.img}}" height="50px" width="50px" />
 				        </td>
 				        <td>
-				            <button md-mini-fab color="basic" (click)="markLetu(kr._id)">
-				                <md-icon class="md-24" aria-label="Example icon-button with a heart icon">check</md-icon>
+				            <button mat-mini-fab color="basic" (click)="markLetu(kr._id)">
+				                <mat-icon class="mat-24" aria-label="Example icon-button with a heart icon">check</mat-icon>
 				            </button>
 				        </td>
 				    </tr>
 				</table>
 
-			</md-tab>
+			</mat-tab>
 
 
 
-			<md-tab label="ILDE">
+			<mat-tab label="ILDE">
 
 				<div style="padding: 10px">
-					<md-expansion-panel>
+					<mat-expansion-panel>
 
-						<md-expansion-panel-header>
-							<md-panel-title>
+						<mat-expansion-panel-header>
+							<mat-panel-title>
 							Rive
-							</md-panel-title>
-							<md-panel-description>
+							</mat-panel-title>
+							<mat-panel-description>
 							Фильтры
-							</md-panel-description>
-						</md-expansion-panel-header>
+							</mat-panel-description>
+						</mat-expansion-panel-header>
 
 						<!-- ILDE BRAND SEARCH -->
 						<div>
 							<table width="100%">
 								<tr>
 									<td style="width: 90%">
-										<md-input-container class="example-full-width">
-												<input type="text" mdInput placeholder="Брэнд Ильдеботэ"
-												[formControl]="myCompleteIldeMatchControl" [mdAutocomplete]="autoIlde" #brandInputIlde>
-										</md-input-container>
+										<mat-input-container class="example-full-width">
+												<input type="text" matInput placeholder="Брэнд Ильдеботэ"
+												[formControl]="myCompleteIldeMatchControl" [matAutocomplete]="autoIlde" #brandInputIlde>
+										</mat-input-container>
 
-										<md-autocomplete #autoIlde="mdAutocomplete">
-											<md-option *ngFor="let option_ilde of filteredIldeMatchOptions | async" 
+										<mat-autocomplete #autoIlde="matAutocomplete">
+											<mat-option *ngFor="let option_ilde of filteredIldeMatchOptions | async" 
 											[value]="option_ilde.val">
 												{{ option_ilde.val }}
-											</md-option>
-										</md-autocomplete>
+											</mat-option>
+										</mat-autocomplete>
 									</td>
 									<td style="text-align: center">
-										<button md-mini-fab (click)="cleanAndReloadIlde()"
+										<button mat-mini-fab (click)="cleanAndReloadIlde()"
 											type="button" color="basic">
-											<md-icon class="md-24">clear</md-icon>
+											<mat-icon class="mat-24">clear</mat-icon>
 										</button>
 									</td>
 								</tr>
@@ -427,40 +427,40 @@
 							<table width="100%">
 								<tr>
 									<td style="width: 90%">
-										<md-input-container class="example-full-width">
-											<input type="text" mdInput placeholder="По имени"
-											[formControl]='myTextSearchControlIlde' [mdAutocomplete]="autoTextIlde" #fulltextInputIlde>
-										</md-input-container>
-										<md-autocomplete #autoTextIlde="mdAutocomplete">
-											<md-option *ngFor="let option_text_complete_ilde of filteredTextOptionsIlde | async" 
+										<mat-input-container class="example-full-width">
+											<input type="text" matInput placeholder="По имени"
+											[formControl]='myTextSearchControlIlde' [matAutocomplete]="autoTextIlde" #fulltextInputIlde>
+										</mat-input-container>
+										<mat-autocomplete #autoTextIlde="matAutocomplete">
+											<mat-option *ngFor="let option_text_complete_ilde of filteredTextOptionsIlde | async" 
 											[value]="option_text_complete_ilde.pn" 
 											(onSelectionChange)="getIldeBrands($event, option_text_complete_ilde.articul)">
 												<div style="font-size: 14px"><img src="http://static.iledebeaute.ru{{option_text_complete_ilde.image}}" 
 													height="30px" width="30px" style="padding-right: 7px" />{{option_text_complete_ilde.brand}} / <b>{{ option_text_complete_ilde.pn}}</b> / {{ option_text_complete_ilde.articul}}</div>
-											</md-option>
-										</md-autocomplete>
+											</mat-option>
+										</mat-autocomplete>
 									</td>
 									<td style="text-align: center">
-										<button md-mini-fab (click)="cleanAndReloadIlde()"
+										<button mat-mini-fab (click)="cleanAndReloadIlde()"
 											type="button" color="basic">
-											<md-icon class="md-24">clear</md-icon>
+											<mat-icon class="mat-24">clear</mat-icon>
 										</button>
 									</td>
 								</tr>
 							</table>
 							<div style="text-align: center">
-								<button md-mini-fab type="button" color="primary" (click)="ildeBrandPlusKeyword()">
-									<md-icon class="md-24">search</md-icon>
+								<button mat-mini-fab type="button" color="primary" (click)="ildeBrandPlusKeyword()">
+									<mat-icon class="mat-24">search</mat-icon>
 								</button>
 							</div>
 						</div>
 
-					</md-expansion-panel>
+					</mat-expansion-panel>
 				</div>
 
 				<div class="ga-progress-bar">
 					<div *ngIf="isIldeLoaded!==undefined">
-						<md-progress-bar mode="buffer"></md-progress-bar>
+						<mat-progress-bar mode="buffer"></mat-progress-bar>
 					</div>
 				</div>
 
@@ -471,34 +471,34 @@
 				<table class="striped">
 					<tr *ngFor="let jr of asyncIldeProducts | async | paginate: { id: 'match_pr_ilde_paginate', itemsPerPage: pageSize, currentPage: p2, totalItems: totalMatch2 }">
 						<td class="table-td" [attr.id]="'ilde_'+jr._id.artic">
-							<md-list-item>
-								<div md-line><h2 class="h2-c">{{jr._id.name}}</h2></div>
-								<div md-line>
-									<md-chip-list style="padding: 0;margin: 0">
-										<md-chip>{{jr._id.brand}}</md-chip>
-										<md-chip>{{jr._id.artic}}</md-chip>
-										<md-chip color="primary"><b>{{jr._id.listingprice}} руб.</b></md-chip>
-									</md-chip-list>
+							<mat-list-item>
+								<div mat-line><h2 class="h2-c">{{jr._id.name}}</h2></div>
+								<div mat-line>
+									<mat-chip-list style="padding: 0;margin: 0">
+										<mat-chip>{{jr._id.brand}}</mat-chip>
+										<mat-chip>{{jr._id.artic}}</mat-chip>
+										<mat-chip color="primary"><b>{{jr._id.listingprice}} руб.</b></mat-chip>
+									</mat-chip-list>
 								</div>
-							</md-list-item>
+							</mat-list-item>
 						</td>
 						<td>
 							<img (click)="showImg('http://static.iledebeaute.ru'+jr._id.image)" 
 								src="http://static.iledebeaute.ru{{jr._id.image}}" height="50px" />
 						</td>
 						<td>
-							<button md-mini-fab color="basic" (click)="markIlde(jr._id)">
-								<md-icon class="md-24">check</md-icon>
+							<button mat-mini-fab color="basic" (click)="markIlde(jr._id)">
+								<mat-icon class="mat-24">check</mat-icon>
 							</button>
 						</td>
 					</tr>
 				</table>
-			</md-tab>
+			</mat-tab>
 
-			<md-tab label="*">
-				<md-icon>home</md-icon>
-			</md-tab>
+			<mat-tab label="*">
+				<mat-icon>home</mat-icon>
+			</mat-tab>
 
-		</md-tab-group>
+		</mat-tab-group>
 	</div>
 </div>

@@ -1,6 +1,6 @@
 <div style="padding: 14px 7px;text-align: center">
-	<button md-mini-fab type="button" (click)="getListMatched(1)">
-		<md-icon class="md-24">refresh</md-icon>
+	<button mat-mini-fab type="button" (click)="getListMatched(1)">
+		<mat-icon class="mat-24">refresh</mat-icon>
 	</button>
 </div>
 <table class="striped1">
@@ -15,7 +15,7 @@
 		<tr *ngFor="let prods of asyncRes | async">
 			<td>
 				<div style="padding: 7px">
-					<md-checkbox (click)="switchVerified($event)"></md-checkbox>
+					<mat-checkbox (click)="switchVerified($event)"></mat-checkbox>
 				</div>
 			</td>
 			<td class="ga-tr-1" width="25%" style="position: relative">
@@ -57,8 +57,8 @@
 				</div>
 			</td>
 			<td>
-				<button md-mini-fab type="button" color="basic">
-					<md-icon class="md-24">clear</md-icon>
+				<button mat-mini-fab type="button" color="basic">
+					<mat-icon class="mat-24">clear</mat-icon>
 				</button>
 			</td>
 		</tr>

@@ -5,12 +5,12 @@ import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
 import { FormControl } from '@angular/forms';
 import { URLSearchParams } from '@angular/http';
-import { MdSnackBar } from '@angular/material';
-import { MdChip, MdChipList } from '@angular/material';
-import { MdDialog, MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
+import { MatChip, MatChipList } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { MatchService } from './match.service';
 import { GlobalService } from './global.service';
-import { MdExpansionPanel, MdExpansionPanelHeader, MdExpansionPanelActionRow } from '@angular/material';
+import { MatExpansionPanel,  MatExpansionPanelTitle, MatExpansionPanelHeader, MatExpansionPanelActionRow } from '@angular/material';
 
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/observable/merge';
@@ -85,9 +85,9 @@ export class MatchListComponent implements OnInit {
 export class WarnDialogComponent {
 
     constructor(
-            private dialogRefMatch: MdDialogRef<WarnDialogComponent>,
+            private dialogRefMatch: MatDialogRef<WarnDialogComponent>,
             private http: HttpClient,
-            @Inject(MD_DIALOG_DATA) public data: any,
+            @Inject(MAT_DIALOG_DATA) public data: any,
             private mlist: MatchListComponent
         ) {}
 
@@ -112,11 +112,11 @@ export class WarnDialogComponent {
 export class MatchDialogComponent {
 
     constructor(
-            public dialogRefMatch: MdDialogRef<MatchDialogComponent>,
-            public mdialog: MdDialog,
+            public dialogRefMatch: MatDialogRef<MatchDialogComponent>,
+            public mdialog: MatDialog,
             private http: HttpClient,
             private globals: GlobalService,
-            @Inject(MD_DIALOG_DATA) public data: any
+            @Inject(MAT_DIALOG_DATA) public data: any
         ) {}
 
     onNoClick(): void {
@@ -222,8 +222,8 @@ export class MatchProductFormComponent implements OnInit {
 
     constructor(
         private http: HttpClient,
-        private mdialog: MdDialog,
-        private snackBar: MdSnackBar,
+        private mdialog: MatDialog,
+        private snackBar: MatSnackBar,
         private mlist: MatchListComponent,
         private globals: GlobalService
     ) {

@@ -1,5 +1,5 @@
-<h1 md-dialog-title>GESTORI</h1>
-<md-dialog-content>
+<h1 mat-dialog-title>GESTORI</h1>
+<mat-dialog-content>
     <div>Are you sure you want add this product to gestori ?</div>
     <p>
         <table>
@@ -19,8 +19,8 @@
                 <td>Измерение:</td><td class="aright">{{data.measure}}</td>
             </tr>
         </table>
-</md-dialog-content>
-<md-dialog-actions class="aright">
-    <button md-raised-button color="primary" md-button [md-dialog-close]="true" (click)="clickYes()">Yes</button>
-    <button md-button md-dialog-close>No</button>
-</md-dialog-actions>
+</mat-dialog-content>
+<mat-dialog-actions class="aright">
+    <button mat-raised-button color="primary" mat-button [mat-dialog-close]="true" (click)="clickYes()">Yes</button>
+    <button mat-button mat-dialog-close>No</button>
+</mat-dialog-actions>

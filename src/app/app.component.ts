@@ -3,16 +3,16 @@ import { FormControl } from '@angular/forms';
 import { Injectable, Inject } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { MdProgressBar, MdDialog, MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
+import { MatProgressBar, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { PageEvent } from '@angular/material';
-import { MdSnackBar } from '@angular/material';
-import { MdAutocomplete } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
+import { MatAutocomplete } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import { PaginationInstance } from 'ngx-pagination/dist/ngx-pagination.module';
 import { EventEmitter } from '@angular/core';
 import { GlobalService } from './global.service';
 
-import { DataSource } from '@angular/cdk';
+import { DataSource } from '@angular/cdk/table';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/startWith';
@@ -42,8 +42,8 @@ interface IServerResponse {
 export class DialogOverviewExampleDialogComponent {
 
     constructor(
-      public dialogRef: MdDialogRef<DialogOverviewExampleDialogComponent>,
-      @Inject(MD_DIALOG_DATA) public data: any) {}
+      public dialogRef: MatDialogRef<DialogOverviewExampleDialogComponent>,
+      @Inject(MAT_DIALOG_DATA) public data: any) {}
 
     onNoClick(): void {
       this.dialogRef.close();
@@ -123,8 +123,8 @@ export class AppComponent implements OnInit {
   }
 
   constructor(
-    private http: HttpClient, public dialog: MdDialog,
-    public snackBar: MdSnackBar, private sanitizer: DomSanitizer,
+    private http: HttpClient, public dialog: MatDialog,
+    public snackBar: MatSnackBar, private sanitizer: DomSanitizer,
     private globals: GlobalService
   ) {}
 

@@ -1,28 +1,28 @@
-<md-sidenav-container class="example-container">
+<mat-sidenav-container class="example-container">
 
-    <md-sidenav #sidenav class="example-sidenav">
-        <md-list>
-            <h3 md-subheader>Folders</h3>
-            <md-list-item *ngFor="let folder of folders">
-                <md-icon md-list-icon>folder</md-icon>
-                <h4 md-line>{{folder.name}}</h4>
-                <p md-line> {{folder.updated | date}} </p>
-            </md-list-item>
-            <md-divider></md-divider>
-            <h3 md-subheader>Notes</h3>
-            <md-list-item *ngFor="let note of notes">
-                <md-icon md-list-icon>note</md-icon>
-                <h4 md-line>{{note.name}}</h4>
-                <p md-line> {{note.updated | date}} </p>
-            </md-list-item>
-        </md-list>
-    </md-sidenav>
+    <mat-sidenav #sidenav class="example-sidenav">
+        <mat-list>
+            <h3 mat-subheader>Folders</h3>
+            <mat-list-item *ngFor="let folder of folders">
+                <mat-icon mat-list-icon>folder</mat-icon>
+                <h4 mat-line>{{folder.name}}</h4>
+                <p mat-line> {{folder.updated | date}} </p>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+            <h3 mat-subheader>Notes</h3>
+            <mat-list-item *ngFor="let note of notes">
+                <mat-icon mat-list-icon>note</mat-icon>
+                <h4 mat-line>{{note.name}}</h4>
+                <p mat-line> {{note.updated | date}} </p>
+            </mat-list-item>
+        </mat-list>
+    </mat-sidenav>
 
-    <md-toolbar color="primary" class="bottom-shadow">
+    <mat-toolbar color="primary" class="bottom-shadow">
         <span>
-            <md-icon md-button (click)="sidenav.open()"
+            <mat-icon mat-button (click)="sidenav.open()"
                     style="cursor: pointer">menu
-            </md-icon>
+            </mat-icon>
         </span>
         <span>
             <svg transform="scale(-0.5) translate(20,35)" style="width: 80px;margin: 0;padding: 0">
@@ -31,96 +31,96 @@
             </svg>
         </span>
         <span class="example-spacer"></span>
-        <button md-button [mdMenuTriggerFor]="menu">
-            <md-icon class="example-icon">person</md-icon>
+        <button mat-button [matMenuTriggerFor]="menu">
+            <mat-icon class="example-icon">person</mat-icon>
         </button>
-        <md-menu #menu="mdMenu">
-            <button md-menu-item>
-                <md-icon>dialpad</md-icon>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item>
+                <mat-icon>dialpad</mat-icon>
                 <span>Profile</span>
             </button>
-            <button md-menu-item>
-                <md-icon>fingerprint</md-icon>
+            <button mat-menu-item>
+                <mat-icon>fingerprint</mat-icon>
                 <span>Log out</span>
             </button>
-        </md-menu>
-        <md-icon class="example-icon">delete</md-icon>
-    </md-toolbar>
+        </mat-menu>
+        <mat-icon class="example-icon">delete</mat-icon>
+    </mat-toolbar>
 
-    <md-tab-group>
-        <md-tab label="Match">
+    <mat-tab-group>
+        <mat-tab label="Match">
                 <match-product-form></match-product-form>
-        </md-tab>
-        <md-tab label="Совпало">
+        </mat-tab>
+        <mat-tab label="Совпало">
             <match-list></match-list>
-        </md-tab>
-        <md-tab label="Form">
+        </mat-tab>
+        <mat-tab label="Form">
             <gestori-product-form></gestori-product-form>
-        </md-tab>
-        <md-tab label="Брэнды">
+        </mat-tab>
+        <mat-tab label="Брэнды">
             <div class="has-text-centered">
-                <div style="display: none"><md-spinner></md-spinner></div>
+                <div style="display: none"><mat-spinner></mat-spinner></div>
                 <pagination-controls (pageChange)="getPage($event)" id="server"></pagination-controls>
             </div>
             <div style="padding: 0 15px">
-            <md-list>
+            <mat-list>
                 <table>
                     <tr>
                         <td>
-                            <md-icon class="example-icon">search</md-icon>
+                            <mat-icon class="example-icon">search</mat-icon>
                         </td>
                         <td>
-                            <md-input-container class="example-full-width">
-                                <input type="text" mdInput placeholder="Brand search"
-                                [formControl]="myCompleteControl" [mdAutocomplete]="auto" #brandInput>
-                            </md-input-container>
+                            <mat-input-container class="example-full-width">
+                                <input type="text" matInput placeholder="Brand search"
+                                [formControl]="myCompleteControl" [matAutocomplete]="auto" #brandInput>
+                            </mat-input-container>
 
-                            <md-autocomplete #auto="mdAutocomplete">
-                                <md-option *ngFor="let option_complete of filteredOptions | async" [value]="option_complete.val">
+                            <mat-autocomplete #auto="matAutocomplete">
+                                <mat-option *ngFor="let option_complete of filteredOptions | async" [value]="option_complete.val">
                                     {{ option_complete.val }}
-                                </md-option>
-                            </md-autocomplete>
+                                </mat-option>
+                            </mat-autocomplete>
                         </td>
                         <td>
-                            <button md-icon-button color="primary">
-                                <md-icon class="md-24">clear</md-icon>
+                            <button mat-icon-button color="primary">
+                                <mat-icon class="mat-24">clear</mat-icon>
                             </button>
                         </td>
                     </tr>
                     <tr *ngFor="let br of asyncBrands | async | paginate: { id: 'server', itemsPerPage: 10, currentPage: p, totalItems: total }">
                         <td>
-                            <md-checkbox></md-checkbox>
+                            <mat-checkbox></mat-checkbox>
                         </td>
                         <td>
-                            <button md-icon-button color="primary">
-                                <md-icon class="md-24" aria-label="Example icon-button with a heart icon">add</md-icon>
+                            <button mat-icon-button color="primary">
+                                <mat-icon class="mat-24" aria-label="Example icon-button with a heart icon">add</mat-icon>
                             </button>
                         </td>
                         <td>
-                            <md-input-container class="example-full-width">
-                                <input type="text" mdInput #brandInput>
-                            </md-input-container>
+                            <mat-input-container class="example-full-width">
+                                <input type="text" matInput #brandInput>
+                            </mat-input-container>
                         </td>
                         <td>
-                            <md-list-item>
-                                <span md-line>{{br._id.name}}</span>
-                            </md-list-item>
+                            <mat-list-item>
+                                <span mat-line>{{br._id.name}}</span>
+                            </mat-list-item>
                         </td>
                         <td>
-                            <button md-icon-button (click)="saveBrand(br._id.id, brandInput.value)">
-                                <md-icon>check</md-icon>
+                            <button mat-icon-button (click)="saveBrand(br._id.id, brandInput.value)">
+                                <mat-icon>check</mat-icon>
                             </button>
                         </td>
                     </tr>
                 </table>
-            </md-list>
+            </mat-list>
             </div>
             <div class="has-text-centered">
-                <div style="display: none"><md-spinner></md-spinner></div>
+                <div style="display: none"><mat-spinner></mat-spinner></div>
                 <pagination-controls (pageChange)="getPage($event)" id="server"></pagination-controls>
             </div>
-        </md-tab>
+        </mat-tab>
 
-    </md-tab-group>
+    </mat-tab-group>
 
-</md-sidenav-container>
+</mat-sidenav-container>

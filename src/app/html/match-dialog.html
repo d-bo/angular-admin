@@ -1,8 +1,8 @@
-<h1 md-dialog-title>Match</h1>
+<h1 mat-dialog-title>Match</h1>
 
-<md-dialog-content>
+<mat-dialog-content>
     <h3>Вы уверены ?</h3>
-</md-dialog-content>
+</mat-dialog-content>
 
 <div *ngIf="data.gestSelectedItem!==undefined">
 <h2 class="h2-c">Gest</h2>
@@ -47,7 +47,7 @@
 </div>
 <!-- /LETU -->
 
-<md-dialog-actions class="aright">
-    <button md-raised-button color="primary" md-button [md-dialog-close]="true" (click)="onYesClick(data.gestSelectedItem, data.riveSelectedItem, data.ildeSelectedItem, data.letuSelectedItem)">Да</button>
-    <button md-button md-dialog-close>Нет</button>
-</md-dialog-actions>
+<mat-dialog-actions class="aright">
+    <button mat-raised-button color="primary" mat-button [mat-dialog-close]="true" (click)="onYesClick(data.gestSelectedItem, data.riveSelectedItem, data.ildeSelectedItem, data.letuSelectedItem)">Да</button>
+    <button mat-button mat-dialog-close>Нет</button>
+</mat-dialog-actions>
