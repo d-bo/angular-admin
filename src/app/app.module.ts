@@ -5,24 +5,26 @@ import { Injectable } from '@angular/core';
 import 'hammerjs';
 
 import { AppComponent, DialogOverviewExampleDialogComponent } from './app.component';
-import { MatInputModule } from '@angular/material';
-import { MatButtonModule } from '@angular/material';
-import { MatToolbarModule } from '@angular/material';
-import { MatMenuModule } from '@angular/material';
-import { MatSidenavModule } from '@angular/material';
-import { MatListModule } from '@angular/material';
-import { MatAutocompleteModule } from '@angular/material';
-import { MatSelectModule } from '@angular/material';
-import { MatTableModule } from '@angular/material';
-import { MatCheckboxModule } from '@angular/material';
-import { MatSnackBarModule } from '@angular/material';
-import { MatDialogModule } from '@angular/material';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatSelectModule } from '@angular/material/select/';
+import { MatTableModule } from '@angular/material/table';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatPaginatorModule } from '@angular/material';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { MatSlideToggleModule } from '@angular/material';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
 
 import { GestoriProductFormComponent, SubmitDialog } from './gestori.product.form.component';
 import { MatchListComponent, MatchProductFormComponent, MatchDialogComponent, WarnDialogComponent } from './match.product.form.component';
@@ -32,7 +34,6 @@ import { BaseRequestOptions, Headers } from '@angular/http';
 import { RequestOptions } from '@angular/http';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatProgressBarModule } from '@angular/material';
-import { MatIconModule } from '@angular/material/icon';
 
 
 
@@ -85,7 +86,9 @@ export class CustomRequestOptions extends BaseRequestOptions {
     MatProgressBarModule,
     MatExpansionModule,
     MatChipsModule,
-    MatTabsModule
+    MatTabsModule,
+    MatIconModule,
+    MatCardModule
   ],
   providers: [
     GlobalService,

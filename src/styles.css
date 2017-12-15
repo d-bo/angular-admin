@@ -39,10 +39,6 @@ body {
     background-color: #f5f5f5;
 }
 
-.table-td {
-	padding: 11px 7px;
-}
-
 .ga-h2-custom h2 {
 	margin: 0;
 	color: #333;
@@ -104,15 +100,23 @@ body {
 }
 
 .h2-c {
-    color: #000 !important;
-
-    font-size: 18px !important;
+    color: #222 !important;
     margin: 0 !important;
-    line-height: 22px !important;
+    line-height: 26px !important;
 }
 
 .ga-progress-bar {
     height: 10px;
     margin-top: 14px;
     padding: 0 24px;
+}
+
+.mat-expansion-panel-body {
+  overflow: hidden !important;
+  padding-bottom: 14px !important;
+}
+
+.mat-card {
+
+  margin: 7px 0;
 }

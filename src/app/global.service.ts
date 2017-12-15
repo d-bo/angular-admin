@@ -7,7 +7,7 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 @Injectable()
 export class GlobalService {
 
-    MAIN_IP = '127.0.0.1';
+    MAIN_IP = '192.168.65.243';
     constructor(
         private http: HttpClient
     ) {}
