@@ -155,7 +155,7 @@ export class AppComponent implements OnInit {
       // pass
     }, err => {
       this.snackBar.open(
-        'cant\'t load API http://127.0.0.1:5000/ping',
+        "cant\'t load API http://"+this.globals.MAIN_IP+"/ping",
         'OK'
       );
     });

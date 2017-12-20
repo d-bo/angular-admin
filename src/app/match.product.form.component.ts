@@ -10,7 +10,7 @@ import { MatChip, MatChipList } from '@angular/material';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { MatchService } from './match.service';
 import { GlobalService } from './global.service';
-import { MatExpansionPanel,  MatExpansionPanelTitle, MatExpansionPanelHeader, MatExpansionPanelActionRow } from '@angular/material';
+import { MatExpansionPanel,  MatExpansionPanelTitle, MatExpansionPanelHeader, MatExpansionPanelActionRow, MatAccordion, MatExpansionPanelDescription,  MatExpansionPanelContent } from '@angular/material';
 
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/observable/merge';
@@ -157,6 +157,8 @@ export class MatchDialogComponent {
 })
 
 export class MatchProductFormComponent implements OnInit {
+
+    panelOpenState: boolean = false;
 
     // observables
     asyncGestoriProducts: Observable<any>;

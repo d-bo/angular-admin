@@ -125,6 +125,7 @@
 			<mat-tab label="RIVE">
 
 				<div style="padding: 10px">
+					<mat-accordion>
 					<mat-expansion-panel>
 						<mat-expansion-panel-header>
 							<mat-panel-title>
@@ -197,6 +198,7 @@
 							</div>
 						</div>
 					</mat-expansion-panel>
+					</mat-accordion>
 				</div>
 
 				<div class="ga-progress-bar">
@@ -273,6 +275,7 @@
 			<mat-tab label="LETU">
 
 				<div style="padding: 10px">
+					<mat-accordion>
 					<mat-expansion-panel>
 						<mat-expansion-panel-header>
 							<mat-panel-title>
@@ -341,8 +344,8 @@
 								</button>
 							</div>
 						</div>
-
 					</mat-expansion-panel>
+					</mat-accordion>
 				</div>
 
 				<div class="ga-progress-bar">
@@ -357,6 +360,7 @@
 
 				<table class="striped">
 				    <tr *ngFor="let kr of asyncLetuProducts | async | paginate: { id: 'match_pr_letu_paginate', itemsPerPage: pageSize, currentPage: p1, totalItems: totalMatch1 }">
+				    	<mat-card>
 				        <td [attr.id]="'letu_'+kr._id.artic">
 				            <mat-list-item>
 								<div mat-line>
@@ -386,6 +390,7 @@
 				                <mat-icon class="mat-24" aria-label="Example icon-button with a heart icon">check</mat-icon>
 				            </button>
 				        </td>
+				    	</mat-card>
 				    </tr>
 				</table>
 
@@ -400,7 +405,7 @@
 
 						<mat-expansion-panel-header>
 							<mat-panel-title>
-							Rive
+							Ilde
 							</mat-panel-title>
 							<mat-panel-description>
 							Фильтры
@@ -479,9 +484,10 @@
 				<div style="text-align: center">
 					<pagination-controls (pageChange)="getPageIlde($event)" id="match_pr_ilde_paginate" previousLabel="Пред." nextLabel="След."></pagination-controls>
 				</div>
-				
+
 				<table class="striped">
 					<tr *ngFor="let jr of asyncIldeProducts | async | paginate: { id: 'match_pr_ilde_paginate', itemsPerPage: pageSize, currentPage: p2, totalItems: totalMatch2 }">
+						<mat-card>
 						<td [attr.id]="'ilde_'+jr._id.artic">
 							<mat-list-item>
 								<div mat-line><h2 class="h2-c">{{jr._id.name}}</h2></div>
@@ -503,6 +509,7 @@
 								<mat-icon class="mat-24">check</mat-icon>
 							</button>
 						</td>
+						</mat-card>
 					</tr>
 				</table>
 			</mat-tab>
