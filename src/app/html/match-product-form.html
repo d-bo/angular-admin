@@ -1,84 +1,75 @@
 <div>
 	<div style="padding:10px;float: left;">
+
 		<div style="padding: 10px">
-			<mat-expansion-panel>
-				<mat-expansion-panel-header>
-					<mat-panel-title>
-					Gestori
-					</mat-panel-title>
-					<mat-panel-description>
-					Фильтры
-					</mat-panel-description>
-				</mat-expansion-panel-header>
 
-				<!-- GEST BRAND SEARCH -->
-				<div>
-					<table width="500px">
-						<tr>
-							<td style="width: 90%">
-								<mat-input-container class="example-full-width">
-									<input type="text" matInput placeholder="Брэнд Gestori" ng-model="inputSearchBrand"
-									[formControl]='myCompleteMatchControl' [matAutocomplete]="auto" #brandInputGest>
-								</mat-input-container>
-								<mat-autocomplete #auto="matAutocomplete">
-									<mat-option *ngFor="let option_complete of filteredMatchOptions | async" 
-									[value]="option_complete.val">
-										{{ option_complete.val }}
-									</mat-option>
-								</mat-autocomplete>
-							</td>
-							<td style="text-align: center">
-								<button 
-									mat-mini-fab (click)="cleanAndReloadGest($event)"
-									type="button" color="basic">
-									<mat-icon class="mat-24">clear</mat-icon>
-								</button>
-							</td>
-						</tr>
-					</table>
-				</div>
+			<!-- GEST BRAND SEARCH -->
+			<div>
+				<table width="500px">
+					<tr>
+						<td style="width: 90%">
+							<mat-input-container class="example-full-width">
+								<input type="text" matInput placeholder="Брэнд Gestori" ng-model="inputSearchBrand"
+								[formControl]='myCompleteMatchControl' [matAutocomplete]="auto" #brandInputGest>
+							</mat-input-container>
+							<mat-autocomplete #auto="matAutocomplete">
+								<mat-option *ngFor="let option_complete of filteredMatchOptions | async" 
+								[value]="option_complete.val">
+									{{ option_complete.val }}
+								</mat-option>
+							</mat-autocomplete>
+						</td>
+						<td style="text-align: center">
+							<button 
+								mat-mini-fab (click)="cleanAndReloadGest($event)"
+								type="button" color="basic">
+								<mat-icon class="mat-24">clear</mat-icon>
+							</button>
+						</td>
+					</tr>
+				</table>
+			</div>
 
-				<!-- GEST FULL TEXT SEARCH -->
-				<div>
-					<table width="100%">
-						<tr>
-							<td style="width: 90%">
-								<mat-input-container class="example-full-width">
-									<input type="text" matInput placeholder="По имени"
-									[formControl]='myTextSearchControl' [matAutocomplete]="autoText" #fulltextInputGest>
-								</mat-input-container>
-								<mat-autocomplete #autoText="matAutocomplete">
-									<mat-option *ngFor="let option_text_complete of filteredTextOptions | async" 
-									[value]="option_text_complete.Name">
-										<div style="font-size: 14px"><b>{{ option_text_complete.Name}}</b> / {{ option_text_complete.Name_e}} / {{ option_text_complete.Barcod}}</div>
-									</mat-option>
-								</mat-autocomplete>
-							</td>
-							<td style="text-align: center">
-								<button 
-									mat-mini-fab (click)="cleanAndReloadGest($event)"
-									type="button" color="basic">
-									<mat-icon class="mat-24">clear</mat-icon>
-								</button>
-							</td>
-						</tr>
-					</table>
-				</div>
+			<!-- GEST FULL TEXT SEARCH -->
+			<div>
+				<table width="100%">
+					<tr>
+						<td style="width: 90%">
+							<mat-input-container class="example-full-width">
+								<input type="text" matInput placeholder="По имени"
+								[formControl]='myTextSearchControl' [matAutocomplete]="autoText" #fulltextInputGest>
+							</mat-input-container>
+							<mat-autocomplete #autoText="matAutocomplete">
+								<mat-option *ngFor="let option_text_complete of filteredTextOptions | async" 
+								[value]="option_text_complete.Name">
+									<div style="font-size: 14px"><b>{{ option_text_complete.Name}}</b> / {{ option_text_complete.Name_e}} / {{ option_text_complete.Barcod}}</div>
+								</mat-option>
+							</mat-autocomplete>
+						</td>
+						<td style="text-align: center">
+							<button 
+								mat-mini-fab (click)="cleanAndReloadGest($event)"
+								type="button" color="basic">
+								<mat-icon class="mat-24">clear</mat-icon>
+							</button>
+						</td>
+					</tr>
+				</table>
+			</div>
 
-				<div style="text-align: center">
-					<span style="margin-right: 50px">
-						<button mat-mini-fab color="basic" (click)="confirmMatchRive()">
-							<mat-icon class="mat-24">add</mat-icon>
-						</button>
-					</span>
-					<span>
-						<button mat-mini-fab type="button" color="primary" (click)="gestoriBrandPlusKeyword()">
-							<mat-icon class="mat-24">search</mat-icon>
-						</button>
-					</span>
-				</div>
+			<div style="text-align: center">
+				<span style="margin-right: 50px">
+					<button mat-mini-fab color="basic" (click)="confirmMatchRive()">
+						<mat-icon class="mat-24">add</mat-icon>
+					</button>
+				</span>
+				<span>
+					<button mat-mini-fab type="button" color="primary" (click)="gestoriBrandPlusKeyword()">
+						<mat-icon class="mat-24">search</mat-icon>
+					</button>
+				</span>
+			</div>
 
-			</mat-expansion-panel>
 		</div>
 
 		<div class="ga-progress-bar">
@@ -91,33 +82,28 @@
 			<pagination-controls (pageChange)="getPageGestori($event)" id="match_pr_paginate" previousLabel="Пред." nextLabel="След."></pagination-controls>
 		</div>
 
-		<table width="100%">
-		    <tr *ngFor="let br of asyncGestoriProducts | async | paginate: { id: 'match_pr_paginate', itemsPerPage: pageSize, currentPage: p, totalItems: totalMatch }">
-		    	<mat-card>
-		        <td [attr.id]="'gest_'+br._id.artic">
-		            <mat-list-item>
-		            	<div mat-line><h2 class="h2-c">{{br._id.name}}</h2></div>
-						<div mat-line>{{br._id.name_e}}</div>
-						<div mat-line>
-							<mat-chip-list style="padding: 0;margin: 0">
-								<mat-chip>{{br._id.brand}}</mat-chip>
-								<mat-chip>{{br._id.artic}}</mat-chip>
-								<mat-chip>{{br._id.barcod}}</mat-chip>
-								<mat-chip color="primary" *ngIf="br._id.retail_price!==''">
-									<b>{{br._id.retail_price}} руб.</b>
-								</mat-chip>
-							</mat-chip-list>
-						</div>
-		            </mat-list-item>
-		        </td>
-		        <td>
-		            <button mat-mini-fab color="basic" (click)="markGestori(br._id)">
-		                <mat-icon class="mat-24">check</mat-icon>
-		            </button>
-		        </td>
-		    	</mat-card>
-		    </tr>
-		</table>
+	    <div *ngFor="let br of asyncGestoriProducts | async | paginate: { id: 'match_pr_paginate', itemsPerPage: pageSize, currentPage: p, totalItems: totalMatch }">
+	    	<mat-card>
+	        <div [attr.id]="'gest_'+br._id.artic">
+	            <mat-list-item>
+	            	<div mat-line><h2 class="h2-c">{{br._id.name}}</h2></div>
+					<div mat-line>{{br._id.name_e}}</div>
+					<div mat-line>
+						<mat-chip-list style="padding: 0;margin: 0">
+							<mat-checkbox style="margin-right:7px" (click)="markGestori(br._id)"></mat-checkbox>
+							<mat-chip>{{br._id.brand}}</mat-chip>
+							<mat-chip>{{br._id.artic}}</mat-chip>
+							<mat-chip>{{br._id.barcod}}</mat-chip>
+							<mat-chip color="primary" *ngIf="br._id.retail_price!==''">
+								<b>{{br._id.retail_price}} руб.</b>
+							</mat-chip>
+						</mat-chip-list>
+					</div>
+	            </mat-list-item>
+	        </div>
+	    	</mat-card>
+	    </div>
+
 	</div>
 
 	<div style="overflow: hidden">
@@ -125,16 +111,6 @@
 			<mat-tab label="RIVE">
 
 				<div style="padding: 10px">
-					<mat-accordion>
-					<mat-expansion-panel>
-						<mat-expansion-panel-header>
-							<mat-panel-title>
-							Rive
-							</mat-panel-title>
-							<mat-panel-description>
-							Фильтры
-							</mat-panel-description>
-						</mat-expansion-panel-header>
 
 						<!-- RIVE BRAND SEARCH -->
 						<div>
@@ -197,8 +173,7 @@
 								</button>
 							</div>
 						</div>
-					</mat-expansion-panel>
-					</mat-accordion>
+
 				</div>
 
 				<div class="ga-progress-bar">
@@ -215,9 +190,9 @@
 
 				<table class="striped">
 					<div *ngFor="let xr of asyncRiveProducts | async | paginate: { id: 'match_pr_rive_paginate', itemsPerPage: pageSize, currentPage: p3, totalItems: totalMatch3 }">
-					    <tr *ngIf="xr._id.name!==''">
+					    <div *ngIf="xr._id.name!==''">
 					    	<mat-card>
-						        <td [attr.id]="'rive_'+xr._id.code">
+						        <div [attr.id]="'rive_'+xr._id.code">
 						            <mat-list-item>
 						            	<!-- IF PRODUCT URL EXISTS -->
 										<div mat-line *ngIf="xr._id.url!==''">
@@ -226,10 +201,10 @@
 												<h2 class="h2-c">
 													{{xr._id.name}}
 												</h2>
-												<h4 style="margin: 0;padding: 0">
-													{{xr._id.name_e}}
-												</h4>
 											</a>
+											<h4 style="margin: 0;padding: 0">
+												{{xr._id.name_e}}
+											</h4>
 										</div>
 										<!-- / -->
 										<!-- IF URL NOT EXISTS -->
@@ -244,33 +219,25 @@
 										<!-- / -->
 										<div mat-line style="margin-bottom: 5px">
 											<mat-chip-list style="padding: 0;">
+												<mat-checkbox style="margin-right:7px" (click)="markRive(xr._id)"></mat-checkbox>
 												<mat-chip>{{xr._id.code}}</mat-chip>
 												<mat-chip>{{xr._id.country}}</mat-chip>
 												<mat-chip *ngIf="xr._id.volumefieldname!=='' || xr._id.volume!==''">{{xr._id.volumefieldname}} {{xr._id.volume}}</mat-chip>
 												<mat-chip *ngIf=""></mat-chip>
 												<mat-chip *ngIf="xr._id.listingprice!==''"><b>{{xr._id.listingprice}} руб.</b></mat-chip>
+												<span>
+													<img src="{{xr._id.image_url}}" (click)="showImg(xr._id.image_url)" height="30px"  width="30px"/>
+												</span>
 											</mat-chip-list>
 										</div>
 										<div mat-line>{{xr._id.desc}}</div>
 									</mat-list-item>
-						        </td>
-						        <td>
-									<img src="{{xr._id.image_url}}" (click)="showImg(xr._id.image_url)" 
-										height="50px" />
-						        </td>
-						        <td>
-									<button mat-mini-fab color="basic" (click)="markRive(xr._id)">
-										<mat-icon class="mat-24" aria-label="Example icon-button with a heart icon">check</mat-icon>
-									</button>
-						        </td>
+						        </div>
 					    	</mat-card>
-					    </tr>
+					    </div>
 					</div>
 				</table>
-
 			</mat-tab>
-
-
 
 			<mat-tab label="LETU">
 
