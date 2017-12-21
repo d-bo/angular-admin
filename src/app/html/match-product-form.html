@@ -1,6 +1,5 @@
 <div>
 	<div style="padding:10px;float: left;">
-
 		<div style="padding: 10px">
 
 			<!-- GEST BRAND SEARCH -->
@@ -83,27 +82,26 @@
 		</div>
 
 	    <div *ngFor="let br of asyncGestoriProducts | async | paginate: { id: 'match_pr_paginate', itemsPerPage: pageSize, currentPage: p, totalItems: totalMatch }">
-	    	<mat-card>
-	        <div [attr.id]="'gest_'+br._id.artic">
-	            <mat-list-item>
-	            	<div mat-line><h2 class="h2-c">{{br._id.name}}</h2></div>
-					<div mat-line>{{br._id.name_e}}</div>
-					<div mat-line>
-						<mat-chip-list style="padding: 0;margin: 0">
-							<mat-checkbox style="margin-right:7px" (click)="markGestori(br._id)"></mat-checkbox>
-							<mat-chip>{{br._id.brand}}</mat-chip>
-							<mat-chip>{{br._id.artic}}</mat-chip>
-							<mat-chip>{{br._id.barcod}}</mat-chip>
-							<mat-chip color="primary" *ngIf="br._id.retail_price!==''">
-								<b>{{br._id.retail_price}} руб.</b>
-							</mat-chip>
-						</mat-chip-list>
-					</div>
-	            </mat-list-item>
-	        </div>
+	    	<mat-card [attr.id]="'gest_'+br._id.artic">
+		        <div>
+		            <mat-list-item>
+		            	<div mat-line><h2 class="h2-c">{{br._id.name}}</h2></div>
+						<div mat-line>{{br._id.name_e}}</div>
+						<div mat-line>
+							<mat-chip-list style="padding: 0;margin: 0">
+								<mat-checkbox style="margin-right:7px" (click)="markGestori(br._id)"></mat-checkbox>
+								<mat-chip>{{br._id.brand}}</mat-chip>
+								<mat-chip>{{br._id.artic}}</mat-chip>
+								<mat-chip>{{br._id.barcod}}</mat-chip>
+								<mat-chip color="primary" *ngIf="br._id.retail_price!==''">
+									<b>{{br._id.retail_price}} руб.</b>
+								</mat-chip>
+							</mat-chip-list>
+						</div>
+		            </mat-list-item>
+		        </div>
 	    	</mat-card>
 	    </div>
-
 	</div>
 
 	<div style="overflow: hidden">
@@ -111,7 +109,6 @@
 			<mat-tab label="RIVE">
 
 				<div style="padding: 10px">
-
 						<!-- RIVE BRAND SEARCH -->
 						<div>
 							<table width="100%">
@@ -142,12 +139,10 @@
 							<table width="100%">
 								<tr>
 									<td style="width: 90%">
-
 										<mat-input-container class="example-full-width">
 											<input type="text" matInput placeholder="По имени"
 											[formControl]='myTextSearchControlRive' [matAutocomplete]="autoTextRive" #fulltextInputRive>
 										</mat-input-container>
-										
 										<mat-autocomplete #autoTextRive="matAutocomplete">
 											<mat-option *ngFor="let option_text_complete_rive of filteredTextOptionsRive | async" 
 											[value]="option_text_complete_rive.name" 
@@ -173,7 +168,6 @@
 								</button>
 							</div>
 						</div>
-
 				</div>
 
 				<div class="ga-progress-bar">
@@ -191,8 +185,8 @@
 				<table class="striped">
 					<div *ngFor="let xr of asyncRiveProducts | async | paginate: { id: 'match_pr_rive_paginate', itemsPerPage: pageSize, currentPage: p3, totalItems: totalMatch3 }">
 					    <div *ngIf="xr._id.name!==''">
-					    	<mat-card>
-						        <div [attr.id]="'rive_'+xr._id.code">
+					    	<mat-card [attr.id]="'rive_'+xr._id.code">
+						        <div>
 						            <mat-list-item>
 						            	<!-- IF PRODUCT URL EXISTS -->
 										<div mat-line *ngIf="xr._id.url!==''">
@@ -326,9 +320,8 @@
 				</div>
 
 				<table class="striped">
-				    <tr *ngFor="let kr of asyncLetuProducts | async | paginate: { id: 'match_pr_letu_paginate', itemsPerPage: pageSize, currentPage: p1, totalItems: totalMatch1 }">
-				    	<mat-card>
-				        <td [attr.id]="'letu_'+kr._id.artic">
+				    <div *ngFor="let kr of asyncLetuProducts | async | paginate: { id: 'match_pr_letu_paginate', itemsPerPage: pageSize, currentPage: p1, totalItems: totalMatch1 }">
+				    	<mat-card [attr.id]="'letu_'+kr._id.artic">
 				            <mat-list-item>
 								<div mat-line>
 									<a href="{{kr._id.url}}" 
@@ -340,25 +333,17 @@
 								</div>
 								<div mat-line>
 									<mat-chip-list style="padding: 0;margin: 0">
+										<mat-checkbox style="margin-right:7px" (click)="markLetu(kr._id)"></mat-checkbox>
 										<mat-chip>{{kr._id.brand}}</mat-chip>
 										<mat-chip>{{kr._id.volume}}</mat-chip>
 										<mat-chip>{{kr._id.artic}}</mat-chip>
 										<mat-chip color="primary" *ngIf="kr._id.listingprice!==''"><b>{{kr._id.listingprice}} руб.</b></mat-chip>
+										<img (click)="showImg('http://www.letu.ru'+kr._id.img)"	src="http://www.letu.ru{{kr._id.img}}" height="30px" width="30px" />
 									</mat-chip-list>
 								</div>
 							</mat-list-item>
-						</td>
-				        <td>
-							<img (click)="showImg('http://www.letu.ru'+kr._id.img)"
-								src="http://www.letu.ru{{kr._id.img}}" height="50px" width="50px" />
-				        </td>
-				        <td>
-				            <button mat-mini-fab color="basic" (click)="markLetu(kr._id)">
-				                <mat-icon class="mat-24" aria-label="Example icon-button with a heart icon">check</mat-icon>
-				            </button>
-				        </td>
 				    	</mat-card>
-				    </tr>
+				    </div>
 				</table>
 
 			</mat-tab>
@@ -452,39 +437,26 @@
 					<pagination-controls (pageChange)="getPageIlde($event)" id="match_pr_ilde_paginate" previousLabel="Пред." nextLabel="След."></pagination-controls>
 				</div>
 
-				<table class="striped">
-					<tr *ngFor="let jr of asyncIldeProducts | async | paginate: { id: 'match_pr_ilde_paginate', itemsPerPage: pageSize, currentPage: p2, totalItems: totalMatch2 }">
-						<mat-card>
-						<td [attr.id]="'ilde_'+jr._id.artic">
-							<mat-list-item>
-								<div mat-line><h2 class="h2-c">{{jr._id.name}}</h2></div>
-								<div mat-line>
-									<mat-chip-list style="padding: 0;margin: 0">
-										<mat-chip>{{jr._id.brand}}</mat-chip>
-										<mat-chip>{{jr._id.artic}}</mat-chip>
-										<mat-chip color="primary"><b>{{jr._id.listingprice}} руб.</b></mat-chip>
-									</mat-chip-list>
-								</div>
-							</mat-list-item>
-						</td>
-						<td>
-							<img (click)="showImg('http://static.iledebeaute.ru'+jr._id.image)" 
-								src="http://static.iledebeaute.ru{{jr._id.image}}" height="50px" />
-						</td>
-						<td>
-							<button mat-mini-fab color="basic" (click)="markIlde(jr._id)">
-								<mat-icon class="mat-24">check</mat-icon>
-							</button>
-						</td>
-						</mat-card>
-					</tr>
-				</table>
+				<div *ngFor="let jr of asyncIldeProducts | async | paginate: { id: 'match_pr_ilde_paginate', itemsPerPage: pageSize, currentPage: p2, totalItems: totalMatch2 }">
+					<mat-card [attr.id]="'ilde_'+jr._id.artic">
+						<mat-list-item>
+							<div mat-line><h2 class="h2-c">{{jr._id.name}}</h2></div>
+							<div mat-line>
+								<mat-chip-list style="padding: 0;margin: 0">
+									<mat-checkbox style="margin-right:7px" (click)="markIlde(jr._id)"></mat-checkbox>
+									<mat-chip>{{jr._id.brand}}</mat-chip>
+									<mat-chip>{{jr._id.artic}}</mat-chip>
+									<mat-chip color="primary"><b>{{jr._id.listingprice}} руб.</b></mat-chip>
+									<img (click)="showImg('http://static.iledebeaute.ru'+jr._id.image)" src="http://static.iledebeaute.ru{{jr._id.image}}" width="30px" height="30px" />
+								</mat-chip-list>
+							</div>
+						</mat-list-item>
+					</mat-card>
+				</div>
 			</mat-tab>
-
 			<mat-tab label="*">
 				<mat-icon>home</mat-icon>
 			</mat-tab>
-
 		</mat-tab-group>
 	</div>
 </div>

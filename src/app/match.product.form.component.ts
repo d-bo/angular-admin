@@ -322,12 +322,12 @@ export class MatchProductFormComponent implements OnInit {
         const el = document.getElementById('gest_' + item_obj.artic);
         const attribute = el.getAttribute('gmarked');
         if (attribute === 'yes') {
-            el.style.borderLeft = '';
+            el.style.filter = 'invert(0%)';
             // el.setAttribute('class', 'selected-item-before');
             el.setAttribute('gmarked', 'no');
             this.gestSelectedItem = undefined;
         } else {
-            el.style.borderLeft = '14px solid rgb(33, 153, 232)';
+            el.style.filter = 'invert(100%)';
             el.setAttribute('gmarked', 'yes');
             this.gestSelectedItem = item_obj;
         }
@@ -338,11 +338,11 @@ export class MatchProductFormComponent implements OnInit {
         const el = document.getElementById('rive_' + item_obj.code);
         const attribute = el.getAttribute('rivemarked');
         if (attribute === 'yes') {
-            el.style.borderLeft = '';
+            el.style.filter = 'invert(0%)';
             el.setAttribute('rivemarked', 'no');
             this.riveSelectedItem = undefined;
         } else {
-            el.style.borderLeft = '14px solid rgb(33, 153, 232)';
+            el.style.filter = 'invert(100%)';
             el.setAttribute('rivemarked', 'yes');
             this.riveSelectedItem = item_obj;
         }
@@ -352,11 +352,11 @@ export class MatchProductFormComponent implements OnInit {
         const el = document.getElementById('ilde_' + item_obj.artic);
         const attribute = el.getAttribute('ildemarked');
         if (attribute === 'yes') {
-            el.style.borderLeft = '';
+            el.style.filter = 'invert(0%)';
             el.setAttribute('ildemarked', 'no');
             this.ildeSelectedItem = undefined;
         } else {
-            el.style.borderLeft = '14px solid rgb(33, 153, 232)';
+            el.style.filter = 'invert(100%)';
             el.setAttribute('ildemarked', 'yes');
             this.ildeSelectedItem = item_obj;
         }
@@ -366,11 +366,11 @@ export class MatchProductFormComponent implements OnInit {
         const el = document.getElementById('letu_' + item_obj.artic);
         const attribute = el.getAttribute('letumarked');
         if (attribute === 'yes') {
-            el.style.borderLeft = '';
+            el.style.filter = 'invert(0%)';
             el.setAttribute('letumarked', 'no');
             this.letuSelectedItem = undefined;
         } else {
-            el.style.borderLeft = '14px solid rgb(33, 153, 232)';
+            el.style.filter = 'invert(100%)';
             el.setAttribute('letumarked', 'yes');
             this.letuSelectedItem = item_obj;
         }

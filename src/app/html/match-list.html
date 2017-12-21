@@ -19,42 +19,42 @@
 				</div>
 			</td>
 			<td class="ga-tr-1" width="25%" style="position: relative">
-				<div *ngIf="prods.gest!==undefined">
-					<div class="ga-h2">{{prods.gest.name_e}}</div>
-					<div class="ga-h2">{{prods.gest.name}}</div>
-					<div class="ga-brand">{{prods.gest.brand}}</div>
-					<div>{{prods.gest.barcod}}</div>
-					<div>{{prods.gest.artic}}</div>
-					<div style="position: absolute;right: 0;bottom: 0;color: green;padding: 7px">{{prods.gest.retail_price}} руб.</div>
-				</div>
+					<mat-card *ngIf="prods.gest!==undefined">
+						<div class="ga-h2">{{prods.gest.name_e}}</div>
+						<div class="ga-h2">{{prods.gest.name}}</div>
+						<div class="ga-brand">{{prods.gest.brand}}</div>
+						<div>{{prods.gest.barcod}}</div>
+						<div>{{prods.gest.artic}}</div>
+						<div style="position: absolute;right: 0;bottom: 0;color: green;padding: 7px">{{prods.gest.retail_price}} руб.</div>
+					</mat-card>
 			</td>
 			<td class="ga-tr-1" width="25%" style="position: relative">
-				<div *ngIf="prods.rive!==undefined">
+				<mat-card *ngIf="prods.rive!==undefined">
 					<div class="ga-h2">{{prods.rive.name}}</div>
 					<div class="ga-brand">{{prods.rive.brand}}</div>
 					<div>{{prods.rive.code}}</div>
 					<div>{{prods.rive.country}}</div>
 					<div><img src="{{prods.rive.image_url}}" height="50px" /></div>
 					<div style="position: absolute;right: 0;bottom: 0;color: green;padding: 7px">{{prods.rive.listingprice}} руб.</div>
-				</div>
+				</mat-card>
 			</td>
 			<td class="ga-tr-1" width="25%" style="position: relative">
-				<div *ngIf="prods.letu!==undefined">
+				<mat-card *ngIf="prods.letu!==undefined">
 					<div class="ga-h2">{{prods.letu.name}}</div>
 					<!-- <div>{{prods.letu.name_e}}</div> -->
 					<div class="ga-brand">{{prods.letu.brand}}</div>
 					<div>{{prods.letu.artic}}</div>
 					<div style="position: absolute;right: 0;bottom: 0;color: green;padding: 7px">{{prods.letu.listingprice}} руб.</div>
-				</div>
+				</mat-card>
 			</td>
 			<td class="ga-tr-1" width="25%" style="position: relative">
-				<div *ngIf="prods.ilde!==undefined">
+				<mat-card *ngIf="prods.ilde!==undefined">
 					<div class="ga-h2">{{prods.ilde.name}}</div>
 					<div class="ga-brand">{{prods.ilde.brand}}</div>
 					<div>{{prods.ilde.artic}}</div>
 					<div><img src="http://static.iledebeaute.ru{{prods.ilde.image}}" height="50px" /></div>
 					<div style="position: absolute;right: 0;bottom: 0;color: green;padding: 7px">{{prods.ilde.listingprice}} руб.</div>
-				</div>
+				</mat-card>
 			</td>
 			<td>
 				<button mat-mini-fab type="button" color="basic">
