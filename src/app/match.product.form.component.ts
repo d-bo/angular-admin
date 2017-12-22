@@ -266,16 +266,16 @@ export class MatchProductFormComponent implements OnInit {
         // FULL TXT LETU
         this.filteredTextOptionsLetu = this.myTextSearchControlLetu.valueChanges
         .flatMap(val => this.globals.get(
-            'http://' + this.globals.MAIN_IP + ':5000/ft?s=' + val + '&b=' + this.myTextSearchControlLetu.value + '&p=letu'
+            'http://' + this.globals.MAIN_IP + ':5000/ft?s=' + val + '&b=' + this.letuSelectedBrand + '&p=letu'
         ));
 
         // FULL TXT ILDE
         this.filteredTextOptionsIlde = this.myTextSearchControlIlde.valueChanges
-        .flatMap(val => this.globals.get('http://' + this.globals.MAIN_IP + ':5000/ft?s=' + val + '&b=' + this.myTextSearchControlIlde.value + '&p=ilde'));
+        .flatMap(val => this.globals.get('http://' + this.globals.MAIN_IP + ':5000/ft?s=' + val + '&b=' + this.letuSelectedBrand + '&p=ilde'));
 
         // FULL TXT RIVE
         this.filteredTextOptionsRive = this.myTextSearchControlRive.valueChanges
-        .flatMap(val => this.globals.get('http://' + this.globals.MAIN_IP + ':5000/ft?s=' + val + '&b=' + this.myTextSearchControlIlde.value + '&p=rive'));
+        .flatMap(val => this.globals.get('http://' + this.globals.MAIN_IP + ':5000/ft?s=' + val + '&b=' + this.riveSelectedBrand + '&p=rive'));
     }
 
     ngOnInit(): void {

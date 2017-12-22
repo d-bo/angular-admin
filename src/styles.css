@@ -119,3 +119,21 @@ body {
 .mat-card {
   margin: 5px 0;
 }
+
+.filter-trans {
+  -webkit-transition: 1s -webkit-filter linear;
+  -moz-transition: 1s -moz-filter linear;
+  -moz-transition: 1s filter linear;
+  -ms-transition: 1s -ms-filter linear;
+  -o-transition: 1s -o-filter linear;
+  transition: 1s filter linear, 1s -webkit-filter linear;
+  margin: 7px 3px;
+}
+
+.price-matchlist {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  color: green;
+  padding: 7px;
+}

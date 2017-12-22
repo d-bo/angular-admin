@@ -82,7 +82,7 @@
 		</div>
 
 	    <div *ngFor="let br of asyncGestoriProducts | async | paginate: { id: 'match_pr_paginate', itemsPerPage: pageSize, currentPage: p, totalItems: totalMatch }">
-	    	<mat-card [attr.id]="'gest_'+br._id.artic">
+	    	<mat-card [attr.id]="'gest_'+br._id.artic" class="filter-trans">
 		        <div>
 		            <mat-list-item>
 		            	<div mat-line><h2 class="h2-c">{{br._id.name}}</h2></div>
@@ -104,70 +104,70 @@
 	    </div>
 	</div>
 
-	<div style="overflow: hidden">
+	<div style="overflow: hidden;">
 		<mat-tab-group style="width: 600px">
 			<mat-tab label="RIVE">
 
 				<div style="padding: 10px">
-						<!-- RIVE BRAND SEARCH -->
-						<div>
-							<table width="100%">
-								<tr>
-									<td style="width: 90%">
-										<mat-input-container class="example-full-width">
-											<input type="text" matInput placeholder="Брэнд Рив Гош"
-											[formControl]="myCompleteRiveMatchControl" [matAutocomplete]="auto3" #brandInputRive>
-										</mat-input-container>
-										<mat-autocomplete #auto3="matAutocomplete">
-											<mat-option *ngFor="let option_rive of filteredRiveMatchOptions | async" [value]="option_rive.val">
-												{{ option_rive.val }}
-											</mat-option>
-										</mat-autocomplete>
-									</td>
-									<td style="text-align: center">
-										<button mat-mini-fab (click)="cleanAndReloadRive()"
-											type="button" color="basic">
-											<mat-icon class="mat-24">clear</mat-icon>
-										</button>
-									</td>
-								</tr>
-							</table>
-						</div>
+					<!-- RIVE BRAND SEARCH -->
+					<div>
+						<table width="100%">
+							<tr>
+								<td style="width: 90%">
+									<mat-input-container class="example-full-width">
+										<input type="text" matInput placeholder="Брэнд Рив Гош"
+										[formControl]="myCompleteRiveMatchControl" [matAutocomplete]="auto3" #brandInputRive>
+									</mat-input-container>
+									<mat-autocomplete #auto3="matAutocomplete">
+										<mat-option *ngFor="let option_rive of filteredRiveMatchOptions | async" [value]="option_rive.val">
+											{{ option_rive.val }}
+										</mat-option>
+									</mat-autocomplete>
+								</td>
+								<td style="text-align: center">
+									<button mat-mini-fab (click)="cleanAndReloadRive()"
+										type="button" color="basic">
+										<mat-icon class="mat-24">clear</mat-icon>
+									</button>
+								</td>
+							</tr>
+						</table>
+					</div>
 
-						<!-- RIVE FULL TEXT SEARCH -->
-						<div>
-							<table width="100%">
-								<tr>
-									<td style="width: 90%">
-										<mat-input-container class="example-full-width">
-											<input type="text" matInput placeholder="По имени"
-											[formControl]='myTextSearchControlRive' [matAutocomplete]="autoTextRive" #fulltextInputRive>
-										</mat-input-container>
-										<mat-autocomplete #autoTextRive="matAutocomplete">
-											<mat-option *ngFor="let option_text_complete_rive of filteredTextOptionsRive | async" 
-											[value]="option_text_complete_rive.name" 
-											(onSelectionChange)="getRiveBrands($event, option_text_complete_rive.code)">
-												<div style="font-size: 14px"><img src="{{option_text_complete_rive.image_url}}" 
-													width="30px" height="30px" style="padding-right: 7px" /><b>
-														{{ option_text_complete_rive.name}}</b> / {{ option_text_complete_rive.code}}
-												</div>
-											</mat-option>
-										</mat-autocomplete>
-									</td>
-									<td style="text-align: center">
-										<button mat-mini-fab (click)="cleanAndReloadRive()"
-											type="button" color="basic">
-											<mat-icon class="mat-24">clear</mat-icon>
-										</button>
-									</td>
-								</tr>
-							</table>
-							<div style="text-align: center">
-								<button mat-mini-fab type="button" color="primary" (click)="riveBrandPlusKeyword()">
-									<mat-icon class="mat-24">search</mat-icon>
-								</button>
-							</div>
+					<!-- RIVE FULL TEXT SEARCH -->
+					<div>
+						<table width="100%">
+							<tr>
+								<td style="width: 90%">
+									<mat-input-container class="example-full-width">
+										<input type="text" matInput placeholder="По имени"
+										[formControl]='myTextSearchControlRive' [matAutocomplete]="autoTextRive" #fulltextInputRive>
+									</mat-input-container>
+									<mat-autocomplete #autoTextRive="matAutocomplete">
+										<mat-option *ngFor="let option_text_complete_rive of filteredTextOptionsRive | async" 
+										[value]="option_text_complete_rive.name" 
+										(onSelectionChange)="getRiveBrands($event, option_text_complete_rive.code)">
+											<div style="font-size: 14px"><img src="{{option_text_complete_rive.image_url}}" 
+												width="30px" height="30px" style="padding-right: 7px" /><b>
+													{{ option_text_complete_rive.name}}</b> / {{ option_text_complete_rive.code}}
+											</div>
+										</mat-option>
+									</mat-autocomplete>
+								</td>
+								<td style="text-align: center">
+									<button mat-mini-fab (click)="cleanAndReloadRive()"
+										type="button" color="basic">
+										<mat-icon class="mat-24">clear</mat-icon>
+									</button>
+								</td>
+							</tr>
+						</table>
+						<div style="text-align: center">
+							<button mat-mini-fab type="button" color="primary" (click)="riveBrandPlusKeyword()">
+								<mat-icon class="mat-24">search</mat-icon>
+							</button>
 						</div>
+					</div>
 				</div>
 
 				<div class="ga-progress-bar">
@@ -182,131 +182,116 @@
 						nextLabel="След."></pagination-controls>
 				</div>
 
-				<table class="striped">
-					<div *ngFor="let xr of asyncRiveProducts | async | paginate: { id: 'match_pr_rive_paginate', itemsPerPage: pageSize, currentPage: p3, totalItems: totalMatch3 }">
-					    <div *ngIf="xr._id.name!==''">
-					    	<mat-card [attr.id]="'rive_'+xr._id.code">
-						        <div>
-						            <mat-list-item>
-						            	<!-- IF PRODUCT URL EXISTS -->
-										<div mat-line *ngIf="xr._id.url!==''">
-											<a href="https://shop.rivegauche.ru/newstore/ru{{xr._id.url}}" 
-												target="_blank" style="text-decoration: none">
-												<h2 class="h2-c">
-													{{xr._id.name}}
-												</h2>
-											</a>
-											<h4 style="margin: 0;padding: 0">
-												{{xr._id.name_e}}
-											</h4>
-										</div>
-										<!-- / -->
-										<!-- IF URL NOT EXISTS -->
-										<div mat-line *ngIf="xr._id.url===''">
+				<div *ngFor="let xr of asyncRiveProducts | async | paginate: { id: 'match_pr_rive_paginate', itemsPerPage: pageSize, currentPage: p3, totalItems: totalMatch3 }">
+				    <div *ngIf="xr._id.name!==''">
+				    	<mat-card [attr.id]="'rive_'+xr._id.code" class="filter-trans">
+					        <div style="margin: 7px;position: relative;">
+					            <mat-list-item>
+					            	<!-- IF PRODUCT URL EXISTS -->
+									<div mat-line *ngIf="xr._id.url!==''">
+										<a href="https://shop.rivegauche.ru/newstore/ru{{xr._id.url}}" 
+											target="_blank" style="text-decoration: none">
 											<h2 class="h2-c">
 												{{xr._id.name}}
 											</h2>
-											<h4 style="margin: 0;padding: 0">
-												{{xr._id.name_e}}
-											</h4>
-										</div>
-										<!-- / -->
-										<div mat-line style="margin-bottom: 5px">
-											<mat-chip-list style="padding: 0;">
-												<mat-checkbox style="margin-right:7px" (click)="markRive(xr._id)"></mat-checkbox>
-												<mat-chip>{{xr._id.code}}</mat-chip>
-												<mat-chip>{{xr._id.country}}</mat-chip>
-												<mat-chip *ngIf="xr._id.volumefieldname!=='' || xr._id.volume!==''">{{xr._id.volumefieldname}} {{xr._id.volume}}</mat-chip>
-												<mat-chip *ngIf=""></mat-chip>
-												<mat-chip *ngIf="xr._id.listingprice!==''"><b>{{xr._id.listingprice}} руб.</b></mat-chip>
-												<span>
-													<img src="{{xr._id.image_url}}" (click)="showImg(xr._id.image_url)" height="30px"  width="30px"/>
-												</span>
-											</mat-chip-list>
-										</div>
-										<div mat-line>{{xr._id.desc}}</div>
-									</mat-list-item>
-						        </div>
-					    	</mat-card>
-					    </div>
-					</div>
-				</table>
+										</a>
+										<h4 style="margin: 0;padding: 0">
+											{{xr._id.name_e}}
+										</h4>
+									</div>
+									<!-- / -->
+									<!-- IF URL NOT EXISTS -->
+									<div mat-line *ngIf="xr._id.url===''">
+										<h2 class="h2-c">
+											{{xr._id.name}}
+										</h2>
+										<h4 style="margin: 0;padding: 0">
+											{{xr._id.name_e}}
+										</h4>
+									</div>
+									<!-- / -->
+									<div mat-line style="margin-bottom: 5px">
+										<mat-chip-list style="padding: 0;">
+											<mat-checkbox style="margin-right:7px" (click)="markRive(xr._id)"></mat-checkbox>
+											<mat-chip>{{xr._id.code}}</mat-chip>
+											<mat-chip>{{xr._id.country}}</mat-chip>
+											<mat-chip *ngIf="xr._id.volumefieldname!=='' || xr._id.volume!==''">{{xr._id.volumefieldname}} {{xr._id.volume}}</mat-chip>
+											<mat-chip *ngIf=""></mat-chip>
+											<mat-chip *ngIf="xr._id.listingprice!==''"><b>{{xr._id.listingprice}} руб.</b></mat-chip>
+											<span style="margin-left: 7px">
+												<img src="{{xr._id.image_url}}" (click)="showImg(xr._id.image_url)" height="30px"  width="30px" />
+											</span>
+										</mat-chip-list>
+									</div>
+									<div mat-line>{{xr._id.desc}}</div>
+								</mat-list-item>
+					        </div>
+				    	</mat-card>
+				    </div>
+				</div>
+				
 			</mat-tab>
 
 			<mat-tab label="LETU">
-
 				<div style="padding: 10px">
-					<mat-accordion>
-					<mat-expansion-panel>
-						<mat-expansion-panel-header>
-							<mat-panel-title>
-							Letu
-							</mat-panel-title>
-							<mat-panel-description>
-							Фильтры
-							</mat-panel-description>
-						</mat-expansion-panel-header>
+					<!-- LETU BRAND SEARCH -->
+					<div>
+						<table width="100%">
+							<tr>
+								<td style="width: 90%">
+									<mat-input-container class="example-full-width">
+										<input type="text" matInput placeholder="Брэнд Летуаль"
+											[formControl]="myCompleteLetuMatchControl" [matAutocomplete]="auto2" #brandInputLetu>
+									</mat-input-container>
+									<mat-autocomplete #auto2="matAutocomplete">
+										<mat-option *ngFor="let option_letu of filteredLetuMatchOptions | async" [value]="option_letu.val">
+											{{ option_letu.val }}
+										</mat-option>
+									</mat-autocomplete>
+								</td>
+								<td style="text-align: center">
+									<button mat-mini-fab (click)="cleanAndReloadLetu()"
+										type="button" color="basic">
+										<mat-icon class="mat-24">clear</mat-icon>
+									</button>
+								</td>
+							</tr>
+						</table>
+					</div>
 
-						<!-- LETU BRAND SEARCH -->
-						<div>
-							<table width="100%">
-								<tr>
-									<td style="width: 90%">
-										<mat-input-container class="example-full-width">
-											<input type="text" matInput placeholder="Брэнд Летуаль"
-												[formControl]="myCompleteLetuMatchControl" [matAutocomplete]="auto2" #brandInputLetu>
-										</mat-input-container>
-										<mat-autocomplete #auto2="matAutocomplete">
-											<mat-option *ngFor="let option_letu of filteredLetuMatchOptions | async" [value]="option_letu.val">
-												{{ option_letu.val }}
-											</mat-option>
-										</mat-autocomplete>
-									</td>
-									<td style="text-align: center">
-										<button mat-mini-fab (click)="cleanAndReloadLetu()"
-											type="button" color="basic">
-											<mat-icon class="mat-24">clear</mat-icon>
-										</button>
-									</td>
-								</tr>
-							</table>
+					<!-- LETU FULL TEXT SEARCH -->
+					<div>
+						<table width="100%">
+							<tr>
+								<td style="width: 90%">
+									<mat-input-container class="example-full-width">
+										<input type="text" matInput placeholder="По имени"
+										[formControl]='myTextSearchControlLetu' [matAutocomplete]="autoTextLetu" #fulltextInputLetu>
+									</mat-input-container>
+									
+									<mat-autocomplete #autoTextLetu="matAutocomplete">
+										<mat-option *ngFor="let option_text_complete_letu of filteredTextOptionsLetu | async" 
+										[value]="option_text_complete_letu.name" 
+										(onSelectionChange)="getLetuBrands($event, option_text_complete_letu.articul)">
+											<div style="font-size: 14px"><img src="http://www.letu.ru{{option_text_complete_letu.img}}" height="30px" width="30px" style="padding-right: 7px" />
+												<b>{{ option_text_complete_letu.name}}</b> / {{ option_text_complete_letu.volume}} / {{ option_text_complete_letu.articul }}</div>
+										</mat-option>
+									</mat-autocomplete>
+								</td>
+								<td style="text-align: center">
+									<button mat-mini-fab (click)="cleanAndReloadLetu()"
+										type="button" color="basic">
+										<mat-icon class="mat-24">clear</mat-icon>
+									</button>
+								</td>
+							</tr>
+						</table>
+						<div style="text-align: center;">
+							<button mat-mini-fab type="button" color="primary" (click)="letuBrandPlusKeyword()">
+								<mat-icon class="mat-24">search</mat-icon>
+							</button>
 						</div>
-
-						<!-- LETU FULL TEXT SEARCH -->
-						<div>
-							<table width="100%">
-								<tr>
-									<td style="width: 90%">
-										<mat-input-container class="example-full-width">
-											<input type="text" matInput placeholder="По имени"
-											[formControl]='myTextSearchControlLetu' [matAutocomplete]="autoTextLetu" #fulltextInputLetu>
-										</mat-input-container>
-										
-										<mat-autocomplete #autoTextLetu="matAutocomplete">
-											<mat-option *ngFor="let option_text_complete_letu of filteredTextOptionsLetu | async" 
-											[value]="option_text_complete_letu.name" 
-											(onSelectionChange)="getLetuBrands($event, option_text_complete_letu.articul)">
-												<div style="font-size: 14px"><img src="http://www.letu.ru{{option_text_complete_letu.img}}" height="30px" width="30px" style="padding-right: 7px" />
-													<b>{{ option_text_complete_letu.name}}</b> / {{ option_text_complete_letu.volume}} / {{ option_text_complete_letu.articul }}</div>
-											</mat-option>
-										</mat-autocomplete>
-									</td>
-									<td style="text-align: center">
-										<button mat-mini-fab (click)="cleanAndReloadLetu()"
-											type="button" color="basic">
-											<mat-icon class="mat-24">clear</mat-icon>
-										</button>
-									</td>
-								</tr>
-							</table>
-							<div style="text-align: center;">
-								<button mat-mini-fab type="button" color="primary" (click)="letuBrandPlusKeyword()">
-									<mat-icon class="mat-24">search</mat-icon>
-								</button>
-							</div>
-						</div>
-					</mat-expansion-panel>
-					</mat-accordion>
+					</div>
 				</div>
 
 				<div class="ga-progress-bar">
@@ -319,9 +304,8 @@
 					<pagination-controls (pageChange)="getPageLetu($event)" id="match_pr_letu_paginate" previousLabel="Пред." nextLabel="След."></pagination-controls>
 				</div>
 
-				<table class="striped">
 				    <div *ngFor="let kr of asyncLetuProducts | async | paginate: { id: 'match_pr_letu_paginate', itemsPerPage: pageSize, currentPage: p1, totalItems: totalMatch1 }">
-				    	<mat-card [attr.id]="'letu_'+kr._id.artic">
+				    	<mat-card [attr.id]="'letu_'+kr._id.artic" class="filter-trans">
 				            <mat-list-item>
 								<div mat-line>
 									<a href="{{kr._id.url}}" 
@@ -331,100 +315,88 @@
 											</h2>
 									</a>
 								</div>
+								<div mat-line>{{kr._id.volume}}</div>
 								<div mat-line>
 									<mat-chip-list style="padding: 0;margin: 0">
 										<mat-checkbox style="margin-right:7px" (click)="markLetu(kr._id)"></mat-checkbox>
 										<mat-chip>{{kr._id.brand}}</mat-chip>
-										<mat-chip>{{kr._id.volume}}</mat-chip>
 										<mat-chip>{{kr._id.artic}}</mat-chip>
 										<mat-chip color="primary" *ngIf="kr._id.listingprice!==''"><b>{{kr._id.listingprice}} руб.</b></mat-chip>
-										<img (click)="showImg('http://www.letu.ru'+kr._id.img)"	src="http://www.letu.ru{{kr._id.img}}" height="30px" width="30px" />
+										<span>
+											<img (click)="showImg('http://www.letu.ru'+kr._id.img)"	src="http://www.letu.ru{{kr._id.img}}" height="30px" width="30px" />
+										</span>
 									</mat-chip-list>
 								</div>
+								<div mat-line>{{kr._id.desc}}</div>
 							</mat-list-item>
 				    	</mat-card>
 				    </div>
-				</table>
-
 			</mat-tab>
 
 
 
 			<mat-tab label="ILDE">
-
 				<div style="padding: 10px">
-					<mat-expansion-panel>
 
-						<mat-expansion-panel-header>
-							<mat-panel-title>
-							Ilde
-							</mat-panel-title>
-							<mat-panel-description>
-							Фильтры
-							</mat-panel-description>
-						</mat-expansion-panel-header>
+					<!-- ILDE BRAND SEARCH -->
+					<div>
+						<table width="100%">
+							<tr>
+								<td style="width: 90%">
+									<mat-input-container class="example-full-width">
+											<input type="text" matInput placeholder="Брэнд Ильдеботэ"
+											[formControl]="myCompleteIldeMatchControl" [matAutocomplete]="autoIlde" #brandInputIlde>
+									</mat-input-container>
 
-						<!-- ILDE BRAND SEARCH -->
-						<div>
-							<table width="100%">
-								<tr>
-									<td style="width: 90%">
-										<mat-input-container class="example-full-width">
-												<input type="text" matInput placeholder="Брэнд Ильдеботэ"
-												[formControl]="myCompleteIldeMatchControl" [matAutocomplete]="autoIlde" #brandInputIlde>
-										</mat-input-container>
+									<mat-autocomplete #autoIlde="matAutocomplete">
+										<mat-option *ngFor="let option_ilde of filteredIldeMatchOptions | async" 
+										[value]="option_ilde.val">
+											{{ option_ilde.val }}
+										</mat-option>
+									</mat-autocomplete>
+								</td>
+								<td style="text-align: center">
+									<button mat-mini-fab (click)="cleanAndReloadIlde()"
+										type="button" color="basic">
+										<mat-icon class="mat-24">clear</mat-icon>
+									</button>
+								</td>
+							</tr>
+						</table>
+					</div>
 
-										<mat-autocomplete #autoIlde="matAutocomplete">
-											<mat-option *ngFor="let option_ilde of filteredIldeMatchOptions | async" 
-											[value]="option_ilde.val">
-												{{ option_ilde.val }}
-											</mat-option>
-										</mat-autocomplete>
-									</td>
-									<td style="text-align: center">
-										<button mat-mini-fab (click)="cleanAndReloadIlde()"
-											type="button" color="basic">
-											<mat-icon class="mat-24">clear</mat-icon>
-										</button>
-									</td>
-								</tr>
-							</table>
+					<!-- ILDE FULL TEXT SEARCH -->
+					<div>
+						<table width="100%">
+							<tr>
+								<td style="width: 90%">
+									<mat-input-container class="example-full-width">
+										<input type="text" matInput placeholder="По имени"
+										[formControl]='myTextSearchControlIlde' [matAutocomplete]="autoTextIlde" #fulltextInputIlde>
+									</mat-input-container>
+									<mat-autocomplete #autoTextIlde="matAutocomplete">
+										<mat-option *ngFor="let option_text_complete_ilde of filteredTextOptionsIlde | async" 
+										[value]="option_text_complete_ilde.pn" 
+										(onSelectionChange)="getIldeBrands($event, option_text_complete_ilde.articul)">
+											<div style="font-size: 14px"><img src="http://static.iledebeaute.ru{{option_text_complete_ilde.image}}" 
+												height="30px" width="30px" style="padding-right: 7px" />{{option_text_complete_ilde.brand}} / <b>{{ option_text_complete_ilde.pn}}</b> / {{ option_text_complete_ilde.articul}}</div>
+										</mat-option>
+									</mat-autocomplete>
+								</td>
+								<td style="text-align: center">
+									<button mat-mini-fab (click)="cleanAndReloadIlde()"
+										type="button" color="basic">
+										<mat-icon class="mat-24">clear</mat-icon>
+									</button>
+								</td>
+							</tr>
+						</table>
+						<div style="text-align: center">
+							<button mat-mini-fab type="button" color="primary" (click)="ildeBrandPlusKeyword()">
+								<mat-icon class="mat-24">search</mat-icon>
+							</button>
 						</div>
-
-						<!-- ILDE FULL TEXT SEARCH -->
-						<div>
-							<table width="100%">
-								<tr>
-									<td style="width: 90%">
-										<mat-input-container class="example-full-width">
-											<input type="text" matInput placeholder="По имени"
-											[formControl]='myTextSearchControlIlde' [matAutocomplete]="autoTextIlde" #fulltextInputIlde>
-										</mat-input-container>
-										<mat-autocomplete #autoTextIlde="matAutocomplete">
-											<mat-option *ngFor="let option_text_complete_ilde of filteredTextOptionsIlde | async" 
-											[value]="option_text_complete_ilde.pn" 
-											(onSelectionChange)="getIldeBrands($event, option_text_complete_ilde.articul)">
-												<div style="font-size: 14px"><img src="http://static.iledebeaute.ru{{option_text_complete_ilde.image}}" 
-													height="30px" width="30px" style="padding-right: 7px" />{{option_text_complete_ilde.brand}} / <b>{{ option_text_complete_ilde.pn}}</b> / {{ option_text_complete_ilde.articul}}</div>
-											</mat-option>
-										</mat-autocomplete>
-									</td>
-									<td style="text-align: center">
-										<button mat-mini-fab (click)="cleanAndReloadIlde()"
-											type="button" color="basic">
-											<mat-icon class="mat-24">clear</mat-icon>
-										</button>
-									</td>
-								</tr>
-							</table>
-							<div style="text-align: center">
-								<button mat-mini-fab type="button" color="primary" (click)="ildeBrandPlusKeyword()">
-									<mat-icon class="mat-24">search</mat-icon>
-								</button>
-							</div>
-						</div>
-
-					</mat-expansion-panel>
+					</div>
 				</div>
 
 				<div class="ga-progress-bar">
@@ -438,7 +410,7 @@
 				</div>
 
 				<div *ngFor="let jr of asyncIldeProducts | async | paginate: { id: 'match_pr_ilde_paginate', itemsPerPage: pageSize, currentPage: p2, totalItems: totalMatch2 }">
-					<mat-card [attr.id]="'ilde_'+jr._id.artic">
+					<mat-card [attr.id]="'ilde_'+jr._id.artic" class="filter-trans">
 						<mat-list-item>
 							<div mat-line><h2 class="h2-c">{{jr._id.name}}</h2></div>
 							<div mat-line>
