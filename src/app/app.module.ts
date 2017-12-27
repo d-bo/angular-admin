@@ -28,6 +28,7 @@ import { MatCardModule } from '@angular/material/card';
 
 import { GestoriProductFormComponent, SubmitDialog } from './gestori.product.form.component';
 import { MatchListComponent, MatchProductFormComponent, MatchDialogComponent, WarnDialogComponent } from './match.product.form.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatchService } from './match.service';
 import { GlobalService } from './global.service';
 import { BaseRequestOptions, Headers } from '@angular/http';
@@ -88,7 +89,8 @@ export class CustomRequestOptions extends BaseRequestOptions {
     MatChipsModule,
     MatTabsModule,
     MatIconModule,
-    MatCardModule
+    MatCardModule,
+    MatTooltipModule
   ],
   providers: [
     GlobalService,

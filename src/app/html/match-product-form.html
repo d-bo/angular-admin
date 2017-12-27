@@ -217,7 +217,10 @@
 											<mat-chip>{{xr._id.country}}</mat-chip>
 											<mat-chip *ngIf="xr._id.volumefieldname!=='' || xr._id.volume!==''">{{xr._id.volumefieldname}} {{xr._id.volume}}</mat-chip>
 											<mat-chip *ngIf=""></mat-chip>
-											<mat-chip *ngIf="xr._id.listingprice!==''"><b>{{xr._id.listingprice}} руб.</b></mat-chip>
+											<mat-chip *ngIf="xr._id.oldprice!==undefined">old <b>{{xr._id.oldprice}} руб.</b><span matTooltip="Tooltip!">I have a tooltip</span></mat-chip>
+											<mat-chip *ngIf="xr._id.listingprice!==undefined"><b>{{xr._id.listingprice}} руб.</b></mat-chip>
+											<mat-chip style="background-color: #85cbff" *ngIf="xr._id.standardcardprice!==undefined"><b>{{xr._id.standardcardprice}} руб.</b></mat-chip>
+											<mat-chip style="background-color: #CDAD00" *ngIf="xr._id.goldprice!==undefined"><b>{{xr._id.goldprice}} руб.</b></mat-chip>
 											<span style="margin-left: 7px">
 												<img src="{{xr._id.image_url}}" (click)="showImg(xr._id.image_url)" height="30px"  width="30px" />
 											</span>
