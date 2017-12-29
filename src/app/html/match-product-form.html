@@ -213,16 +213,29 @@
 									<div mat-line style="margin-bottom: 5px">
 										<mat-chip-list style="padding: 0;">
 											<mat-checkbox style="margin-right:7px" (click)="markRive(xr._id)"></mat-checkbox>
+											<span *ngIf="xr._id.image_url!==undefined && xr._id.image_url!==null" style="margin: 0 7px;">
+												<img src="{{xr._id.image_url}}" (click)="showImg(xr._id.image_url)" height="27px" width="27px" style="cursor: pointer" />
+											</span>
 											<mat-chip>{{xr._id.code}}</mat-chip>
 											<mat-chip>{{xr._id.country}}</mat-chip>
 											<mat-chip *ngIf="xr._id.volumefieldname!=='' || xr._id.volume!==''">{{xr._id.volumefieldname}} {{xr._id.volume}}</mat-chip>
-											<mat-chip *ngIf=""></mat-chip>
-											<mat-chip *ngIf="xr._id.oldprice!==undefined">old <b>{{xr._id.oldprice}} руб.</b><span matTooltip="Tooltip!">I have a tooltip</span></mat-chip>
-											<mat-chip *ngIf="xr._id.listingprice!==undefined"><b>{{xr._id.listingprice}} руб.</b></mat-chip>
-											<mat-chip style="background-color: #85cbff" *ngIf="xr._id.standardcardprice!==undefined"><b>{{xr._id.standardcardprice}} руб.</b></mat-chip>
-											<mat-chip style="background-color: #CDAD00" *ngIf="xr._id.goldprice!==undefined"><b>{{xr._id.goldprice}} руб.</b></mat-chip>
-											<span style="margin-left: 7px">
-												<img src="{{xr._id.image_url}}" (click)="showImg(xr._id.image_url)" height="30px"  width="30px" />
+											<mat-chip *ngIf="xr._id.oldprice!==undefined && xr._id.oldprice!==null">old <b>{{xr._id.oldprice}} руб.</b><span matTooltip="Tooltip!">I have a tooltip</span></mat-chip>
+											<mat-chip *ngIf="xr._id.listingprice!==undefined && xr._id.listingprice!==null">
+												<b>{{xr._id.listingprice}} руб.</b>
+											</mat-chip>
+											<mat-chip style="background-color: #c0cfd6" *ngIf="xr._id.standardcardprice!==undefined && xr._id.standardcardprice!==null">
+												<b>{{xr._id.standardcardprice}} руб.</b>
+											</mat-chip>
+											<mat-chip style="background-color: #d6cdc0" *ngIf="xr._id.goldprice!==undefined && xr._id.goldprice!==null">
+												<b>{{xr._id.goldprice}} руб.</b>
+											</mat-chip>
+											<mat-chip *ngIf="xr._id.lastupdate!==undefined && xr._id.lastupdate!==null">
+												<b>{{xr._id.lastupdate}}</b>
+											</mat-chip>
+											<span>
+												<button mat-icon-button color="basic">
+													<mat-icon aria-label="Example icon-button with a heart icon">cached</mat-icon>
+												</button>
 											</span>
 										</mat-chip-list>
 									</div>
@@ -321,12 +334,17 @@
 								<div mat-line>{{kr._id.volume}}</div>
 								<div mat-line>
 									<mat-chip-list style="padding: 0;margin: 0">
-										<mat-checkbox style="margin-right:7px" (click)="markLetu(kr._id)"></mat-checkbox>
+										<mat-checkbox style="margin: 0 7px" (click)="markLetu(kr._id)"></mat-checkbox>
+										<span style="cursor: pointer;margin-right: 7px">
+											<img (click)="showImg('http://www.letu.ru'+kr._id.img)"	src="http://www.letu.ru{{kr._id.img}}" height="27px" width="27px" />
+										</span>
 										<mat-chip>{{kr._id.brand}}</mat-chip>
 										<mat-chip>{{kr._id.artic}}</mat-chip>
 										<mat-chip color="primary" *ngIf="kr._id.listingprice!==''"><b>{{kr._id.listingprice}} руб.</b></mat-chip>
 										<span>
-											<img (click)="showImg('http://www.letu.ru'+kr._id.img)"	src="http://www.letu.ru{{kr._id.img}}" height="30px" width="30px" />
+											<button mat-icon-button color="basic">
+												<mat-icon aria-label="Example icon-button with a heart icon">cached</mat-icon>
+											</button>
 										</span>
 									</mat-chip-list>
 								</div>
@@ -418,11 +436,18 @@
 							<div mat-line><h2 class="h2-c">{{jr._id.name}}</h2></div>
 							<div mat-line>
 								<mat-chip-list style="padding: 0;margin: 0">
-									<mat-checkbox style="margin-right:7px" (click)="markIlde(jr._id)"></mat-checkbox>
+									<mat-checkbox style="margin: 0 7px" (click)="markIlde(jr._id)"></mat-checkbox>
+									<span style="margin-right: 7px">
+										<img (click)="showImg('http://static.iledebeaute.ru'+jr._id.image)" src="http://static.iledebeaute.ru{{jr._id.image}}" width="27px" height="27px" />
+									</span>
 									<mat-chip>{{jr._id.brand}}</mat-chip>
 									<mat-chip>{{jr._id.artic}}</mat-chip>
 									<mat-chip color="primary"><b>{{jr._id.listingprice}} руб.</b></mat-chip>
-									<img (click)="showImg('http://static.iledebeaute.ru'+jr._id.image)" src="http://static.iledebeaute.ru{{jr._id.image}}" width="30px" height="30px" />
+									<span>
+										<button mat-icon-button color="basic">
+											<mat-icon aria-label="Example icon-button with a heart icon">cached</mat-icon>
+										</button>
+									</span>
 								</mat-chip-list>
 							</div>
 						</mat-list-item>
