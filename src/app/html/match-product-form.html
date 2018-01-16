@@ -216,6 +216,7 @@
 											<span *ngIf="xr._id.image_url!==undefined && xr._id.image_url!==null" style="margin: 0 7px;">
 												<img src="{{xr._id.image_url}}" (click)="showImg(xr._id.image_url)" height="27px" width="27px" style="cursor: pointer" />
 											</span>
+											<mat-chip>{{xr._id.brand}}</mat-chip>
 											<mat-chip>{{xr._id.code}}</mat-chip>
 											<mat-chip>{{xr._id.country}}</mat-chip>
 											<mat-chip *ngIf="xr._id.volumefieldname!=='' || xr._id.volume!==''">{{xr._id.volumefieldname}} {{xr._id.volume}}</mat-chip>
