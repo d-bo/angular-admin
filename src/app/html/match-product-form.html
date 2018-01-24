@@ -443,13 +443,17 @@
 							<div mat-line>
 								<mat-chip-list style="padding: 0;margin: 0">
 									<mat-checkbox style="margin: 0 7px" (click)="markIlde(jr._id)"></mat-checkbox>
-									<span style="margin-right: 7px" *ngIf="jr._id.image!=='' && jr._id.image!==undefined">
+									<span style="margin-right: 7px;cursor: pointer" *ngIf="jr._id.big_pic!=='' && jr._id.big_pic!==undefined">
+										<img (click)="showImg('http:'+jr._id.big_pic)" src="http:{{jr._id.big_pic}}" width="27px" height="27px" />
+									</span>
+									<span style="margin-right: 7px;cursor: pointer" *ngIf="jr._id.image!=='' && jr._id.image!==undefined">
 										<img (click)="showImg('http://static.iledebeaute.ru'+jr._id.image)" src="http://static.iledebeaute.ru{{jr._id.image}}" width="27px" height="27px" />
 									</span>
 									<mat-chip *ngIf="jr._id.brand!=='' && jr._id.brand!==undefined">{{jr._id.brand}}</mat-chip>
 									<mat-chip *ngIf="jr._id.artic!=='' && jr._id.artic!==undefined">{{jr._id.artic}}</mat-chip>
 									<mat-chip *ngIf="jr._id.listingprice!=='' && jr._id.listingprice!==undefined" color="primary"><b>{{jr._id.listingprice}} руб.</b></mat-chip>
 									<mat-chip *ngIf="jr._id.vip_price!=='' && jr._id.vip_price!==undefined" color="primary"><b>{{jr._id.vip_price}} руб.</b></mat-chip>
+									<mat-chip *ngIf="jr._id.date!=='' && jr._id.date!==undefined" color="primary">{{jr._id.date}}</mat-chip>
 									<mat-chip *ngIf="jr._id.LastUpdate!=='' && jr._id.LastUpdate!==undefined" color="primary">{{jr._id.LastUpdate}}</mat-chip>
 									<span>
 										<button mat-icon-button color="basic">
@@ -458,7 +462,7 @@
 									</span>
 								</mat-chip-list>
 							</div>
-							<div mat-line *ngIf="jr._id.desc!=='' && jr._id.desc!==undefined"><h2 class="h2-c">{{jr._id.desc}}</h2></div>
+							<div mat-line *ngIf="jr._id.desc!=='' && jr._id.desc!==undefined">{{jr._id.desc}}</div>
 						</mat-list-item>
 					</mat-card>
 				</div>
