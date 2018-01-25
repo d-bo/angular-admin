@@ -11,6 +11,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { MatchService } from './match.service';
 import { GlobalService } from './global.service';
 import { MatExpansionPanel,  MatExpansionPanelTitle, MatExpansionPanelHeader, MatExpansionPanelActionRow, MatAccordion, MatExpansionPanelDescription } from '@angular/material';
+import { MatDatepickerIntl, MatDatepicker, MatDatepickerInput, MatDatepickerToggle } from '@angular/material/datepicker';
 
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/observable/merge';
@@ -462,6 +463,11 @@ export class MatchProductFormComponent implements OnInit {
         return this.globals.get(
             'http://' + this.globals.MAIN_IP + ':5000/gestori_products?p=' + page + '&pP=' + perPage + '&s=' + brand + '&kw=' + encodeURIComponent(txt)
         );
+    }
+
+    // 
+    getProductPrices(vendor: any, id: any) {
+        alert(vendor+":"+id)
     }
 
     // get gestori products

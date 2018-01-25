@@ -25,6 +25,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
+import { MatNativeDateModule } from '@angular/material';
 
 import { GestoriProductFormComponent, SubmitDialog } from './gestori.product.form.component';
 import { MatchListComponent, MatchProductFormComponent, MatchDialogComponent, WarnDialogComponent } from './match.product.form.component';
@@ -35,6 +36,7 @@ import { BaseRequestOptions, Headers } from '@angular/http';
 import { RequestOptions } from '@angular/http';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatProgressBarModule } from '@angular/material';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 
 
@@ -90,7 +92,9 @@ export class CustomRequestOptions extends BaseRequestOptions {
     MatTabsModule,
     MatIconModule,
     MatCardModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [
     GlobalService,

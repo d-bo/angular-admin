@@ -240,7 +240,26 @@
 											</span>
 										</mat-chip-list>
 									</div>
+
 									<div mat-line>{{xr._id.desc}}</div>
+									<div mat-line>
+										<mat-form-field>
+										  <input matInput [matDatepicker]="pickerStart" placeholder="Месяц">
+										  <mat-datepicker #pickerStart startView="month" [startAt]="startDate"></mat-datepicker>
+										</mat-form-field>
+										<span>
+										  <button mat-icon-button (click)="getProductPrices('RIVE', xr._id.code)">
+										    <mat-icon>lens</mat-icon>
+										  </button>
+										</span>
+										<mat-form-field>
+										  <input matInput [matDatepicker]="pickerEnd" placeholder="Месяц">
+										  <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+										  <mat-datepicker #pickerEnd startView="month" [startAt]="startDate"></mat-datepicker>
+										</mat-form-field>
+									</div>
+									<div></div>
+
 								</mat-list-item>
 					        </div>
 				    	</mat-card>
