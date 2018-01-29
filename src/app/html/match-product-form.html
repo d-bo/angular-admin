@@ -96,6 +96,9 @@
 								<mat-chip color="primary" *ngIf="br._id.retail_price!==''">
 									<b>{{br._id.retail_price}} руб.</b>
 								</mat-chip>
+								<button mat-icon-button (click)="gestoriSearchAll(br._id.name_e)">
+									<mat-icon aria-label="Example icon-button with a heart icon">tune</mat-icon>
+								</button>
 							</mat-chip-list>
 						</div>
 		            </mat-list-item>
@@ -240,26 +243,7 @@
 											</span>
 										</mat-chip-list>
 									</div>
-
 									<div mat-line>{{xr._id.desc}}</div>
-									<div mat-line>
-										<mat-form-field>
-										  <input matInput [matDatepicker]="pickerStart" placeholder="Месяц">
-										  <mat-datepicker #pickerStart startView="month" [startAt]="startDate"></mat-datepicker>
-										</mat-form-field>
-										<span>
-										  <button mat-icon-button (click)="getProductPrices('RIVE', xr._id.code)">
-										    <mat-icon>lens</mat-icon>
-										  </button>
-										</span>
-										<mat-form-field>
-										  <input matInput [matDatepicker]="pickerEnd" placeholder="Месяц">
-										  <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
-										  <mat-datepicker #pickerEnd startView="month" [startAt]="startDate"></mat-datepicker>
-										</mat-form-field>
-									</div>
-									<div></div>
-
 								</mat-list-item>
 					        </div>
 				    	</mat-card>
@@ -457,7 +441,12 @@
 				<div *ngFor="let jr of asyncIldeProducts | async | paginate: { id: 'match_pr_ilde_paginate', itemsPerPage: pageSize, currentPage: p2, totalItems: totalMatch2 }">
 					<mat-card [attr.id]="'ilde_'+jr._id.artic" class="filter-trans">
 						<mat-list-item>
-							<div mat-line><h2 class="h2-c">{{jr._id.name}}</h2></div>
+							<div mat-line>
+								<a href="{{jr._id.url}}" target="_blank" 
+								style="text-decoration: none">
+									<h2 class="h2-c">{{jr._id.name}}</h2>
+								</a>
+							</div>
 							<div mat-line>{{jr._id.Navi}}</div>
 							<div mat-line>
 								<mat-chip-list style="padding: 0;margin: 0">
@@ -485,6 +474,7 @@
 						</mat-list-item>
 					</mat-card>
 				</div>
+
 			</mat-tab>
 			<mat-tab label="*">
 				<mat-icon>home</mat-icon>

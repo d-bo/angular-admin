@@ -161,6 +161,16 @@ export class MatchProductFormComponent implements OnInit {
 
     panelOpenState: boolean = false;
 
+    months = [
+        'jan', 'feb', 'mar', 'apr', 'may',
+        'june', 'jule', 'aug', 'sep', 'oct',
+        'nov', 'dec'
+    ]
+
+    years = [
+        '2018', '2017', '2016'
+    ]
+
     // observables
     asyncGestoriProducts: Observable<any>;
     asyncLetuProducts: Observable<any>;
@@ -221,6 +231,13 @@ export class MatchProductFormComponent implements OnInit {
     isIldeLoaded: boolean;
     isLetuLoaded: boolean;
 
+    // Force load by keyword
+    // workaround
+    // TODO: refactoring
+    forceLoadRiveKeyword: any;
+    forceLoadLetuKeyword: any;
+    forceLoadIldeKeyword: any;
+
     inputSearchBrand: string;
 
     constructor(
@@ -280,6 +297,7 @@ export class MatchProductFormComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.forceLoadRiveKeyword = this.forceLoadLetuKeyword = this.forceLoadIldeKeyword = undefined;
         this.getPageGestori(1, undefined, undefined);
         this.getPageLetu(1, undefined);
         this.getPageIlde(1, undefined);
@@ -316,6 +334,15 @@ export class MatchProductFormComponent implements OnInit {
                 img: item
             }
         });
+    }
+
+    // Match by score
+    gestoriSearchAll(gest_artic) {
+        this.forceLoadRiveKeyword = this.forceLoadLetuKeyword = this.forceLoadIldeKeyword = gest_artic;
+        this.getPageLetu(1, undefined);
+        this.getPageIlde(1, undefined);
+        this.getPageRive(1, undefined);
+        this.forceLoadRiveKeyword = this.forceLoadLetuKeyword = this.forceLoadIldeKeyword = undefined;
     }
 
     markGestori(item_obj) {
@@ -552,8 +579,15 @@ export class MatchProductFormComponent implements OnInit {
         const perPage3 = this.pageSize;
         const start3 = (page - 1) * perPage3;
         const end3 = start3 + perPage3;
-        const kw = this.myTextSearchControlRive.value;
+        let kw = this.myTextSearchControlRive.value;
         search = this.myCompleteRiveMatchControl.value;
+
+        // Force search by keyword
+        if (this.forceLoadRiveKeyword != false) {
+            kw = this.forceLoadRiveKeyword;
+            search = undefined;
+        }
+
         // search by article instead of huge string
         return this.globals.get(
             'http://' + this.globals.MAIN_IP + ':5000/rive_products?page=' + page + '&perPage=' + perPage3 + '&kw=' + kw + '&search=' + search
@@ -563,8 +597,15 @@ export class MatchProductFormComponent implements OnInit {
     serverCallIldeObservable(page: number, search: string): Observable<any> {
         const start2 = (page - 1) * this.pageSize;
         const end2 = start2 + this.pageSize;
-        const kw = this.myTextSearchControlIlde.value;
+        let kw = this.myTextSearchControlIlde.value;
         search = this.myCompleteIldeMatchControl.value;
+
+        // Force search by keyword
+        if (this.forceLoadIldeKeyword !== false) {
+            kw = this.forceLoadIldeKeyword;
+            search = undefined;
+        }
+
         // search by article instead of huge string
         return this.globals.get(
             'http://' + this.globals.MAIN_IP + ':5000/ilde_products?page=' + page + '&perPage=' + this.pageSize + '&kw=' + kw + '&search=' + search
@@ -575,8 +616,15 @@ export class MatchProductFormComponent implements OnInit {
         const perPage1 = this.pageSize;
         const start1 = (page - 1) * perPage1;
         const end1 = start1 + perPage1;
-        const kw = this.myTextSearchControlLetu.value;
+        let kw = this.myTextSearchControlLetu.value;
         search = this.myCompleteLetuMatchControl.value;
+
+        // Force search by keyword
+        if (this.forceLoadLetuKeyword !== false) {
+            kw = this.forceLoadLetuKeyword;
+            search = undefined;
+        }
+
         // search by article instead of huge string
         return this.globals.get(
             'http://' + this.globals.MAIN_IP + ':5000/letu_products?page=' + page + '&perPage=' + perPage1 + '&kw=' + kw + '&search=' + search
