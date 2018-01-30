@@ -85,7 +85,14 @@
 	    	<mat-card [attr.id]="'gest_'+br._id.artic" class="filter-trans">
 		        <div>
 		            <mat-list-item>
-		            	<div mat-line><h2 class="h2-c">{{br._id.name}}</h2></div>
+		            	<div mat-line style="position: relative">
+		            		<div *ngIf="br._id.rive_match_code!==undefined || br._id.letu_match_code!==undefined || br._id.ilde_match_code !==undefined" style="position: absolute;top: -10px;right: 0px">
+								<button mat-icon-button style="color: #3f51b5">
+									<mat-icon>lock</mat-icon>
+								</button>
+		            		</div>
+		            		<h2 class="h2-c">{{br._id.name}}</h2>
+		            	</div>
 						<div mat-line>{{br._id.name_e}}</div>
 						<div mat-line>
 							<mat-chip-list style="padding: 0;margin: 0">
@@ -100,6 +107,11 @@
 									<mat-icon aria-label="Example icon-button with a heart icon">tune</mat-icon>
 								</button>
 							</mat-chip-list>
+						</div>
+						<div mat-line>
+							<mat-chip>{{br._id.rive_match_code}}</mat-chip>
+							<mat-chip>{{br._id.letu_match_code}}</mat-chip>
+							<mat-chip>{{br._id.ilde_match_code}}</mat-chip>
 						</div>
 		            </mat-list-item>
 		        </div>
@@ -188,6 +200,11 @@
 				    <div *ngIf="xr._id.name!==''">
 				    	<mat-card [attr.id]="'rive_'+xr._id.code" class="filter-trans">
 					        <div style="margin: 7px;position: relative;">
+			            		<div *ngIf="xr._id.gest_match_code!==undefined" style="position: absolute;top: -10px;right: 0px">
+									<button mat-icon-button style="color: #3f51b5">
+										<mat-icon>lock</mat-icon>
+									</button>
+			            		</div>
 					            <mat-list-item>
 					            	<!-- IF PRODUCT URL EXISTS -->
 									<div mat-line *ngIf="xr._id.url!==''">
@@ -327,7 +344,12 @@
 			    <div *ngFor="let kr of asyncLetuProducts | async | paginate: { id: 'match_pr_letu_paginate', itemsPerPage: pageSize, currentPage: p1, totalItems: totalMatch1 }">
 			    	<mat-card [attr.id]="'letu_'+kr._id.artic" class="filter-trans">
 			            <mat-list-item>
-							<div mat-line>
+							<div mat-line style="position: relative;">
+			            		<div *ngIf="kr._id.gest_match_code!==undefined" style="position: absolute;top: -10px;right: 0px">
+									<button mat-icon-button style="color: #3f51b5">
+										<mat-icon>lock</mat-icon>
+									</button>
+			            		</div>
 								<a href="{{kr._id.url}}" target="_blank" 
 								style="text-decoration: none">
 										<h2 class="h2-c">
@@ -441,11 +463,21 @@
 				<div *ngFor="let jr of asyncIldeProducts | async | paginate: { id: 'match_pr_ilde_paginate', itemsPerPage: pageSize, currentPage: p2, totalItems: totalMatch2 }">
 					<mat-card [attr.id]="'ilde_'+jr._id.artic" class="filter-trans">
 						<mat-list-item>
-							<div mat-line>
-								<a href="{{jr._id.url}}" target="_blank" 
-								style="text-decoration: none">
+							<div mat-line style="position: relative">
+			            		<div *ngIf="jr._id.gest_match_code!==undefined" style="position: absolute;top: -10px;right: 0px">
+									<button mat-icon-button style="color: #3f51b5">
+										<mat-icon>lock</mat-icon>
+									</button>
+			            		</div>
+								<div *ngIf="jr._id.url!==''">
+									<a href="{{jr._id.url}}" target="_blank" 
+									style="text-decoration: none">
+										<h2 class="h2-c">{{jr._id.name}}</h2>
+									</a>
+								</div>
+								<div *ngIf="jr._id.url==''">
 									<h2 class="h2-c">{{jr._id.name}}</h2>
-								</a>
+								</div>
 							</div>
 							<div mat-line>{{jr._id.Navi}}</div>
 							<div mat-line>
