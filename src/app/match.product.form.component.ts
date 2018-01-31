@@ -342,7 +342,6 @@ export class MatchProductFormComponent implements OnInit {
         this.getPageLetu(1, undefined);
         this.getPageIlde(1, undefined);
         this.getPageRive(1, undefined);
-        this.forceLoadRiveKeyword = this.forceLoadLetuKeyword = this.forceLoadIldeKeyword = undefined;
     }
 
     markGestori(item_obj) {
@@ -467,29 +466,20 @@ export class MatchProductFormComponent implements OnInit {
 
     // search gestori global
     riveBrandPlusKeyword() {
+        this.forceLoadRiveKeyword = this.forceLoadLetuKeyword = this.forceLoadIldeKeyword = undefined;
         this.getPageRive(1, this.myCompleteRiveMatchControl.value);
     }
 
     // search gestori global
     letuBrandPlusKeyword() {
+        this.forceLoadRiveKeyword = this.forceLoadLetuKeyword = this.forceLoadIldeKeyword = undefined;
         this.getPageLetu(1, this.myCompleteLetuMatchControl.value);
     }
 
     // search gestori global
     ildeBrandPlusKeyword() {
+        this.forceLoadRiveKeyword = this.forceLoadLetuKeyword = this.forceLoadIldeKeyword = undefined;
         this.getPageIlde(1, this.myCompleteIldeMatchControl.value);
-    }
-
-    serverCallGestoriObservable(page: number, brand: string, artic: any, keyword: any): Observable<any> {
-        const perPage = this.pageSize;
-        const start = (page - 1) * perPage;
-        const end = start + perPage;
-        const txt = this.myTextSearchControl.value;
-        brand = this.myCompleteMatchControl.value;
-        // search by article instead of huge string
-        return this.globals.get(
-            'http://' + this.globals.MAIN_IP + ':5000/gestori_products?p=' + page + '&pP=' + perPage + '&s=' + brand + '&kw=' + encodeURIComponent(txt)
-        );
     }
 
     // 
@@ -575,6 +565,18 @@ export class MatchProductFormComponent implements OnInit {
             }).map(res => res.data);
     }
 
+    serverCallGestoriObservable(page: number, brand: string, artic: any, keyword: any): Observable<any> {
+        const perPage = this.pageSize;
+        const start = (page - 1) * perPage;
+        const end = start + perPage;
+        const txt = this.myTextSearchControl.value;
+        brand = this.myCompleteMatchControl.value;
+        // search by article instead of huge string
+        return this.globals.get(
+            'http://' + this.globals.MAIN_IP + ':5000/gestori_products?p=' + page + '&pP=' + perPage + '&s=' + brand + '&kw=' + encodeURIComponent(txt)
+        );
+    }
+
     serverCallRiveObservable(page: number, search: string): Observable<any> {
         const perPage3 = this.pageSize;
         const start3 = (page - 1) * perPage3;
@@ -583,7 +585,7 @@ export class MatchProductFormComponent implements OnInit {
         search = this.myCompleteRiveMatchControl.value;
 
         // Force search by keyword
-        if (this.forceLoadRiveKeyword != false) {
+        if (this.forceLoadRiveKeyword !== undefined) {
             kw = this.forceLoadRiveKeyword;
             search = undefined;
         }
@@ -601,7 +603,7 @@ export class MatchProductFormComponent implements OnInit {
         search = this.myCompleteIldeMatchControl.value;
 
         // Force search by keyword
-        if (this.forceLoadIldeKeyword !== false) {
+        if (this.forceLoadIldeKeyword !== undefined) {
             kw = this.forceLoadIldeKeyword;
             search = undefined;
         }
@@ -620,7 +622,7 @@ export class MatchProductFormComponent implements OnInit {
         search = this.myCompleteLetuMatchControl.value;
 
         // Force search by keyword
-        if (this.forceLoadLetuKeyword !== false) {
+        if (this.forceLoadLetuKeyword !== undefined) {
             kw = this.forceLoadLetuKeyword;
             search = undefined;
         }
