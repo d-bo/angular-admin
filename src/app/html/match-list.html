@@ -19,41 +19,43 @@
 				</div>
 			</td>
 			<td class="ga-tr-1" width="25%" style="position: relative">
-				<mat-card *ngIf="prods.gest!==undefined">
-					<div class="ga-h2">{{prods.gest.name_e}}</div>
-					<div class="ga-h2">{{prods.gest.name}}</div>
-					<div class="ga-brand">{{prods.gest.brand}}</div>
-					<div>{{prods.gest.barcod}}</div>
-					<div>{{prods.gest.artic}}</div>
-					<div *ngIf="prods.gest.retail_price" class="price-matchlist">{{prods.gest.retail_price}} руб.</div>
+				<mat-card *ngIf="prods.gest?.length > 0">
+					<div class="ga-h2">{{prods.gest[0].Name_e}}</div>
+					<div class="ga-h2">{{prods.gest[0].Name}}</div>
+					<div class="ga-brand">{{prods.gest[0].cod_brand}}</div>
+					<div>{{prods.gest[0].Barcod}}</div>
+					<div>{{prods.gest[0].Artic}}</div>
+					<div *ngIf="prods.gest[0].Retail_price" class="price-matchlist">{{prods.gest[0].Retail_price}} руб.</div>
 				</mat-card>
 			</td>
 			<td class="ga-tr-1" width="25%" style="position: relative">
-				<mat-card *ngIf="prods.rive!==undefined">
-					<div class="ga-h2">{{prods.rive.name}}</div>
-					<div class="ga-brand">{{prods.rive.brand}}</div>
-					<div>{{prods.rive.code}}</div>
-					<div>{{prods.rive.country}}</div>
+				<mat-card *ngIf="prods.rive?.length > 0">
+					<div class="ga-h2">{{prods.rive[0].name}}</div>
+					<div class="ga-brand">{{prods.rive[0].brand}}</div>
+					<div>{{prods.rive[0].code}}</div>
+					<div>{{prods.rive[0].country}}</div>
 					<div><img src="{{prods.rive.image_url}}" height="50px" /></div>
-					<div *ngIf="prods.rive.listingprice!==undefined" style="position: absolute;right: 0;bottom: 0;color: green;padding: 7px">{{prods.rive.listingprice}} руб.</div>
+					<div *ngIf="prods.rive[0].listingprice!==undefined && prods.rive[0].listingprice!==null" style="position: absolute;right: 0;bottom: 0;color: green;padding: 7px">{{prods.rive[0].listingprice}} руб.</div>
+					<div *ngIf="prods.rive[0].oldprice!==undefined && prods.rive[0].oldprice!==null" style="position: absolute;right: 0;bottom: 0;color: green;padding: 7px">{{prods.rive[0].oldprice}} руб.</div>
 				</mat-card>
 			</td>
 			<td class="ga-tr-1" width="25%" style="position: relative">
-				<mat-card *ngIf="prods.letu!==undefined">
-					<div class="ga-h2">{{prods.letu.name}}</div>
+				<mat-card *ngIf="prods.letu?.length > 0">
+					<div class="ga-h2">{{prods.letu[0].name}}</div>
 					<!-- <div>{{prods.letu.name_e}}</div> -->
-					<div class="ga-brand">{{prods.letu.brand}}</div>
-					<div>{{prods.letu.artic}}</div>
-					<div *ngIf="" style="position: absolute;right: 0;bottom: 0;color: green;padding: 7px">{{prods.letu.listingprice}} руб.</div>
+					<div class="ga-brand">{{prods.letu[0].brand}}</div>
+					<div>{{prods.letu[0].artic}}</div>
+					<div *ngIf="" style="position: absolute;right: 0;bottom: 0;color: green;padding: 7px">{{prods.letu[0].listingprice}} руб.</div>
 				</mat-card>
 			</td>
 			<td class="ga-tr-1" width="25%" style="position: relative">
-				<mat-card *ngIf="prods.ilde!==undefined">
-					<div class="ga-h2">{{prods.ilde.name}}</div>
-					<div class="ga-brand">{{prods.ilde.brand}}</div>
-					<div>{{prods.ilde.artic}}</div>
+				<mat-card *ngIf="prods.ilde?.length > 0">
+					<div class="ga-h2">{{prods.ilde[0].pn}}</div>
+					<div class="ga-h2">{{prods.ilde[0].pc}}</div>
+					<div class="ga-brand">{{prods.ilde[0].brand}}</div>
+					<div>{{prods.ilde[0].articul}}</div>
 					<div><img src="http://static.iledebeaute.ru{{prods.ilde.image}}" height="50px" /></div>
-					<div *ngIf="prods.ilde.listingprice!==undefined" style="position: absolute;right: 0;bottom: 0;color: green;padding: 7px">{{prods.ilde.listingprice}} руб.</div>
+					<div *ngIf="prods.ilde[0].listingprice!==undefined" style="position: absolute;right: 0;bottom: 0;color: green;padding: 7px">{{prods.ilde[0].listingprice}} руб.</div>
 				</mat-card>
 			</td>
 		</tr>

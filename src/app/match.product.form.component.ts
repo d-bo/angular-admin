@@ -69,7 +69,7 @@ export class MatchListComponent implements OnInit {
     getListMatched(page: number) {
         this.asyncRes = this.serverCallListObservable(page)
             .do(res => {
-                // nope
+                console.log(res);
             }).map(res => res);
     }
 
