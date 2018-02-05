@@ -159,6 +159,16 @@ export class MatchDialogComponent {
 
 export class MatchProductFormComponent implements OnInit {
 
+    isGestChecked: boolean = false;
+    isRiveChecked: boolean = false;
+    isIldeChecked: boolean = false;
+    isLetuChecked: boolean = false;
+
+    gest_chkboxs: boolean = false;
+    rive_chkboxs: boolean = false;
+    letu_chkboxs: boolean = false;
+    ilde_chkboxs: boolean = false;
+
     panelOpenState: boolean = false;
 
     months = [
@@ -345,9 +355,11 @@ export class MatchProductFormComponent implements OnInit {
     }
 
     markGestori(item_obj) {
-        console.log(item_obj);
         const el = document.getElementById('gest_' + item_obj.artic);
         const attribute = el.getAttribute('gmarked');
+
+        this.unselectProds("gest_card");
+
         if (attribute === 'yes') {
             el.style.filter = 'invert(0%)';
             // el.setAttribute('class', 'selected-item-before');
@@ -361,9 +373,11 @@ export class MatchProductFormComponent implements OnInit {
     }
 
     markRive(item_obj) {
-        console.log(item_obj);
         const el = document.getElementById('rive_' + item_obj.code);
         const attribute = el.getAttribute('rivemarked');
+
+        this.unselectProds("rive_card");
+
         if (attribute === 'yes') {
             el.style.filter = 'invert(0%)';
             el.setAttribute('rivemarked', 'no');
@@ -378,6 +392,9 @@ export class MatchProductFormComponent implements OnInit {
     markIlde(item_obj) {
         const el = document.getElementById('ilde_' + item_obj.artic);
         const attribute = el.getAttribute('ildemarked');
+
+        this.unselectProds("ilde_card");
+
         if (attribute === 'yes') {
             el.style.filter = 'invert(0%)';
             el.setAttribute('ildemarked', 'no');
@@ -392,6 +409,9 @@ export class MatchProductFormComponent implements OnInit {
     markLetu(item_obj) {
         const el = document.getElementById('letu_' + item_obj.artic);
         const attribute = el.getAttribute('letumarked');
+
+        this.unselectProds("letu_card");
+
         if (attribute === 'yes') {
             el.style.filter = 'invert(0%)';
             el.setAttribute('letumarked', 'no');
@@ -434,6 +454,29 @@ export class MatchProductFormComponent implements OnInit {
             width: '600px',
             data: save_data
         });
+
+        // Uncheck gestori product cards
+        this.unselectProds("letu_card");
+        this.unselectProds("ilde_card");
+        this.unselectProds("rive_card");
+        this.unselectProds("gest_card");
+
+        this.riveSelectedItem = undefined;
+        this.letuSelectedItem = undefined;
+        this.ildeSelectedItem = undefined;
+        this.gestSelectedItem = undefined;
+
+        this.mlist.getListMatched(1);
+    }
+
+    unselectProds(sel_class) {
+        // Uncheck gestori product cards
+        let els = <any>document.getElementsByClassName(sel_class);
+        for (let i = 0; i < els.length; i++) {
+            if (els[i].style!==undefined) {
+                els[i].style.filter = 'invert(0%)';
+            }
+        }
     }
 
     getGestoriBrands(event, item) {

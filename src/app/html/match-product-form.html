@@ -40,14 +40,14 @@
 							</mat-input-container>
 							<mat-autocomplete #autoText="matAutocomplete">
 								<mat-option *ngFor="let option_text_complete of filteredTextOptions | async" 
-								[value]="option_text_complete.Name">
+								[value]="option_text_complete.Name" 
+								(onSelectionChange)="getGestoriBrands($event, option_text_complete_rive.code)">
 									<div style="font-size: 14px"><b>{{ option_text_complete.Name}}</b> / {{ option_text_complete.Name_e}} / {{ option_text_complete.Barcod}}</div>
 								</mat-option>
 							</mat-autocomplete>
 						</td>
 						<td style="text-align: center">
-							<button 
-								mat-mini-fab (click)="cleanAndReloadGest($event)"
+							<button mat-mini-fab (click)="cleanAndReloadGest($event)"
 								type="button" color="basic">
 								<mat-icon class="mat-24">clear</mat-icon>
 							</button>
@@ -82,7 +82,7 @@
 		</div>
 
 	    <div *ngFor="let br of asyncGestoriProducts | async | paginate: { id: 'match_pr_paginate', itemsPerPage: pageSize, currentPage: p, totalItems: totalMatch }">
-	    	<mat-card [attr.id]="'gest_'+br._id.artic" class="filter-trans">
+	    	<mat-card [attr.id]="'gest_'+br._id.artic" class="gest_card">
 		        <div>
 		            <mat-list-item>
 		            	<div mat-line style="position: relative">
@@ -96,7 +96,9 @@
 						<div mat-line>{{br._id.name_e}}</div>
 						<div mat-line>
 							<mat-chip-list style="padding: 0;margin: 0">
-								<mat-checkbox style="margin-right:7px" (click)="markGestori(br._id)"></mat-checkbox>
+							  <button mat-icon-button (click)="markGestori(br._id)">
+							    <mat-icon>favorite</mat-icon>
+							  </button>
 								<mat-chip>{{br._id.brand}}</mat-chip>
 								<mat-chip>{{br._id.artic}}</mat-chip>
 								<mat-chip>{{br._id.barcod}}</mat-chip>
@@ -104,7 +106,7 @@
 									<b>{{br._id.retail_price}} руб.</b>
 								</mat-chip>
 								<button mat-icon-button (click)="gestoriSearchAll(br._id.name_e)">
-									<mat-icon aria-label="Example icon-button with a heart icon">tune</mat-icon>
+									<mat-icon>tune</mat-icon>
 								</button>
 							</mat-chip-list>
 						</div>
@@ -193,7 +195,7 @@
 
 				<div *ngFor="let xr of asyncRiveProducts | async | paginate: { id: 'match_pr_rive_paginate', itemsPerPage: pageSize, currentPage: p3, totalItems: totalMatch3 }">
 				    <div *ngIf="xr._id.name!==''">
-				    	<mat-card [attr.id]="'rive_'+xr._id.code" class="filter-trans">
+				    	<mat-card [attr.id]="'rive_'+xr._id.code" class="rive_card">
 					        <div style="margin: 7px;position: relative;">
 			            		<div *ngIf="xr._id.gest_match_code!==undefined" style="position: absolute;top: -10px;right: 0px">
 									<button mat-icon-button style="color: #3f51b5">
@@ -227,7 +229,9 @@
 									<div *ngIf="xr._id.navi!=='' && xr._id.navi!==undefined" mat-line>{{xr._id.navi}}</div>
 									<div mat-line style="margin-bottom: 5px">
 										<mat-chip-list style="padding: 0;">
-											<mat-checkbox style="margin-right:7px" (click)="markRive(xr._id)"></mat-checkbox>
+										  <button mat-icon-button (click)="markRive(xr._id)">
+										    <mat-icon>favorite</mat-icon>
+										  </button>
 											<span *ngIf="xr._id.image_url!==undefined && xr._id.image_url!==null" style="margin: 0 7px;">
 												<img src="{{xr._id.image_url}}" (click)="showImg(xr._id.image_url)" height="27px" width="27px" style="cursor: pointer" />
 											</span>
@@ -337,7 +341,7 @@
 				</div>
 
 			    <div *ngFor="let kr of asyncLetuProducts | async | paginate: { id: 'match_pr_letu_paginate', itemsPerPage: pageSize, currentPage: p1, totalItems: totalMatch1 }">
-			    	<mat-card [attr.id]="'letu_'+kr._id.artic" class="filter-trans">
+			    	<mat-card [attr.id]="'letu_'+kr._id.artic" class="letu_card">
 			            <mat-list-item>
 							<div mat-line style="position: relative;">
 			            		<div *ngIf="kr._id.gest_match_code!==undefined" style="position: absolute;top: -10px;right: 0px">
@@ -356,7 +360,9 @@
 							<div *ngIf="kr._id.Navi!==''" mat-line>{{kr._id.Navi}}</div>
 							<div mat-line>
 								<mat-chip-list style="padding: 0;margin: 0">
-									<mat-checkbox style="margin: 0 7px" (click)="markLetu(kr._id)"></mat-checkbox>
+									<button mat-icon-button (click)="markLetu(kr._id)">
+										<mat-icon>favorite</mat-icon>
+									</button>
 									<span style="cursor: pointer;margin-right: 7px">
 										<img (click)="showImg('http://www.letu.ru'+kr._id.img)"	src="http://www.letu.ru{{kr._id.img}}" height="27px" width="27px" />
 									</span>
@@ -456,7 +462,7 @@
 				</div>
 
 				<div *ngFor="let jr of asyncIldeProducts | async | paginate: { id: 'match_pr_ilde_paginate', itemsPerPage: pageSize, currentPage: p2, totalItems: totalMatch2 }">
-					<mat-card [attr.id]="'ilde_'+jr._id.artic" class="filter-trans">
+					<mat-card [attr.id]="'ilde_'+jr._id.artic" class="ilde_card">
 						<mat-list-item>
 							<div mat-line style="position: relative">
 			            		<div *ngIf="jr._id.gest_match_code!==undefined" style="position: absolute;top: -10px;right: 0px">
@@ -477,7 +483,9 @@
 							<div mat-line>{{jr._id.Navi}}</div>
 							<div mat-line>
 								<mat-chip-list style="padding: 0;margin: 0">
-									<mat-checkbox style="margin: 0 7px" (click)="markIlde(jr._id)"></mat-checkbox>
+									<button mat-icon-button (click)="markIlde(jr._id)">
+										<mat-icon>favorite</mat-icon>
+									</button>
 									<span style="margin-right: 7px;cursor: pointer" *ngIf="jr._id.big_pic!=='' && jr._id.big_pic!==undefined">
 										<img (click)="showImg('http:'+jr._id.big_pic)" src="http:{{jr._id.big_pic}}" width="27px" height="27px" />
 									</span>
