@@ -64,7 +64,7 @@ export class GestoriProductFormComponent {
         private globals: GlobalService
     ) {
         this.asyncGroups = this.GroupsControl.valueChanges
-            .flatMap(val => this.http.get('http://127.0.0.1:5000/gestori_groups?search='+val));
+            .flatMap(val => this.http.get('http://127.0.0.1:5000/v1/gestori_groups?search='+val));
     }
 
     measures = [
@@ -98,7 +98,7 @@ export class GestoriProductFormComponent {
     }
 
     saveProduct(data) {
-        this.http.post('http://127.0.0.1:5000/gestori_csv_put', data)
+        this.http.post('http://127.0.0.1:5000/v1/gestori_csv_put', data)
             .subscribe(data => {alert('ok')}, error => {alert('error')})
         this.submitted = true;
     }

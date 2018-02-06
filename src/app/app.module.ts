@@ -28,7 +28,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatNativeDateModule } from '@angular/material';
 
 import { GestoriProductFormComponent, SubmitDialog } from './gestori.product.form.component';
-import { MatchListComponent, MatchProductFormComponent, MatchDialogComponent, WarnDialogComponent } from './match.product.form.component';
+import { MatchListComponent, MatchProductFormComponent, MatchDialogComponent, WarnDialogComponent, ConfirmDialogComponent } from './match.product.form.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatchService } from './match.service';
 import { GlobalService } from './global.service';
@@ -37,6 +37,7 @@ import { RequestOptions } from '@angular/http';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatProgressBarModule } from '@angular/material';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 
 
@@ -58,13 +59,15 @@ export class CustomRequestOptions extends BaseRequestOptions {
     SubmitDialog,
     MatchDialogComponent,
     WarnDialogComponent,
+    ConfirmDialogComponent,
     MatchListComponent
   ],
   entryComponents: [
     DialogOverviewExampleDialogComponent,
     SubmitDialog,
     MatchDialogComponent,
-    WarnDialogComponent
+    WarnDialogComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -94,7 +97,8 @@ export class CustomRequestOptions extends BaseRequestOptions {
     MatCardModule,
     MatTooltipModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatButtonToggleModule
   ],
   providers: [
     GlobalService,

@@ -1,0 +1,13 @@
+<h2 mat-dialog-title></h2>
+
+<mat-dialog-content>
+    <p>{{data.msg}}</p>
+    <div>
+        <img *ngIf="data.img!==undefined" src="{{data.img}}" style="max-width: 300px" />
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions class="aright">
+    <button mat-raised-button color="primary" mat-button [mat-dialog-close]="true" (click)="onYesClick(data.oid)">Да</button>
+    <button mat-button mat-dialog-close>Нет</button>
+</mat-dialog-actions>

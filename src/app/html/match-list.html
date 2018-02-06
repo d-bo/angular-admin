@@ -12,11 +12,21 @@
 		<td><h2>ilde</h2></td>
 	</thead>
 	<tbody>
-		<tr *ngFor="let prods of asyncRes | async">
+		<tr *ngFor="let prods of asyncRes | async" [attr.id]="'matched_'+prods._id['$oid']">
 			<td>
-				<div style="padding: 7px">
-					<mat-checkbox (click)="switchVerified($event)"></mat-checkbox>
-				</div>
+				<button mat-icon-button [matMenuTriggerFor]="menu">
+				  <mat-icon>more_vert</mat-icon>
+				</button>
+				<mat-menu #menu="matMenu">
+				  <button mat-menu-item (click)="clearMatchedItems(prods._id['$oid'])">
+				    <mat-icon>clear</mat-icon>
+				    <span>Удалить</span>
+				  </button>
+				  <button mat-menu-item disabled>
+				    <mat-icon>Edit</mat-icon>
+				    <span>chat</span>
+				  </button>
+				</mat-menu>
 			</td>
 			<td class="ga-tr-1" width="25%" style="position: relative">
 				<mat-card *ngIf="prods.gest?.length > 0">

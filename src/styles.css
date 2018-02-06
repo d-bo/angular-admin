@@ -100,9 +100,17 @@ body {
 }
 
 .h2-c {
-    color: #222 !important;
     margin: 0 !important;
     line-height: 26px !important;
+}
+
+h3 {
+    margin: 0 !important;
+    line-height: 26px !important;
+}
+
+a h2 {
+  color: #333 !important;
 }
 
 .ga-progress-bar {
@@ -126,4 +134,12 @@ body {
   bottom: 0;
   color: green;
   padding: 7px;
+}
+
+.trans-top {
+  top: 0px;
+  -o-transition: all 1s linear;
+  -moz-transition: all 1s linear;
+  -webkit-transition: all 1s linear;
+  transition: all 1s linear;
 }

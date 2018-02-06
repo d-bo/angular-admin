@@ -151,12 +151,12 @@ export class AppComponent implements OnInit {
   }
 
   ping() {
-    this.globals.get('http://' + this.globals.MAIN_IP + ':5000/ping?_p=0').subscribe(data => {
+    this.globals.get('http://' + this.globals.MAIN_IP + ':5000/v1/ping?_p=0').subscribe(data => {
       // pass
     }, err => {
       console.log(err.message);
       this.snackBar.open(
-        "cant\'t load API http://"+this.globals.MAIN_IP+"/ping - ",
+        "cant\'t load API http://"+this.globals.MAIN_IP+"/v1/ping - ",
         'OK'
       );
     });
