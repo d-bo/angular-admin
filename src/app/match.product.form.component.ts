@@ -479,6 +479,8 @@ export class MatchProductFormComponent implements OnInit {
             el.style.setProperty('left', '10px', 'important');
             el.style.setProperty('filter', 'invert(100%)');
             el.style.setProperty('z-index', '1001');
+            el.style.setProperty('max-width', '580px');
+            el.style.setProperty('width', '580px');
             el.setAttribute('gmarked', 'yes');
             this.gestSelectedItem = item_obj;
             this.gestoriSearchAll(item_obj.name_e);
