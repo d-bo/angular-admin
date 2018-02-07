@@ -411,6 +411,37 @@ export class MatchProductFormComponent implements OnInit {
         this.getPageLetu(1, undefined);
     }
 
+    // No match
+    letuNoMatch() {
+        this.letuSelectedItem = undefined;
+        this.snackBar.open(
+            "Нет совпадений LETU",
+            "",
+            {'duration': 700}
+        );
+    }
+
+    // No match
+    riveNoMatch() {
+        this.riveSelectedItem = undefined;
+        this.snackBar.open(
+            "Нет совпадений RIVE",
+            "",
+            {'duration': 700}
+        );
+    }
+
+    // No match
+    ildeNoMatch() {
+        this.ildeSelectedItem = undefined;
+        this.snackBar.open(
+            "Нет совпадений ILDE",
+            "",
+            {'duration': 700}
+        );
+    }
+
+
     // img dialog
     showImg(item) {
         const dialogRef = this.mdialog.open(WarnDialogComponent, {
