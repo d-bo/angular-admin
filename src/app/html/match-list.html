@@ -1,9 +1,18 @@
-<div style="padding: 14px 7px;text-align: center">
-	<button mat-mini-fab type="button" (click)="getListMatched(1)">
-		<mat-icon class="mat-24">refresh</mat-icon>
-	</button>
+<div style="padding: 14px 7px;text-align: center;max-width: 1240px">
+	<div>
+		<button mat-mini-fab type="button" (click)="getListMatched(1)">
+			<mat-icon class="mat-24">refresh</mat-icon>
+		</button>
+	</div>
+	<div>
+		<div class="ga-progress-bar">
+			<div *ngIf="isMatchListLoaded!==undefined">
+				<mat-progress-bar mode="query"></mat-progress-bar>
+			</div>
+		</div>
+	</div>
 </div>
-<table class="striped1">
+<table class="striped1" style="max-width: 1240px">
 	<thead>
 		<td></td>
 		<td><h2>gestori</h2></td>
@@ -23,8 +32,8 @@
 				    <span>Удалить</span>
 				  </button>
 				  <button mat-menu-item disabled>
-				    <mat-icon>Edit</mat-icon>
-				    <span>chat</span>
+				    <mat-icon>export</mat-icon>
+				    <span>Экспорт</span>
 				  </button>
 				</mat-menu>
 			</td>
@@ -39,32 +48,35 @@
 				</mat-card>
 			</td>
 			<td class="ga-tr-1" width="25%" style="position: relative">
-				<mat-card *ngIf="prods.rive?.length > 0">
+				<mat-card *ngIf="prods.rive_match_code!==undefined">
 					<div class="ga-h2">{{prods.rive[0].name}}</div>
 					<div class="ga-brand">{{prods.rive[0].brand}}</div>
 					<div>{{prods.rive[0].code}}</div>
 					<div>{{prods.rive[0].country}}</div>
-					<div><img src="{{prods.rive.image_url}}" height="50px" /></div>
+					<div *ngIf="prods.rive[0].image_url!==undefined"><img src="{{prods.rive[0].image_url}}" height="50px" /></div>
 					<div *ngIf="prods.rive[0].listingprice!==undefined && prods.rive[0].listingprice!==null" style="position: absolute;right: 0;bottom: 0;color: green;padding: 7px">{{prods.rive[0].listingprice}} руб.</div>
 					<div *ngIf="prods.rive[0].oldprice!==undefined && prods.rive[0].oldprice!==null" style="position: absolute;right: 0;bottom: 0;color: green;padding: 7px">{{prods.rive[0].oldprice}} руб.</div>
 				</mat-card>
 			</td>
 			<td class="ga-tr-1" width="25%" style="position: relative">
-				<mat-card *ngIf="prods.letu?.length > 0">
+				<mat-card *ngIf="prods.letu_match_code!==undefined">
 					<div class="ga-h2">{{prods.letu[0].name}}</div>
 					<!-- <div>{{prods.letu.name_e}}</div> -->
 					<div class="ga-brand">{{prods.letu[0].brand}}</div>
-					<div>{{prods.letu[0].artic}}</div>
-					<div *ngIf="" style="position: absolute;right: 0;bottom: 0;color: green;padding: 7px">{{prods.letu[0].listingprice}} руб.</div>
+					<div>{{prods.letu[0].articul}}</div>
+					<div *ngIf="prods.letu[0].img!==undefined"><img src="https://www.letu.ru{{prods.letu[0].img}}" height="50px" /></div>
+					<div *ngIf="prods.letu[0].listingprice!==undefined" style="position: absolute;right: 0;bottom: 0;color: green;padding: 7px">{{prods.letu[0].listingprice}} руб.</div>
 				</mat-card>
 			</td>
 			<td class="ga-tr-1" width="25%" style="position: relative">
-				<mat-card *ngIf="prods.ilde?.length > 0">
+				<mat-card *ngIf="prods.ilde_match_code!==undefined">
 					<div class="ga-h2">{{prods.ilde[0].pn}}</div>
 					<div class="ga-h2">{{prods.ilde[0].pc}}</div>
 					<div class="ga-brand">{{prods.ilde[0].brand}}</div>
 					<div>{{prods.ilde[0].articul}}</div>
-					<div><img src="http://static.iledebeaute.ru{{prods.ilde.image}}" height="50px" /></div>
+					<div><span *ngIf="prods.ilde[0].image!==undefined"><img src="http://static.iledebeaute.ru{{prods.ilde[0].image}}" height="50px" /></span>
+					<span *ngIf="prods.ilde[0].big_pic!==undefined"><img src="http:{{prods.ilde[0].big_pic}}" height="50px" /></span>
+					</div>
 					<div *ngIf="prods.ilde[0].listingprice!==undefined" style="position: absolute;right: 0;bottom: 0;color: green;padding: 7px">{{prods.ilde[0].listingprice}} руб.</div>
 				</mat-card>
 			</td>

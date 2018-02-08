@@ -12,6 +12,7 @@ import { MatchService } from './match.service';
 import { GlobalService } from './global.service';
 import { MatExpansionPanel,  MatExpansionPanelTitle, MatExpansionPanelHeader, MatExpansionPanelActionRow, MatAccordion, MatExpansionPanelDescription } from '@angular/material';
 import { MatDatepickerIntl, MatDatepicker, MatDatepickerInput, MatDatepickerToggle } from '@angular/material/datepicker';
+import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/observable/merge';
@@ -38,6 +39,7 @@ export class MatchListComponent implements OnInit {
     mservice: any;
     res: any;
     asyncRes: Observable<any>;
+    isMatchListLoaded: boolean;
 
     constructor(
             private matchService: MatchService,
@@ -68,19 +70,20 @@ export class MatchListComponent implements OnInit {
     }
 
     getListMatched(page: number) {
+        this.isMatchListLoaded = true;
         this.asyncRes = this.serverCallListObservable(page)
             .do(res => {
                 console.log(res);
+                this.isMatchListLoaded = undefined;
             }).map(res => res);
     }
 
     clearMatchedItems(matched_obj) {
-        alert(matched_obj);
         //alert(matched_obj['$oid']);
         console.log("MATCHED OBJ: "+matched_obj)
         let dialog = this.mdialog.open(ConfirmDialogComponent, {
             data: {
-                'msg': 'Are you sure ?',
+                'msg': 'Вы уверены ?',
                 'oid': matched_obj
             }
         });
@@ -314,6 +317,7 @@ export class MatchProductFormComponent implements OnInit {
     isRiveLoaded: boolean;
     isIldeLoaded: boolean;
     isLetuLoaded: boolean;
+    isMatchListLoaded: boolean;
 
     // Force load by keyword
     // workaround
@@ -324,17 +328,21 @@ export class MatchProductFormComponent implements OnInit {
 
     inputSearchBrand: string;
 
+    inlineBackground: any;
+
     constructor(
         private http: HttpClient,
         private mdialog: MatDialog,
         private snackBar: MatSnackBar,
         private mlist: MatchListComponent,
-        private globals: GlobalService
+        private globals: GlobalService,
+        private _sanitizer: DomSanitizer
     ) {
 
         this.http = http;
         this.mdialog = mdialog;
         this.snackBar = snackBar;
+        this.inlineBackground = this._sanitizer.bypassSecurityTrustStyle('background: #f0f0f0');
 
         // autocomplete BRAND search
         this.filteredMatchOptions = this.myCompleteMatchControl.valueChanges
@@ -386,6 +394,30 @@ export class MatchProductFormComponent implements OnInit {
         this.getPageLetu(1, undefined);
         this.getPageIlde(1, undefined);
         this.getPageRive(1, undefined);
+    }
+
+    gestMarkChecked(gest_obj, uncheck) {
+        console.log(gest_obj);
+        this.http.post(
+            'http://' + this.globals.MAIN_IP + ':5000/v1/gestMarkChecked',
+            {'oid': gest_obj['cod_good']},
+            {
+                headers: this.globals.noCache()
+            }
+        ).subscribe(
+            x => {},
+            err => {
+                const dialogRef = this.mdialog.open(WarnDialogComponent, {
+                  data: {
+                      'msg': 'ошибка: ' + err
+                    }
+                });
+            },
+            () => {
+                let doc = document.getElementById("gest_"+gest_obj['artic']+'_div').style.backgroundColor = '#f0f0f0';
+                console.log(doc);
+            }
+        );
     }
 
     // clean input search by brands
@@ -658,7 +690,7 @@ export class MatchProductFormComponent implements OnInit {
             if (res.data.length < 1) {
                 const dialogRef = this.mdialog.open(WarnDialogComponent, {
                     data: {
-                        'msg': 'Не найдено'
+                            'msg': 'Не найдено'
                         }
                     });
                 this.totalMatch = 0;

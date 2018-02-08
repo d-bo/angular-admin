@@ -78,35 +78,49 @@
 
 	    <div *ngFor="let br of asyncGestoriProducts | async | paginate: { id: 'match_pr_paginate', itemsPerPage: pageSize, currentPage: p, totalItems: totalMatch }" style="max-width: 580px">
 	    	<div [attr.id]="'gest_'+br._id.artic">
-	    	<mat-card [attr.id]="'gest_'+br._id.artic+'_div'" class="gest_card trans-top">
-		        <div>
-		            <mat-list-item>
-		            	<div mat-line style="position: relative">
-		            		<div *ngIf="br._id.rive_match_code!==undefined || br._id.letu_match_code!==undefined || br._id.ilde_match_code !==undefined" style="position: absolute;top: -20px;right: -20px">
-								<button mat-icon-button style="color: #3f51b5">
-									<mat-icon>lock</mat-icon>
+	    	<mat-card [attr.id]="'gest_'+br._id.artic+'_div'" class="gest_card trans-top"
+	    	[attr.style]="br._id.verified ? inlineBackground : ''">
+	            <mat-list-item>
+	            	<div mat-line style="position: relative">
+	            		<div *ngIf="br._id.rive_match_code!==undefined || br._id.letu_match_code!==undefined || br._id.ilde_match_code !==undefined" style="position: absolute;top: -20px;right: -20px">
+							<button mat-icon-button style="color: #3f51b5">
+								<mat-icon>lock</mat-icon>
+							</button>
+	            		</div>
+	            		<h2 class="h2-c">{{br._id.name}}</h2>
+	            	</div>
+					<div mat-line><h3>{{br._id.name_e}}</h3></div>
+					<div mat-line>
+						<mat-chip-list style="padding: 0;margin: 0">
+							<div *ngIf="br._id.rive_match_code===undefined && br._id.letu_match_code===undefined && br._id.ilde_match_code ===undefined">
+							  <button mat-icon-button color="accent" (click)="markGestori(br._id)">
+							    <mat-icon>favorite</mat-icon>
+							  </button>
+							</div>
+							<mat-chip>{{br._id.brand}}</mat-chip>
+							<mat-chip>{{br._id.artic}}</mat-chip>
+							<mat-chip>{{br._id.barcod}}</mat-chip>
+							<mat-chip color="primary" *ngIf="br._id.retail_price!==''">
+								<b>{{br._id.retail_price}} руб.</b>
+							</mat-chip>
+							<span>
+								<button mat-icon-button [matMenuTriggerFor]="menuGest">
+								  <mat-icon>more_vert</mat-icon>
 								</button>
-		            		</div>
-		            		<h2 class="h2-c">{{br._id.name}}</h2>
-		            	</div>
-						<div mat-line><h3>{{br._id.name_e}}</h3></div>
-						<div mat-line>
-							<mat-chip-list style="padding: 0;margin: 0">
-								<div *ngIf="br._id.rive_match_code===undefined && br._id.letu_match_code===undefined && br._id.ilde_match_code ===undefined">
-								  <button mat-icon-button color="accent" (click)="markGestori(br._id)">
-								    <mat-icon>favorite</mat-icon>
+								<mat-menu #menuGest="matMenu">
+								  <button mat-menu-item (click)="gestMarkChecked(br._id)">
+								    <mat-icon>done</mat-icon>
+								    <span>Проверено !</span>
 								  </button>
-								</div>
-								<mat-chip>{{br._id.brand}}</mat-chip>
-								<mat-chip>{{br._id.artic}}</mat-chip>
-								<mat-chip>{{br._id.barcod}}</mat-chip>
-								<mat-chip color="primary" *ngIf="br._id.retail_price!==''">
-									<b>{{br._id.retail_price}} руб.</b>
-								</mat-chip>
-							</mat-chip-list>
-						</div>
-		            </mat-list-item>
-		        </div>
+								  <button mat-menu-item disabled>
+								    <mat-icon>export</mat-icon>
+								    <span>Экспорт</span>
+								  </button>
+								</mat-menu>
+							</span>
+						</mat-chip-list>
+					</div>
+	            </mat-list-item>
 	    	</mat-card>
 	    	</div>
 	    </div>
