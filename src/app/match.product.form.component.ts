@@ -370,22 +370,22 @@ export class MatchProductFormComponent implements OnInit {
         // FULL TXT GEST
         this.filteredTextOptions = this.myTextSearchControl.valueChanges
         .flatMap(val => this.globals.get(
-            'http://' + this.globals.MAIN_IP + ':5000/v1/ft?s=' + val + '&b=' + this.gestoriSelectedBrand + '&p=gest'
+            'http://' + this.globals.MAIN_IP + ':5000/v1/ft?s=' + val + '&b=' + this.myCompleteMatchControl.value + '&p=gest'
         ));
 
         // FULL TXT LETU
         this.filteredTextOptionsLetu = this.myTextSearchControlLetu.valueChanges
         .flatMap(val => this.globals.get(
-            'http://' + this.globals.MAIN_IP + ':5000/v1/ft?s=' + val + '&b=' + this.letuSelectedBrand + '&p=letu'
+            'http://' + this.globals.MAIN_IP + ':5000/v1/ft?s=' + val + '&b=' + this.myCompleteLetuMatchControl.value + '&p=letu'
         ));
 
         // FULL TXT ILDE
         this.filteredTextOptionsIlde = this.myTextSearchControlIlde.valueChanges
-        .flatMap(val => this.globals.get('http://' + this.globals.MAIN_IP + ':5000/v1/ft?s=' + val + '&b=' + this.letuSelectedBrand + '&p=ilde'));
+        .flatMap(val => this.globals.get('http://' + this.globals.MAIN_IP + ':5000/v1/ft?s=' + val + '&b=' + this.myCompleteIldeMatchControl.value + '&p=ilde'));
 
         // FULL TXT RIVE
         this.filteredTextOptionsRive = this.myTextSearchControlRive.valueChanges
-        .flatMap(val => this.globals.get('http://' + this.globals.MAIN_IP + ':5000/v1/ft?s=' + val + '&b=' + this.riveSelectedBrand + '&p=rive'));
+        .flatMap(val => this.globals.get('http://' + this.globals.MAIN_IP + ':5000/v1/ft?s=' + val + '&b=' + this.myCompleteRiveMatchControl.value + '&p=rive'));
     }
 
     ngOnInit(): void {

@@ -40,8 +40,7 @@
 							</mat-input-container>
 							<mat-autocomplete #autoText="matAutocomplete">
 								<mat-option *ngFor="let option_text_complete of filteredTextOptions | async" 
-								[value]="option_text_complete.Name" 
-								(onSelectionChange)="getGestoriBrands($event, option_text_complete_rive.code)">
+								[value]="option_text_complete.Name">
 									<div style="font-size: 14px"><b>{{ option_text_complete.Name}}</b> / {{ option_text_complete.Name_e}} / {{ option_text_complete.Barcod}}</div>
 								</mat-option>
 							</mat-autocomplete>
@@ -390,6 +389,7 @@
 										</h2>
 								</a>
 							</div>
+							<div mat-line><h3>{{kr._id.name_e}}</h3></div>
 							<div mat-line>{{kr._id.volume}}</div>
 							<div *ngIf="kr._id.Navi!==''" mat-line>{{kr._id.Navi}}</div>
 							<div mat-line>
@@ -526,6 +526,7 @@
 									<h2 class="h2-c">{{jr._id.name}}</h2>
 								</div>
 							</div>
+							<div mat-line><h3>{{jr._id.name_e}}</h3></div>
 							<div mat-line>{{jr._id.Navi}}</div>
 							<div mat-line>
 								<mat-chip-list style="padding: 0;margin: 0">
