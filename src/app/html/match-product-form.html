@@ -57,7 +57,7 @@
 
 			<div style="text-align: center">
 				<span>
-					<button mat-mini-fab type="button" color="primary" (click)="gestoriBrandPlusKeyword()">
+					<button mat-fab type="button" color="primary" (click)="gestoriBrandPlusKeyword()">
 						<mat-icon class="mat-24">search</mat-icon>
 					</button>
 				</span>
@@ -183,9 +183,10 @@
 								</td>
 							</tr>
 						</table>
+
 						<div style="text-align: center">
 							<span style="margin-right: 14px">
-								<button mat-mini-fab type="button" color="primary" (click)="riveBrandPlusKeyword()">
+								<button mat-fab type="button" color="primary" (click)="riveBrandPlusKeyword()">
 									<mat-icon class="mat-24">search</mat-icon>
 								</button>
 							</span>
@@ -214,6 +215,7 @@
 						nextLabel="След."></pagination-controls>
 				</div>
 
+				<div style="margin: 0 7px">
 				<div *ngFor="let xr of asyncRiveProducts | async | paginate: { id: 'match_pr_rive_paginate', itemsPerPage: pageSize, currentPage: p3, totalItems: totalMatch3 }">
 				    <div *ngIf="xr._id.name!==''">
 				    	<mat-card [attr.id]="'rive_'+xr._id.code" class="rive_card">
@@ -288,11 +290,13 @@
 				    	</mat-card>
 				    </div>
 				</div>
+				</div>
 				
 			</mat-tab>
 
 			<mat-tab label="LETU">
 				<div style="padding: 10px">
+
 					<!-- LETU BRAND SEARCH -->
 					<div>
 						<table width="100%">
@@ -347,7 +351,7 @@
 						</table>
 						<div style="text-align: center;">
 							<span style="margin-right: 14px">
-								<button mat-mini-fab type="button" color="primary" (click)="letuBrandPlusKeyword()">
+								<button mat-fab type="button" color="primary" (click)="letuBrandPlusKeyword()">
 									<mat-icon class="mat-24">search</mat-icon>
 								</button>
 							</span>
@@ -373,6 +377,7 @@
 					<pagination-controls (pageChange)="getPageLetu($event)" id="match_pr_letu_paginate" previousLabel="Пред." nextLabel="След."></pagination-controls>
 				</div>
 
+				<div style="margin: 0 7px">
 			    <div *ngFor="let kr of asyncLetuProducts | async | paginate: { id: 'match_pr_letu_paginate', itemsPerPage: pageSize, currentPage: p1, totalItems: totalMatch1 }">
 			    	<mat-card [attr.id]="'letu_'+kr._id.artic" class="letu_card">
 			            <mat-list-item>
@@ -418,6 +423,7 @@
 						</mat-list-item>
 			    	</mat-card>
 			    </div>
+				</div>
 			    
 			</mat-tab>
 
@@ -481,7 +487,7 @@
 						</table>
 						<div style="text-align: center">
 							<span style="margin-right: 14px">
-								<button mat-mini-fab type="button" color="primary" (click)="ildeBrandPlusKeyword()">
+								<button mat-fab type="button" color="primary" (click)="ildeBrandPlusKeyword()">
 									<mat-icon class="mat-24">search</mat-icon>
 								</button>
 							</span>
@@ -507,6 +513,7 @@
 					<pagination-controls (pageChange)="getPageIlde($event)" id="match_pr_ilde_paginate" previousLabel="Пред." nextLabel="След."></pagination-controls>
 				</div>
 
+				<div style="margin: 0 7px">
 				<div *ngFor="let jr of asyncIldeProducts | async | paginate: { id: 'match_pr_ilde_paginate', itemsPerPage: pageSize, currentPage: p2, totalItems: totalMatch2 }">
 					<mat-card [attr.id]="'ilde_'+jr._id.artic" class="ilde_card">
 						<mat-list-item>
@@ -557,6 +564,7 @@
 							<div mat-line *ngIf="jr._id.desc!=='' && jr._id.desc!==undefined">{{jr._id.desc}}</div>
 						</mat-list-item>
 					</mat-card>
+				</div>
 				</div>
 
 			</mat-tab>
