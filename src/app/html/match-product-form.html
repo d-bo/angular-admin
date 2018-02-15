@@ -20,7 +20,7 @@
 						</td>
 						<td style="text-align: center">
 							<button 
-								mat-mini-fab (click)="cleanAndReloadGest($event)"
+								mat-mini-fab (click)="cleanAndReloadGest()"
 								type="button" color="basic">
 								<mat-icon class="mat-24">clear</mat-icon>
 							</button>
@@ -46,7 +46,7 @@
 							</mat-autocomplete>
 						</td>
 						<td style="text-align: center">
-							<button mat-mini-fab (click)="cleanAndReloadGest($event)"
+							<button mat-mini-fab (click)="cleanAndReloadGest()"
 								type="button" color="basic">
 								<mat-icon class="mat-24">clear</mat-icon>
 							</button>
@@ -72,7 +72,7 @@
 		</div>
 
 		<div style="text-align: center">
-			<pagination-controls (pageChange)="getPageGestori($event)" id="match_pr_paginate" previousLabel="Пред." nextLabel="След."></pagination-controls>
+			<pagination-controls id="match_pr_paginate" previousLabel="Пред." nextLabel="След."></pagination-controls>
 		</div>
 
 	    <div *ngFor="let br of asyncGestoriProducts | async | paginate: { id: 'match_pr_paginate', itemsPerPage: pageSize, currentPage: p, totalItems: totalMatch }" style="max-width: 580px">
@@ -210,8 +210,7 @@
 				</div>
 
 				<div style="text-align: center">
-					<pagination-controls (pageChange)="getPageRive($event)" 
-						id="match_pr_rive_paginate" previousLabel="Пред." 
+					<pagination-controls id="match_pr_rive_paginate" previousLabel="Пред." 
 						nextLabel="След."></pagination-controls>
 				</div>
 
@@ -374,7 +373,7 @@
 				</div>
 
 				<div style="text-align: center">
-					<pagination-controls (pageChange)="getPageLetu($event)" id="match_pr_letu_paginate" previousLabel="Пред." nextLabel="След."></pagination-controls>
+					<pagination-controls id="match_pr_letu_paginate" previousLabel="Пред." nextLabel="След."></pagination-controls>
 				</div>
 
 				<div style="margin: 0 7px">
@@ -510,7 +509,7 @@
 				</div>
 
 				<div style="text-align: center">
-					<pagination-controls (pageChange)="getPageIlde($event)" id="match_pr_ilde_paginate" previousLabel="Пред." nextLabel="След."></pagination-controls>
+					<pagination-controls id="match_pr_ilde_paginate" previousLabel="Пред." nextLabel="След."></pagination-controls>
 				</div>
 
 				<div style="margin: 0 7px">
