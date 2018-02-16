@@ -1,5 +1,6 @@
 {
   "name": "cat-admin",
+  "author": "Dmitry Bolkhovitinov",
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
@@ -11,9 +12,10 @@
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
-"build": {
+  "build": {
     "appId": "com.example.app"
-},
+  },
+  "main": "main.js",
   "private": true,
   "dependencies": {
     "@angular/animations": "^4.4.6",
@@ -37,6 +39,7 @@
     "zone.js": "^0.8.14"
   },
   "devDependencies": {
+    "electron-builder": "^20.0.4",
     "@angular/cli": "1.3.0",
     "@angular/compiler-cli": "^4.2.4",
     "@angular/language-service": "^4.2.4",

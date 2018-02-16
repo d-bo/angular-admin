@@ -72,7 +72,7 @@
 		</div>
 
 		<div style="text-align: center">
-			<pagination-controls id="match_pr_paginate" previousLabel="Пред." nextLabel="След."></pagination-controls>
+			<pagination-controls (pageChange)="getPageGestori($event, undefined, undefined)" id="match_pr_paginate" previousLabel="Пред." nextLabel="След."></pagination-controls>
 		</div>
 
 	    <div *ngFor="let br of asyncGestoriProducts | async | paginate: { id: 'match_pr_paginate', itemsPerPage: pageSize, currentPage: p, totalItems: totalMatch }" style="max-width: 580px">
@@ -210,7 +210,7 @@
 				</div>
 
 				<div style="text-align: center">
-					<pagination-controls id="match_pr_rive_paginate" previousLabel="Пред." 
+					<pagination-controls (pageChange)="getPageRive($event, undefined)" id="match_pr_rive_paginate" previousLabel="Пред." 
 						nextLabel="След."></pagination-controls>
 				</div>
 
@@ -373,7 +373,7 @@
 				</div>
 
 				<div style="text-align: center">
-					<pagination-controls id="match_pr_letu_paginate" previousLabel="Пред." nextLabel="След."></pagination-controls>
+					<pagination-controls (pageChange)="getPageLetu($event, undefined)" id="match_pr_letu_paginate" previousLabel="Пред." nextLabel="След."></pagination-controls>
 				</div>
 
 				<div style="margin: 0 7px">
@@ -509,7 +509,7 @@
 				</div>
 
 				<div style="text-align: center">
-					<pagination-controls id="match_pr_ilde_paginate" previousLabel="Пред." nextLabel="След."></pagination-controls>
+					<pagination-controls (pageChange)="getPageIlde($event, undefined)" id="match_pr_ilde_paginate" previousLabel="Пред." nextLabel="След."></pagination-controls>
 				</div>
 
 				<div style="margin: 0 7px">
