@@ -4,7 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import 'hammerjs';
 
-import { AppComponent, DialogOverviewExampleDialogComponent } from './app.component';
+import { AppComponent } from './app.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -26,12 +26,16 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatNativeDateModule } from '@angular/material';
+import { MatchListComponent } from './match.list.component';
+import { ConfirmDialogComponent } from './confirm.dialog.component';
+import { DialogOverviewExampleDialogComponent } from './dialog.overview.example.dialog.component';
+import { WarnDialogComponent } from './warn.dialog.component';
 
 import { GestoriProductFormComponent, SubmitDialog } from './gestori.product.form.component';
-import { MatchListComponent, MatchProductFormComponent, MatchDialogComponent, WarnDialogComponent, ConfirmDialogComponent } from './match.product.form.component';
+import { MatchProductFormComponent, MatchDialogComponent } from './match.product.form.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatchService } from './match.service';
-import { GlobalService } from './global.service';
+import { MatchService } from './service/match.service';
+import { GlobalService } from './service/global.service';
 import { BaseRequestOptions, Headers } from '@angular/http';
 import { RequestOptions } from '@angular/http';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -104,6 +108,8 @@ export class CustomRequestOptions extends BaseRequestOptions {
     GlobalService,
     MatchService,
     MatchListComponent,
+    ConfirmDialogComponent,
+    WarnDialogComponent,
     {provide: RequestOptions, useClass: CustomRequestOptions}
   ],
   bootstrap: [AppComponent]

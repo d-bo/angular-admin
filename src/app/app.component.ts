@@ -10,7 +10,8 @@ import { MatAutocomplete } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import { PaginationInstance } from 'ngx-pagination/dist/ngx-pagination.module';
 import { EventEmitter } from '@angular/core';
-import { GlobalService } from './global.service';
+import { GlobalService } from './service/global.service';
+import { DialogOverviewExampleDialogComponent } from './dialog.overview.example.dialog.component';
 
 import { DataSource } from '@angular/cdk/table';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -28,26 +29,11 @@ import 'rxjs/add/operator/mergeMap';
 import _ from 'lodash';
 
 
+
 // holy shit
 interface IServerResponse {
   data: any;
   count: number;
-}
-
-@Component({
-  selector: 'dialog-overview-example-dialog',
-  templateUrl: './html/dialog-overview-example-dialog.html',
-})
-
-export class DialogOverviewExampleDialogComponent {
-
-    constructor(
-      public dialogRef: MatDialogRef<DialogOverviewExampleDialogComponent>,
-      @Inject(MAT_DIALOG_DATA) public data: any) {}
-
-    onNoClick(): void {
-      this.dialogRef.close();
-    }
 }
 
 @Component({

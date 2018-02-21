@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { FormControl } from '@angular/forms';
 import { URLSearchParams } from "@angular/http";
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { GlobalService } from './global.service';
+import { GlobalService } from './service/global.service';
 
 import 'rxjs/add/operator/mergeMap';
 

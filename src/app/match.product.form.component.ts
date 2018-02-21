@@ -8,8 +8,10 @@ import { URLSearchParams } from '@angular/http';
 import { MatSnackBar } from '@angular/material';
 import { MatChip, MatChipList } from '@angular/material';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { MatchService } from './match.service';
-import { GlobalService } from './global.service';
+import { MatchService } from './service/match.service';
+import { GlobalService } from './service/global.service';
+import { WarnDialogComponent } from './warn.dialog.component';
+import { MatchListComponent } from './match.list.component';
 import { MatExpansionPanel,  MatExpansionPanelTitle, MatExpansionPanelHeader, MatExpansionPanelActionRow, MatAccordion, MatExpansionPanelDescription } from '@angular/material';
 import { MatDatepickerIntl, MatDatepicker, MatDatepickerInput, MatDatepickerToggle } from '@angular/material/datepicker';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
@@ -25,158 +27,6 @@ import 'rxjs/add/operator/delay';
 import 'rxjs/add/operator/mergeMap';
 
 import _ from 'lodash';
-
-
-
-@Component({
-    selector: 'match-list',
-    templateUrl: './html/match-list.html',
-})
-
-// MatchListComponent
-export class MatchListComponent implements OnInit {
-
-    mservice: any;
-    res: any;
-    asyncRes: Observable<any>;
-    isMatchListLoaded: boolean;
-
-    constructor(
-            private matchService: MatchService,
-            public mdialog: MatDialog
-        ) {
-            this.mservice = matchService;
-        }
-
-    ngOnInit(): void {
-        this.getListMatched(1);
-    }
-
-    add(save_data): void {
-        if (this.res !== undefined) {
-            this.res.push();
-        }
-    }
-
-    addElement(item): void {
-        if (item !== undefined) {
-            this.res.push(item);
-        }
-        console.log('MatchListComponent item undefined');
-    }
-
-    switchVerified(event, item) {
-        alert(item);
-    }
-
-    getListMatched(page: number) {
-        this.isMatchListLoaded = true;
-        this.asyncRes = this.serverCallListObservable(page)
-            .do(res => {
-                console.log(res);
-                this.isMatchListLoaded = undefined;
-            }).map(res => res);
-    }
-
-    clearMatchedItems(matched_obj) {
-        //alert(matched_obj['$oid']);
-        console.log("MATCHED OBJ: "+matched_obj)
-        let dialog = this.mdialog.open(ConfirmDialogComponent, {
-            data: {
-                'msg': 'Вы уверены ?',
-                'oid': matched_obj
-            }
-        });
-    }
-
-    serverCallListObservable(page: number) {
-        return this.mservice.getMatched(1);
-    }
-}
-
-
-
-@Component({
-  selector: 'confirm-dialog',
-  templateUrl: './html/confirm-dialog.html'
-})
-
-export class ConfirmDialogComponent {
-
-    constructor(
-            private dialogRefMatch: MatDialogRef<ConfirmDialogComponent>,
-            private http: HttpClient,
-            private globals: GlobalService,
-            public mdialog: MatDialog,
-            public MLC: MatchListComponent,
-            @Inject(MAT_DIALOG_DATA) public data: any
-        ) {}
-
-    onYesClick(oid): void {
-        var MLCe = this.MLC;
-        var oids = oid;
-        this.dialogRefMatch.close();
-        this.http.post(
-            'http://' + this.globals.MAIN_IP + ':5000/v1/matchDelete',
-            {'oid': oids},
-            {
-                headers: this.globals.noCache()
-            }
-        ).subscribe(
-            x => {},
-            err => {
-                const dialogRef = this.mdialog.open(WarnDialogComponent, {
-                  data: {
-                      'msg': 'ошибка: ' + err
-                    }
-                });
-            },
-            () => {
-                const dialogRef = this.mdialog.open(WarnDialogComponent, {
-                  data: {
-                      'msg': 'OK !'
-                    }
-                });
-                MLCe.getListMatched(1);
-                document.getElementById("matched_"+oids).remove();
-            }
-        );
-    }
-
-    onNoClick(): void {
-      this.dialogRefMatch.close();
-    }
-}
-
-
-
-@Component({
-    selector: 'warn-dialog',
-    templateUrl: './html/warn-dialog.html',
-})
-
-export class WarnDialogComponent {
-
-    constructor(
-            private dialogRefMatch: MatDialogRef<WarnDialogComponent>,
-            private http: HttpClient,
-            @Inject(MAT_DIALOG_DATA) public data: any,
-            private mlist: MatchListComponent
-        ) {}
-
-    onYesClick(): void {
-        // pass
-    }
-
-    onNoClick(): void {
-      this.dialogRefMatch.close();
-    }
-
-    refreshMatchList() {
-        this.mlist.getListMatched(1);
-    }
-}
-
 
 
 
