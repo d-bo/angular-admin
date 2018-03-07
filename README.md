@@ -8,7 +8,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 # Start
 cd angular-admin
 sudo docker build --no-cache -t ga/angular-admin .
-sudo docker run -d --network host --log-driver syslog ga/angular-admin:latest
+sudo docker run -d --network host --log-driver syslog gapple/angular-admin:latest
 # Stop
 sudo docker ps
 sudo docker kill <image_name>
