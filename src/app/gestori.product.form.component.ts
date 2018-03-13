@@ -6,6 +6,7 @@ import { FormControl } from '@angular/forms';
 import { URLSearchParams } from "@angular/http";
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { GlobalService } from './service/global.service';
+import { MatPaginatorIntl, MatPaginator, PageEvent } from '@angular/material/paginator';
 
 import 'rxjs/add/operator/mergeMap';
 
@@ -57,6 +58,13 @@ export class GestoriProductFormComponent {
     loading: any;
     GroupsControl = new FormControl();
     submitted = false;
+
+    // MatPaginator Inputs
+    length = 100;
+    pageSizeOptions = [5, 10, 25, 100];
+
+    // MatPaginator Output
+    pageEvent: PageEvent;
 
     constructor(
         public http: HttpClient,
