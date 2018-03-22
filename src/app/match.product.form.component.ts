@@ -113,27 +113,32 @@ export class MatchProductFormComponent implements OnInit {
     asyncLetuProducts: Observable<any>;
     asyncIldeProducts: Observable<any>;
     asyncRiveProducts: Observable<any>;
+    asyncPodrProducts: Observable<any>;
 
     filteredMatchOptions: Observable<any>;
     filteredLetuMatchOptions: Observable<any>;
     filteredRiveMatchOptions: Observable<any>;
     filteredIldeMatchOptions: Observable<any>;
+    filteredPodrMatchOptions: Observable<any>;
 
     filteredTextOptions: Observable<any>;
     filteredTextOptionsLetu: Observable<any>;
     filteredTextOptionsRive: Observable<any>;
     filteredTextOptionsIlde: Observable<any>;
+    filteredTextOptionsPodr: Observable<any>;
 
     asyncFulltextSearchGest: Observable<any>;
     asyncFulltextSearchLetu: Observable<any>;
     asyncFulltextSearchIlde: Observable<any>;
     asyncFulltextSearchRive: Observable<any>;
+    asyncFulltextSearchPodr: Observable<any>;
 
     p: any;
     p1: any;
     p2: any;
     p3: any;
     p4: any;
+    p5: any;
     pgTxt: any;
     pageSize = 7;
     totalMatch: number;
@@ -141,32 +146,38 @@ export class MatchProductFormComponent implements OnInit {
     totalMatch2: number;
     totalMatch3: number;
     totalMatch4: number;
+    totalMatch5: number;
     totalMatchGestTxt: number;
 
     myCompleteMatchControl = new FormControl();
     myCompleteLetuMatchControl = new FormControl();
     myCompleteIldeMatchControl = new FormControl();
     myCompleteRiveMatchControl = new FormControl();
+    myCompletePodrMatchControl = new FormControl();
 
     myTextSearchControl = new FormControl();
     myTextSearchControlLetu = new FormControl();
     myTextSearchControlIlde = new FormControl();
     myTextSearchControlRive = new FormControl();
+    myTextSearchControlPodr = new FormControl();
 
     gestoriSelectedBrand: any;
     riveSelectedBrand: any;
     letuSelectedBrand: any;
     ildeSelectedBrand: any;
+    podrSelectedBrand: any;
 
     gestSelectedItem: any;
     riveSelectedItem: any;
     letuSelectedItem: any;
     ildeSelectedItem: any;
+    podrSelectedItem: any;
 
     isGestLoaded: boolean;
     isRiveLoaded: boolean;
     isIldeLoaded: boolean;
     isLetuLoaded: boolean;
+    isPodrLoaded: boolean;
     isMatchListLoaded: boolean;
 
     // Force load by keyword
@@ -175,6 +186,7 @@ export class MatchProductFormComponent implements OnInit {
     forceLoadRiveKeyword: any;
     forceLoadLetuKeyword: any;
     forceLoadIldeKeyword: any;
+    forceLoadPodrKeyword: any;
 
     inputSearchBrand: string;
 
@@ -215,12 +227,23 @@ export class MatchProductFormComponent implements OnInit {
                 'http://' + this.globals.MAIN_IP + ':5000/v1/brands?s=' + val + '&p=rive'
             ));
 
+        this.filteredPodrMatchOptions = this.myCompletePodrMatchControl.valueChanges
+            .flatMap(val => this.globals.get(
+                'http://' + this.globals.MAIN_IP + ':5000/v1/brands?s=' + val + '&p=podr'
+            ));
+
 
 
         // FULL TXT GEST
         this.filteredTextOptions = this.myTextSearchControl.valueChanges
         .flatMap(val => this.globals.get(
             'http://' + this.globals.MAIN_IP + ':5000/v1/ft?s=' + val + '&b=' + this.myCompleteMatchControl.value + '&p=gest'
+        ));
+
+        // FULL TXT PODR
+        this.filteredTextOptions = this.myTextSearchControlPodr.valueChanges
+        .flatMap(val => this.globals.get(
+            'http://' + this.globals.MAIN_IP + ':5000/v1/ft?s=' + val + '&b=' + this.myCompletePodrMatchControl.value + '&p=podr'
         ));
 
         // FULL TXT LETU
@@ -244,6 +267,7 @@ export class MatchProductFormComponent implements OnInit {
         this.getPageLetu(1, undefined);
         this.getPageIlde(1, undefined);
         this.getPageRive(1, undefined);
+        this.getPagePodr(1, undefined);
     }
 
     gestMarkChecked(gest_obj, uncheck) {
@@ -292,6 +316,11 @@ export class MatchProductFormComponent implements OnInit {
         this.letuSelectedBrand = undefined;
         this.getPageLetu(1, undefined);
     }
+    cleanAndReloadPodr() {
+        this.myCompletePodrMatchControl.reset();
+        this.podrSelectedBrand = undefined;
+        this.getPagePodr(1, undefined);
+    }
 
     // No match
     letuNoMatch() {
@@ -318,6 +347,16 @@ export class MatchProductFormComponent implements OnInit {
         this.ildeSelectedItem = undefined;
         this.snackBar.open(
             "Нет совпадений ILDE",
+            "",
+            {'duration': 700}
+        );
+    }
+
+    // No match
+    podrNoMatch() {
+        this.podrSelectedItem = undefined;
+        this.snackBar.open(
+            "Нет совпадений PODRUGKA",
             "",
             {'duration': 700}
         );
@@ -422,6 +461,23 @@ export class MatchProductFormComponent implements OnInit {
         }
     }
 
+    markPodr(item_obj) {
+        const el = document.getElementById('podr_' + item_obj.artic);
+        const attribute = el.getAttribute('podrmarked');
+
+        this.unselectProds("podr_card");
+
+        if (attribute === 'yes') {
+            el.style.filter = 'invert(0%)';
+            el.setAttribute('podrmarked', 'no');
+            this.podrSelectedItem = undefined;
+        } else {
+            el.style.filter = 'invert(100%)';
+            el.setAttribute('podrmarked', 'yes');
+            this.podrSelectedItem = item_obj;
+        }
+    }
+
     confirmMatchRive() {
         if (this.gestSelectedItem === '' || this.gestSelectedItem === undefined) {
             const dialogRef = this.mdialog.open(WarnDialogComponent, {
@@ -496,6 +552,11 @@ export class MatchProductFormComponent implements OnInit {
     getLetuBrands(event, item) {
         this.letuSelectedBrand = event.source.value;
         this.getPageLetu(1, item);
+    }
+
+    getPodrBrands(event, item) {
+        this.podrSelectedBrand = event.source.value;
+        this.getPagePodr(1, item);
     }
 
     // search gestori global
@@ -614,6 +675,25 @@ export class MatchProductFormComponent implements OnInit {
             }).map(res => res.data);
     }
 
+    getPagePodr(page: number, keyword: any) {
+        this.isPodrLoaded = true;
+        this.asyncPodrProducts = this.serverCallPodrObservable(page, this.podrSelectedBrand)
+            .do(res => {
+                this.totalMatch5 = res.count;
+                // total found products check
+                if (res.data.length < 1) {
+                    const dialogRef = this.mdialog.open(WarnDialogComponent, {
+                        data: {
+                            'msg': 'Не найдено'
+                          }
+                      });
+                    this.totalMatch5 = 0;
+                }
+                this.p5 = page;
+                this.isPodrLoaded = undefined;
+            }).map(res => res.data);
+    }
+
     serverCallGestoriObservable(page: number, brand: string, artic: any, keyword: any): Observable<any> {
         const perPage = this.pageSize;
         const start = (page - 1) * perPage;
@@ -646,6 +726,7 @@ export class MatchProductFormComponent implements OnInit {
     }
 
     serverCallIldeObservable(page: number, search: string): Observable<any> {
+
         const start2 = (page - 1) * this.pageSize;
         const end2 = start2 + this.pageSize;
         let kw = this.myTextSearchControlIlde.value;
@@ -681,4 +762,24 @@ export class MatchProductFormComponent implements OnInit {
             'http://' + this.globals.MAIN_IP + ':5000/v1/letu_products?page=' + page + '&perPage=' + perPage1 + '&kw=' + kw + '&search=' + search
         );
     }
+
+    serverCallPodrObservable(page: number, search: string): Observable<any> {
+        const perPage1 = this.pageSize;
+        const start1 = (page - 1) * perPage1;
+        const end1 = start1 + perPage1;
+        let kw = this.myTextSearchControlPodr.value;
+        search = this.myCompletePodrMatchControl.value;
+
+        // Force search by keyword
+        if (this.forceLoadPodrKeyword !== undefined) {
+            kw = this.forceLoadPodrKeyword;
+            search = undefined;
+        }
+
+        // search by article instead of huge string
+        return this.globals.get(
+            'http://' + this.globals.MAIN_IP + ':5000/v1/podr_products?page=' + page + '&perPage=' + perPage1 + '&kw=' + kw + '&search=' + search
+        );
+    }
+
 }

@@ -566,10 +566,136 @@
 					</mat-card>
 				</div>
 				</div>
-
 			</mat-tab>
-			<mat-tab label="*">
-				<mat-icon>home</mat-icon>
+
+			<mat-tab label="PODRUGKA">
+				<div style="padding: 10px">
+
+					<!-- PODRUGKA BRAND SEARCH -->
+					<div>
+						<table width="100%">
+							<tr>
+								<td style="width: 90%">
+									<mat-input-container class="example-full-width">
+											<input type="text" matInput placeholder="Брэнд Podrugka"
+											[formControl]="myCompletePodrMatchControl" [matAutocomplete]="autoPodr" #brandInputPodr>
+									</mat-input-container>
+
+									<mat-autocomplete #autoPodr="matAutocomplete">
+										<mat-option *ngFor="let option_podr of filteredPodrMatchOptions | async" 
+										[value]="option_podr.val">
+											{{ option_podr.val }}
+										</mat-option>
+									</mat-autocomplete>
+								</td>
+								<td style="text-align: center">
+									<button mat-mini-fab (click)="cleanAndReloadPodr()"
+										type="button" color="basic">
+										<mat-icon class="mat-24">clear</mat-icon>
+									</button>
+								</td>
+							</tr>
+						</table>
+					</div>
+
+					<!-- PODRUGKA FULL TEXT SEARCH -->
+					<div>
+						<table width="100%">
+							<tr>
+								<td style="width: 90%">
+									<mat-input-container class="example-full-width">
+										<input type="text" matInput placeholder="По имени"
+										[formControl]='myTextSearchControlPodr' [matAutocomplete]="autoTextPodr" #fulltextInputPodr>
+									</mat-input-container>
+									<mat-autocomplete #autoTextPodr="matAutocomplete">
+										<mat-option *ngFor="let option_text_complete_podr of filteredTextOptionsPodr | async" 
+										[value]="option_text_complete_podr.pn" 
+										(onSelectionChange)="getPodrBrands($event, option_text_complete_podr.articul)">
+											<div style="font-size: 14px"><img src="http://static.iledebeaute.ru{{option_text_complete_podr.image}}" 
+												height="30px" width="30px" style="padding-right: 7px" />{{option_text_complete_podr.brand}} / <b>{{ option_text_complete_podr.pn}}</b> / {{ option_text_complete_podr.articul}}</div>
+										</mat-option>
+									</mat-autocomplete>
+								</td>
+								<td style="text-align: center">
+									<button mat-mini-fab (click)="cleanAndReloadPodr()"
+										type="button" color="basic">
+										<mat-icon class="mat-24">clear</mat-icon>
+									</button>
+								</td>
+							</tr>
+						</table>
+						<div style="text-align: center">
+							<span style="margin-right: 14px">
+								<button mat-fab type="button" color="primary" (click)="podeBrandPlusKeyword()">
+									<mat-icon class="mat-24">search</mat-icon>
+								</button>
+							</span>
+							<span style="margin-right: 14px">
+								<button mat-fab color="accent" (click)="confirmMatchPodr()">
+									<mat-icon class="mat-24">add</mat-icon>
+								</button>
+							</span>
+							<span>
+								<mat-button-toggle (click)="podrNoMatch()">Нет совпадений</mat-button-toggle>
+							</span>
+						</div>
+					</div>
+
+				</div>
+
+				<div class="ga-progress-bar">
+					<div *ngIf="isPodrLoaded!==undefined">
+						<mat-progress-bar mode="buffer"></mat-progress-bar>
+					</div>
+				</div>
+
+				<div style="text-align: center">
+					<pagination-controls (pageChange)="getPagePodr($event, undefined)" id="match_pr_podr_paginate" previousLabel="Пред." nextLabel="След."></pagination-controls>
+				</div>
+
+				<div style="margin: 0 7px">
+				<div *ngFor="let qr of asyncPodrProducts | async | paginate: { id: 'match_pr_podr_paginate', itemsPerPage: pageSize, currentPage: p5, totalItems: totalMatch5 }">
+					<mat-card [attr.id]="'podr_'+qr._id.artic" class="podr_card">
+						<mat-list-item>
+							<div mat-line style="position: relative">
+			            		<div *ngIf="qr._id.gest_match_code!==undefined" style="position: absolute;top: -10px;right: 0px">
+									<button mat-icon-button style="color: #3f51b5">
+										<mat-icon>lock</mat-icon>
+									</button>
+			            		</div>
+								<div *ngIf="qr._id.url!==''">
+									<a href="{{qr._id.url}}" target="_blank" 
+									style="text-decoration: none">
+										<h2 class="h2-c">{{qr._id.name}}</h2>
+									</a>
+								</div>
+								<div *ngIf="qr._id.url==''">
+									<h2 class="h2-c">{{qr._id.name}}</h2>
+								</div>
+							</div>
+							<div mat-line>{{qr._id.navi}}</div>
+							<div mat-line>
+								<mat-chip-list style="padding: 0;margin: 0">
+									<span style="margin-right: 7px;cursor: pointer" *ngIf="qr._id.img!=='' && qr._id.img!==undefined">
+										<img (click)="showImg(qr._id.img)" src="{{qr._id.img}}" width="27px" height="27px" />
+									</span>
+									<mat-chip *ngIf="qr._id.brand!=='' && qr._id.brand!==undefined">{{qr._id.brand}}</mat-chip>
+									<mat-chip *ngIf="qr._id.country!=='' && qr._id.country!==undefined">{{qr._id.country}}</mat-chip>
+									<mat-chip *ngIf="qr._id.articul!=='' && qr._id.articul!==undefined">{{qr._id.articul}}</mat-chip>
+									<mat-chip *ngIf="qr._id.price!=='' && qr._id.price!==undefined" color="primary"><b>{{qr._id.price}} руб.</b></mat-chip>
+									<mat-chip *ngIf="qr._id.date!=='' && qr._id.date!==undefined" color="primary">{{qr._id.date}}</mat-chip>
+									<span>
+										<button mat-icon-button color="basic">
+											<mat-icon aria-label="Example icon-button with a heart icon">cached</mat-icon>
+										</button>
+									</span>
+								</mat-chip-list>
+							</div>
+							<div mat-line *ngIf="qr._id.desc!=='' && qr._id.desc!==undefined">{{qr._id.desc}}</div>
+						</mat-list-item>
+					</mat-card>
+				</div>
+				</div>
 			</mat-tab>
 		</mat-tab-group>
 	</div>
