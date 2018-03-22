@@ -40,8 +40,8 @@
 			<td class="ga-tr-1" width="25%" style="position: relative">
 				<mat-card *ngIf="prods.gest?.length > 0">
 					<div class="ga-h2">{{prods.gest[0].Name_e}}</div>
+					<div class="ga-brand">{{prods.gest[0].name_brand}}</div>
 					<div class="ga-h2">{{prods.gest[0].Name}}</div>
-					<div class="ga-brand">{{prods.gest[0].cod_brand}}</div>
 					<div>{{prods.gest[0].Barcod}}</div>
 					<div>{{prods.gest[0].Artic}}</div>
 					<div *ngIf="prods.gest[0].Retail_price" class="price-matchlist">{{prods.gest[0].Retail_price}} руб.</div>

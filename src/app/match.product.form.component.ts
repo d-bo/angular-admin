@@ -506,6 +506,13 @@ export class MatchProductFormComponent implements OnInit {
         this.getPageGestori(1, brand, txt);
     }
 
+    // search gestori cod_good
+    gestoriCodgood(cod_good) {
+        this.myTextSearchControl.setValue(cod_good);
+        this.getPageGestori(1, "", cod_good);
+        window.scrollTo(0, 10);
+    }
+
     // search gestori global
     riveBrandPlusKeyword() {
         this.forceLoadRiveKeyword = this.forceLoadLetuKeyword = this.forceLoadIldeKeyword = undefined;

@@ -547,6 +547,7 @@
 									<span style="margin-right: 7px;cursor: pointer" *ngIf="jr._id.image!=='' && jr._id.image!==undefined">
 										<img (click)="showImg('http://static.iledebeaute.ru'+jr._id.image)" src="http://static.iledebeaute.ru{{jr._id.image}}" width="27px" height="27px" />
 									</span>
+									<mat-chip (click)="gestoriCodgood(jr._id.gestori)" color="primary" selected="true" style="cursor: pointer" *ngIf="jr._id.gestori!=='' && jr._id.gestori!==undefined">{{jr._id.gestori}}</mat-chip>
 									<mat-chip *ngIf="jr._id.brand!=='' && jr._id.brand!==undefined">{{jr._id.brand}}</mat-chip>
 									<mat-chip *ngIf="jr._id.artic!=='' && jr._id.artic!==undefined">{{jr._id.artic}}</mat-chip>
 									<mat-chip *ngIf="jr._id.listingprice!=='' && jr._id.listingprice!==undefined" color="primary"><b>{{jr._id.listingprice}} руб.</b></mat-chip>

@@ -143,9 +143,3 @@ a h2 {
   -webkit-transition: all 1s linear;
   transition: all 1s linear;
 }
-
-.svg-shadow {
-    /* Use -webkit- only if supporting: Chrome < 54, iOS < 9.3, Android < 4.4.4 */
-    -webkit-filter: drop-shadow( 3px 3px 13px #fff ); 
-            filter: drop-shadow( 3px 3px 13px #fff );
-}
