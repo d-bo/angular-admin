@@ -11,6 +11,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { MatchService } from './service/match.service';
 import { GlobalService } from './service/global.service';
 import { WarnDialogComponent } from './warn.dialog.component';
+import { MatchDialogComponent } from './match.dialog.component';
 import { MatchListComponent } from './match.list.component';
 import { MatExpansionPanel,  MatExpansionPanelTitle, MatExpansionPanelHeader, MatExpansionPanelActionRow, MatAccordion, MatExpansionPanelDescription } from '@angular/material';
 import { MatDatepickerIntl, MatDatepicker, MatDatepickerInput, MatDatepickerToggle } from '@angular/material/datepicker';
@@ -31,58 +32,9 @@ import _ from 'lodash';
 
 
 @Component({
-  selector: 'match-dialog',
-  templateUrl: './html/match-dialog.html',
-})
-
-export class MatchDialogComponent {
-
-    constructor(
-            public dialogRefMatch: MatDialogRef<MatchDialogComponent>,
-            public mdialog: MatDialog,
-            private http: HttpClient,
-            private globals: GlobalService,
-            @Inject(MAT_DIALOG_DATA) public data: any
-        ) {}
-
-    onNoClick(): void {
-      this.dialogRefMatch.close();
-    }
-
-    onYesClick(gest, rive, ilde, letu): void {
-        this.dialogRefMatch.close();
-        this.http.post(
-            'http://' + this.globals.MAIN_IP + ':5000/v1/match',
-            {'gest': gest, 'rive': rive, 'ilde': ilde, 'letu': letu},
-            {
-                headers: this.globals.noCache()
-            }
-        ).subscribe(
-            x => {},
-            err => {
-                const dialogRef = this.mdialog.open(WarnDialogComponent, {
-                  data: {
-                      'msg': 'ошибка: ' + err
-                    }
-                });
-            },
-            () => {
-                const dialogRef = this.mdialog.open(WarnDialogComponent, {
-                  data: {
-                      'msg': 'OK !'
-                    }
-                });
-            }
-        );
-    }
-}
-
-@Component({
     selector: 'match-product-form',
     templateUrl: './html/match-product-form.html'
 })
-
-
 
 export class MatchProductFormComponent implements OnInit {
 
@@ -576,20 +528,26 @@ export class MatchProductFormComponent implements OnInit {
 
     // search gestori global
     riveBrandPlusKeyword() {
-        this.forceLoadRiveKeyword = this.forceLoadLetuKeyword = this.forceLoadIldeKeyword = undefined;
+        this.forceLoadPodrKeyword = this.forceLoadRiveKeyword = this.forceLoadLetuKeyword = this.forceLoadIldeKeyword = undefined;
         this.getPageRive(1, this.myCompleteRiveMatchControl.value);
     }
 
     // search gestori global
     letuBrandPlusKeyword() {
-        this.forceLoadRiveKeyword = this.forceLoadLetuKeyword = this.forceLoadIldeKeyword = undefined;
+        this.forceLoadPodrKeyword = this.forceLoadRiveKeyword = this.forceLoadLetuKeyword = this.forceLoadIldeKeyword = undefined;
         this.getPageLetu(1, this.myCompleteLetuMatchControl.value);
     }
 
     // search gestori global
     ildeBrandPlusKeyword() {
-        this.forceLoadRiveKeyword = this.forceLoadLetuKeyword = this.forceLoadIldeKeyword = undefined;
+        this.forceLoadPodrKeyword = this.forceLoadRiveKeyword = this.forceLoadLetuKeyword = this.forceLoadIldeKeyword = undefined;
         this.getPageIlde(1, this.myCompleteIldeMatchControl.value);
+    }
+
+    // search gestori global
+    podrBrandPlusKeyword() {
+        this.forceLoadPodrKeyword = this.forceLoadRiveKeyword = this.forceLoadLetuKeyword = this.forceLoadIldeKeyword = undefined;
+        this.getPagePodr(1, this.myCompletePodrMatchControl.value);
     }
 
     // 

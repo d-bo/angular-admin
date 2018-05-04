@@ -41,7 +41,8 @@ import { MatchListComponent } from './match.list.component';
 import { ConfirmDialogComponent } from './confirm.dialog.component';
 import { WarnDialogComponent } from './warn.dialog.component';
 import { GestoriProductFormComponent, SubmitDialog } from './gestori.product.form.component';
-import { MatchProductFormComponent, MatchDialogComponent } from './match.product.form.component';
+import { MatchProductFormComponent } from './match.product.form.component';
+import { MatchDialogComponent } from './match.dialog.component'
 import { DialogOverviewExampleDialogComponent } from './dialog.overview.example.dialog.component';
 
 
