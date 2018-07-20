@@ -2,6 +2,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 import 'hammerjs';
 
 import { MatInputModule } from '@angular/material/input';
@@ -35,15 +36,26 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatPaginatorModule } from '@angular/material/paginator';
 
 import { AppComponent } from './app.component';
+import { PageNotFoundComponent } from './404.component';
 import { MatchService } from './service/match.service';
 import { GlobalService } from './service/global.service';
 import { MatchListComponent } from './match.list.component';
 import { ConfirmDialogComponent } from './confirm.dialog.component';
+import { SigninComponent } from './signin.component';
+import { LoaderComponent } from './loader.component';
+import { DashboardComponent } from './dashboard.component';
 import { WarnDialogComponent } from './warn.dialog.component';
 import { GestoriProductFormComponent, SubmitDialog } from './gestori.product.form.component';
 import { MatchProductFormComponent } from './match.product.form.component';
 import { MatchDialogComponent } from './match.dialog.component'
 import { DialogOverviewExampleDialogComponent } from './dialog.overview.example.dialog.component';
+
+const appRoutes: Routes = [
+  { path: '', component: AppComponent },
+  { path: 'signin', component: SigninComponent },
+  { path: 'dashboard', component: DashboardComponent },
+  { path: '**', component: PageNotFoundComponent }
+];
 
 
 
@@ -59,6 +71,10 @@ export class CustomRequestOptions extends BaseRequestOptions {
 @NgModule({
   declarations: [
     AppComponent,
+    SigninComponent,
+    LoaderComponent,
+    DashboardComponent,
+    PageNotFoundComponent,
     DialogOverviewExampleDialogComponent,
     GestoriProductFormComponent,
     MatchProductFormComponent,
@@ -76,6 +92,10 @@ export class CustomRequestOptions extends BaseRequestOptions {
     ConfirmDialogComponent
   ],
   imports: [
+    RouterModule.forRoot(
+      appRoutes,
+      { enableTracing: true }
+    ),
     BrowserAnimationsModule,
     MatInputModule,
     MatButtonModule,

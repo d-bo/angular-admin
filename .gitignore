@@ -43,3 +43,6 @@ yarn-error.log
 Thumbs.db
 
 npm-debug.log.*
+
+# Cordova 
+www

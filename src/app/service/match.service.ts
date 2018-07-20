@@ -15,7 +15,7 @@ export class MatchService {
 
     getMatched(page: any): Observable<any> {
         return this.globals.get(
-            'http://' + this.globals.MAIN_IP + ':5000/v1/getMatched?perPage=10&page=' + page
+            this.globals.MAIN_IP + '/v1/getMatched?perPage=10&page=' + page
         );
     }
 }

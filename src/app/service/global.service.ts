@@ -7,7 +7,7 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 @Injectable()
 export class GlobalService {
 
-    MAIN_IP = '192.168.65.243';
+    MAIN_IP = 'https://python-cat-api.eu-gb.mybluemix.net';
     constructor(
         private http: HttpClient
     ) {}

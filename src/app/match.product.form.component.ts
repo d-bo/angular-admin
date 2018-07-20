@@ -33,7 +33,8 @@ import _ from 'lodash';
 
 @Component({
     selector: 'match-product-form',
-    templateUrl: './html/match-product-form.html'
+    templateUrl: './html/match-product-form.html',
+    styleUrls: ['./css/bootstrap-grid.css']
 })
 
 export class MatchProductFormComponent implements OnInit {
@@ -161,27 +162,27 @@ export class MatchProductFormComponent implements OnInit {
         // autocomplete BRAND search
         this.filteredMatchOptions = this.myCompleteMatchControl.valueChanges
             .flatMap(val => this.globals.get(
-                'http://' + this.globals.MAIN_IP + ':5000/v1/brands?s=' + val + '&p=gest'
+                this.globals.MAIN_IP + '/v1/brands?s=' + val + '&p=gest'
             ));
 
         this.filteredLetuMatchOptions = this.myCompleteLetuMatchControl.valueChanges
             .flatMap(val => this.globals.get(
-                'http://' + this.globals.MAIN_IP + ':5000/v1/brands?s=' + val + '&p=letu'
+                this.globals.MAIN_IP + '/v1/brands?s=' + val + '&p=letu'
             ));
 
         this.filteredIldeMatchOptions = this.myCompleteIldeMatchControl.valueChanges
             .flatMap(val => this.globals.get(
-                'http://' + this.globals.MAIN_IP + ':5000/v1/brands?s=' + val + '&p=ilde'
+                this.globals.MAIN_IP + '/v1/brands?s=' + val + '&p=ilde'
             ));
 
         this.filteredRiveMatchOptions = this.myCompleteRiveMatchControl.valueChanges
             .flatMap(val => this.globals.get(
-                'http://' + this.globals.MAIN_IP + ':5000/v1/brands?s=' + val + '&p=rive'
+                this.globals.MAIN_IP + '/v1/brands?s=' + val + '&p=rive'
             ));
 
         this.filteredPodrMatchOptions = this.myCompletePodrMatchControl.valueChanges
             .flatMap(val => this.globals.get(
-                'http://' + this.globals.MAIN_IP + ':5000/v1/brands?s=' + val + '&p=podr'
+                this.globals.MAIN_IP + '/v1/brands?s=' + val + '&p=podr'
             ));
 
 
@@ -189,28 +190,28 @@ export class MatchProductFormComponent implements OnInit {
         // FULL TXT GEST
         this.filteredTextOptions = this.myTextSearchControl.valueChanges
         .flatMap(val => this.globals.get(
-            'http://' + this.globals.MAIN_IP + ':5000/v1/ft?s=' + val + '&b=' + this.myCompleteMatchControl.value + '&p=gest'
+            this.globals.MAIN_IP + '/v1/ft?s=' + val + '&b=' + this.myCompleteMatchControl.value + '&p=gest'
         ));
 
         // FULL TXT PODR
         this.filteredTextOptions = this.myTextSearchControlPodr.valueChanges
         .flatMap(val => this.globals.get(
-            'http://' + this.globals.MAIN_IP + ':5000/v1/ft?s=' + val + '&b=' + this.myCompletePodrMatchControl.value + '&p=podr'
+            this.globals.MAIN_IP + '/v1/ft?s=' + val + '&b=' + this.myCompletePodrMatchControl.value + '&p=podr'
         ));
 
         // FULL TXT LETU
         this.filteredTextOptionsLetu = this.myTextSearchControlLetu.valueChanges
         .flatMap(val => this.globals.get(
-            'http://' + this.globals.MAIN_IP + ':5000/v1/ft?s=' + val + '&b=' + this.myCompleteLetuMatchControl.value + '&p=letu'
+            this.globals.MAIN_IP + '/v1/ft?s=' + val + '&b=' + this.myCompleteLetuMatchControl.value + '&p=letu'
         ));
 
         // FULL TXT ILDE
         this.filteredTextOptionsIlde = this.myTextSearchControlIlde.valueChanges
-        .flatMap(val => this.globals.get('http://' + this.globals.MAIN_IP + ':5000/v1/ft?s=' + val + '&b=' + this.myCompleteIldeMatchControl.value + '&p=ilde'));
+        .flatMap(val => this.globals.get(this.globals.MAIN_IP + '/v1/ft?s=' + val + '&b=' + this.myCompleteIldeMatchControl.value + '&p=ilde'));
 
         // FULL TXT RIVE
         this.filteredTextOptionsRive = this.myTextSearchControlRive.valueChanges
-        .flatMap(val => this.globals.get('http://' + this.globals.MAIN_IP + ':5000/v1/ft?s=' + val + '&b=' + this.myCompleteRiveMatchControl.value + '&p=rive'));
+        .flatMap(val => this.globals.get(this.globals.MAIN_IP + '/v1/ft?s=' + val + '&b=' + this.myCompleteRiveMatchControl.value + '&p=rive'));
     }
 
     ngOnInit(): void {
@@ -225,7 +226,7 @@ export class MatchProductFormComponent implements OnInit {
     gestMarkChecked(gest_obj, uncheck) {
         console.log(gest_obj);
         this.http.post(
-            'http://' + this.globals.MAIN_IP + ':5000/v1/gestMarkChecked',
+            this.globals.MAIN_IP + '/v1/gestMarkChecked',
             {'oid': gest_obj['cod_good']},
             {
                 headers: this.globals.noCache()
@@ -313,7 +314,6 @@ export class MatchProductFormComponent implements OnInit {
             {'duration': 700}
         );
     }
-
 
     // img dialog
     showImg(item) {
@@ -660,7 +660,7 @@ export class MatchProductFormComponent implements OnInit {
         brand = this.myCompleteMatchControl.value;
         // search by article instead of huge string
         return this.globals.get(
-            'http://' + this.globals.MAIN_IP + ':5000/v1/gestori_products?p=' + page + '&pP=' + perPage + '&s=' + brand + '&kw=' + encodeURIComponent(txt)
+            this.globals.MAIN_IP + '/v1/gestori_products?p=' + page + '&pP=' + perPage + '&s=' + brand + '&kw=' + encodeURIComponent(txt)
         );
     }
 
@@ -679,7 +679,7 @@ export class MatchProductFormComponent implements OnInit {
 
         // search by article instead of huge string
         return this.globals.get(
-            'http://' + this.globals.MAIN_IP + ':5000/v1/rive_products?page=' + page + '&perPage=' + perPage3 + '&kw=' + kw + '&search=' + search
+            this.globals.MAIN_IP + '/v1/rive_products?page=' + page + '&perPage=' + perPage3 + '&kw=' + kw + '&search=' + search
         );
     }
 
@@ -698,7 +698,7 @@ export class MatchProductFormComponent implements OnInit {
 
         // search by article instead of huge string
         return this.globals.get(
-            'http://' + this.globals.MAIN_IP + ':5000/v1/ilde_products?page=' + page + '&perPage=' + this.pageSize + '&kw=' + kw + '&search=' + search
+            this.globals.MAIN_IP + '/v1/ilde_products?page=' + page + '&perPage=' + this.pageSize + '&kw=' + kw + '&search=' + search
         );
     }
 
@@ -717,7 +717,7 @@ export class MatchProductFormComponent implements OnInit {
 
         // search by article instead of huge string
         return this.globals.get(
-            'http://' + this.globals.MAIN_IP + ':5000/v1/letu_products?page=' + page + '&perPage=' + perPage1 + '&kw=' + kw + '&search=' + search
+            this.globals.MAIN_IP + '/v1/letu_products?page=' + page + '&perPage=' + perPage1 + '&kw=' + kw + '&search=' + search
         );
     }
 
@@ -736,7 +736,7 @@ export class MatchProductFormComponent implements OnInit {
 
         // search by article instead of huge string
         return this.globals.get(
-            'http://' + this.globals.MAIN_IP + ':5000/v1/podr_products?page=' + page + '&perPage=' + perPage1 + '&kw=' + kw + '&search=' + search
+            this.globals.MAIN_IP + '/v1/podr_products?page=' + page + '&perPage=' + perPage1 + '&kw=' + kw + '&search=' + search
         );
     }
 
