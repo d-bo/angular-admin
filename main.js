@@ -1,4 +1,5 @@
 const electron = require('electron')
+const remote = electron.remote;
 // Module to control application life.
 const app = electron.app
 // Module to create native browser window.
@@ -11,9 +12,14 @@ const url = require('url')
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
 
-function createWindow () {
+function createWindow() {
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 1100, height: 840})
+  mainWindow = new BrowserWindow({
+    width: 750,
+    height: 800,
+    icon: path.join(__dirname, 'www', 'icon.png'),
+    frame: false
+  })
 
   // and load the index.html of the app.
   mainWindow.loadURL(url.format({
@@ -55,6 +61,10 @@ app.on('activate', function () {
   // dock icon is clicked and there are no other windows open.
   if (mainWindow === null) {
     createWindow()
+    document.getElementById("close-btn").addEventListener("click", function (e) {
+         var window = remote.getCurrentWindow();
+         window.close();
+    });
   }
 })
 
